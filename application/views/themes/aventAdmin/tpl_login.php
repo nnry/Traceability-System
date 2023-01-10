@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" style="background-image:url(<?php echo base_url() . $image_url; ?>/img/bg.jpg); background-size: cover;">
+<html lang="en" style="background-image:url(<?php echo base_url() . $image_url; ?>/img/BG.png); background-size: cover;">
+
+<link rel="shortcut icon" href="<?php echo base_url() . $css_url; ?>img/Logo2.png"/>
 
 <head>
 
@@ -17,6 +19,8 @@
 
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url() . $css_url; ?>css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo base_url() . $css_url; ?>img/Logo2.png"/>
+   
 
 </head>
 <style>
@@ -26,17 +30,6 @@
         background-size: cover;
     }
 
-    .card {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
-        word-wrap: break-word;
-        background-color: #ffffffa3;
-        background-clip: border-box;
-        border: 1px solid #ffffffa3;
-        border-radius: .35rem
-    }
 </style>
 
 <body class="bg-gradient-primary">
@@ -53,6 +46,7 @@
                         <div class="card-body">
 
                             <div class="text-center">
+                                <img src="<?php echo base_url() . $image_url; ?>/img/Logo2.png" width="130" height="130"><br><br>
                                 <h1 class="h10S text-gray-900 mb-5">Traceability</h1>
                             </div>
                             <form class="user">
@@ -73,8 +67,8 @@
                                     Login
                                 </a>
                                 <hr>
-                                <div class="text-right">
-                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                <div class="text-center">
+                                    <a href="<?php echo base_url() ?>Forgot_Password/forgotPassword" class="small" href="forgot-password.html">Forgot Password?</a>
                                 </div>
 
                             </form>
@@ -98,52 +92,54 @@
         <!-- Custom scripts for all pages-->
         <script src="<?php echo base_url() . $js_url; ?>js/sb-admin-2.min.js"></script>
 
+
         <!-- ************************************************************************************************************************** -->
-        
-        
+
+
 </body>
+
 </html>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="<?php echo base_url() . $js_url; ?>jquery-2.1.4.min.js"></script>
+<script src="<?php echo base_url() . $js_url; ?>js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
-            $("#login").click(function() {
-                login()
-            })
+    $("#login").click(function() {
+        login()
+    })
 
-            function login() {
-                var empcode = $("#empcode").val();
-                var emppass = $("#emppass").val();
-                // alert(empcode)
-                // alert(emppass)
-                var path = $.ajax({
-                    method: "post",
-                    url: "<?php echo base_url(); ?>Login/checkUserLogin",
-                    data: {
-                        empcode: empcode,
-                        emppass: emppass
-                    }
+    function login() {
+        var empcode = $("#empcode").val();
+        var emppass = $("#emppass").val();
+        // alert(empcode)
+        // alert(emppass)
+        var path = $.ajax({
+            method: "post",
+            url: "<?php echo base_url(); ?>Login/checkUserLogin",
+            data: {
+                empcode: empcode,
+                emppass: emppass
+                // emppass: "namwan"
+            }
+        })
+        path.done(function(rs) {
+        //     alert(rs)
+            console.log(rs);
+
+            if (rs === "1") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Welcome to Traceability',
+                    text: 'You signed up successfully',
+                }).then(function(){
+                    window.location.href="<?php echo base_url() ?>Manage/Homepage";
                 })
-                path.done(function(rs) {
-                    // alert(rs)
-                    console.log(rs);
-
-                    if (rs === "1") {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Welcome to website',
-                            text: 'You signed up successfully',
-                            showConfirmButton: false,
-                            footer: '<a href=" <?php echo base_url()?>Manage/Homepage">Lets Go</a>'
-
-                        })
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Data not found',
-                            text: 'You failed to signed up',
-                        })
-                    }
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Data not found',
+                    text: 'You failed to signed up',
                 })
             }
-        </script>
+        })
+    }
+</script>

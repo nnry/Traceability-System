@@ -10,7 +10,7 @@ $db['default'] = array(
 	'hostname' => 'Driver={SQL Server};Server=192.168.161.101\PCSDBSV;Database=traceability_db_dev;AutoTranslate=yes;',
 	'username' => 'pcs_admin',
 	'password' => 'P@ss!fa',
-	'database' => 'qgate_db_dev',
+	'database' => 'traceability_db_dev',
 	'dbdriver' => 'odbc',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-image:url(<?php echo base_url() . $image_url; ?>/img/BG.png); background-size: cover;">
+
+<link rel="shortcut icon" href="<?php echo base_url() . $css_url; ?>img/Logo2.png"/>
 
 <head>
 
@@ -12,6 +14,8 @@
 	<link href="<?php echo base_url() . $css_url; ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
 	<link href="<?php echo base_url() . $css_url; ?>css/sb-admin-2.min.css" rel="stylesheet"> 
+    
+    
 </head>
 
 <body id="page-top">

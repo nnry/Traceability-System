@@ -9,7 +9,7 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-:root {
+ :root {
     --blue: #4e73df;
     --indigo: #6610f2;
     --purple: #6f42c1;
@@ -173,13 +173,13 @@ sup {
 }
 
 a {
-    color: #4e73df;
+    color: #AF99FF;
     text-decoration: none;
     background-color: transparent
 }
 
 a:hover {
-    color: #224abe;
+    color: #AF99FF;
     text-decoration: underline
 }
 
@@ -2694,37 +2694,37 @@ fieldset:disabled a.btn {
 
 .btn-primary {
     color: #fff;
-    background-color: #4e73df;
-    border-color: #4e73df
+    background-color: #CAADFF;
+    border-color: #CAADFF
 }
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #2e59d9;
-    border-color: #2653d4
+    background-color: #AF99FF;
+    border-color: #AF99FF
 }
 
 .btn-primary.focus,
 .btn-primary:focus {
     color: #fff;
-    background-color: #2e59d9;
-    border-color: #2653d4;
+    background-color: #987ff3;
+    border-color: #987ff3;
     box-shadow: 0 0 0 .2rem rgba(105, 136, 228, .5)
 }
 
 .btn-primary.disabled,
 .btn-primary:disabled {
     color: #fff;
-    background-color: #4e73df;
-    border-color: #4e73df
+    background-color: #987ff3;
+    border-color: #987ff3
 }
 
 .btn-primary:not(:disabled):not(.disabled).active,
 .btn-primary:not(:disabled):not(.disabled):active,
 .show>.btn-primary.dropdown-toggle {
     color: #fff;
-    background-color: #2653d4;
-    border-color: #244ec9
+    background-color: #987ff3;
+    border-color: #987ff3
 }
 
 .btn-primary:not(:disabled):not(.disabled).active:focus,
@@ -3991,8 +3991,8 @@ input[type=submit].btn-block {
 
 .custom-control-input:checked~.custom-control-label::before {
     color: #fff;
-    border-color: #4e73df;
-    background-color: #4e73df
+    border-color: #AF99FF;
+    background-color: #AF99FF
 }
 
 .custom-control-input:focus~.custom-control-label::before {
@@ -4998,9 +4998,9 @@ input[type=submit].btn-block {
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    /* background-color: #ffffffa3; */
-    background-clip: border-box;
-    /* border: 1px solid #ffffffa3; */
+    background-color: #ffffffa3;
+    /* bacground-clip: border-box; */
+    border: 1px solid #ffffffa3; 
     border-radius: .35rem
 }
 
@@ -12107,15 +12107,14 @@ form.user .custom-checkbox.small label {
 }
 
 form.user .form-control-user {
-    font-size: .8rem;
-    border-radius: 10rem;
+    font-size: .8em;
+    border-radius: 12rem;
     padding: 1.5rem 1rem
 }
 
 form.user .btn-user {
-    font-size: .8rem;
-    border-radius: 10rem;
-    padding: .75rem 1rem
+    font-size: 18px;
+    border-radius: 12rem;
 }
 
 .btn-google {

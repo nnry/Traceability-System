@@ -1,10 +1,8 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
-
-class Login extends CI_Controller
+class Forgot_Password extends CI_Controller
 {
-
-	private $theme;
+    private $theme;
 
 	public function __construct()
 	{
@@ -28,32 +26,32 @@ class Login extends CI_Controller
 		// ini_set('display_errors', 1);
 		// error_reporting(E_ALL);
 	}
-
-	public function Account()
+    public function forgotPassword()
 	{
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-
-		$this->template->set_master_template('themes/' . $this->theme . '/tpl_login.php');
 		$this->template->write('page_title', 'TBKK | ' . $setTitle . '');
-		// $this->template->write_view('page_content', 'themes/'. $this->theme .'/view_login.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/view_forgot_password.php');
 		$this->template->render();
-
-		// $rs = $this->backoffice_model->getUser();
-		// echo json_encode($rs);
-
-		// $test = md5("namwan").strlen(50);
-		// echo "password ==>".$test;
-		//echo base64_encode("55555555");
-		// echo md5($_POST["a123"]).strlen(50);
+		// $forEmail = $_POST["forEmail"];
+		// $forPass =$_POST["forPass"];
+		// echo $forEmail;
+		// echo $forPass;
+		// exit();
 	}
+    public function checkEmail(){
+        $forEmail = $_POST["Email"];
+		$forPass =md5($_POST["Pass"]);
+	
+        $rscheckForgot = $this->backoffice_model-> checkForgot($forEmail);
 
+        if($rscheckForgot === true){
 
-	public function checkUserLogin()
-	{
-		$code = $_POST["empcode"];
-		$pass = md5($_POST["emppass"]);
+            $rsForpass  = $this->backoffice_model -> forgotPass($forEmail,$forPass);
+            echo  $rsForpass;
+        }else{
+			echo $rscheckForgot;
+		}   
 
-		$rscheckLogin = $this->backoffice_model->checkLogin($code, $pass);
-		echo $rscheckLogin;
-	}
+    }
 }
+?>

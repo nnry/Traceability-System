@@ -37,7 +37,7 @@ class manage extends CI_Controller {
 	}
 	public function Homepage() {
 		$setTitle = strtoupper($this->router->fetch_method().' '.$this->router->fetch_class());
-        $this->template->write('page_title', 'TBKK | '.$setTitle.'');
+        $this->template->write('page_title',$setTitle.'');
         $this->template->write_view('page_menu', 'themes/'. $this->theme .'/first_set/view_menu.php');
         $this->template->write_view('page_header', 'themes/'. $this->theme .'/first_set/view_header.php');
     
@@ -46,7 +46,7 @@ class manage extends CI_Controller {
 
 		$this->template->render();
 	}
-	
+
 		
 	}
 
