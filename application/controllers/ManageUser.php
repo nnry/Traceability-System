@@ -1,11 +1,7 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-class manage extends CI_Controller {
-	 
-	private $theme; 
-	 
-	public function __construct()
+class manageUser extends CI_Controller{
+    public function __construct()
 	{
 		parent::__construct();
 
@@ -35,24 +31,18 @@ class manage extends CI_Controller {
 		redirect('manage');	
 					
 	}
-	public function Homepage() {
-		$setTitle = "Traceability | Homepage";
-		$data["fullname"] = $this->session->userdata("fname")." ".$this->session->userdata("lname");
-		$data["per"] = $this->session->userdata("permission");
+	public function ManagementUser() {
+		// $name = new login_oop();
+		// $name->getName();
+		// print_r($name);
+		// $setTitle = strtoupper($this->router->fetch_method().' '.$this->router->fetch_class());
+		$setTitle = "Traceability | Management User";
         $this->template->write('page_title',$setTitle.' ');
-        $this->template->write_view('page_menu', 'themes/'. $this->theme .'/first_set/view_menu.php',$data);
-        $this->template->write_view('page_header', 'themes/'. $this->theme .'/first_set/view_header.php',$data);
-    
-		$this->template->write_view('page_content', 'themes/'. $this->theme .'/view_homepage.php');
-		$this->template->write_view('page_footer', 'themes/'. $this->theme .'/first_set/view_footer.php');
-
+        $this->template->write_view('page_menu', 'themes/'. $this->theme .'/first_set/view_menu.php');
+        $this->template->write_view('page_header', 'themes/'. $this->theme .'/first_set/view_header.php');
+		$this->template->write_view('page_content', 'themes/'. $this->theme .'/view_manageUser.php');
+		//$this->template->write_view('page_footer', 'themes/'. $this->theme .'/first_set/view_footer.php');
 		$this->template->render();
 	}
-
-		
-	}
-
-
-
-	
-
+}
+?>

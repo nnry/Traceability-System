@@ -162,7 +162,7 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 			$binds = array($binds);
 			$bind_count = 1;
 		}
-		else
+		else 
 		{
 			// Make sure we're using numeric keys
 			$binds = array_values($binds);
@@ -201,7 +201,7 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 			}
 			while ($c !== 0);
 		}
-
+ 
 		if (FALSE !== ($this->odbc_result = odbc_prepare($this->conn_id, $sql)))
 		{
 			$this->binds = array_values($binds);

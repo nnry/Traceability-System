@@ -2675,7 +2675,7 @@ textarea.form-control.is-invalid {
 .btn.focus,
 .btn:focus {
     outline: 0;
-    box-shadow: 0 0 0 .2rem rgba(78, 115, 223, .25)
+    box-shadow: 0 0 0 .2rem #7150eb
 }
 
 .btn.disabled,
@@ -2709,14 +2709,14 @@ fieldset:disabled a.btn {
     color: #fff;
     background-color: #987ff3;
     border-color: #987ff3;
-    box-shadow: 0 0 0 .2rem rgba(105, 136, 228, .5)
+    box-shadow: 0 0 0 .2rem #987ff3
 }
 
 .btn-primary.disabled,
 .btn-primary:disabled {
     color: #fff;
     background-color: #987ff3;
-    border-color: #987ff3
+    border-color: #7150eb
 }
 
 .btn-primary:not(:disabled):not(.disabled).active,
@@ -2730,7 +2730,7 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .show>.btn-primary.dropdown-toggle:focus {
-    box-shadow: 0 0 0 .2rem rgba(105, 136, 228, .5)
+    box-shadow: 0 0 0 .2rem #7150eb
 }
 
 .btn-secondary {
@@ -3614,14 +3614,14 @@ input[type=submit].btn-block {
 .dropdown-item:hover {
     color: #2e2f37;
     text-decoration: none;
-    background-color: #eaecf4
+    background-color: #fcd9eb
 }
 
 .dropdown-item.active,
 .dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: #4e73df
+    background-color: #FFADC7
 }
 
 .dropdown-item.disabled,
@@ -10757,7 +10757,7 @@ button.bg-dark:hover {
 }
 
 .text-primary {
-    color: #4e73df !important
+    color: #AF99FF !important
 }
 
 a.text-primary:focus,
@@ -11099,14 +11099,14 @@ a:focus {
 }
 
 .bg-gradient-primary {
-    background-color: #e74a3b;
-    background-image: linear-gradient(180deg, #e74a3b 10%, #224abe 100%);
+    background-color: #FF99B6;
+    background-image: linear-gradient(180deg, #FF99B6 10%, #AF99FF 100%);
     background-size: cover 
 }
 
 .bg-gradient-secondary {
-    background-color: #858796;
-    background-image: linear-gradient(180deg, #858796 10%, #60616f 100%);
+    background-color: #FF99B6;
+    background-image: linear-gradient(180deg, #FF99B6 10%, #AF99FF 100%);
     background-size: cover
 }
 
@@ -11207,7 +11207,7 @@ a:focus {
 }
 
 .text-gray-400 {
-    color: #d1d3e2 !important
+    color: #7a7c8f !important
 }
 
 .text-gray-500 {
@@ -11598,18 +11598,18 @@ a:focus {
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:hover,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item:hover {
-    background-color: #eaecf4
+    background-color: #fcd9eb
 }
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:active,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item:active {
-    background-color: #dddfeb
+    background-color: #FFADC7
 }
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item.active,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item.active {
-    color: #4e73df;
-    font-weight: 700
+    color: #AF99FF;
+    font-weight: 700;
 }
 
 .sidebar #sidebarToggle {

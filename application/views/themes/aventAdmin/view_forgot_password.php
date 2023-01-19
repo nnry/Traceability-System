@@ -92,8 +92,7 @@
 
 </html>
  <!-- ************************************************************************************************************************** -->
- 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
 <script src="<?php echo base_url() . $js_url; ?>js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
     $("#forgotPassword").click(function() {
@@ -119,8 +118,8 @@
             if (rsForpass === "1") {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Welcome to website',
-                    text: 'You signed up successfully',
+                    title: 'Forgot Password Succeed '
+                    // text: 'You signed up successfully',
                 }).then(function(){
                     window.location.href="<?php echo base_url() ?>Login/Account";
                 })
