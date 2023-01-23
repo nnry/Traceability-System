@@ -32,16 +32,17 @@ class manageUser extends CI_Controller{
 					
 	}
 	public function ManagementUser() {
-		// $name = new login_oop();
-		// $name->getName();
-		// print_r($name);
-		// $setTitle = strtoupper($this->router->fetch_method().' '.$this->router->fetch_class());
+		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		$empcode = $this->session->userdata("empcode");
+		$data["menu"] = $this->backoffice_model->showMenu2($empcode); //show เมนูใหญ่
 		$setTitle = "Traceability | Management User";
+		$data["resultUser"] = $this->backoffice_model->getTableData();
         $this->template->write('page_title',$setTitle.' ');
-        $this->template->write_view('page_menu', 'themes/'. $this->theme .'/first_set/view_menu.php');
-        $this->template->write_view('page_header', 'themes/'. $this->theme .'/first_set/view_header.php');
+        $this->template->write_view('page_menu', 'themes/'. $this->theme .'/first_set/view_menu.php',$data);
+        $this->template->write_view('page_header', 'themes/'. $this->theme .'/first_set/view_header.php',$data);
 		$this->template->write_view('page_content', 'themes/'. $this->theme .'/view_manageUser.php');
-		//$this->template->write_view('page_footer', 'themes/'. $this->theme .'/first_set/view_footer.php');
+		
+		$this->template->write_view('page_footer', 'themes/'. $this->theme .'/first_set/view_footer.php');
 		$this->template->render();
 	}
 }

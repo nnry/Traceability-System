@@ -71,7 +71,6 @@ class Login extends CI_Controller
 					'empcode' => $data['sa_code'],
 					'fname' => $data['sa_fname'],
 					'lname' => $data['sa_lname'],
-					'permission' => $data['spg_name'],
 					'login' => "OK"
 				);
 				$this->session->set_userdata($session_data);

@@ -46,5 +46,6 @@
     <script src="<?php echo base_url() . $js_url; ?>js/demo/chart-area-demo.js"></script>
     <script src="<?php echo base_url() . $js_url; ?>js/demo/chart-pie-demo.js"></script>
     <script src="<?php echo base_url() . $js_url; ?>js/demo/datatables-demo.js"></script>
+    
     <!-- *************************************************************************************************** -->
     
