@@ -50,6 +50,10 @@ class Login extends CI_Controller
 
 
 	}
+	public function logout(){
+		$this->template->set_master_template('themes/' . $this->theme . '/tpl_logout.php');
+		$this->template->render();
+	}
 
 
 	public function checkUserLogin()

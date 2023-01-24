@@ -27,12 +27,17 @@
 <body id="page-top">
     <!-- Begin Page Content -->
     <div class="container-fluid">
+        <h1 class="h3 mb-2 text-gray-800">Management User</h1>
         <!-- DataTales Example -->
         <div class="card shadow mb-4"><br>
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            <div class="card-header py" style="width:100%; text-align:right">
+                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                        class="fas fa-user-plus fa-sm"></i> Add User</a>
+                <!-- <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
+
             </div>
-            <div class="card-body">
+            <div class="card-body ">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -44,21 +49,37 @@
                                 <th>Last Name</th>
                                 <th>User E-mail</th>
                                 <th>Plant</th>
+                                <th>Status</th>
+                                <th>Actoin</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $i = 0;
-                            foreach($resultUser as $value){
+                            foreach ($resultUser as $value) {
                                 $i++;
                                 echo "<tr>";
-                                echo "<td>".$i."</td>";
+                                echo "<td>" . $i . "</td>";
                                 echo "<td>" . $value["spg_name"] . "</td>";
                                 echo "<td>" . $value["sa_code"] . "</td>";
                                 echo "<td>" . $value["sa_fname"] . "</td>";
                                 echo "<td>" . $value["sa_lname"] . "</td>";
                                 echo "<td>" . $value["sa_email"] . "</td>";
                                 echo "<td>" . $value["mpa_name"] . "</td>";
+                                // echo "<td>" . "Edit and Status" . "</td>";
+                                echo "<td>
+                                <div class=\"custom-switch text-center\">
+                                    <input type=\"checkbox\" class=\"custom-control-input\" id=\"customSwitch$i\">
+                                    <label class=\"custom-control-label\" for=\"customSwitch$i\"></label>
+                                </div>
+                                </td>";
+                                echo "<td>
+                                    <div class=\"text-wrap text-center\" >
+                                        <button class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm  me-md-2 \"><i
+                                        class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
+                                    </div>
+                                </td>";
                                 echo "</tr>";
                             }
                             ?>
@@ -69,25 +90,9 @@
         </div>
 
     </div>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>Login/Account">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
 </body>
 
