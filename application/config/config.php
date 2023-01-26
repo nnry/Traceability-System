@@ -5,6 +5,8 @@ $config['base_url'] = 'http://localhost/tracea';
 
 //$config['base_url'] = 'http://192.168.161.102/tracea/';
 
+// $config['base_url'] = 'http://192.168.161.214/tracea/';
+
 $config['index_page'] = '';
 
 $config['uri_protocol']	= 'AUTO';
@@ -94,3 +96,4 @@ $config['asset_url'] = 'assets/';
 $config['js_url'] = 'assets/';
 $config['css_url'] = 'assets/';
 $config['image_url'] = 'assets/';
+$config['vendor_url'] = 'assets/';

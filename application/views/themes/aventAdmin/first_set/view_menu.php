@@ -67,7 +67,7 @@
                         </a>
                         <a class="dropdown-item" href="<?php echo base_url()?>ResetPassword/RePassword">
                             <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Reset Password
+                            Change Password
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">

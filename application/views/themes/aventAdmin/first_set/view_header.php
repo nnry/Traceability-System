@@ -17,9 +17,9 @@
         foreach ($menu as $key => $values) {
             if ($name != $values["sm_name"]) {
         ?>
-                <li class="nav-item ">
+                <li class="nav-item active">
                     <a class="nav-link collapsed" data-toggle="collapse" href="#<?php echo "list" . $key; ?>" aria-expanded="false" aria-controls="<?php echo "list" . $key; ?>">
-                        <i class="fas fa-fw fa-user"></i>
+                        <i class="<?php echo $values["sm_icon"] ?>"></i>
                         <span><?php echo $values["sm_name"]; ?></span>
                     </a>
                     <?php foreach ($menu as $key1 => $values1) {
