@@ -40,13 +40,13 @@
                             <tr>
                                 <th>NO.</th>
                                 <th>Employees Code</th>
-                                <th>Frist Name</th>
+                                <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Group Permission</th>
                                 <th>E-mail</th>
                                 <th>Plant</th>
                                 <th>Status</th>
-                                <th>Actoin</th>
+                                <th>Action</th>
 
                             </tr>
                         </thead>
@@ -231,6 +231,10 @@
                         </div>
                     </div>
                 </div>
+                <!-- <script>
+                    function from
+
+                </script> -->
 
 
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -242,7 +246,7 @@
                         saveedit()
                     });
                     $("#btnSaveAdd").click(function() {
-                        alert("btnSaveAdd")
+                        //alert("btnSaveAdd")
                         addUser()
                     });
 
@@ -276,32 +280,44 @@
                         var editgroup = $("#editgroup").val();
                         var editemil = $("#editemailaddress").val();
 
-                        var path = $.ajax({
-                            method: "post",
-                            url: "<?php echo base_url(); ?>manageUser/saveEdit",
-                            data: {
-                                empcode: editempcode,
-                                groupper: editgroup,
-                                editemail: editemil,
-                            }
-                        })
-                        path.done(function(rs) {
-                            // alert(rs);
-                            if (rs === "true") {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'You have successfully edit user',
-                                }).then(function() {
-                                    window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
-                                })
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Data not found',
-                                    text: 'You failed to signed up',
-                                })
-                            }
-                        })
+                        var email = document.getElementById("editemailaddress");
+
+                        if (email.value == "") {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Are you sure?',
+                                text: 'You failed to edit user',
+                                confirmButtonColor: '#F7B267',
+                            })
+                        } else {
+                            var path = $.ajax({
+                                method: "post",
+                                url: "<?php echo base_url(); ?>manageUser/saveEdit",
+                                data: {
+                                    empcode: editempcode,
+                                    groupper: editgroup,
+                                    editemail: editemil,
+                                }
+                            })
+                            path.done(function(rs) {
+                                // alert(rs);
+                                if (rs === "true") {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Successfully',
+                                        text: 'You have successfully edit user',
+                                    }).then(function() {
+                                        window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Data not found',
+                                        text: 'You failed to edit user',
+                                    })
+                                }
+                            })
+                        }
 
                     };
 
@@ -314,37 +330,59 @@
                         var password = $('#addpassword').val();
                         var plant = $('#addplant').val();
 
-                        var path = $.ajax({
-                            method: "POST",
-                            url: "<?php echo base_url(); ?>manageUser/addManageUser",
-                            data: {
-                                empcode: empcode,
-                                firstname: firstname,
-                                lastname: lastname,
-                                groupper: groupper,
-                                email: email,
-                                password: password,
-                                plant: plant,
-                            }
-                        })
-                        path.done(function(rs) {
-                            console.log(rs);
-                            alert(rs);
-                            if (rs === "true") {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'You have successfully add user.',
-                                    
-                                }).then(function() {
-                                    window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
-                                })
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'You failed to register',
-                                })
-                            }
-                        })
+                        var addempcode = document.getElementById("addempcode");
+                        var addfirstname = document.getElementById("addfirstname");
+                        var addlastname = document.getElementById("addlastname");
+                        var addgroup = document.getElementById("addgroup");
+                        var addemailaddress = document.getElementById("addemailaddress");
+                        var addpassword = document.getElementById("addpassword");
+                        var addplant = document.getElementById("addplant");
+
+
+
+                        if (addempcode.value == "" || addfirstname.value == "" || addlastname.value == "" || addgroup.value == "" || addemailaddress.value == "" || addpassword.value == "" || addplant.value == "") {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Are you sure?',
+                                text: 'You failed to add user',
+                                confirmButtonColor: '#F7B267',
+                            })
+                        } else {
+                            var path = $.ajax({
+                                method: "POST",
+                                url: "<?php echo base_url(); ?>manageUser/addManageUser",
+                                data: {
+                                    empcode: empcode,
+                                    firstname: firstname,
+                                    lastname: lastname,
+                                    groupper: groupper,
+                                    email: email,
+                                    password: password,
+                                    plant: plant,
+                                }
+                            })
+                            path.done(function(rs) {
+                                console.log(rs);
+                                alert(rs);
+                                if (rs === "true") {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Successfully',
+                                        text: 'You have successfully add user.',
+
+                                    }).then(function() {
+                                        window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'You failed to register',
+                                    })
+                                }
+                            })
+                        }
+
+
                     };
                 </script>
             </div>

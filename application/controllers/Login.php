@@ -39,14 +39,6 @@ class Login extends CI_Controller
 		// $this->template->write_view('page_content', 'themes/'. $this->theme .'/view_login.php');
 		$this->template->render();
 
-		// $rs = $this->backoffice_model->getUser();
-		// echo json_encode($rs);
-
-		// $test = md5("namwan").strlen(50);
-		// echo "password ==>".$test;
-		//echo base64_encode("55555555");
-		// echo md5($_POST["a123"]).strlen(50);
-
 
 
 	}

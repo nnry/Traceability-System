@@ -29,12 +29,6 @@ class Backoffice_model extends CI_Model
             return false;
         }
     }
-    // public function checkUserPermission()
-    // {
-    //     $sql = "EXEC [dbo].[GET_USER_PREMISSION]";
-    //     $res = $this->db->query($sql);
-    //     $row = $res->result_array();
-    // }
 
     public function checkUserAdd($empcode){
         $sql = "EXEC [dbo].[CHECK_ADD_USER] @EMP_CODE  = '{$empcode}'";
@@ -153,19 +147,19 @@ class Backoffice_model extends CI_Model
 				return  true;
 			}
     }
-    public function saveEdit($empcode, $groupCon, $editemail){
-        $sql = "EXEC [dbo].[GET_SAVE_EDIT] @EMP_CODE ='{$empcode}',@EMP_GROUP='{$groupCon}',@EMP_EMAIL='{$editemail}'";
+    public function saveEdit($empcode, $groupCon, $editemail,$empcodeUser){
+        $sql = "EXEC [dbo].[GET_SAVE_EDIT] @EMP_CODE ='{$empcode}',@EMP_GROUP='{$groupCon}',@EMP_EMAIL='{$editemail}',@EMP_USER='{$empcodeUser}'";
 		$res = $this->db->query($sql);
-        if(empty($res)){
-			return "false";
-		}else {
+        if($res){
 			return "true";
+		}else{
+			return "false";
 		}
     }
 // ***********insert***************************************insert***************************insert**************************insert********************** insert*******************************************
 
-public function insertUser($empcode,$firstname,$lastname,$groupCon,$email,$password,$plantCon){
-        $sql = "EXEC [dbo].[INSERT_USER] @EMP_CODE ='{$empcode}',@EMP_FNAMEE='{$firstname}',@EMP_LNAMEE ='{$lastname}',@EMP_GROUP ='{$groupCon}',@EMP_EMAIL='{$email}',@EMP_PASS='{$password}',@EMP_PLANT='{$plantCon}'";
+public function insertUser($empcode,$firstname,$lastname,$groupCon,$email,$password,$plantCon,$empcodeUser){
+        $sql = "EXEC [dbo].[INSERT_USER] @EMP_CODE ='{$empcode}',@EMP_FNAMEE='{$firstname}',@EMP_LNAMEE ='{$lastname}',@EMP_GROUP ='{$groupCon}',@EMP_EMAIL='{$email}',@EMP_PASS='{$password}',@EMP_PLANT='{$plantCon}',@EMP_USER='{$empcodeUser}'";
         $res = $this->db->query($sql);
 		if($res){
 			return "true";

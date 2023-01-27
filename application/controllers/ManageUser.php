@@ -64,19 +64,18 @@ class manageUser extends CI_Controller
 	}
 	public function saveEdit()
 	{
-		// // $id = $_GET["id"];
-		// $groupper = $_GET["groupper"];
-		// // $editemail = $_GET["editemail"];
+		$empcodeUser = $this->session->userdata("empcode");
 		$empcode = $_POST["empcode"];
 		$groupper = $_POST["groupper"];
 		$editemail = $_POST["editemail"];
-
-		$groupCon = $this->backoffice_model->convert("spg_id", "sys_permission_group", "spg_name ='$groupper'");
-		$rs = $this->backoffice_model->saveEdit($empcode, $groupCon, $editemail);
-		echo $rs;
+			$groupCon = $this->backoffice_model->convert("spg_id", "sys_permission_group", "spg_name ='$groupper'");
+			$rs = $this->backoffice_model->saveEdit($empcode, $groupCon, $editemail,$empcodeUser);
+			echo $rs;
+	
 	}
 	public function addManageUser()
 	{
+		$empcodeUser = $this->session->userdata("empcode");
 		$empcode = $_POST["empcode"];
 		$firstname = $_POST["firstname"];
 		$lastname = $_POST["lastname"];
@@ -84,12 +83,13 @@ class manageUser extends CI_Controller
 		$email = $_POST["email"];
 		$password = $_POST["password"];
 		$plant = $_POST["plant"];
+
 		$rscheck = $this->backoffice_model->checkUserAdd($empcode);
 		if ($rscheck == "true") {
 			$groupCon = $this->backoffice_model->convert("spg_id", "sys_permission_group", "spg_name ='$groupper'");
 			$plantCon = $this->backoffice_model->convert("mpa_id", "mst_plant_admin", "mpa_name='$plant'");
 			$password_md5 = md5($password);
-			$rs = $this->backoffice_model->insertUser($empcode, $firstname, $lastname, $groupCon, $email,$password_md5, $plantCon);
+			$rs = $this->backoffice_model->insertUser($empcode, $firstname, $lastname, $groupCon, $email, $password_md5, $plantCon,$empcodeUser);
 			echo $rs;
 		} else if ($rscheck == "false") {
 			return "false";

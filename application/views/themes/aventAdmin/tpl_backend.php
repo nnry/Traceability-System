@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="background-image:url(<?php echo base_url() . $image_url; ?>/img/BG.png); background-size: cover;">
+<html lang="en" style="background-image:url(<?php echo base_url() . $image_url; ?>img/Artboard.png); background-size: cover;">
 
 <link rel="shortcut icon" href="<?php echo base_url() . $css_url; ?>img/Logo2.png"/>
 
