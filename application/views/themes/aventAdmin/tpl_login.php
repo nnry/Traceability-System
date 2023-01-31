@@ -124,10 +124,10 @@
             }
         })
         path.done(function(rs) {
-        //     alert(rs)
+        alert(rs)
             console.log(rs);
 
-            if (rs === "1") {
+            if (rs === "true") {
                 Swal.fire({
                     icon: 'success',
                     title: 'Welcome to Traceability',

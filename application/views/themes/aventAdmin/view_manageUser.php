@@ -126,12 +126,12 @@
                                 <div class="form-group">
                                     <label for="username">Group Permission :</label>
                                     <div>
-                                        <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="editgroup">
+                                        <select class="form-select col-md-12 width-100px" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e; width:500px;" aria-label="Default select example" id="editgroup">
 
                                             <?php
                                             foreach ($groupper as $groupPer) {
                                             ?>
-                                                <option><?php echo $groupPer["spg_name"]; ?></option>
+                                                <option value="<?php echo $groupPer["spg_id"];?>" ><?php echo $groupPer["spg_name"]; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -189,12 +189,12 @@
                                 <div class="form-group">
                                     <label for="username">Group Permission :</label>
                                     <div>
-                                        <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addgroup" placeholder="Enter your plant">
+                                        <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addgroup" placeholder="Enter your Group Permission">
                                             <option>Please select group permission</option>
                                             <?php
                                             foreach ($groupper as $groupPer) {
                                             ?>
-                                                <option><?php echo $groupPer["spg_name"]; ?></option>
+                                                <option value="<?php echo $groupPer["spg_id"];?>"><?php echo $groupPer["spg_name"]; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -217,7 +217,7 @@
                                             <?php
                                             foreach ($plant as $plant) {
                                             ?>
-                                                <option><?php echo $plant["mpa_name"]; ?></option>
+                                                <option value="<?php echo $plant["mpa_id"]; ?>"><?php echo $plant["mpa_name"]; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -231,22 +231,17 @@
                         </div>
                     </div>
                 </div>
-                <!-- <script>
-                    function from
-
-                </script> -->
 
 
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
-                <script src="<?php echo base_url() . $js_url; ?>js/jquery-2.1.4.min.js"></script>
                 <script type="text/javascript">
                     $("#btnSaveEdit").click(function() {
-                        // alert("1111");
+                        alert("1111");
                         saveedit()
                     });
                     $("#btnSaveAdd").click(function() {
-                        //alert("btnSaveAdd")
+                        alert("btnSaveAdd")
                         addUser()
                     });
 
@@ -300,7 +295,7 @@
                                 }
                             })
                             path.done(function(rs) {
-                                // alert(rs);
+                                alert(rs);
                                 if (rs === "true") {
                                     Swal.fire({
                                         icon: 'success',

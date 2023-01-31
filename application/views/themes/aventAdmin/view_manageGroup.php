@@ -11,9 +11,7 @@
 
     <!-- Custom fonts for this template -->
     <link href="<?php echo base_url() ?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url() ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
@@ -29,26 +27,6 @@
 
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Management Group Permission</h1>
-        <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <form
-            class="d-none d-sm-inline-block form-inline mr-auto ml-md my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-                <input type="text" class="form-control bg-light border-1 small" placeholder="Search for..."
-                    aria-label="Search" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Add User</a>
-        </div> -->
-        <!-- <h1 class="h3 mb-2 text-gray-800">Management User</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
-
-
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py" style="width:100%; text-align:right">
@@ -60,59 +38,102 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>ID</th>
+                                <th>Name Permission</th>
+                                <th>Status</th>
+                                <th>Detail</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                            </tr>
-                            
+                            <?php
+                            $j = 0;
+                            foreach ($groupper as $value1) {
+                                $j++;
+                                echo "<tr>";
+                                echo "<td>" . $value1["spg_id"] . "</td>";
+                                echo "<td>" . $value1["spg_name"] . "</td>";
+                                if ($value1["spg_status"] == "1") {
+                                    echo "<td>
+                                            <div class=\"custom-switch text-center\" >
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=groupstatus$j checked onclick='groupstatus(" . $value1["spg_id"] . ")'>
+                                                <label class=\"custom-control-label\" for=groupstatus$j ></label>
+                                            </div>
+                                    </td>";
+                                } else {
+                                    echo "<td>
+                                        <div class=\"custom-switch text-center\" >
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=groupstatus$j onclick='groupstatus(" . $value1["spg_id"] . ")'>
+                                            <label class=\"custom-control-label\" for=groupstatus$j></label>
+                                        </div>
+                                    </td>";
+                                }
+                                echo "<td></td>";
+                                echo "<td>
+                                    <div class=\"text-wrap text-center\" >
+                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editgroupper\"  onclick='editgroup(" . $value1["spg_id"] . ")'><i
+                                     class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
+                                    </div>
+                                </td>";
+                                echo "</tr>";
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
+                <!-- Edit Modal-->
+                <div class="modal fade" id="editgroupper" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit fa-sm"></i> Edit User</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+
+                            <form class="card-body" action="#">
+                                <div class="form-group">
+                                    <label for="empcode">Employee Code :</label>
+                                    <input class="form-control" type="empcode" id="editempcode" required="" disabled>
+                                </div>
+                            </form>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                <a class="btn btn-primary" type="submit" id="btnSaveEdit">Save</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
+                <script type="text/javascript">
+                    function groupstatus(spg_id) {
+                        var path = $.ajax({
+                            method: "get",
+                            url: "<?php echo base_url(); ?>manageGroup/swiftStatus?spg_id=" + spg_id,
+                        })
+                    };
+
+                    function editgroup(spg_id) {
+                        var path = $.ajax({
+                            method: "get",
+                            dataType: "json",
+                            url: "<?php echo base_url(); ?>manageGroup/editNameGroup?spg_id=" + spg_id,
+                        })
+                        path.done(function(rs) {
+                            alert(rs)
+                            console.log(rs);
+                            $("#editempcode").val(rs[0]["spg_name"]);
+                        })
+                    };
+                </script>
             </div>
         </div>
 
     </div>
     <!-- /.container-fluid -->
-
-    </div>
-    <!-- End of Main Content -->
-
-    <!-- Footer -->
-    <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-                <span>Copyright &copy; Your Website 2020</span>
-            </div>
-        </div>
-    </footer>
-    <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-
-
 
 </body>
 

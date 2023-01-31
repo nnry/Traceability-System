@@ -34,7 +34,9 @@ class manageUser extends CI_Controller
 	public function ManagementUser()
 	{
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+		
 		$empcode = $this->session->userdata("empcode");
+
 		$data["menu"] = $this->backoffice_model->showMenu2($empcode); //show เมนูใหญ่
 		$setTitle = "Traceability | Management User";
 		$data["resultUser"] = $this->backoffice_model->getTableData();
@@ -53,7 +55,6 @@ class manageUser extends CI_Controller
 	{
 		$sa_id = $_GET["sa_id"];
 		$res = $this->backoffice_model->editStatus($sa_id);
-		// echo date('h:i:s')."<br>";
 		echo json_encode($res);
 	}
 	public function editManageUser()
@@ -64,14 +65,14 @@ class manageUser extends CI_Controller
 	}
 	public function saveEdit()
 	{
-		$empcodeUser = $this->session->userdata("empcode");
+		 $empcodeUser = $this->session->userdata("empcode");
 		$empcode = $_POST["empcode"];
 		$groupper = $_POST["groupper"];
 		$editemail = $_POST["editemail"];
-			$groupCon = $this->backoffice_model->convert("spg_id", "sys_permission_group", "spg_name ='$groupper'");
-			$rs = $this->backoffice_model->saveEdit($empcode, $groupCon, $editemail,$empcodeUser);
-			echo $rs;
-	
+			 $rs = $this->backoffice_model->saveEditmodel($empcode, $groupper, $editemail,$empcodeUser);
+		 	echo $rs;
+		// echo $empcode.$groupper.$editemail;
+
 	}
 	public function addManageUser()
 	{
@@ -86,10 +87,8 @@ class manageUser extends CI_Controller
 
 		$rscheck = $this->backoffice_model->checkUserAdd($empcode);
 		if ($rscheck == "true") {
-			$groupCon = $this->backoffice_model->convert("spg_id", "sys_permission_group", "spg_name ='$groupper'");
-			$plantCon = $this->backoffice_model->convert("mpa_id", "mst_plant_admin", "mpa_name='$plant'");
 			$password_md5 = md5($password);
-			$rs = $this->backoffice_model->insertUser($empcode, $firstname, $lastname, $groupCon, $email, $password_md5, $plantCon,$empcodeUser);
+			$rs = $this->backoffice_model->insertUser($empcode, $firstname, $lastname, $groupper, $email, $password_md5, $plant,$empcodeUser);
 			echo $rs;
 		} else if ($rscheck == "false") {
 			return "false";

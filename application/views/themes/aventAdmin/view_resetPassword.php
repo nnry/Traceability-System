@@ -36,7 +36,7 @@
         <!-- Project Card Example -->
         <div class="card shadow lg-6">
             <div class="card-header py-3">
-                <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>Reset Password</h1>
+                <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>Change Password</h1>
                 <!-- <h6 class="m-0 font-weight-bold text-primary">Projects</h6> -->
             </div>
             <form class="card-body">

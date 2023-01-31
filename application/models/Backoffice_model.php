@@ -12,9 +12,9 @@ class Backoffice_model extends CI_Model
         $row = $res->result_array();
         // return $row;
         if ($row) {
-            return true;
+            return "true";
         } else {
-            return false;
+            return "false";
         }
     }
 
@@ -42,13 +42,15 @@ class Backoffice_model extends CI_Model
     }
     //***************************explanner***************************
 
-    // public function checkexpenner($code, $pass){
-    //     $this->EXP = $this->load->database('exp_db',true);
-    //     $checkuser ="SELECT USER_CD FROM USER_MST WHERE USER_CD='{$code}', PASSWORD='{$pass}'";
-    //     $qucheck = $this->EXP->query($checkuser);
-    //     $secheck = $qucheck->result_array();
-
-    // }
+    public function addexpenner($code,$fname,$lname,$email,$pass,$conphase,$group,$user){
+        $sql = "EXEC [dbo].[ADD_EXPLANER] @EMP_CODE ='{$code}',@EMP_FNAMEE='{$fname}',@EMP_LNAMEE ='{$lname}',@EMP_GROUP ='{$group}',@EMP_EMAIL='{$email}',@EMP_PASS='{$pass}',@EMP_PLANT='{$conphase}',@EMP_USER='{$user}'";
+        $res = $this->db->query($sql);
+		if($res){
+			return "true";
+		}else{
+			return "false";
+		}
+    }
 
     // ******************GET*************select*******************GET**********************select*****************GET********select*******
 
@@ -89,7 +91,13 @@ class Backoffice_model extends CI_Model
         $res = $this->db->query($sql);
         $row = $res->result_array();
         return $row;
-
+    }
+    public function editNameGroupPer($spg_id){
+        $sql = "EXEC [dbo].[GET_EDIT_NAME_GROUP] @EMP_ID ='{$spg_id}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        return $row;
+            
     }
     //*********show**********innter join***************show***************innter join*****************show***************innter join*******************show*******
     public function showMenu2($empcode)
@@ -102,15 +110,15 @@ class Backoffice_model extends CI_Model
 
     //***********************update************update***********************update*********************update***********update
     public function convert($attr, $table, $condition){
-        $sql ="select $attr from $table where $condition";
-        $query = $this->db->query($sql);
+		$sql ="select $attr from $table where $condition";
+		$query = $this->db->query($sql);
 		$get = $query->result_array();
 		if (empty($get)) {
 			return "0";
 		} else {
 			return $get["0"][$attr];
 		}
-    }
+	}   
     public function forgotPass($forEmail, $forPass)
     {
         $sql = "EXEC [dbo].[GET_FORGOT_PASSWORD] @EMP_EMAIL  = '{$forEmail}',@EMP_PASS = '{$forPass}'";
@@ -147,8 +155,43 @@ class Backoffice_model extends CI_Model
 				return  true;
 			}
     }
-    public function saveEdit($empcode, $groupCon, $editemail,$empcodeUser){
+    public function saveEditmodel($empcode, $groupCon, $editemail,$empcodeUser){
         $sql = "EXEC [dbo].[GET_SAVE_EDIT] @EMP_CODE ='{$empcode}',@EMP_GROUP='{$groupCon}',@EMP_EMAIL='{$editemail}',@EMP_USER='{$empcodeUser}'";
+		$res = $this->db->query($sql);
+        if($res){
+			return "true";
+		}else{
+			return "false";
+		}
+    }
+
+    public function swiftStatusGrop($spg_id)   {
+        $sql = "EXEC [dbo].[GET_GROUP_STATUS] @EMP_ID ='{$spg_id}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        $result = $row[0]["spg_status"];
+			if ($result == 1) {
+				$sql = "EXEC [dbo].[GET_GROUP_STATUS_OFF] @EMP_ID ='{$spg_id}'";
+				$res = $this->db->query($sql);
+				if($res){
+					return true;
+				   }else{
+					return false; 
+				   }
+			} elseif ($result == 0) {
+				$sql = "EXEC [dbo].[GET_GROUP_STATUS_ON] @EMP_ID ='{$spg_id}'";
+				$res = $this->db->query($sql);
+				if($res){
+					return true;
+				   }else{
+					return false; 
+				   }
+			}else{
+				return  true;
+			}
+    }
+    public function saveEditNameGroup($idgroup,$name,$empcodeUser){
+        $sql = "EXEC [dbo].[GET_SAVE_EDIT_GROUP] @EMP_ID  ='{$idgroup}',@EMP_NAME='{$name}',@EMP_USER='{$empcodeUser}'";
 		$res = $this->db->query($sql);
         if($res){
 			return "true";

@@ -38,11 +38,9 @@ class Login extends CI_Controller
 		$this->template->write('page_title', '' . $setTitle . 'TBKK | ');
 		// $this->template->write_view('page_content', 'themes/'. $this->theme .'/view_login.php');
 		$this->template->render();
-
-
-
 	}
-	public function logout(){
+	public function logout()
+	{
 		$this->template->set_master_template('themes/' . $this->theme . '/tpl_logout.php');
 		$this->template->render();
 	}
@@ -50,18 +48,17 @@ class Login extends CI_Controller
 
 	public function checkUserLogin()
 	{
-		$code = $_POST["empcode"];
-		$pass = md5($_POST["emppass"]);
-
-
+		 $code = $_POST["empcode"];
+		 $pass = md5($_POST["emppass"]);
 		// $code = $_GET["empcode"];
 		// $pass = md5($_GET["emppass"]);
-
+		// $code = "5101716";
+		// $code = "admin01";
 		$rscheckLogin = $this->backoffice_model->checkLogin($code, $pass);
 		if ($rscheckLogin == "true") {
 			echo $rscheckLogin;
 			$data = $this->backoffice_model->getname($code);
-			if ($data == true ) {
+			if ($data == true) {
 				$session_data = array(
 					'id' => $data['sa_id'],
 					'empcode' => $data['sa_code'],
@@ -72,7 +69,33 @@ class Login extends CI_Controller
 				$this->session->set_userdata($session_data);
 			}
 		} else {
-			echo $rscheckLogin;
+			$ch = curl_init("http://192.168.161.77/api_system/getAccountEx?username=$code");
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			$output = curl_exec($ch);
+			$data = json_decode($output, true);
+			//echo $output;
+			// echo "<pre>";
+			// print_r($data);
+			// echo "</pre>";
+			$code = $data["0"]["USER_CD"];
+			$name = $data["0"]["USER_NAME"];
+			$subname = explode(" ", $name);
+			$fname = $subname["0"];
+			$lname = $subname["1"];
+			$email = $data["0"]["ADDRESS"];
+			$pass = $data["0"]["PASSWORD"];
+			$phase = $data["0"]["PLANT_CD"];
+			$group = 3 ;
+			$user = "System";
+			$conphase = $this->backoffice_model->convert("mpa_id", "mst_plant_admin", "mpa_phase_plant='$phase'");
+
+			if ($code) {
+				// echo "true";
+				 $rs = $this->backoffice_model->addexpenner($code,$fname,$lname,$email,$pass,$conphase,$group,$user);
+				 echo $rs;
+			} else {
+				// echo "false";
+			}
 		}
 	}
 }

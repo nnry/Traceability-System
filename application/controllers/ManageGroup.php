@@ -38,16 +38,31 @@ class manageGroup extends CI_Controller {
 	public function ManagementGroupPer() {
 		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
 		$empcode = $this->session->userdata("empcode");
-		$data["menu"] = $this->backoffice_model->showMenu2($empcode); 
+		$data["menu"] = $this->backoffice_model->showMenu2($empcode);
+		$data["groupper"] = $this->backoffice_model->getTableGroup();
 		$setTitle = "Traceability System | Management Group Permission";
         $this->template->write('page_title',$setTitle.' ');
         $this->template->write_view('page_menu', 'themes/'. $this->theme .'/first_set/view_menu.php',$data);
         $this->template->write_view('page_header', 'themes/'. $this->theme .'/first_set/view_header.php',$data);
-		$this->template->write_view('page_content', 'themes/'. $this->theme .'/view_manageGroup.php');
-		// $this->template->write_view('page_footer', 'themes/'. $this->theme .'/first_set/view_footer.php');
+		$this->template->write_view('page_content', 'themes/'. $this->theme .'/view_manageGroup.php',$data);
+		$this->template->write_view('page_footer', 'themes/'. $this->theme .'/first_set/view_footer.php');
 
 		$this->template->render();
 	}
+	public function swiftStatus()
+	{
+		$spg_id = $_GET["spg_id"];
+		$res = $this->backoffice_model->swiftStatusGrop($spg_id);
+		// echo date('h:i:s')."<br>";
+		echo json_encode($res);
+	}
+	public function editNameGroup(){
+		$spg_id = $_GET["spg_id"];
+		$res = $this->backoffice_model->editNameGroupPer($spg_id);
+		echo json_encode($res);
+
+	}
+
 
 		
 	}
