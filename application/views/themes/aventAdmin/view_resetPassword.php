@@ -22,6 +22,7 @@
 
 </head>
 
+
 <body id="page-top">
 
     <!-- Begin Page Content -->
@@ -36,82 +37,130 @@
         <!-- Project Card Example -->
         <div class="card shadow lg-6">
             <div class="card-header py-3">
-                <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>Change Password</h1>
+                <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>Change
+                    Password</h1>
                 <!-- <h6 class="m-0 font-weight-bold text-primary">Projects</h6> -->
             </div>
-            <form class="card-body">
-                <div style="width:100%; text-align:right">
-                    <div class="card-body col-md-10 row mb-3">
-                        <label class="col-sm-4 col-form-label">Old Password :</label>
-                        <div class="col-sm-8">
-                            <input type="password" class="form-control ng-pristine ng-valid ng-empty ng-touched">
+
+            <div class="col-lg-18">
+                <form class="card-body">
+                    <div class="row-lg-16">
+                        <div class="card-body col-md-12 row mb-3">
+                            <label class="col-sm-4 col-form-label">Current Password :</label>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control ng-pristine ng-valid ng-empty ng-touched"  id="oldpass">
+                            </div>
+                        </div>
+
+                        <div class="card-body col-md-12 row mb-3">
+                            <label class="col-sm-4 col-form-label">New Password :</label>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control ng-pristine ng-valid ng-empty ng-touched"  id="newpass">
+                            </div>
+                        </div>
+
+                      
+                        <div class="card-body col-md-12 row mb-3">
+                            <label class="col-sm-4 col-form-label">Confirm Password :</label>
+                            <div class="col-sm-6">
+                                <input ng-model="rePassword" type="password" class="form-control ng-pristine ng-valid ng-empty ng-touched" ng-change="checkre()" id="compass">
+                            </div>
                         </div>
                     </div>
-
-                    <div class="card-body col-md-10 row mb-3">
-                        <label class="col-sm-4 col-form-label">New Password :</label>
-                        <div class="col-sm-8">
-                            <input type="password" class="form-control ng-pristine ng-valid ng-empty ng-touched"
-                                ng-model="Newpassword" ng-change="checkconfig()">
-                        </div>
-                    </div>
-
-                    <div class="card-body col-md-10 row mb-3">
-                        <label class="col-sm-4 col-form-label">Confirm Password :</label>
-                        <div class="col-sm-8">
-                            <input ng-model="rePassword" type="password"
-                                class="form-control ng-pristine ng-valid ng-empty ng-touched" ng-change="checkre()">
-                        </div>
-                    </div>
-
-                    <div>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <button type="submit" class="btn btn-secondary">Cancel</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    </div>
-    </div>
-
-    </div>
-    <!-- /.container-fluid -->
-
-    </div>
-    <!-- End of Main Content -->
-
-
-
-    </div>
-    <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <!-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
+                </form>
             </div>
-        </div> -->
+            <div class="col-lg mb-3 text-right">
+                <button type="submit" class="btn btn-primary" id="saveCheng">Save</button>
+                <button type="submit" class="btn btn-secondary" id="canCheng">Cancel</button>
+            </div>
+        </div>
+    </div> 
 </body>
 
-</html>
+</html> 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
+<script type="text/javascript">
+    $("#saveCheng").click(function() {
+        // alert("1111");
+        saveChengPass()
+    });
+
+    $("#canCheng").click(function() {
+        //alert("1111");
+        cancelChengPass()
+    });
+
+    function cancelChengPass() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "คุณต้องการที่จะยกเลิกใช่หรือไม่ ?( Do you want to cancel? )",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: ' Yes '
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "<?php echo base_url() ?>manage/Homepage";
+            }
+        })
+    }
+
+    function saveChengPass() {
+        var oldpass = $("#oldpass").val();
+        var newpass = $("#newpass").val();
+        var compass = $("#compass").val();
+
+        var cheoldpass = document.getElementById("oldpass");
+        var chenewpass = document.getElementById("newpass");
+        var checompass = document.getElementById("compass");
+
+        // if(cheoldpass.value == "" ||chenewpass.value == "" ||checompass.value == "" ){
+        //     Swal.fire({
+        //         icon: 'warning',
+        //         title: 'Are you sure?',
+        //         text: 'You failed to chenge password',
+        //         confirmButtonColor: '#F7B267',
+        //     })
+        // }else{
+            var path = $.ajax({
+                method: "post",
+                url: "<?php echo base_url(); ?>ResetPassword/checkRePass",
+                data: {
+                    oldpass: oldpass,
+                    newpass: newpass,
+                    compass: compass,
+                }
+            }) 
+            path.done(function(rs) {
+               // alert(rs);
+                console.log(rs);
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully',
+                        text: 'You have successfully edit profile',
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>manage/Homepage";
+                    })
+                } else if(rs == "old pass fail") {
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Data not found',
+                        text: 'You failed to current password',
+                    })
+
+                }else if(rs == "confirm pass fail" ){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Data not found',
+                        text: 'You failed to Change Password',
+                    })
+                }
+            })
+        // }
+
+    }
+</script>

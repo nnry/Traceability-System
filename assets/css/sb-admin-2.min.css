@@ -1227,8 +1227,9 @@ pre code {
     }
 
     .col-md-10 {
-        flex: 0 0 83.33333%;
-        max-width: 83.33333%
+        text-align: right;
+        flex: 0 0 100%;
+        max-width: 100%
     }
 
     .col-md-11 {
@@ -1237,6 +1238,7 @@ pre code {
     }
 
     .col-md-12 {
+        text-align: right;
         flex: 0 0 100%;
         max-width: 100%
     }
@@ -2218,6 +2220,7 @@ select.form-control:focus::-ms-value {
     margin-bottom: 0;
     font-size: inherit;
     line-height: 1.5
+    /* text-align: right; */
 }
 
 .col-form-label-lg {
@@ -5032,7 +5035,7 @@ input[type=submit].btn-block {
 }
 
 .card-body {
-    flex: 1 1 auto;
+    flex: 1 1 ;
     min-height: 1px;
     padding: 1.25rem
 }
@@ -12590,7 +12593,3 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
     width: 100%
 }
-/* 
-#addgroup{
-    width:150px;   
-   } */

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" style="background-image:url(<?php echo base_url() . $image_url; ?>/img/Artboard.png); background-size: cover;">
 
-<link rel="shortcut icon" href="<?php echo base_url() . $css_url; ?>img/Logo2.png"/>
+<link rel="shortcut icon" href="<?php echo base_url() . $css_url; ?>img/Logo2.png" />
 
 <head>
 
@@ -19,8 +19,8 @@
 
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url() . $css_url; ?>css/sb-admin-2.min.css" rel="stylesheet">
-    <link rel="shortcut icon" href="<?php echo base_url() . $css_url; ?>img/Logo2.png"/>
-   
+    <link rel="shortcut icon" href="<?php echo base_url() . $css_url; ?>img/Logo2.png" />
+
 
 </head>
 <style>
@@ -29,7 +29,6 @@
         background-image: linear-gradient(180deg, #4e73df00 10%, #224abe00 100%);
         background-size: cover;
     }
-
 </style>
 
 <body class="bg-gradient-primary">
@@ -112,9 +111,20 @@
     function login() {
         var empcode = $("#empcode").val();
         var emppass = $("#emppass").val();
-        // alert(empcode)
-        // alert(emppass)
-        var path = $.ajax({
+
+
+        var code = document.getElementById("empcode");
+        var pass = document.getElementById("emppass");
+
+        if (code.value == "" || pass.value == "" ) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Are you sure?',
+                text: 'You failed to edit user',
+                confirmButtonColor: '#F7B267',
+            })
+        } else {
+            var path = $.ajax({
             method: "post",
             url: "<?php echo base_url(); ?>Login/checkUserLogin",
             data: {
@@ -124,7 +134,7 @@
             }
         })
         path.done(function(rs) {
-        alert(rs)
+            // alert(rs)
             console.log(rs);
 
             if (rs === "true") {
@@ -132,8 +142,8 @@
                     icon: 'success',
                     title: 'Welcome to Traceability',
                     text: 'You signed up successfully',
-                }).then(function(){
-                    window.location.href="<?php echo base_url() ?>Manage/Homepage";
+                }).then(function() {
+                    window.location.href = "<?php echo base_url() ?>Manage/Homepage";
                 })
             } else {
                 Swal.fire({
@@ -143,6 +153,7 @@
                 })
             }
         })
+        }
+       
     }
-   
 </script>

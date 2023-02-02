@@ -33,11 +33,12 @@ class manageUser extends CI_Controller
 	}
 	public function ManagementUser()
 	{
-		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
-		
-		$empcode = $this->session->userdata("empcode");
 
-		$data["menu"] = $this->backoffice_model->showMenu2($empcode); //show เมนูใหญ่
+		$empcode = $this->session->userdata("empcode");
+		$data = $this->backoffice_model->getname($empcode);
+		$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
+		$data["user"] = $data["sa_code"];
+		$data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
 		$setTitle = "Traceability | Management User";
 		$data["resultUser"] = $this->backoffice_model->getTableData();
 		$data["groupper"] = $this->backoffice_model->getTableGroup();
@@ -65,12 +66,12 @@ class manageUser extends CI_Controller
 	}
 	public function saveEdit()
 	{
-		 $empcodeUser = $this->session->userdata("empcode");
+		$empcodeUser = $this->session->userdata("empcode");
 		$empcode = $_POST["empcode"];
 		$groupper = $_POST["groupper"];
 		$editemail = $_POST["editemail"];
-			 $rs = $this->backoffice_model->saveEditmodel($empcode, $groupper, $editemail,$empcodeUser);
-		 	echo $rs;
+		$rs = $this->backoffice_model->saveEditmodel($empcode, $groupper, $editemail, $empcodeUser);
+		echo $rs;
 		// echo $empcode.$groupper.$editemail;
 
 	}
@@ -88,7 +89,7 @@ class manageUser extends CI_Controller
 		$rscheck = $this->backoffice_model->checkUserAdd($empcode);
 		if ($rscheck == "true") {
 			$password_md5 = md5($password);
-			$rs = $this->backoffice_model->insertUser($empcode, $firstname, $lastname, $groupper, $email, $password_md5, $plant,$empcodeUser);
+			$rs = $this->backoffice_model->insertUser($empcode, $firstname, $lastname, $groupper, $email, $password_md5, $plant, $empcodeUser);
 			echo $rs;
 		} else if ($rscheck == "false") {
 			return "false";

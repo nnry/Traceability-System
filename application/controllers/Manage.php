@@ -37,10 +37,13 @@ class manage extends CI_Controller
 	}
 	public function Homepage()
 	{
-		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
-		$setTitle = "Traceability | Homepage";
 		$empcode = $this->session->userdata("empcode");
-		$data["menu"] = $this->backoffice_model->showMenu2($empcode); //show เมนูใหญ่
+		$data = $this->backoffice_model->getname($empcode);
+		$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
+		$data["user"] = $data["sa_code"];
+		$data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
+		$setTitle = "Traceability | Homepage";
+	
 		$this->template->write('page_title', $setTitle . ' ');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);

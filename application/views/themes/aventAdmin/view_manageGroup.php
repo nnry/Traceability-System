@@ -31,14 +31,14 @@
         <div class="card shadow mb-4">
             <div class="card-header py" style="width:100%; text-align:right">
                 <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
-                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-user-plus fa-sm"></i> Add Permission</a>
+                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle=modal data-target=#addgroupper><i class="fas fa-user-plus fa-sm"></i> Add Permission</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>NO</th>
                                 <th>Name Permission</th>
                                 <th>Status</th>
                                 <th>Detail</th>
@@ -68,10 +68,15 @@
                                         </div>
                                     </td>";
                                 }
-                                echo "<td></td>";
                                 echo "<td>
                                     <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editgroupper\"  onclick='editgroup(" . $value1["spg_id"] . ")'><i
+                                        <button  class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#detailgroupper\"  onclick='detailgroup(" . $value1["spg_id"] . ")'><i
+                                        class=\"fas fa-info-circle fa-sm\"></i>info</button>                              
+                                    </div>
+                                </td>";
+                                echo "<td>
+                                    <div class=\"text-wrap text-center\" >
+                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editgroupper\"  id= \"showtable\"     onclick='editgroup(" . $value1["spg_id"] . ")'><i
                                      class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
                                     </div>
                                 </td>";
@@ -86,7 +91,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit fa-sm"></i> Edit User</h5>
+                                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit fa-sm"></i> Edit Permission Group Name</h5>
                                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
@@ -94,21 +99,63 @@
 
                             <form class="card-body" action="#">
                                 <div class="form-group">
-                                    <label for="empcode">Employee Code :</label>
-                                    <input class="form-control" type="empcode" id="editempcode" required="" disabled>
+                                    <label for="pername">Permission Group :</label>
+                                    <input class="form-control" type="hidden" id="hideID" required="" value="">
+                                    <input class="form-control" type="pername" id="editName" required="" value="">
                                 </div>
                             </form>
 
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                <a class="btn btn-primary" type="submit" id="btnSaveEdit">Save</a>
+                                <a class="btn btn-primary" type="submit" id="btnSaveEditgroup">Save</a>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- addUser Modal-->
+                <div class="modal fade" id="addgroupper" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-plus fa-sm"></i> Add Permission Group</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+
+                            <form class="card-body" action="#">
+                                <div class="form-group">
+                                    <label for="pgn_name">Permission Group :</label>
+                                    <input class="form-control" type="hidden" id="hideIDadd" required="" value="">
+                                    <input class="form-control" type="text" id="addname" required="" placeholder="Enter your permission group name">
+                                </div>
+                            </form>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                <a class="btn btn-primary" type="submit" id="btnSaveAdd">Save</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End addUser Modal-->
+
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
                 <script type="text/javascript">
+                    $("#btnSaveEditgroup").click(function() {
+                        //alert("1111");
+                        saveeditgroup()
+                    });
+                    $("#btnSaveAdd").click(function() {
+                        //alert("1111");
+                        addPerGroup()
+                    });
+                    function detailgroup(spg_id){
+
+                    }
+
                     function groupstatus(spg_id) {
                         var path = $.ajax({
                             method: "get",
@@ -123,11 +170,102 @@
                             url: "<?php echo base_url(); ?>manageGroup/editNameGroup?spg_id=" + spg_id,
                         })
                         path.done(function(rs) {
-                            alert(rs)
+                            // alert(rs)
                             console.log(rs);
-                            $("#editempcode").val(rs[0]["spg_name"]);
+                            $("#hideID").val(rs[0]["spg_id"]);
+                            $("#editName").val(rs[0]["spg_name"]);
                         })
                     };
+
+                    function saveeditgroup() {
+                        var name = $("#editName").val();
+                        var id = $("#hideID").val();
+
+                        var editname = document.getElementById("editName");
+                        if (editname.value == "") {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Are you sure?',
+                                text: 'You failed to edit name group permission',
+                                confirmButtonColor: '#F7B267',
+                            })
+                        } else {
+                            var path = $.ajax({
+                                method: "post",
+                                url: "<?php echo base_url(); ?>manageGroup/saveEditPer",
+                                data: {
+                                    id: id,
+                                    name: name
+                                }
+                            })
+                            path.done(function(rs) {
+                                //alert(rs);
+                                if (rs === "true") {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Successfully',
+                                        text: 'You have successfully edit  name group permission',
+                                    }).then(function() {
+                                        window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Data not found',
+                                        text: 'You failed to edit  name group permission',
+                                    })
+                                }
+                            })
+                        }
+
+
+                    }
+
+                    function addPerGroup() {
+                        var name = $('#addname').val();
+                        // var id = $('#hideIDadd').val();
+                        var addname = document.getElementById("addname");
+
+                        if (addname.value == "") {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Are you sure?',
+                                text: 'You failed to edit name group permission',
+                                confirmButtonColor: '#F7B267',
+                            })
+                        } else {
+                            var path = $.ajax({
+                                method: "POST",
+                                url: "<?php echo base_url(); ?>manageGroup/addPergroup",
+                                data: {
+                                    // id:id,
+                                    name: name
+                                }
+                            })
+                            path.done(function(rs) {
+                                console.log(rs);
+                                alert(rs);
+                                if (rs === "true") {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Successfully',
+                                        text: 'You have successfully add  name group permission',
+
+                                    }).then(function() {
+                                        window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'You failed to register',
+                                    })
+                                }
+                            })
+                        }
+
+
+
+                    }
                 </script>
             </div>
         </div>

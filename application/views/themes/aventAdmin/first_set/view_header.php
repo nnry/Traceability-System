@@ -11,48 +11,51 @@
             </div>
             <div class="sidebar-brand-text mx-3">Traceability</div>
         </a>
-        <?php
-        // echo $data_menu;
-        $name = "";
-        foreach ($menu as $key => $values) {
-            if ($name != $values["sm_name"]) {
-        ?>
-                <li class="nav-item active">
-                    <a class="nav-link collapsed" data-toggle="collapse" href="#<?php echo "list" . $key; ?>" aria-expanded="false" aria-controls="<?php echo "list" . $key; ?>">
-                        <i class="<?php echo $values["sm_icon"] ?>"></i>
-                        <span><?php echo $values["sm_name"]; ?></span>
-                    </a>
-                    <?php foreach ($menu as $key1 => $values1) {
-                        if ($values["sm_name"] == $values1["sm_name"]) {
-                    ?>
-                            <div class="collapse" id="<?php echo "list" . $key; ?>">
-                                <ul class="bg-white py-2 collapse-inner rounded">
-                                    <a class="collapse-item" href="<?php echo base_url().$values1["ss_method"] ?>"><?php echo $values1["ss_name"] ?></a>
-                                </ul>
-                            </div>
-               
-        <?php
         
-                        }
-                    
-                    } ?>
-                        </li>
-<?php
+            <?php
+            // echo $data_menu;
+
+            $name = "";
+            foreach ($menu as $key => $values) {
+                if ($name != $values["sm_name"]) {
+            ?>
+                    <li class="nav-item active">
+                        <a class="nav-link collapsed" data-toggle="collapse" href="#<?php echo "list" . $key; ?>" aria-expanded="false" aria-controls="<?php echo "list" . $key; ?>">
+                            <i class="<?php echo $values["sm_icon"] ?>"></i>
+                            <span><?php echo $values["sm_name"]; ?></span>
+                        </a>
+
+                        <div class="collapse" id="<?php echo "list" . $key; ?>">
+                            <?php foreach ($menu as $key1 => $values1) {
+                                if ($values["sm_name"] == $values1["sm_name"]) {
+                            ?>
+                                    <div class="bg-white py-2 collapse-inner rounded">
+                                        <a class="collapse-item" href="<?php echo base_url() . $values1["ss_method"] ?>"><?php echo $values1["ss_name"] ?></a>
+                                    </div>
+
+                            <?php
+                            }
+                        } ?>
+                        </div>
+
+                    </li>
+            <?php
+                }
+                $name = $values["sm_name"];
             }
-            $name = $values["sm_name"];
-        }
-?>
+            ?>
+       
 
 
-<!-- Divider -->
-<hr class="sidebar-divider d-none d-md-block">
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
 
-<!-- Sidebar Toggler (Sidebar) -->
-<div class="text-center d-none d-md-inline">
-    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-</div>
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
 
-<!-- Sidebar Message
+        <!-- Sidebar Message
             <div class="sidebar-card d-none d-lg-flex">
                 <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
                 <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>

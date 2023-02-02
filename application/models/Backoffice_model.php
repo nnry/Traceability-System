@@ -30,28 +30,60 @@ class Backoffice_model extends CI_Model
         }
     }
 
-    public function checkUserAdd($empcode){
+    public function checkUserAdd($empcode)
+    {
         $sql = "EXEC [dbo].[CHECK_ADD_USER] @EMP_CODE  = '{$empcode}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         if (empty($row)) {
-            return "true"; 
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+    public function checkpass($empcode,$oldpass){
+        $sql = "EXEC [dbo].[CHECK_PASSWORD] @EMP_CODE  ='{$empcode}', @EMP_OLD_PASS ='{$oldpass}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        if ($row) {
+            return "true";
         } else {
             return "false";
         }
     }
     //***************************explanner***************************
 
-    public function addexpenner($code,$fname,$lname,$email,$pass,$conphase,$group,$user){
-        $sql = "EXEC [dbo].[ADD_EXPLANER] @EMP_CODE ='{$code}',@EMP_FNAMEE='{$fname}',@EMP_LNAMEE ='{$lname}',@EMP_GROUP ='{$group}',@EMP_EMAIL='{$email}',@EMP_PASS='{$pass}',@EMP_PLANT='{$conphase}',@EMP_USER='{$user}'";
+    public function checkexplainer($usercode)
+    {
+        $sql = "EXEC [dbo].[GET_CHCEK_EXPLANER] @EMP_CODE  = '{$usercode}'";
         $res = $this->db->query($sql);
-		if($res){
-			return "true";
-		}else{
-			return "false";
-		}
+        $row = $res->result_array();
+        if ($row) {
+            return "true";
+        } else {
+            return "false";
+        }
     }
-
+    public function addexplainer($code, $fname, $lname, $email, $pass, $conphase, $group, $user)
+    {
+        $sql = "EXEC [dbo].[ADD_EXPLAINER] @EMP_CODE ='{$code}',@EMP_FNAMEE='{$fname}',@EMP_LNAMEE ='{$lname}',@EMP_GROUP ='{$group}',@EMP_EMAIL='{$email}',@EMP_PASS='{$pass}',@EMP_PLANT='{$conphase}',@EMP_USER='{$user}'";
+        $res = $this->db->query($sql);
+        if ($res) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+    public function updatepass($passex, $usercode)
+    {
+        $sql = "EXEC [dbo].[UP_DATE_EXPLAINER] @EMP_PASS  ='{$passex}',@EMP_CODE='{$usercode}'";
+        $res = $this->db->query($sql);
+        if ($res) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
     // ******************GET*************select*******************GET**********************select*****************GET********select*******
 
     public function getname($code)
@@ -65,7 +97,6 @@ class Backoffice_model extends CI_Model
         } else {
             return false;
         }
-
     }
     public function getTableData()
     {
@@ -74,30 +105,33 @@ class Backoffice_model extends CI_Model
         $row = $res->result_array();
         return $row;
     }
-    public function editUser($sa_id){
+    public function editUser($sa_id)
+    {
         $sql = "EXEC [dbo].[GET_EDIT_MANAGE] @EMP_ID ='{$sa_id}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         return $row;
     }
-    public function getTableGroup(){
-        $sql = "EXEC [dbo].[GET_TABLE_GROUP]" ;
+    public function getTableGroup()
+    {
+        $sql = "EXEC [dbo].[GET_TABLE_GROUP]";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         return $row;
     }
-    public function getTablePlant(){
-        $sql = "EXEC [dbo].[GET_TABLE_Plant]" ;
+    public function getTablePlant()
+    {
+        $sql = "EXEC [dbo].[GET_TABLE_PLANT]";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         return $row;
     }
-    public function editNameGroupPer($spg_id){
+    public function editNameGroupPer($spg_id)
+    {
         $sql = "EXEC [dbo].[GET_EDIT_NAME_GROUP] @EMP_ID ='{$spg_id}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         return $row;
-            
     }
     //*********show**********innter join***************show***************innter join*****************show***************innter join*******************show*******
     public function showMenu2($empcode)
@@ -109,16 +143,17 @@ class Backoffice_model extends CI_Model
     }
 
     //***********************update************update***********************update*********************update***********update
-    public function convert($attr, $table, $condition){
-		$sql ="select $attr from $table where $condition";
-		$query = $this->db->query($sql);
-		$get = $query->result_array();
-		if (empty($get)) {
-			return "0";
-		} else {
-			return $get["0"][$attr];
-		}
-	}   
+    public function convert($attr, $table, $condition)
+    {
+        $sql = "select $attr from $table where $condition";
+        $query = $this->db->query($sql);
+        $get = $query->result_array();
+        if (empty($get)) {
+            return "0";
+        } else {
+            return $get["0"][$attr];
+        }
+    }
     public function forgotPass($forEmail, $forPass)
     {
         $sql = "EXEC [dbo].[GET_FORGOT_PASSWORD] @EMP_EMAIL  = '{$forEmail}',@EMP_PASS = '{$forPass}'";
@@ -135,79 +170,112 @@ class Backoffice_model extends CI_Model
         $res = $this->db->query($sql);
         $row = $res->result_array();
         $result = $row[0]["sa_status"];
-			if ($result == 1) {
-				$sql = "EXEC [dbo].[GET_EDIT_STATUS_OFF] @EMP_ID ='{$sa_id}'";
-				$res = $this->db->query($sql);
-				if($res){
-					return true;
-				   }else{
-					return false; 
-				   }
-			} elseif ($result == 0) {
-				$sql = "EXEC [dbo].[GET_EDIT_STATUS_ON] @EMP_ID ='{$sa_id}'";
-				$res = $this->db->query($sql);
-				if($res){
-					return true;
-				   }else{
-					return false; 
-				   }
-			}else{
-				return  true;
-			}
+        if ($result == 1) {
+            $sql = "EXEC [dbo].[GET_EDIT_STATUS_OFF] @EMP_ID ='{$sa_id}'";
+            $res = $this->db->query($sql);
+            if ($res) {
+                return true;
+            } else {
+                return false;
+            }
+        } elseif ($result == 0) {
+            $sql = "EXEC [dbo].[GET_EDIT_STATUS_ON] @EMP_ID ='{$sa_id}'";
+            $res = $this->db->query($sql);
+            if ($res) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return  true;
+        }
     }
-    public function saveEditmodel($empcode, $groupCon, $editemail,$empcodeUser){
+    public function saveEditmodel($empcode, $groupCon, $editemail, $empcodeUser)
+    {
         $sql = "EXEC [dbo].[GET_SAVE_EDIT] @EMP_CODE ='{$empcode}',@EMP_GROUP='{$groupCon}',@EMP_EMAIL='{$editemail}',@EMP_USER='{$empcodeUser}'";
-		$res = $this->db->query($sql);
-        if($res){
-			return "true";
-		}else{
-			return "false";
-		}
+        $res = $this->db->query($sql);
+        if ($res) {
+            return "true";
+        } else {
+            return "false";
+        }
     }
 
-    public function swiftStatusGrop($spg_id)   {
+    public function swiftStatusGrop($spg_id)
+    {
         $sql = "EXEC [dbo].[GET_GROUP_STATUS] @EMP_ID ='{$spg_id}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         $result = $row[0]["spg_status"];
-			if ($result == 1) {
-				$sql = "EXEC [dbo].[GET_GROUP_STATUS_OFF] @EMP_ID ='{$spg_id}'";
-				$res = $this->db->query($sql);
-				if($res){
-					return true;
-				   }else{
-					return false; 
-				   }
-			} elseif ($result == 0) {
-				$sql = "EXEC [dbo].[GET_GROUP_STATUS_ON] @EMP_ID ='{$spg_id}'";
-				$res = $this->db->query($sql);
-				if($res){
-					return true;
-				   }else{
-					return false; 
-				   }
-			}else{
-				return  true;
-			}
+        if ($result == 1) {
+            $sql = "EXEC [dbo].[GET_GROUP_STATUS_OFF] @EMP_ID ='{$spg_id}'";
+            $res = $this->db->query($sql);
+            if ($res) {
+                return true;
+            } else {
+                return false;
+            }
+        } elseif ($result == 0) {
+            $sql = "EXEC [dbo].[GET_GROUP_STATUS_ON] @EMP_ID ='{$spg_id}'";
+            $res = $this->db->query($sql);
+            if ($res) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return  true;
+        }
     }
-    public function saveEditNameGroup($idgroup,$name,$empcodeUser){
-        $sql = "EXEC [dbo].[GET_SAVE_EDIT_GROUP] @EMP_ID  ='{$idgroup}',@EMP_NAME='{$name}',@EMP_USER='{$empcodeUser}'";
-		$res = $this->db->query($sql);
-        if($res){
-			return "true";
-		}else{
-			return "false";
-		}
+    public function saveEditNameGroup($id, $name, $empcode)
+    {
+        $sql = "EXEC [dbo].[GET_SAVE_EDIT_GROUP] @EMP_ID  ='{$id}',@EMP_NAME='{$name}',@EMP_USER='{$empcode}'";
+        $res = $this->db->query($sql);
+        if ($res) {
+            return "true";
+        } else {
+            return "false";
+        }
     }
-// ***********insert***************************************insert***************************insert**************************insert********************** insert*******************************************
+    public function saveEditProfile($fname, $lname, $email, $plant,$empcodeUser){
+        $sql = "EXEC [dbo].[GET_EDIT_PROFILE] @EMP_FNAME  ='{$fname}', @EMP_LNAME ='{$lname}',@EMP_EMAIL='{$email}',@EMP_PLANT='{$plant}',@EMP_USER='{$empcodeUser}'";
+        $res = $this->db->query($sql);
+        if ($res) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+    public function upChangePass($newpass,$empcode){
+        $sql = "EXEC [dbo].[UP_DATE_CHANGE_PASS] @EMP_NEWPASS ='{$newpass}', @EMP_ID='{$empcode}'";
+        $res = $this->db->query($sql);
+        if ($res) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+    // ***********insert***************************************insert***************************insert**************************insert********************** insert*******************************************
 
-public function insertUser($empcode,$firstname,$lastname,$groupCon,$email,$password,$plantCon,$empcodeUser){
+    public function insertUser($empcode, $firstname, $lastname, $groupCon, $email, $password, $plantCon, $empcodeUser)
+    {
         $sql = "EXEC [dbo].[INSERT_USER] @EMP_CODE ='{$empcode}',@EMP_FNAMEE='{$firstname}',@EMP_LNAMEE ='{$lastname}',@EMP_GROUP ='{$groupCon}',@EMP_EMAIL='{$email}',@EMP_PASS='{$password}',@EMP_PLANT='{$plantCon}',@EMP_USER='{$empcodeUser}'";
         $res = $this->db->query($sql);
-		if($res){
-			return "true";
-		}else{
-			return "false";
-		}
-}
+        if ($res) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+    public function insertPermissionGroup($name, $empcode)
+    {
+        $sql = "EXEC [dbo].[INSERT_PER_GROUP] @EMP_NAMEGROUP ='{$name}', @EMP_USER='{$empcode}'";
+        $res = $this->db->query($sql);
+        if ($res) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+    
 }

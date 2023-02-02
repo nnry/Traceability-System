@@ -210,7 +210,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="password">Plant :</label>
+                                    <label>Plant :</label>
                                     <div>
                                         <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="addplant" aria-label="Default select example" placeholder="Enter your plant">
                                             <option>Please select plant</option>
@@ -237,11 +237,11 @@
                 <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
                 <script type="text/javascript">
                     $("#btnSaveEdit").click(function() {
-                        alert("1111");
+                        //alert("1111");
                         saveedit()
                     });
                     $("#btnSaveAdd").click(function() {
-                        alert("btnSaveAdd")
+                       // alert("btnSaveAdd")
                         addUser()
                     });
 
@@ -273,7 +273,7 @@
                     function saveedit() {
                         var editempcode = $("#editempcode").val();
                         var editgroup = $("#editgroup").val();
-                        var editemil = $("#editemailaddress").val();
+                        var editemail = $("#editemailaddress").val();
 
                         var email = document.getElementById("editemailaddress");
 
@@ -281,7 +281,7 @@
                             Swal.fire({
                                 icon: 'warning',
                                 title: 'Are you sure?',
-                                text: 'You failed to edit user',
+                                text: 'You failed to edit employee',
                                 confirmButtonColor: '#F7B267',
                             })
                         } else {
@@ -291,7 +291,7 @@
                                 data: {
                                     empcode: editempcode,
                                     groupper: editgroup,
-                                    editemail: editemil,
+                                    editemail: editemail,
                                 }
                             })
                             path.done(function(rs) {
@@ -300,7 +300,7 @@
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'Successfully',
-                                        text: 'You have successfully edit user',
+                                        text: 'You have successfully edit employee',
                                     }).then(function() {
                                         window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
                                     })
@@ -308,7 +308,7 @@
                                     Swal.fire({
                                         icon: 'error',
                                         title: 'Data not found',
-                                        text: 'You failed to edit user',
+                                        text: 'You failed to edit employee',
                                     })
                                 }
                             })

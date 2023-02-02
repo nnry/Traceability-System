@@ -48,12 +48,8 @@ class Login extends CI_Controller
 
 	public function checkUserLogin()
 	{
-		 $code = $_POST["empcode"];
-		 $pass = md5($_POST["emppass"]);
-		// $code = $_GET["empcode"];
-		// $pass = md5($_GET["emppass"]);
-		// $code = "5101716";
-		// $code = "admin01";
+		$code = $_POST["empcode"];
+		$pass = md5($_POST["emppass"]);
 		$rscheckLogin = $this->backoffice_model->checkLogin($code, $pass);
 		if ($rscheckLogin == "true") {
 			echo $rscheckLogin;
@@ -64,6 +60,7 @@ class Login extends CI_Controller
 					'empcode' => $data['sa_code'],
 					'fname' => $data['sa_fname'],
 					'lname' => $data['sa_lname'],
+					'email' =>$data['sa_email'],
 					'login' => "OK"
 				);
 				$this->session->set_userdata($session_data);
@@ -73,28 +70,34 @@ class Login extends CI_Controller
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			$output = curl_exec($ch);
 			$data = json_decode($output, true);
-			//echo $output;
-			// echo "<pre>";
-			// print_r($data);
-			// echo "</pre>";
-			$code = $data["0"]["USER_CD"];
+			$usercode = $data["0"]["USER_CD"];
 			$name = $data["0"]["USER_NAME"];
 			$subname = explode(" ", $name);
 			$fname = $subname["0"];
 			$lname = $subname["1"];
 			$email = $data["0"]["ADDRESS"];
-			$pass = $data["0"]["PASSWORD"];
+			$passex = $data["0"]["PASSWORD"];
 			$phase = $data["0"]["PLANT_CD"];
-			$group = 3 ;
+			$group = 3;
 			$user = "System";
 			$conphase = $this->backoffice_model->convert("mpa_id", "mst_plant_admin", "mpa_phase_plant='$phase'");
 
-			if ($code) {
-				// echo "true";
-				 $rs = $this->backoffice_model->addexpenner($code,$fname,$lname,$email,$pass,$conphase,$group,$user);
-				 echo $rs;
+
+			if ($usercode) {
+				$excheck = $this->backoffice_model->checkexplainer($usercode);
+				if ($excheck == "true") {
+					if ($pass == $passex) {
+						echo "true";
+					} else {
+						$rsUpdate = $this->backoffice_model->updatepass($passex, $usercode);
+						echo $rsUpdate;
+					}
+				} else {
+					$rs = $this->backoffice_model->addexplainer($usercode, $fname, $lname, $email, $passex, $conphase, $group, $user);
+					echo $rs;
+				}
 			} else {
-				// echo "false";
+				echo "false";
 			}
 		}
 	}

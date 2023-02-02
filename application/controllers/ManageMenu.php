@@ -1,17 +1,18 @@
 <?php
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class manageMenu extends CI_Controller {
-	 
-	private $theme; 
-	 
+class manageMenu extends CI_Controller
+{
+
+	private $theme;
+
 	public function __construct()
 	{
 		parent::__construct();
 
 		## asset config
 		$theme = $this->config->item('theme');
-		$this->theme = $theme; 
+		$this->theme = $theme;
 
 		$this->asset_url = $this->config->item('asset_url');
 		$this->js_url = $this->config->item('js_url');
@@ -21,38 +22,33 @@ class manageMenu extends CI_Controller {
 		$this->img_path = $this->image_url;
 
 		$this->template->write('js_url', $this->js_url);
-  	    $this->template->write('css_url', $this->css_url);
+		$this->template->write('css_url', $this->css_url);
 		$this->template->write('asset_url', $this->asset_url);
 		$this->template->write('image_url', $this->image_url);
 		// ini_set('display_errors', 1);
 		// error_reporting(E_ALL);
 	}
-	 
+
 	public function index()
 	{
 
 		$this->backoffice_model->checksession();
-		redirect('manage');	
-					
+		redirect('manage');
 	}
-	public function ManagementMenu() {
-		$data["fullname"] = $this->session->userdata("fname") . " " . $this->session->userdata("lname");
+	public function ManagementMenu()
+	{
 		$empcode = $this->session->userdata("empcode");
-		$data["menu"] = $this->backoffice_model->showMenu2($empcode); 
+		$data = $this->backoffice_model->getname($empcode);
+		$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
+		$data["user"] = $data["sa_code"];
+		$data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
 		$setTitle = "Traceability System | Management Menu";
-        $this->template->write('page_title',$setTitle.' ');
-        $this->template->write_view('page_menu', 'themes/'. $this->theme .'/first_set/view_menu.php',$data);
-        $this->template->write_view('page_header', 'themes/'. $this->theme .'/first_set/view_header.php',$data);
-		$this->template->write_view('page_content', 'themes/'. $this->theme .'/view_manageMenu.php');
+		$this->template->write('page_title', $setTitle . ' ');
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
+		$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/view_manageMenu.php');
 		// $this->template->write_view('page_footer', 'themes/'. $this->theme .'/first_set/view_footer.php');
 
 		$this->template->render();
 	}
-
-		
-	}
-
-
-
-	
-
+}
