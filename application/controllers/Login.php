@@ -66,7 +66,8 @@ class Login extends CI_Controller
 				$this->session->set_userdata($session_data);
 			}
 		} else {
-			$ch = curl_init("http://192.168.161.77/api_system/getAccountEx?username=$code");
+			// http://192.168.161.102/api_system/getAccountEx?username=5101716
+			$ch = curl_init("http://192.168.161.102/api_system/getAccountEx?username=$code");
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			$output = curl_exec($ch);
 			$data = json_decode($output, true);

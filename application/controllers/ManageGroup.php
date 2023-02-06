@@ -43,6 +43,7 @@ class manageGroup extends CI_Controller
 		$data["user"] = $data["sa_code"];
 		$data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
 		$data["groupper"] = $this->backoffice_model->getTableGroup();
+		$data["tabledetail"] = $this->backoffice_model->TableDetailGroup();
 		$setTitle = "Traceability System | Management Group Permission";
 		$this->template->write('page_title', $setTitle . ' ');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
@@ -59,6 +60,13 @@ class manageGroup extends CI_Controller
 		// echo date('h:i:s')."<br>";
 		echo json_encode($res);
 	}
+	public function statusDetail(){
+		$spd_id = $_GET["spd_id"];
+		$res = $this->backoffice_model->swiftStatusDetail($spd_id);
+		// // echo date('h:i:s')."<br>";
+		echo json_encode($res);
+
+	}
 	public function editNameGroup()
 	{
 		$spg_id = $_GET["spg_id"];
@@ -70,15 +78,31 @@ class manageGroup extends CI_Controller
 		$empcode = $this->session->userdata("empcode");
 		$id = $_POST["id"];
 		$name = $_POST["name"];
-		$res = $this->backoffice_model->saveEditNameGroup($id, $name, $empcode);
+		$check = $this->backoffice_model->checkPerAdd($name);
+		if ($check == "true") {
+			$res = $this->backoffice_model->saveEditNameGroup($id, $name, $empcode);
 		echo $res;
+		}else {
+			echo "false";
+		}
+		
 	}
 	public function addPergroup()
 	{
 		$empcode = $this->session->userdata("empcode");
 		// $id = $_POST["id"];
 		$name = $_POST["name"];
-		$res = $this->backoffice_model->insertPermissionGroup($name, $empcode);
-		echo $res;
+		$check = $this->backoffice_model->checkPerAdd($name);
+		if ($check == "true") {
+			$res = $this->backoffice_model->insertPermissionGroup($name, $empcode);
+			echo $res;
+		}else {
+			echo "false";
+		}
+	}
+	public function getDetailGroup(){
+		$id = $_GET["spd_id"];
+		$res = $this->backoffice_model->detailGroup($id);
+		echo json_encode($res) ;
 	}
 }

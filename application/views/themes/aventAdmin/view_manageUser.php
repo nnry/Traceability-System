@@ -38,7 +38,7 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>NO.</th>
+                                <th>No.</th>
                                 <th>Employees Code</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
@@ -131,7 +131,7 @@
                                             <?php
                                             foreach ($groupper as $groupPer) {
                                             ?>
-                                                <option value="<?php echo $groupPer["spg_id"];?>" ><?php echo $groupPer["spg_name"]; ?></option>
+                                                <option value="<?php echo $groupPer["spg_id"]; ?>"><?php echo $groupPer["spg_name"]; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -194,7 +194,7 @@
                                             <?php
                                             foreach ($groupper as $groupPer) {
                                             ?>
-                                                <option value="<?php echo $groupPer["spg_id"];?>"><?php echo $groupPer["spg_name"]; ?></option>
+                                                <option value="<?php echo $groupPer["spg_id"]; ?>"><?php echo $groupPer["spg_name"]; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -241,15 +241,34 @@
                         saveedit()
                     });
                     $("#btnSaveAdd").click(function() {
-                       // alert("btnSaveAdd")
+                        // alert("btnSaveAdd")
                         addUser()
                     });
 
                     function status(sa_id) {
-                        var path = $.ajax({
-                            method: "get",
-                            url: "<?php echo base_url(); ?>manageUser/swiftStatus?sa_id=" + sa_id,
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "คุณต้องการแก้ไขสถานะใช่หรือไม่? ( Do you want to edit your status? )",
+                            icon: 'question',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes' //ชื่อปุ่ม
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                var path = $.ajax({
+                                    method: "get",
+                                    url: "<?php echo base_url(); ?>manageUser/swiftStatus?sa_id=" + sa_id,
+                                })
+                                Swal.fire(
+                                    'Success!',
+                                    'เปลี่ยนแปลงข้อมูลสำเร็จ',
+                                    'success'
+                                )
+                            }
+                            window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
                         })
+
                     };
 
                     function edit(sa_id) {
