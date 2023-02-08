@@ -65,6 +65,7 @@ class manageMenu extends CI_Controller
 		$menu = $_POST["menu"];
 		$sub = $_POST["submenu"];
 		$path = $_POST["path"];
+	
 		$res = $this->backoffice_model->saveEditTableMenu($menu,$sub,$path,$idsub,$empcodeUser);
 		echo $res;
 	}
@@ -79,6 +80,10 @@ class manageMenu extends CI_Controller
 		$submenu = $_POST["addsubmenu"];
 		$path = $_POST["addpath"];
 		$icons = $_POST["addicons"];
+
+		$resCheckMenu = $this->backoffice_model->checkMenu($menu);
+
+
 		$res = $this->backoffice_model->insertMenu($menu,$submenu,$path,$icons,$empcodeUser);
 		echo json_encode($res);
 	}

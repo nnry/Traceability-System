@@ -66,9 +66,12 @@
                                     Login
                                 </a>
                                 <hr>
-                                <div class="text-center">
+                                <!-- <div class="text-center">
                                     <a href="<?php echo base_url() ?>Forgot_Password/forgotPassword" class="small" href="forgot-password.html">Forgot Password?</a>
-                                </div>
+                                </div> -->
+                                <!-- <div class="text-center">
+                                    <a href="<?php echo base_url() ?>Forgot_Password/forgotPassword" class="small" href="forgot-password.html">Forgot Password?</a>
+                                </div> -->
 
                             </form>
 

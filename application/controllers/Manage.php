@@ -37,12 +37,27 @@ class manage extends CI_Controller
 	}
 	public function Homepage()
 	{
+		// $ch = curl_init("http://192.168.161.102/api_system/getAccountEx?username=$code");
+		// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		// $output = curl_exec($ch);
+		// $data = json_decode($output, true);
+		// $usercode = $data["0"]["USER_CD"];
+		// $name = $data["0"]["USER_NAME"];
+		// $subname = explode(" ", $name);
+		// $fname = $subname["0"];
+		// $lname = $subname["1"];
+		// $email = $data["0"]["ADDRESS"];
+		// $passex = $data["0"]["PASSWORD"];
+		// $phase = $data["0"]["PLANT_CD"];
+		// $group = 3;
+		// $user = "System";
 		$empcode = $this->session->userdata("empcode");
 		$data = $this->backoffice_model->getname($empcode);
 		$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
 		$data["user"] = $data["sa_code"];
-		$data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
+		// $data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
 		$setTitle = "Traceability | Homepage";
+		
 	
 		$this->template->write('page_title', $setTitle . ' ');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
@@ -52,6 +67,7 @@ class manage extends CI_Controller
 
 		$this->template->render();
 	}
+
 }
 ?>
 

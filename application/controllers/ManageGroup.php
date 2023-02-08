@@ -101,7 +101,7 @@ class manageGroup extends CI_Controller
 		}
 	}
 	public function getDetailGroup(){
-		$id = $_GET["spd_id"];
+		$id = $_GET["spg_id"];
 		$res = $this->backoffice_model->detailGroup($id);
 		echo json_encode($res) ;
 	}

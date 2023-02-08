@@ -38,14 +38,21 @@ class manageUser extends CI_Controller
 		$data = $this->backoffice_model->getname($empcode);
 		$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
 		$data["user"] = $data["sa_code"];
-		$data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
+		
 		$setTitle = "Traceability | Management User";
 		$data["resultUser"] = $this->backoffice_model->getTableData();
 		$data["groupper"] = $this->backoffice_model->getTableGroup();
 		$data["plant"] = $this->backoffice_model->getTablePlant();
+
+
+		$menu["menu"] = $this->backoffice_model->showMenu2($data["user"]);
+
+
+
 		$this->template->write('page_title', $setTitle . ' ');
-		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
+		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $menu);
+		
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/view_manageUser.php', $data);
 
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/first_set/view_footer.php');

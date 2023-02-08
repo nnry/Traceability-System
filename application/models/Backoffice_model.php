@@ -19,7 +19,7 @@ class Backoffice_model extends CI_Model
     }
 
     public function checkForgot($forEmail)
-    {        
+    {
         $sql = "EXEC [dbo].[GET_CHCEK_FORGOT] @EMP_EMAIL  = '{$forEmail}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
@@ -41,7 +41,8 @@ class Backoffice_model extends CI_Model
             return "false";
         }
     }
-    public function checkpass($empcode,$oldpass){
+    public function checkpass($empcode, $oldpass)
+    {
         $sql = "EXEC [dbo].[CHECK_PASSWORD] @EMP_CODE  ='{$empcode}', @EMP_OLD_PASS ='{$oldpass}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
@@ -60,6 +61,19 @@ class Backoffice_model extends CI_Model
             return "true";
         } else {
             return "false";
+        }
+    }
+    public function checkMenu($menu)
+    {
+        $sql = "EXEC [dbo].[GET_CHECK_MENU] @MN_NAME= '{$menu}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        if ($row) {
+            //"true" มี
+
+
+        } else {
+            //"false" ไม่มี
         }
     }
     //***************************explanner***************************
@@ -123,12 +137,12 @@ class Backoffice_model extends CI_Model
         $row = $res->result_array();
         return $row;
     }
-    public function getEditMenu($ss_id){
+    public function getEditMenu($ss_id)
+    {
         $sql = "EXEC [dbo].[GET_EDIT_MANU] @EMP_ID ='{$ss_id}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         return $row;
-
     }
     public function getTableGroup()
     {
@@ -159,14 +173,16 @@ class Backoffice_model extends CI_Model
         return $row;
     }
 
-    public function detailGroup($id){
+    public function detailGroup($id)
+    {
         $sql = "EXEC [dbo].[GET_PER_MENU] @GROP_ID ='{$id}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         return $row;
     }
 
-    public function tableMenu(){
+    public function tableMenu()
+    {
         $sql = "EXEC [dbo].[GET_TABLE_MENU]";
         $res = $this->db->query($sql);
         $row = $res->result_array();
@@ -181,6 +197,45 @@ class Backoffice_model extends CI_Model
         $res = $this->db->query($sql);
         $row = $res->result_array();
         return $row;
+    }
+    public function ShowMenu()
+    {
+
+        $para = $this->session->userdata('id');
+
+        $get_url = trim($this->router->fetch_class() . '/' . $this->router->fetch_method());
+        $sqlChkGrp = "SELECT spg_id FROM sys_admin WHERE sa_id = '{$para}';";
+        $excChkGrp = $this->db->query($sqlChkGrp);
+        $recChkGrp = $excChkGrp->result_array();
+        $Grp = implode($recChkGrp[0]);
+
+        $sqlGroupMenu = "EXEC [dbo].[GET_MENU_PER] @SSM_GROUP  = '{$Grp}'";
+        // var_dump($sqlGroupMenu);
+        // exit;
+
+        $excGroupMenu = $this->db->query($sqlGroupMenu);
+        // var_dump($excGroupMenu);
+        // exit;
+
+        $result = array();
+        foreach ($excGroupMenu->result_array() as $gm) {
+            
+            $sqlSubMenu = "EXEC [dbo].[GET_SUBMENU_PER] @SSM_GROUP  = '{$Grp}',@ANS ='{$gm["sm_id"]}'";
+
+            $excSubMenu = $this->db->query($sqlSubMenu);
+            
+            $subMenu = array();
+            foreach ($excSubMenu->result_array() as $sm) {
+                // var_dump($sm);
+                array_push($subMenu, array('name' => $sm['ss_name'], 'method' => $sm['ss_method']));
+            }
+
+            array_push($result, array('g_name' => $gm['sm_name'], 'icon_menu' => $gm['sm_icon'], 'sub_menu' => $subMenu));
+        }
+
+        return $result;
+    //    var_dump($para);
+        // exit;
     }
 
     //***********************update************update***********************update*********************update***********update
@@ -268,11 +323,12 @@ class Backoffice_model extends CI_Model
             return  true;
         }
     }
-    public function swiftStatusDetail($spd_id){
+    public function swiftStatusDetail($spd_id)
+    {
         $sql = "EXEC [dbo].[GET_DETAIL_GROUP_STATUS] @EMP_ID ='{$spd_id}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
-        $result = $row[0]["ss_status"];
+        $result = $row[0]["spd_status"];
         // return $result;
         if ($result == 1) {
             $sql = "EXEC [dbo].[GET_DETAIL_STATUS_OFF] @EMP_ID ='{$spd_id}'";
@@ -282,7 +338,6 @@ class Backoffice_model extends CI_Model
             } else {
                 return false;
             }
-        
         } elseif ($result == 0) {
             $sql = "EXEC [dbo].[GET_DETAIL_STATUS_ON] @EMP_ID ='{$spd_id}'";
             $res = $this->db->query($sql);
@@ -294,7 +349,6 @@ class Backoffice_model extends CI_Model
         } else {
             return  $res;
         }
-
     }
     public function saveEditNameGroup($id, $name, $empcode)
     {
@@ -306,7 +360,8 @@ class Backoffice_model extends CI_Model
             return "false";
         }
     }
-    public function saveEditProfile($fname, $lname, $email, $plant,$empcodeUser){
+    public function saveEditProfile($fname, $lname, $email, $plant, $empcodeUser)
+    {
         $sql = "EXEC [dbo].[GET_EDIT_PROFILE] @EMP_FNAME  ='{$fname}', @EMP_LNAME ='{$lname}',@EMP_EMAIL='{$email}',@EMP_PLANT='{$plant}',@EMP_USER='{$empcodeUser}'";
         $res = $this->db->query($sql);
         if ($res) {
@@ -315,7 +370,8 @@ class Backoffice_model extends CI_Model
             return "false";
         }
     }
-    public function upChangePass($newpass,$empcode){
+    public function upChangePass($newpass, $empcode)
+    {
         $sql = "EXEC [dbo].[UP_DATE_CHANGE_PASS] @EMP_NEWPASS ='{$newpass}', @EMP_ID='{$empcode}'";
         $res = $this->db->query($sql);
         if ($res) {
@@ -325,7 +381,8 @@ class Backoffice_model extends CI_Model
         }
     }
 
-    public function saveEditTableMenu($menu,$sub,$path,$idsub,$empcodeUser){
+    public function saveEditTableMenu($menu, $sub, $path, $idsub, $empcodeUser)
+    {
         $sql = "EXEC [dbo].[GET_SAVE_EDIT_MENU] @MN_ID  ='{$idsub}',@MN_MENU ='{$menu}',@MN_SUBMENU='{$sub}',@MN_PATH='{$path}',@EMP_USER='{$empcodeUser}'";
         $res = $this->db->query($sql);
         if ($res) {
@@ -333,7 +390,6 @@ class Backoffice_model extends CI_Model
         } else {
             return "false";
         }
-
     }
     public function swiftStatusMenu($ss_id)
     {
@@ -383,7 +439,8 @@ class Backoffice_model extends CI_Model
             return "false";
         }
     }
-    public function insertMenu($menu,$submenu,$path,$icons,$empcodeUser){
+    public function insertMenu($menu, $submenu, $path, $icons, $empcodeUser)
+    {
         $sql = "EXEC [dbo].[INSERT_MENU] @EMP_NAMEGROUP ='{$name}', @EMP_USER='{$empcode}'";
         $res = $this->db->query($sql);
         if ($res) {
@@ -392,5 +449,4 @@ class Backoffice_model extends CI_Model
             return "false";
         }
     }
-    
 }

@@ -163,7 +163,7 @@
                             tb += "<tr><td>" + parseInt(i + 1) + "</td>"
                             tb += "<td>" + value["sm_name"] + "</td>"
                             tb += "<td>" + value["ss_name"] + "</td>"
-                            if (value["ss_status"] == "1") {
+                            if (value["spd_status"] == "1") {
                                 tb += "<td>"
                                 tb += "<div class=\"custom-switch text-center\" >"
                                 tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetail" + j + "'  id='statusdetail" + j + "' checked onclick='statusdetail(" + value["spd_id"] + ")'>"
@@ -194,11 +194,11 @@
                         addPerGroup()
                     });
 
-                    function detailgroup(spd_id) {
+                    function detailgroup(spg_id) {
                         var path = $.ajax({
                             method: "get",
                             dataType: "json",
-                            url: "<?php echo base_url(); ?>manageGroup/getDetailGroup?spd_id=" + spd_id,
+                            url: "<?php echo base_url(); ?>manageGroup/getDetailGroup?spg_id=" + spg_id,
                         })
                         path.done(function(rs) {
                             GetDetail(rs);
@@ -222,11 +222,11 @@
                                     method: "get",
                                     url: "<?php echo base_url(); ?>manageGroup/statusDetail?spd_id=" + spd_id,
                                 })
-                                Swal.fire(
-                                    'Success!',
-                                    'เปลี่ยนแปลงข้อมูลสำเร็จ',
-                                    'success'
-                                )
+                                // Swal.fire(
+                                //     'Success!',
+                                //     'เปลี่ยนแปลงข้อมูลสำเร็จ',
+                                //     'success'
+                                // )
                             }
                             window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
                         })
@@ -248,11 +248,11 @@
                                     method: "get",
                                     url: "<?php echo base_url(); ?>manageGroup/swiftStatus?spg_id=" + spg_id,
                                 })
-                                Swal.fire(
-                                    'Success!',
-                                    'เปลี่ยนแปลงข้อมูลสำเร็จ',
-                                    'success'
-                                )
+                                // Swal.fire(
+                                //     'Success!',
+                                //     'เปลี่ยนแปลงข้อมูลสำเร็จ',
+                                //     'success'
+                                // )
                             }
                             window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
                         })
@@ -392,7 +392,7 @@
                                 echo "<td>" . $detail["spg_id"] . "</td>";
                                 echo "<td>" . $detail["sm_name"] . "</td>";
                                 echo "<td>" . $detail["ss_name"] . "</td>";
-                                if ($detail["ss_status"] == "1") {
+                                if ($detail["spd_status"] == "1") {
                                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
                                                 <input type=\"checkbox\" class=\"custom-control-input\" name=statusdetil$j  id=statusdetail$j checked onclick='statusdetail(" . $detail["spd_id"] . ")'>

@@ -126,7 +126,7 @@
                                 <div class="form-group">
                                     <label for="username">Group Permission :</label>
                                     <div>
-                                        <select class="form-select col-md-12 width-100px" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e; width:500px;" aria-label="Default select example" id="editgroup">
+                                        <select class="form-select col-md width-100px" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e; width:500px;" aria-label="Default select example" id="editgroup">
 
                                             <?php
                                             foreach ($groupper as $groupPer) {
@@ -189,7 +189,7 @@
                                 <div class="form-group">
                                     <label for="username">Group Permission :</label>
                                     <div>
-                                        <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addgroup" placeholder="Enter your Group Permission">
+                                        <select class="form-select col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addgroup" placeholder="Enter your Group Permission">
                                             <option>Please select group permission</option>
                                             <?php
                                             foreach ($groupper as $groupPer) {
@@ -212,7 +212,7 @@
                                 <div class="form-group">
                                     <label>Plant :</label>
                                     <div>
-                                        <select class="form-select col-md-12" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="addplant" aria-label="Default select example" placeholder="Enter your plant">
+                                        <select class="form-select col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="addplant" aria-label="Default select example" placeholder="Enter your plant">
                                             <option>Please select plant</option>
                                             <?php
                                             foreach ($plant as $plant) {
@@ -260,11 +260,11 @@
                                     method: "get",
                                     url: "<?php echo base_url(); ?>manageUser/swiftStatus?sa_id=" + sa_id,
                                 })
-                                Swal.fire(
-                                    'Success!',
-                                    'เปลี่ยนแปลงข้อมูลสำเร็จ',
-                                    'success'
-                                )
+                                // Swal.fire(
+                                //     'Success!',
+                                //     'เปลี่ยนแปลงข้อมูลสำเร็จ',
+                                //     'success'
+                                // )
                             }
                             window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
                         })

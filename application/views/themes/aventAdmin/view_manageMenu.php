@@ -115,6 +115,11 @@
                                     <input class="form-control" type="text" required="" id="editpath">
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="lastname">Show order :</label>
+                                    <input class="form-control" type="text" required="" id="editorder">
+                                </div>
+
                             </form>
 
                             <div class="modal-footer">
@@ -197,6 +202,8 @@
                             $("#editmenuname").val(rs[0]["sm_name"]);
                             $("#editsubmenu").val(rs[0]["ss_name"]);
                             $("#editpath").val(rs[0]["ss_method"]);
+                           
+                            
                           
                         })
     
@@ -216,11 +223,11 @@
                                     method: "get",
                                     url: "<?php echo base_url(); ?>manageMenu/statusMenu?ss_id=" + ss_id,
                                 })
-                                Swal.fire(
-                                    'Success!',
-                                    'เปลี่ยนแปลงข้อมูลสำเร็จ',
-                                    'success'
-                                )
+                                // Swal.fire(
+                                //     'Success!',
+                                //     'เปลี่ยนแปลงข้อมูลสำเร็จ',
+                                //     'success'
+                                // )
                               
                             }
                              window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";  
@@ -233,12 +240,13 @@
                         var menu = $("#editmenuname").val();
                         var submenu = $("#editsubmenu").val();
                         var path = $("#editpath").val();
-
+                       
                         var chmenu = document.getElementById("editmenuname");
                         var chsubmenu = document.getElementById("editsubmenu");
                         var chpath = document.getElementById("editpath");
+                        var choder = document.getElementById("editorder");
 
-                        if (chmenu.value == "" ||chsubmenu.value == ""  || chpath.value == "") {
+                        if (chmenu.value == "" ||chsubmenu.value == ""  || chpath.value == "" || choder.value == "") {
                             Swal.fire({
                                 icon: 'warning',
                                 title: 'Are you sure?',
@@ -254,6 +262,7 @@
                                     menu: menu,
                                     submenu: submenu,
                                     path: path,
+                                  
                                 }
                             })
                             path.done(function(rs) {

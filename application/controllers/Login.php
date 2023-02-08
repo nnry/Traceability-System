@@ -60,7 +60,7 @@ class Login extends CI_Controller
 					'empcode' => $data['sa_code'],
 					'fname' => $data['sa_fname'],
 					'lname' => $data['sa_lname'],
-					'email' =>$data['sa_email'],
+					'email' => $data['sa_email'],
 					'login' => "OK"
 				);
 				$this->session->set_userdata($session_data);
@@ -87,6 +87,20 @@ class Login extends CI_Controller
 			if ($usercode) {
 				$excheck = $this->backoffice_model->checkexplainer($usercode);
 				if ($excheck == "true") {
+				
+					$data = $this->backoffice_model->getname($usercode);
+					if ($data == true) {
+						$session_data = array(
+							'id' => $data['sa_id'],
+							'empcode' => $data['sa_code'],
+							'fname' => $data['sa_fname'],
+							'lname' => $data['sa_lname'],
+							'email' => $data['sa_email'],
+							'login' => "OK"
+						);
+						$this->session->set_userdata($session_data);
+					}
+
 					if ($pass == $passex) {
 						echo "true";
 					} else {

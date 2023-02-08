@@ -18,12 +18,23 @@
     
 </head>
 
-<body id="page-top">
-	<?php echo $page_header; ?>
-	<?php echo $page_menu; ?>
-	<?php echo $page_content; ?>
-	<?php echo $page_footer; ?>
 
+<body id="page-top">
+     <!-- Page Wrapper -->
+     <div id="wrapper">
+        <?php echo $page_menu; ?>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <?php echo $page_header; ?>
+                <?php echo $page_content; ?>
+                <?php echo $page_footer; ?>
+            </div>
+            <!-- End Main Content -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
 </body>
 
 </html>
