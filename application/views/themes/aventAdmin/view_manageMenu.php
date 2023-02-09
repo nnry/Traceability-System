@@ -11,17 +11,16 @@
 
     <!-- Custom fonts for this template -->
     <link href="<?php echo base_url() ?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url() ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
     <link href="<?php echo base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet"/>
 </head>
+
 
 <body id="page-top">
     <!-- Begin Page Content -->
@@ -29,7 +28,7 @@
 
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Management Menu</h1>
- 
+
 
 
         <!-- DataTales Example -->
@@ -51,14 +50,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                           <?php
-                           $i = 0;
-                           foreach ($tableMenu as $value) {
-                               $i++;
-                            echo "<tr>";
-                                echo "<td>" .$i. "</td>";
+                            <?php
+                            $i = 0;
+                            foreach ($tableMenu as $value) {
+                                $i++;
+                                echo "<tr>";
+                                echo "<td>" . $i . "</td>";
                                 echo "<td>" . $value["sm_name"] . "</td>";
-                                echo "<td>" . $value["ss_name"] . "</td>"; 
+                                echo "<td>" . $value["ss_name"] . "</td>";
                                 if ($value["ss_status"] == "1") {
                                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
@@ -81,9 +80,9 @@
                                     </div>
                                 </td>";
                                 echo "</tr>";
-                           }
-                           ?>
-                          
+                            }
+                            ?>
+
                         </tbody>
                     </table>
                 </div>
@@ -106,18 +105,13 @@
 
                                 <div class="form-group">
                                     <label for="fristname">Submenu:</label>
-                                    <input class="form-control" type="text" id="idsub" required="" hidden >
-                                    <input class="form-control" type="text" id="editsubmenu" required="" >
+                                    <input class="form-control" type="text" id="idsub" required="" hidden>
+                                    <input class="form-control" type="text" id="editsubmenu" required="">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="lastname">Path :</label>
                                     <input class="form-control" type="text" required="" id="editpath">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="lastname">Show order :</label>
-                                    <input class="form-control" type="text" required="" id="editorder">
                                 </div>
 
                             </form>
@@ -131,7 +125,7 @@
                 </div>
                 <!----------------------END  Edit Modal ----------------------------->
 
-                <!----------------------ADD Modal ----------------------------->
+                <!----------------------ADD Menu Modal ----------------------------->
                 <div class="modal fade" id="addmenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -145,7 +139,7 @@
                             <form class="card-body" action="#">
                                 <div class="form-group">
                                     <label for="empcode">Menu :</label>
-                                    <input class="form-control" type="text" id="addmenu" required="" placeholder="Enter menu name">
+                                    <input class="form-control" type="text" id="addmmenu" required="" placeholder="Enter menu name">
                                 </div>
 
                                 <div class="form-group">
@@ -157,11 +151,24 @@
                                     <label for="lastname">Path :</label>
                                     <input class="form-control" type="text" required="" id="addpath" placeholder="Enter path name">
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="emailaddress">Icons :</label>
-                                    <input class="form-control" type="text" id="addicons" required="" placeholder="Enter icons name">
+                                    <label for="lastname">Icon :</label>
+                                    <input class="form-control" type="text" required="" id="addicons" placeholder="Enter path name">
                                 </div>
+
+                                <!-- <div class="form-group">
+                                    <label>Icons :</label>
+                                    <div>
+                                        <select class="form-select col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="addplant" aria-label="Default select example" placeholder="Enter your plant">
+                                            <option>Please select icons</option>
+                                            <//?php
+                                            //foreach ($icon as $value) {
+                                         ?>
+                                                <option value="<//?php echo $value["mi_id"]; ?>"><//?php echo $value["mi_icon"]["mi_name"]; ?></option>
+                                            <//?php } ?>
+                                        </select>
+                                    </div>
+                                </div> -->
 
                             </form>
 
@@ -174,13 +181,12 @@
                 </div>
 
 
-                <!----------------------END  ADD Modal ----------------------------->
+                <!----------------------END Menu ADD Modal ----------------------------->
 
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
                 <script type="text/javascript">
-
-                     $("#btnSaveEditMenu").click(function() {
+                    $("#btnSaveEditMenu").click(function() {
                         // alert("wowowowo")
                         saveeditmenu()
                     });
@@ -189,7 +195,7 @@
                         addmenu()
                     });
 
-                    function editmenu(ss_id){
+                    function editmenu(ss_id) {
                         var path = $.ajax({
                             method: "get",
                             dataType: "json",
@@ -202,13 +208,14 @@
                             $("#editmenuname").val(rs[0]["sm_name"]);
                             $("#editsubmenu").val(rs[0]["ss_name"]);
                             $("#editpath").val(rs[0]["ss_method"]);
-                           
-                            
-                          
+
+
+
                         })
-    
+
                     }
-                    function statusmenu(ss_id){
+
+                    function statusmenu(ss_id) {
                         Swal.fire({
                             title: 'Are you sure?',
                             text: "คุณต้องการแก้ไขสถานะใช่หรือไม่? ( Do you want to edit your status? )",
@@ -228,25 +235,25 @@
                                 //     'เปลี่ยนแปลงข้อมูลสำเร็จ',
                                 //     'success'
                                 // )
-                              
+
                             }
-                             window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";  
+                            window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";
                         })
 
                     }
 
-                    function saveeditmenu(){
+                    function saveeditmenu() {
                         var idsub = $("#idsub").val();
                         var menu = $("#editmenuname").val();
                         var submenu = $("#editsubmenu").val();
                         var path = $("#editpath").val();
-                       
+
                         var chmenu = document.getElementById("editmenuname");
                         var chsubmenu = document.getElementById("editsubmenu");
                         var chpath = document.getElementById("editpath");
                         var choder = document.getElementById("editorder");
 
-                        if (chmenu.value == "" ||chsubmenu.value == ""  || chpath.value == "" || choder.value == "") {
+                        if (chmenu.value == "" || chsubmenu.value == "" || chpath.value == "" || choder.value == "") {
                             Swal.fire({
                                 icon: 'warning',
                                 title: 'Are you sure?',
@@ -258,15 +265,15 @@
                                 method: "post",
                                 url: "<?php echo base_url(); ?>manageMenu/saveEditMenu",
                                 data: {
-                                    idsub:idsub,
+                                    idsub: idsub,
                                     menu: menu,
                                     submenu: submenu,
                                     path: path,
-                                  
+
                                 }
                             })
                             path.done(function(rs) {
-                                alert(rs);
+                                // alert(rs);
                                 if (rs === "true") {
                                     Swal.fire({
                                         icon: 'success',
@@ -287,9 +294,9 @@
                     }
 
 
-                    function addmenu(){
-                       
-                        var addmenu = $("#addmenu").val();
+                    function addmenu() {
+
+                        var addmmenu = $("#addmmenu").val();
                         var addsubmenu = $("#addsubmenu").val();
                         var addpath = $("#addpath").val();
                         var addicons = $("#addicons").val();
@@ -300,7 +307,7 @@
                         var cheicons = document.getElementById("addicons");
 
 
-                        if (chemenu.value == "" || chesubmenu.value == "" || chepath.value == "" ||cheicons.value == "") {
+                        if (chemenu.value == "" || chesubmenu.value == "" || chepath.value == "" || cheicons.value == "") {
                             Swal.fire({
                                 icon: 'warning',
                                 title: 'Are you sure?',
@@ -308,30 +315,38 @@
                                 confirmButtonColor: '#F7B267',
                             })
                         } else {
-                            var path = $.ajax({
-                                method: "post",
-                                url: "<?php echo base_url(); ?>manageUser/insertMenu",
-                                data: {
-                                    addmenu: addmenu,
-                                    addsubmenu: addsubmenu,
-                                    addpath: addpath,
-                                    addicons: addicons,
+                        var path = $.ajax({
+                            method: "post",
+                            url: "<?php echo base_url(); ?>manageMenu/insertMenu",
+                            data: {
+                                addmmenu: addmmenu,
+                                addsubmenu: addsubmenu,
+                                addpath: addpath,
+                                addicons: addicons,
+                            }
+                        })
+                        path.done(function(rs) {
+                            alert(rs);
+                            if (rs === "true") {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Successfully',
+                                        text: 'You have successfully add menu',
+                                    }).then(function() {
+                                        window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Data not found',
+                                        text: 'You failed to add menu',
+                                    })
                                 }
-                            })
-                            path.done(function(rs) {
-                                alert(rs);
-
-
-                                })
-
+                        })
                         }
 
-                        
-
-
                     }
-
-
+                
                 </script>
             </div>
         </div>
@@ -339,16 +354,16 @@
     </div>
     <!-- /.container-fluid -->
 
-   
+
 
     <!-- Footer -->
-    <footer class="sticky-footer bg-white">
+    <!-- <footer class="sticky-footer bg-white">
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
                 <span>Copyright &copy; Your Website 2020</span>
             </div>
         </div>
-    </footer>
+    </footer> -->
     <!-- End of Footer -->
 
     <!-- Scroll to Top Button-->

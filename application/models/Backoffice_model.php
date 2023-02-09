@@ -69,11 +69,20 @@ class Backoffice_model extends CI_Model
         $res = $this->db->query($sql);
         $row = $res->result_array();
         if ($row) {
-            //"true" มี
-
-
+            return "true"; // มี
         } else {
-            //"false" ไม่มี
+            return "false"; //ไม่มี
+        }
+    }
+    public function checkSubmenu($menu)
+    {
+        $sql = "EXEC [dbo].[GET_CHECK_SUBMENU] @MN_NAME= '{$menu}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        if (empty($row)) {
+            return "true"; //ไม่มี แอดได้
+        } else {
+            return "false"; //ซ้ำ
         }
     }
     //***************************explanner***************************
@@ -189,6 +198,13 @@ class Backoffice_model extends CI_Model
         return $row;
     }
 
+    public function tableIcon()
+    {
+        $sql = "EXEC [dbo].[GET_TABLE_MENU]";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        return $row;
+    }
 
     //*********show**********innter join***************show***************innter join*****************show***************innter join*******************show*******
     public function showMenu2($empcode)
@@ -219,11 +235,11 @@ class Backoffice_model extends CI_Model
 
         $result = array();
         foreach ($excGroupMenu->result_array() as $gm) {
-            
+
             $sqlSubMenu = "EXEC [dbo].[GET_SUBMENU_PER] @SSM_GROUP  = '{$Grp}',@ANS ='{$gm["sm_id"]}'";
 
             $excSubMenu = $this->db->query($sqlSubMenu);
-            
+
             $subMenu = array();
             foreach ($excSubMenu->result_array() as $sm) {
                 // var_dump($sm);
@@ -234,7 +250,7 @@ class Backoffice_model extends CI_Model
         }
 
         return $result;
-    //    var_dump($para);
+        //    var_dump($para);
         // exit;
     }
 
@@ -439,14 +455,45 @@ class Backoffice_model extends CI_Model
             return "false";
         }
     }
-    public function insertMenu($menu, $submenu, $path, $icons, $empcodeUser)
+    public function insertSubMenu($consm_id,$submenu,$path,$icons,$empcodeUser,$addorder)
     {
-        $sql = "EXEC [dbo].[INSERT_MENU] @EMP_NAMEGROUP ='{$name}', @EMP_USER='{$empcode}'";
+        $sql = "EXEC [dbo].[INSERT_SUBMENU] @SSM_ID = '{$consm_id}',@MN_SUBMENU ='{$submenu}',@MN_PATH = '{$path}',@EMP_USER ='{$empcodeUser}',@MN_ICON='{$icons}',@MN_ORDER='$addorder'";
         $res = $this->db->query($sql);
         if ($res) {
             return "true";
         } else {
             return "false";
         }
+    }
+    public function insertMenu($menu,$icons,$empcodeUser,$addorder)
+    {
+        $sql = "EXEC [dbo].[INSERT_MENU_MM] @SM_NAME = '{$menu}',@EMP_USER ='{$empcodeUser}',@MN_ICON='{$icons}',@MN_ORDER='$addorder'";
+        $res = $this->db->query($sql);
+        if ($res) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+
+    ////////////////////////////////////////////////  MAX //////////////////////////////////////////////////////////
+    public function maxOrder($consm_id){
+        $sql = "EXEC [dbo].[MAX_ORDER_NO] @SM_ID = '{$consm_id}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        $ss = $row["0"]["re_max"];
+        return $ss;
+      
+
+        
+    }
+    public function maxOrderMenu(){
+        $sql = "EXEC [dbo].[MAX_ORDER_NO_MENU]";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        $ss = $row["0"]["re_max"];
+        return $ss;
+      
+
     }
 }

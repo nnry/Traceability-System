@@ -41,14 +41,13 @@ class manageMenu extends CI_Controller
 		$data = $this->backoffice_model->getname($empcode);
 		$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
 		$data["user"] = $data["sa_code"];
-		$data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
 		$data["tableMenu"] = $this->backoffice_model->tableMenu();
 		$setTitle = "Traceability System | Management Menu";
 		$this->template->write('page_title', $setTitle . ' ');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/view_manageMenu.php');
-		// $this->template->write_view('page_footer', 'themes/'. $this->theme .'/first_set/view_footer.php');
+		$this->template->write_view('page_footer', 'themes/'. $this->theme .'/first_set/view_footer.php');
 
 		$this->template->render();
 	}
@@ -76,15 +75,44 @@ class manageMenu extends CI_Controller
 	}
 	public function insertMenu(){
 		$empcodeUser = $this->session->userdata("empcode");
-		$menu = $_POST["addmenu"];
+		$menu = $_POST["addmmenu"];
 		$submenu = $_POST["addsubmenu"];
 		$path = $_POST["addpath"];
 		$icons = $_POST["addicons"];
 
 		$resCheckMenu = $this->backoffice_model->checkMenu($menu);
 
+		if($resCheckMenu ==  "true" ){ //มีอยู่แล้ว
+			$consm_id = $this->backoffice_model->convert("sm_id", "sys_menu", "sm_name ='{$menu}'");
+			$check = $this->backoffice_model->checkSubmenu($submenu);
+			if($check == "true"){
+				$order = $this->backoffice_model->maxOrder($consm_id);
+				$addorder = $order + 1;
+				$insertsubmenu = $this->backoffice_model->insertSubMenu($consm_id,$submenu,$path,$icons,$empcodeUser,$addorder);
+				echo $insertsubmenu; 
+			}else{
+				echo $check;
+			}
+			
+		}else{ //ไม่มีแอดได้
+			$check = $this->backoffice_model->checkSubmenu($submenu);
+			if($check == "true"){
+				$order = $this->backoffice_model->maxOrderMenu();
+				$addorder = $order + 1;
+				$insertmenu = $this->backoffice_model->insertMenu($menu,$icons,$empcodeUser,$addorder);
+				if($insertmenu =="true"){
+					$consm_id = $this->backoffice_model->convert("sm_id", "sys_menu", "sm_name ='{$menu}'");
+					$insertsubmenu = $this->backoffice_model->insertSubMenu($consm_id,$submenu,$path,$icons,$empcodeUser,$addorder);
+					echo $insertsubmenu;
+				}else{
+					return $insertmenu;
+				}
+			}else{
+				echo $check;
+			}
 
-		$res = $this->backoffice_model->insertMenu($menu,$submenu,$path,$icons,$empcodeUser);
-		echo json_encode($res);
+		}
+		
+
 	}
 }
