@@ -63,8 +63,8 @@ class manageGroup extends CI_Controller
 		$spd_id = $_GET["spd_id"];
 		$res = $this->backoffice_model->swiftStatusDetail($spd_id);
 		// // echo date('h:i:s')."<br>";
-		// echo json_encode($res);
-		echo $res;
+		echo json_encode($res);
+		// echo $res;
 
 	}
 	public function editNameGroup()
@@ -116,17 +116,17 @@ class manageGroup extends CI_Controller
 		$id = $_POST["Gid"];
 		$menu = $_POST["remenu"];
 		$sub =$_POST["resubmenu"];
-		echo $id;
-		echo $menu;
-		echo $sub;
-		// $res = $this->backoffice_model->regis($id,$menu,$sub,$empcode);
-		// echo $res;
+		// echo $id;
+		// echo $menu;
+		// echo $sub;
+		$res = $this->backoffice_model->regis($id,$menu,$sub,$empcode);
+		echo $res;
 
 	}
-	public function tt(){
-		$id = $_GET["id"];
-		$res = $this->backoffice_model->loadDataAdd($id);
-		print_r($res);
-	}
+	// public function tt(){
+	// 	$id = $_GET["id"];
+	// 	$res = $this->backoffice_model->loadDataAdd($id);
+	// 	print_r($res);
+	// }
 	
 }

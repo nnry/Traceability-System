@@ -64,9 +64,33 @@ class manageMenu extends CI_Controller
 		$menu = $_POST["menu"];
 		$sub = $_POST["submenu"];
 		$path = $_POST["path"];
+
+		// echo $idsub;
+		// echo $menu;
+		// echo $sub;
+		// echo $path;
 	
-		$res = $this->backoffice_model->saveEditTableMenu($menu,$sub,$path,$idsub,$empcodeUser);
-		echo $res;
+		$chkmenu=$this->backoffice_model->checkMenu($menu);
+		if($chkmenu == "true") {// มี
+			// echo "false";
+			$checksub = $this->backoffice_model->checkSubmenu($sub);
+			// echo $checksub;
+			if($checksub == "true"){
+				$res = $this->backoffice_model->saveEditTableMenu($menu,$sub,$path,$idsub,$empcodeUser);
+				echo $res;
+			}else{
+				echo "false";
+			}
+		}else{
+			$checksub = $this->backoffice_model->checkSubmenu($sub);
+			echo $checksub;
+			if($checksub == "true"){
+				$res = $this->backoffice_model->saveEditTableMenu($menu,$sub,$path,$idsub,$empcodeUser);
+				echo $res;
+			}else{
+				echo "false";
+			}
+		}
 	}
 	public function statusMenu(){
 		$ss_id = $_GET["ss_id"];

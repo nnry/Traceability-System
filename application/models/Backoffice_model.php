@@ -440,7 +440,7 @@ public function loadDataAdd($id){
             $sql = "EXEC [dbo].[GET_DETAIL_STATUS_OFF] @EMP_ID ='{$spd_id}'";
             $res = $this->db->query($sql);
             if ($res) {
-                return "0"; /// ปิด
+                return true; /// ปิด
             } else {
                 return false;
             }
@@ -448,7 +448,7 @@ public function loadDataAdd($id){
             $sql = "EXEC [dbo].[GET_DETAIL_STATUS_ON] @EMP_ID ='{$spd_id}'";
             $res = $this->db->query($sql);
             if ($res) {
-                return "1"; //เปิด
+                return true; //เปิด
             } else {
                 return false;
             }
@@ -569,7 +569,7 @@ public function loadDataAdd($id){
 
     public function regis($id,$menu,$sub,$empcode){
         
-        $sql = "EXEC [dbo].[INSERT_MENU_MM] @SM_NAME = '{$menu}',@EMP_USER ='{$empcodeUser}',@MN_ICON='{$icons}',@MN_ORDER='$addorder'";
+        $sql = "EXEC [dbo].[INSERT_PER_GROUP_MEMU] @GR_ID ='{$id}' , @MN_MENU ='{$menu}' , @MN_SUBMENU ='{$sub}' ,@EMP_USER='{$empcode}'";
         $res = $this->db->query($sql);
 
         if ($res) {

@@ -31,7 +31,7 @@ class Login extends CI_Controller
 
 	public function Account()
 	{
-		
+		// unset(session_id());
 		$this->load->library('session');
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 

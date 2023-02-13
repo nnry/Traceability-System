@@ -266,9 +266,9 @@
                         var chmenu = document.getElementById("editmenuname");
                         var chsubmenu = document.getElementById("editsubmenu");
                         var chpath = document.getElementById("editpath");
-                        var choder = document.getElementById("editorder");
 
-                        if (chmenu.value == "" || chsubmenu.value == "" || chpath.value == "" || choder.value == "") {
+
+                        if (chmenu.value == "" || chsubmenu.value == "" || chpath.value == "" ) {
                             Swal.fire({
                                 icon: 'warning',
                                 title: 'Are you sure?',
@@ -288,7 +288,7 @@
                                 }
                             })
                             path.done(function(rs) {
-                                // alert(rs);
+                                alert(rs);
                                 if (rs === "true") {
                                     Swal.fire({
                                         icon: 'success',
