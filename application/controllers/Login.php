@@ -31,6 +31,7 @@ class Login extends CI_Controller
 
 	public function Account()
 	{
+		
 		$this->load->library('session');
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 
@@ -39,11 +40,11 @@ class Login extends CI_Controller
 		// $this->template->write_view('page_content', 'themes/'. $this->theme .'/view_login.php');
 		$this->template->render();
 	}
-	public function logout()
-	{
-		$this->template->set_master_template('themes/' . $this->theme . '/tpl_logout.php');
-		$this->template->render();
-	}
+	// public function logout()
+	// {
+	// 	$this->template->set_master_template('themes/' . $this->theme . '/tpl_logout.php');
+	// 	$this->template->render();
+	// }
 
 
 	public function checkUserLogin()
@@ -79,15 +80,15 @@ class Login extends CI_Controller
 			$email = $data["0"]["ADDRESS"];
 			$passex = $data["0"]["PASSWORD"];
 			$phase = $data["0"]["PLANT_CD"];
-			$group = 3;
-			$user = "System";
+			$group = 2;
+			$user = $this->session->userdata("empcode");
 			$conphase = $this->backoffice_model->convert("mpa_id", "mst_plant_admin", "mpa_phase_plant='$phase'");
 
 
 			if ($usercode) {
 				$excheck = $this->backoffice_model->checkexplainer($usercode);
 				if ($excheck == "true") {
-				
+
 					$data = $this->backoffice_model->getname($usercode);
 					if ($data == true) {
 						$session_data = array(
@@ -110,6 +111,18 @@ class Login extends CI_Controller
 				} else {
 					$rs = $this->backoffice_model->addexplainer($usercode, $fname, $lname, $email, $passex, $conphase, $group, $user);
 					echo $rs;
+					$data = $this->backoffice_model->getname($usercode);
+					if ($data == true) {
+						$session_data = array(
+							'id' => $data['sa_id'],
+							'empcode' => $data['sa_code'],
+							'fname' => $data['sa_fname'],
+							'lname' => $data['sa_lname'],
+							'email' => $data['sa_email'],
+							'login' => "OK"
+						);
+						$this->session->set_userdata($session_data);
+					}
 				}
 			} else {
 				echo "false";

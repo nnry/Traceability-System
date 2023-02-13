@@ -185,6 +185,7 @@ class Backoffice_model extends CI_Model
     public function detailGroup($id)
     {
         $sql = "EXEC [dbo].[GET_PER_MENU] @GROP_ID ='{$id}'";
+        // $sql = "EXEC [dbo].[GET_PER_MENU_TWO] @GROP_ID ='{$id}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         return $row;
@@ -205,6 +206,95 @@ class Backoffice_model extends CI_Model
         $row = $res->result_array();
         return $row;
     }
+    public function tableMainMenu()
+    {
+        $sql = "EXEC [dbo].[GET_MENU_MAIN]";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        return $row;
+    }
+    public function tableMainSubMenu()
+    {
+        $sql = "EXEC [dbo].[GET_SUBMENU_MAIN]";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        return $row;
+    }
+
+    public function loadMaingroup($id)
+    {
+        $sql = "select DISTINCT spd.sm_id from sys_permission_detail as spd left JOIN  sys_menu as sm on  sm.sm_id != spd.sm_id 
+        where  spd.spg_id = '{$id}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        return $row;
+    }
+    public function Mainmenu($spg_id){
+        $sql = " SELECT
+            * 
+        FROM
+            sys_permission_detail 
+        WHERE
+            spg_id = '{$spg_id}' 
+        ";
+    $res = $this->db->query($sql);
+    $id= "";
+    $i = 0;
+    foreach ($row = $res->result_array() as $value) {
+        $id.=$value["ss_id"];
+        if($i < count($row)-1){
+            $id .= ",";
+        }
+        $i++;
+    }
+    if($id == ""){
+        $id = 0;
+    }
+         $sql = "SELECT
+            sys_menu.sm_id ,
+            sys_menu.sm_name  
+        FROM
+            sys_submenu INNER JOIN sys_menu on sys_submenu.sm_id = sys_menu.sm_id
+        WHERE
+        ss_id NOT IN({$id})
+    GROUP BY
+    sys_menu.sm_id,
+    sys_menu.sm_name";
+    $res = $this->db->query($sql);
+    $rowLoad = $res->result_array();
+    return $rowLoad;
+    }
+public function loadDataAdd($id){
+       $sql = " SELECT
+            * 
+        FROM
+            sys_permission_detail 
+        WHERE
+            spg_id = '{$id}' 
+        ";
+    $res = $this->db->query($sql);
+    $id= "";
+    $i = 0;
+    foreach ($row = $res->result_array() as $value) {
+        $id.=$value["ss_id"];
+        if($i < count($row)-1){
+            $id .= ",";
+        }
+        $i++;
+    }
+    if($id == ""){
+        $id = 0;
+    }
+    $sqlLoad = "SELECT
+                * 
+            FROM
+            sys_submenu INNER JOIN sys_menu on sys_submenu.sm_id = sys_menu.sm_id
+            WHERE
+            ss_id NOT IN({$id})"; 
+     $resLoad = $this->db->query($sqlLoad);
+     $rowLoad = $resLoad->result_array();
+     return $rowLoad;
+}
 
     //*********show**********innter join***************show***************innter join*****************show***************innter join*******************show*******
     public function showMenu2($empcode)
@@ -469,6 +559,19 @@ class Backoffice_model extends CI_Model
     {
         $sql = "EXEC [dbo].[INSERT_MENU_MM] @SM_NAME = '{$menu}',@EMP_USER ='{$empcodeUser}',@MN_ICON='{$icons}',@MN_ORDER='$addorder'";
         $res = $this->db->query($sql);
+
+        if ($res) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+
+    public function regis($id,$menu,$sub,$empcode){
+        
+        $sql = "EXEC [dbo].[INSERT_MENU_MM] @SM_NAME = '{$menu}',@EMP_USER ='{$empcodeUser}',@MN_ICON='{$icons}',@MN_ORDER='$addorder'";
+        $res = $this->db->query($sql);
+
         if ($res) {
             return "true";
         } else {

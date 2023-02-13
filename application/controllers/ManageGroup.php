@@ -41,7 +41,6 @@ class manageGroup extends CI_Controller
 		$data = $this->backoffice_model->getname($empcode);
 		$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
 		$data["user"] = $data["sa_code"];
-		$data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
 		$data["groupper"] = $this->backoffice_model->getTableGroup();
 		$data["tabledetail"] = $this->backoffice_model->TableDetailGroup();
 		$setTitle = "Traceability System | Management Group Permission";
@@ -64,7 +63,8 @@ class manageGroup extends CI_Controller
 		$spd_id = $_GET["spd_id"];
 		$res = $this->backoffice_model->swiftStatusDetail($spd_id);
 		// // echo date('h:i:s')."<br>";
-		echo json_encode($res);
+		// echo json_encode($res);
+		echo $res;
 
 	}
 	public function editNameGroup()
@@ -102,7 +102,31 @@ class manageGroup extends CI_Controller
 	}
 	public function getDetailGroup(){
 		$id = $_GET["spg_id"];
-		$res = $this->backoffice_model->detailGroup($id);
+		$res["userGroup"] = $this->backoffice_model->detailGroup($id);
+		$res["mainMenu"] = $this->backoffice_model->tableMainMenu();
+		$res["MainSubMenuAll"] = $this->backoffice_model->tableMainSubMenu();
+		$res["selectMainmenusubmenu"] = $this->backoffice_model->loadDataAdd($id);
+		$res["Mainmenu"] = $this->backoffice_model->Mainmenu($id);
 		echo json_encode($res) ;
+		
 	}
+
+	public function regisMenu(){
+		$empcode = $this->session->userdata("empcode");
+		$id = $_POST["Gid"];
+		$menu = $_POST["remenu"];
+		$sub =$_POST["resubmenu"];
+		echo $id;
+		echo $menu;
+		echo $sub;
+		// $res = $this->backoffice_model->regis($id,$menu,$sub,$empcode);
+		// echo $res;
+
+	}
+	public function tt(){
+		$id = $_GET["id"];
+		$res = $this->backoffice_model->loadDataAdd($id);
+		print_r($res);
+	}
+	
 }

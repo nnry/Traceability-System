@@ -18,7 +18,7 @@
 
     <!-- Custom styles for this page -->
     <link href="<?php echo base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 
 
@@ -230,14 +230,29 @@
                                     method: "get",
                                     url: "<?php echo base_url(); ?>manageMenu/statusMenu?ss_id=" + ss_id,
                                 })
-                                // Swal.fire(
-                                //     'Success!',
-                                //     'เปลี่ยนแปลงข้อมูลสำเร็จ',
-                                //     'success'
-                                // )
+                                path.done(function(rs) {
+                                    // alert(rs);
+                                    if (rs === "true") {
+                                        Swal.fire(
+                                            'Success!',
+                                            'เปลี่ยนแปลงข้อมูลสำเร็จ',
+                                            'success'
+                                        ).then(function() {
+                                            window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";
+                                        })
+                                    } else {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Data not found',
+                                            text: 'You failed to edit status',
+                                        })
+                                    }
+                                })
 
+                            } else {
+                                window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";
                             }
-                            window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";
+
                         })
 
                     }
@@ -315,19 +330,19 @@
                                 confirmButtonColor: '#F7B267',
                             })
                         } else {
-                        var path = $.ajax({
-                            method: "post",
-                            url: "<?php echo base_url(); ?>manageMenu/insertMenu",
-                            data: {
-                                addmmenu: addmmenu,
-                                addsubmenu: addsubmenu,
-                                addpath: addpath,
-                                addicons: addicons,
-                            }
-                        })
-                        path.done(function(rs) {
-                            alert(rs);
-                            if (rs === "true") {
+                            var path = $.ajax({
+                                method: "post",
+                                url: "<?php echo base_url(); ?>manageMenu/insertMenu",
+                                data: {
+                                    addmmenu: addmmenu,
+                                    addsubmenu: addsubmenu,
+                                    addpath: addpath,
+                                    addicons: addicons,
+                                }
+                            })
+                            path.done(function(rs) {
+                                alert(rs);
+                                if (rs === "true") {
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'Successfully',
@@ -342,11 +357,10 @@
                                         text: 'You failed to add menu',
                                     })
                                 }
-                        })
+                            })
                         }
 
                     }
-                
                 </script>
             </div>
         </div>

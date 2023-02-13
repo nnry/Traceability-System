@@ -118,7 +118,7 @@
                     </div>
                 </div>
 
-                <!--------------------------------------------- addUser Modal---------------------------------------------------------->
+                <!--------------------------------------------- addPermission Modal---------------------------------------------------------->
 
                 <div class="modal fade" id="addgroupper" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -147,222 +147,6 @@
                 </div>
 
                 <!------------------------------------------------ End addUser Modal---------------------------------------------------------->
-
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-                <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-                <script type="text/javascript">
-                    function GetDetail(rs) {
-                        console.log("data ==== >", rs)
-                        var tb = ""
-                        var j = 1
-                        var i = 0
-
-                        $.each(rs, function(key, value) {
-                            tb += "<tr><td>" + parseInt(i + 1) + "</td>"
-                            tb += "<td>" + value["sm_name"] + "</td>"
-                            tb += "<td>" + value["ss_name"] + "</td>"
-                            if (value["spd_status"] == "1") {
-                                tb += "<td>"
-                                tb += "<div class=\"custom-switch text-center\" >"
-                                tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetail" + j + "'  id='statusdetail" + j + "' checked onclick='statusdetail(" + value["spd_id"] + ")'>"
-                                tb += "<label class=\"custom-control-label\" for='statusdetail" + j + "' ></label>"
-                                tb += "</div>"
-                                tb += "</td>"
-                            } else {
-                                tb += "<td>"
-                                tb += "<div class=\"custom-switch text-center\" >"
-                                tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetail" + j + "'  id='statusdetail" + j + "'  onclick='statusdetail(" + value["spd_id"] + ")'>"
-                                tb += "<label class=\"custom-control-label\" for='statusdetail" + j + "' ></label>"
-                                tb += "</div>"
-                                tb += "</td>"
-                            }
-                            tb += "</tr>"
-                            j++
-                            i++
-                        })
-                        // alert(tb)
-                        $("#tbsubmenu").html(tb)
-                    }
-                    $("#btnSaveEditgroup").click(function() {
-                        //alert("1111");
-                        saveeditgroup()
-                    });
-                    $("#btnSaveAdd").click(function() {
-                        //alert("1111");
-                        addPerGroup()
-                    });
-
-                    function detailgroup(spg_id) {
-                        var path = $.ajax({
-                            method: "get",
-                            dataType: "json",
-                            url: "<?php echo base_url(); ?>manageGroup/getDetailGroup?spg_id=" + spg_id,
-                        })
-                        path.done(function(rs) {
-                            GetDetail(rs);
-                            $("#bodyshow").show("fast")
-                        })
-
-                    };
-
-                    function statusdetail(spd_id) {
-                        Swal.fire({
-                            title: 'Are you sure?',
-                            text: "คุณต้องการแก้ไขสถานะใช่หรือไม่? ( Do you want to edit your status? )",
-                            icon: 'question',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes' //ชื่อปุ่ม
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                var path = $.ajax({
-                                    method: "get",
-                                    url: "<?php echo base_url(); ?>manageGroup/statusDetail?spd_id=" + spd_id,
-                                })
-                                // Swal.fire(
-                                //     'Success!',
-                                //     'เปลี่ยนแปลงข้อมูลสำเร็จ',
-                                //     'success'
-                                // )
-                            }
-                            window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
-                        })
-
-                    };
-
-                    function groupstatus(spg_id) {
-                        Swal.fire({
-                            title: 'Are you sure?',
-                            text: "คุณต้องการแก้ไขสถานะใช่หรือไม่? ( Do you want to edit your status? )",
-                            icon: 'question',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes' //ชื่อปุ่ม
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                var path = $.ajax({
-                                    method: "get",
-                                    url: "<?php echo base_url(); ?>manageGroup/swiftStatus?spg_id=" + spg_id,
-                                })
-                                // Swal.fire(
-                                //     'Success!',
-                                //     'เปลี่ยนแปลงข้อมูลสำเร็จ',
-                                //     'success'
-                                // )
-                            }
-                            window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
-                        })
-
-                    };
-
-                    function editgroup(spg_id) {
-                        var path = $.ajax({
-                            method: "get",
-                            dataType: "json",
-                            url: "<?php echo base_url(); ?>manageGroup/editNameGroup?spg_id=" + spg_id,
-                        })
-                        path.done(function(rs) {
-                            // alert(rs)
-                            console.log(rs);
-                            $("#hideID").val(rs[0]["spg_id"]);
-                            $("#editName").val(rs[0]["spg_name"]);
-                        })
-                    };
-
-                    function saveeditgroup() {
-                        var name = $("#editName").val();
-                        var id = $("#hideID").val();
-
-                        var editname = document.getElementById("editName");
-                        if (editname.value == "") {
-                            Swal.fire({
-                                icon: 'warning',
-                                title: 'Are you sure?',
-                                text: 'You failed to edit name group permission',
-                                confirmButtonColor: '#F7B267',
-                            })
-                        } else {
-                            var path = $.ajax({
-                                method: "post",
-                                url: "<?php echo base_url(); ?>manageGroup/saveEditPer",
-                                data: {
-                                    id: id,
-                                    name: name
-                                }
-                            })
-                            path.done(function(rs) {
-                                //alert(rs);
-                                if (rs === "true") {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Successfully',
-                                        text: 'You have successfully edit  name group permission',
-                                    }).then(function() {
-                                        window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
-                                    })
-                                } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Data not found',
-                                        text: 'You failed to edit  name group permission',
-                                    })
-                                }
-                            })
-                        }
-
-
-                    }
-
-                    function addPerGroup() {
-                        var name = $('#addname').val();
-                        // var id = $('#hideIDadd').val();
-                        var addname = document.getElementById("addname");
-
-                        if (addname.value == "") {
-                            Swal.fire({
-                                icon: 'warning',
-                                title: 'Are you sure?',
-                                text: 'You failed to edit name group permission',
-                                confirmButtonColor: '#F7B267',
-                            })
-                        } else {
-                            var path = $.ajax({
-                                method: "POST",
-                                url: "<?php echo base_url(); ?>manageGroup/addPergroup",
-                                data: {
-                                    // id:id,
-                                    name: name
-                                }
-                            })
-                            path.done(function(rs) {
-                                console.log(rs);
-                                // alert(rs);
-                                if (rs === "true") {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Successfully',
-                                        text: 'You have successfully add  name group permission',
-
-                                    }).then(function() {
-                                        window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
-                                    })
-                                } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'You failed to register',
-                                    })
-                                }
-                            })
-                        }
-
-
-
-                    }
-                </script>
             </div>
 
             <!---------------------------------------------------------- Tabledetail ------------------------------------------------------->
@@ -372,7 +156,7 @@
                     <table class="table table-bordered" id="Tabledetail" width="100%" cellspacing="0">
                         <!-- style="display: none"-->
                         <div class="card-header py" style="width:100%; text-align:right">
-                            <a hidden href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle=modal data-target=#addpermenu id="btnaddpermenu"><i class="fas fa-user-plus fa-sm"></i> Register </a>
+                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle=modal data-target=#addpermenu id="btnaddpermenu" name="btnaddpermenu"><i class="fas fa-user-plus fa-sm"></i> Register </a>
                         </div>
 
                         <thead>
@@ -413,6 +197,51 @@
                         </tbody>
                     </table>
                 </div>
+                <!--------------------------------------------- addPerMunu Modal---------------------------------------------------------->
+
+                <div class="modal fade" id="addpermenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-plus fa-sm"></i> Add Permission Group Menu</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+
+                            <form class="card-body" action="#">
+
+                                <div class="form-group">
+                                    <label for="lastname">ID :</label>
+                                    <input class="form-control" type="text" required="" id="idregis" checked>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="username">Menu :</label>
+                                    <div>
+                                        <select class="form-select col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="regismenu" placeholder="Enter your Group Permission">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="username">Submenu :</label>
+                                    <div>
+                                        <select class="form-select col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="regissubmenu" placeholder="Enter your Group Permission">
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                <a class="btn btn-primary" type="submit" name="btnSaveAddRegis" id="btnSaveAddRegis">Save</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--------------------------------------------- addPer Modal---------------------------------------------------------->
             </div>
             <!-------------------------------------------------- Tabledetail --------------------------------------->
         </div>
@@ -422,4 +251,366 @@
 
 </body>
 
-</html>
+<!-- </html> -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script type="text/javascript">
+            var datafullbody = {}
+            $(document).ready(function() {
+                $("select")
+                    .change(function() {
+                        var str = "";
+                        var tb = ""
+                        var para = this.value
+                        $("select option:selected").each(function() {
+
+                            loadSubmenu(para)
+
+                        });
+
+                    })
+            })
+
+            function loadSubmenu(para) {
+                console.log("para ==> " , datafullbody.selectMainmenusubmenu )
+                $("#regissubmenu").html("")
+                var tb = " "
+                var i =0
+                $.each(datafullbody.selectMainmenusubmenu, function(key, value) {
+                    if (para == value["sm_id"]) {
+                        tb += "<option value='" + value["ss_id"] + "'>" + value["ss_name"] + "</option>"
+                    }
+                    i++
+                })
+              
+                $("#regissubmenu").html(tb)
+            }
+
+            function GetDetail(rs) {
+                // console.log("data ==== >", rs)
+                var tb = " "
+                var j = 1
+                var i = 0
+                $.each(rs, function(key, value) {
+                    tb += "<tr><td>" + parseInt(i + 1) + "</td>"
+                    tb += "<td>" + value["sm_name"] + "</td>"
+                    tb += "<td>" + value["ss_name"] + "</td>"
+                    if (value["spd_status"] == "1") {
+                        tb += "<td>"
+                        tb += "<div class=\"custom-switch text-center\" >"
+                        tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetail" + j + "'  id='statusdetail" + j + "' checked onclick='statusdetail(" + value["spd_id"] + ")'>"
+                        tb += "<label class=\"custom-control-label\" for='statusdetail" + j + "' ></label>"
+                        tb += "</div>"
+                        tb += "</td>"
+                    } else {
+                        tb += "<td>"
+                        tb += "<div class=\"custom-switch text-center\" >"
+                        tb += "<input type=\"checkbox\" class=\"custom-control-input\" name='statusdetail" + j + "'  id='statusdetail" + j + "'  onclick='statusdetail(" + value["spd_id"] + ")'>"
+                        tb += "<label class=\"custom-control-label\" for='statusdetail" + j + "' ></label>"
+                        tb += "</div>"
+                        tb += "</td>"
+                    }
+                    tb += "</tr>"
+                    j++
+                    i++
+                })
+                // alert(tb)
+                $("#tbsubmenu").html(tb)
+            }
+
+            function setMainmenu(rs) {
+                // console.log("data ==== >", rs)
+                datafullbody = rs
+                var tb = " "
+                var j = 1
+                var i = 0
+                var selectMainmenusubmenu = rs.selectMainmenusubmenu
+                var Mainmenu = rs.Mainmenu
+                // console.log("....", rs)
+                // console.log("....asd=>", Mainmenu)
+                var para = 0
+                $.each(Mainmenu, function(key, value) {
+                    tb += "<option value='" + value["sm_id"] + "'>" + value["sm_name"] + "</option>"
+                    para = value["sm_id"]
+                    i++
+                })
+                loadSubmenu(Mainmenu[0]["sm_id"])
+                $("#regismenu").html(tb)
+            }
+
+            $("#btnSaveEditgroup").click(function() {
+                //alert("1111");
+                saveeditgroup()
+            });
+            $("#btnSaveAdd").click(function() {
+                //alert("1111");
+                addPerGroup()
+            });
+
+            $("#btnSaveAddRegis").click(function() {
+                // alert("1111");
+                regisMenu()
+            });
+
+            function regisMenu() {
+                var Gid = $('#idregis').val();
+                var remenu = $('#regismenu').val();
+                var regisMenu = $('#regissubmenu').val();
+                // alert("regisMenu ==>" + regisMenu)
+                var chGid = document.getElementById("idregis");
+                var chremenu = document.getElementById("regismenu");
+                var chresubmenu = document.getElementById("regissubmenu");
+
+                if (chremenu.value == "" || chresubmenu.value == "") {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Are you sure?',
+                        text: 'You failed to add user',
+                        confirmButtonColor: '#F7B267',
+                    })
+                } else {
+                    var path = $.ajax({
+                        method: "post",
+                        url: "<?php echo base_url(); ?>manageGroup/regisMenu",
+                        data: {
+                            Gid: Gid,
+                            remenu: remenu,
+                            resubmenu: regisMenu
+                        }
+                    })
+                    path.done(function(rs) {
+                        // console.log(rs);
+                        alert(rs);
+                        // if (rs === "true") {
+                        //     Swal.fire({
+                        //         icon: 'success',
+                        //         title: 'Successfully',
+                        //         text: 'You have successfully add user.',
+
+                        //     }).then(function() {
+                        //         window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
+                        //     })
+                        // } else {
+                        //     Swal.fire({
+                        //         icon: 'error',
+                        //         title: 'You failed to register',
+                        //     })
+                        // }
+                    })
+
+                }
+
+            }
+
+            function detailgroup(spg_id) {
+                // $("#bodyshow").show("fast")
+                try {
+                    var path = $.ajax({ // ajax frist
+                        method: "get",
+                        dataType: "json",
+                        url: "<?php echo base_url(); ?>manageGroup/getDetailGroup?spg_id=" + spg_id,
+                    })
+                    path.done(function(rs) {
+                        // alert("RS")
+                        // console.log("RS========>", rs)
+                        GetDetail(rs.userGroup); //show data
+                        setMainmenu(rs);
+                        $("#bodyshow").show("fast")
+                    })
+                    $("#idregis").val(spg_id);
+
+                } catch (err) {
+                    alert("555")
+                    $("#bodyshow").show("fast")
+                    $("#tbsubmenu").html("")
+                }
+                // load_menu(spg_id);
+
+
+            };
+
+            function statusdetail(spd_id) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "คุณต้องการแก้ไขสถานะใช่หรือไม่? ( Do you want to edit your status? )",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes' //ชื่อปุ่ม
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var path = $.ajax({
+                            method: "get",
+                            url: "<?php echo base_url(); ?>manageGroup/statusDetail?spd_id=" + spd_id,
+                        })
+                        path.done(function(rs) {
+                           
+                            // if (rs === "true") {
+                            //     Swal.fire(
+                            //         'Success!',
+                            //         'เปลี่ยนแปลงข้อมูลสำเร็จ',
+                            //         'success'
+                            //     ).then(function() {
+                            //         window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
+                            //     })
+                            // } else {
+                            //     Swal.fire({
+                            //         icon: 'error',
+                            //         title: 'Data not found',
+                            //         text: 'You failed to edit status',
+                            //     })
+                            // }
+                        })
+                    }
+                    window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
+                })
+
+            };
+
+            function groupstatus(spg_id) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "คุณต้องการแก้ไขสถานะใช่หรือไม่? ( Do you want to edit your status? )",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes' //ชื่อปุ่ม
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var path = $.ajax({
+                            method: "get",
+                            url: "<?php echo base_url(); ?>manageGroup/swiftStatus?spg_id=" + spg_id,
+                        })
+                        path.done(function(rs) {
+                            // alert(rs);
+                            if (rs === "true") {
+                                Swal.fire(
+                                    'Success!',
+                                    'เปลี่ยนแปลงข้อมูลสำเร็จ',
+                                    'success'
+                                ).then(function() {
+                                    window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
+                                })
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Data not found',
+                                    text: 'You failed to edit employee',
+                                })
+                            }
+                        })
+                    }
+                    window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
+                })
+
+            };
+
+            function editgroup(spg_id) {
+                var path = $.ajax({
+                    method: "get",
+                    dataType: "json",
+                    url: "<?php echo base_url(); ?>manageGroup/editNameGroup?spg_id=" + spg_id,
+                })
+                path.done(function(rs) {
+                    // alert(rs)
+                    // console.log(rs);
+                    $("#hideID").val(rs[0]["spg_id"]);
+                    $("#editName").val(rs[0]["spg_name"]);
+                })
+            };
+
+
+            function saveeditgroup() {
+                var name = $("#editName").val();
+                var id = $("#hideID").val();
+
+                var editname = document.getElementById("editName");
+                if (editname.value == "") {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Are you sure?',
+                        text: 'You failed to edit name group permission',
+                        confirmButtonColor: '#F7B267',
+                    })
+                } else {
+                    var path = $.ajax({
+                        method: "post",
+                        url: "<?php echo base_url(); ?>manageGroup/saveEditPer",
+                        data: {
+                            id: id,
+                            name: name
+                        }
+                    })
+                    path.done(function(rs) {
+                        //alert(rs);
+                        if (rs === "true") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Successfully',
+                                text: 'You have successfully edit  name group permission',
+                            }).then(function() {
+                                window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Data not found',
+                                text: 'You failed to edit  name group permission',
+                            })
+                        }
+                    })
+                }
+
+
+            }
+
+            function addPerGroup() {
+                var name = $('#addname').val();
+                // var id = $('#hideIDadd').val();
+                var addname = document.getElementById("addname");
+
+                if (addname.value == "") {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Are you sure?',
+                        text: 'You failed to edit name group permission',
+                        confirmButtonColor: '#F7B267',
+                    })
+                } else {
+                    var path = $.ajax({
+                        method: "POST",
+                        url: "<?php echo base_url(); ?>manageGroup/addPergroup",
+                        data: {
+                            // id:id,
+                            name: name
+                        }
+                    })
+                    path.done(function(rs) {
+                        // console.log(rs);
+                        // alert(rs);
+                        if (rs === "true") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Successfully',
+                                text: 'You have successfully add  name group permission',
+
+                            }).then(function() {
+                                window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'You failed to register',
+                            })
+                        }
+                    })
+                }
+
+
+
+            }
+        </script>

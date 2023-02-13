@@ -124,10 +124,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="username">Group Permission :</label>
+                                    <label for="groupper">Group Permission :</label>
                                     <div>
-                                        <select class="form-select col-md width-100px" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e; width:500px;" aria-label="Default select example" id="editgroup">
-
+                                        <select id="editgroup" name="editgroup" class="form-select col-md width-100px" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e; width:500px;" aria-label="Default select example">
                                             <?php
                                             foreach ($groupper as $groupPer) {
                                             ?>
@@ -187,7 +186,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="username">Group Permission :</label>
+                                    <label for="groupper">Group Permission :</label>
                                     <div>
                                         <select class="form-select col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addgroup" placeholder="Enter your Group Permission">
                                             <option>Please select group permission</option>
@@ -260,13 +259,28 @@
                                     method: "get",
                                     url: "<?php echo base_url(); ?>manageUser/swiftStatus?sa_id=" + sa_id,
                                 })
-                                // Swal.fire(
-                                //     'Success!',
-                                //     'เปลี่ยนแปลงข้อมูลสำเร็จ',
-                                //     'success'
-                                // )
+                                path.done(function(rs) {
+                                    // alert(rs);
+                                    if (rs === "true") {
+                                        Swal.fire(
+                                            'Success!',
+                                            'เปลี่ยนแปลงข้อมูลสำเร็จ',
+                                            'success'
+                                        ).then(function() {
+                                            window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
+                                        })
+                                    } else {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Data not found',
+                                            text: 'You failed to edit status',
+                                        })
+                                    }
+                                })
+
+                            } else {
+                                window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
                             }
-                            window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
                         })
 
                     };
@@ -278,7 +292,7 @@
                             url: "<?php echo base_url(); ?>manageUser/editManageUser?sa_id=" + sa_id,
                         })
                         path.done(function(rs) {
-                            // alert(rs)
+                            //  alert(rs)
                             console.log(rs);
                             $("#editempcode").val(rs[0]["sa_code"]);
                             $("#editfirstname").val(rs[0]["sa_fname"]);
