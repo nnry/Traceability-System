@@ -41,6 +41,7 @@ class manageMenu extends CI_Controller
 		$data = $this->backoffice_model->getname($empcode);
 		$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
 		$data["user"] = $data["sa_code"];
+		$data["id"] = $data["sa_id"];
 		$data["tableMenu"] = $this->backoffice_model->tableMenu();
 		$setTitle = "Traceability System | Management Menu";
 		$this->template->write('page_title', $setTitle . ' ');

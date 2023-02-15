@@ -28,7 +28,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4"><br>
             <div class="card-header py" style="width:100%; text-align:right">
-                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle=modal data-target=#adduser><i class="fas fa-user-plus fa-sm"></i> Add User</a>
+                <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle=modal data-target=#adduser ><i class="fas fa-user-plus fa-sm" ></i> Add User</a> -->
                 <!-- <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
 
@@ -57,7 +57,7 @@
                                 //$i = $value["sa_id"];
                                 $i++;
                                 echo "<tr>";
-                                echo "<td>" . $value["sa_id"] . "</td>";
+                                echo "<td>" . $i . "</td>";
                                 echo "<td>" . $value["sa_code"] . "</td>";
                                 echo "<td>" . $value["sa_fname"] . "</td>";
                                 echo "<td>" . $value["sa_lname"] . "</td>";
@@ -137,8 +137,10 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="emailaddress">Email :</label>
-                                    <input class="form-control" type="email" id="editemailaddress" required="">
+                                    <label for="email">Email :</label>
+                                    <input class="form-control" type="email" id="editemailaddress" name="editemailaddress">
+                                    <div id="validEmail"></div>
+                                    <!-- <input type="submit"> -->
                                 </div>
 
                                 <div class="form-group">
@@ -153,13 +155,14 @@
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                                 <a class="btn btn-primary" type="submit" id="btnSaveEdit">Save</a>
+                                <!-- <submit class="btn btn-primary" type="submit" id="btnSaveEdit">Save</submit> -->
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- addUser Modal-->
-                <div class="modal fade" id="adduser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <!-- <div class="modal fade" id="adduser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -190,11 +193,11 @@
                                     <div>
                                         <select class="form-select col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addgroup" placeholder="Enter your Group Permission">
                                             <option>Please select group permission</option>
-                                            <?php
+                                            <//?php
                                             foreach ($groupper as $groupPer) {
                                             ?>
-                                                <option value="<?php echo $groupPer["spg_id"]; ?>"><?php echo $groupPer["spg_name"]; ?></option>
-                                            <?php } ?>
+                                                <option value="<//?php echo $groupPer["spg_id"]; ?>"><//?php echo $groupPer["spg_name"]; ?></option>
+                                            <//?php } ?>
                                         </select>
                                     </div>
                                 </div>
@@ -213,11 +216,11 @@
                                     <div>
                                         <select class="form-select col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="addplant" aria-label="Default select example" placeholder="Enter your plant">
                                             <option>Please select plant</option>
-                                            <?php
+                                            <//?php
                                             foreach ($plant as $plant) {
                                             ?>
-                                                <option value="<?php echo $plant["mpa_id"]; ?>"><?php echo $plant["mpa_name"]; ?></option>
-                                            <?php } ?>
+                                                <option value="<//?php echo $plant["mpa_id"]; ?>"><//?php echo $plant["mpa_name"]; ?></option>
+                                            <//php } ?>
                                         </select>
                                     </div>
                                 </div>
@@ -229,21 +232,46 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
+                <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
                 <script type="text/javascript">
-                    $("#btnSaveEdit").click(function() {
-                        //alert("1111");
-                        saveedit()
+                    $(document).ready(function() {
+
+                        $("#editemailaddress").keyup(function() {
+
+                            var email = $("#editemailaddress").val();
+
+                            if (email != 0) {
+                                if (isValidEmailAddress(email)) {
+                                    $("#validEmail").html("<font color='green'>อีเมล์ถูกต้อง</font>");
+                                   
+                                    
+                                } else {
+                                    $("#validEmail").html("<font color='red'>อีเมล์ไม่ถูกต้อง</font>");
+                                }
+                            } else {
+                                $("#validEmail").html("");
+                            }
+
+                        });
+
                     });
+
+                    function isValidEmailAddress(emailAddress) {
+                        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+                        return pattern.test(emailAddress);
+                    }
+                    // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
                     $("#btnSaveAdd").click(function() {
                         // alert("btnSaveAdd")
                         addUser()
                     });
-
+                    
                     function status(sa_id) {
                         Swal.fire({
                             title: 'Are you sure?',
@@ -288,18 +316,31 @@
                     function edit(sa_id) {
                         var path = $.ajax({
                             method: "get",
-                            dataType: "json",
+                            // dataType: "json",
                             url: "<?php echo base_url(); ?>manageUser/editManageUser?sa_id=" + sa_id,
                         })
                         path.done(function(rs) {
                             //  alert(rs)
-                            console.log(rs);
-                            $("#editempcode").val(rs[0]["sa_code"]);
-                            $("#editfirstname").val(rs[0]["sa_fname"]);
-                            $("#editlastname").val(rs[0]["sa_lname"]);
+                            // console.log(rs);
+                            var data = JSON.parse(rs)
+                            // alert(data)
+                            var tb = ""
+                            var checked = ""
+                            $("#editempcode").val(data.getdata[0]["sa_code"]);
+                            $("#editfirstname").val(data.getdata[0]["sa_fname"]);
+                            $("#editlastname").val(data.getdata[0]["sa_lname"]);
+                            $("#editemailaddress").val(data.getdata[0]["sa_email"]);
+                            $("#editplant").val(data.getdata[0]["mpa_name"]);
                             $("#editgroup").val(rs[0]["spg_name"]);
-                            $("#editemailaddress").val(rs[0]["sa_email"]);
-                            $("#editplant").val(rs[0]["mpa_name"]);
+                            $.each(data.datatableGroup, function(key, value) {
+                                if (value["spg_name"] == data.getdata[0]["spg_name"]) {
+                                    checked = "selected"
+                                } else {
+                                    checked = ""
+                                }
+                                tb += "<option value='" + value["spg_id"] + "' " + checked + ">" + value["spg_name"] + "</option>"
+                            })
+                            $("#editgroup").html(tb);
                         })
                     };
 

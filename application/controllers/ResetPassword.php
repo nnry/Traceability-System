@@ -41,6 +41,7 @@ class ResetPassword extends CI_Controller
 		$data = $this->backoffice_model->getname($empcode);
 		$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
 		$data["user"] = $data["sa_code"];
+		$data["id"] = $data["sa_id"];
 		$data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
 		$setTitle = "Traceability System | Reset Password";
 		$this->template->write('page_title', $setTitle . ' ');

@@ -17,7 +17,18 @@ class Backoffice_model extends CI_Model
             return "false";
         }
     }
-
+    public function CheckSession() 
+    {
+        if($this->session->userdata('sa_id')=="")
+        {
+            redirect('login/logout');
+            return FALSE;
+        }
+        else
+        {  
+            return TRUE;  
+        }
+    }
     public function checkForgot($forEmail)
     {
         $sql = "EXEC [dbo].[GET_CHCEK_FORGOT] @EMP_EMAIL  = '{$forEmail}'";
@@ -85,6 +96,29 @@ class Backoffice_model extends CI_Model
             return "false"; //ซ้ำ
         }
     }
+    public function checkEmail($editemail){
+        $sql = "EXEC [dbo].[GET_CHECK_EMAIL] @EMP_EMAIL = '{$editemail}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        if (empty($row)) {
+            return "true"; //ไม่มี แอดได้
+        } else {
+            return "false"; //ซ้ำ
+        }
+
+    }
+    public function checkLog_login($id){
+        $sql = "EXEC [dbo].[GET_CHECK_LOG] @EMP_ID = '{$id}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        if ($row) {
+            return "true"; // มี
+        } else {
+            return "false"; //ไม่มี
+        }
+
+    }
+    
     //***************************explanner***************************
 
     public function checkexplainer($usercode)
@@ -180,6 +214,13 @@ class Backoffice_model extends CI_Model
         $res = $this->db->query($sql);
         $row = $res->result_array();
         return $row;
+    }
+    public function selectplant($empid){
+        $sql = "EXEC [dbo].[GET_PLANT] @EMP_CODE ='{$empid}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        return $row;
+
     }
 
     public function detailGroup($id)
@@ -578,6 +619,20 @@ public function loadDataAdd($id){
             return "false";
         }
     }
+
+    public function insertlog($id){
+        $sql = "EXEC [dbo].[INSERT_LOG] @EMP_ID ='{$id}'";
+        $res = $this->db->query($sql);
+
+        if ($res) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+
+
+    
 
     ////////////////////////////////////////////////  MAX //////////////////////////////////////////////////////////
     public function maxOrder($consm_id){

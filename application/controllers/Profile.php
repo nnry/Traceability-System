@@ -61,11 +61,16 @@ class Profile extends CI_Controller
 		
 		$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
 		$data["user"] = $data["sa_code"];
+		$data["id"] = $data["sa_id"];
 		$data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
+		
 		$data["plant"] = $this->backoffice_model->getTablePlant();
 		$data["fname"] = $data["sa_fname"];
 		$data["lname"] =  $data["sa_lname"];
 		$data["email"] =  $data["sa_email"];
+		// $data["selectplant"] = $this->backoffice_model->selectplant($data["user"]);
+		// $data["youplant"] = $data["mpa_name"];
+		
 
 		$setTitle = "Traceability System | Profile";
 		$this->template->write('page_title', $setTitle . ' ');

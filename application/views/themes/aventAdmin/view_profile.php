@@ -73,7 +73,7 @@
                                 <div class="card-body col-md-10 row mb-3">
                                     <label class="col-sm-4 col-form-label">Plant :</label> &nbsp; &nbsp;
                                     <select class="form-select col-sm-6" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="plant">
-                                        <option selected>Select Plant...</option>
+                                        <!-- <option></option> -->
                                         <!-- <option value="1">Plant 8</option>
                                         <option value="2">Plant 10</option> -->
                                         <?php
@@ -104,6 +104,9 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
 <script type="text/javascript">
+   
+   
+
     $("#saveEditPro").click(function() {
         // alert("1111");
         save()
@@ -160,7 +163,7 @@
                 }
             })
             path.done(function(rs) {
-                alert(rs);
+                // alert(rs);
                 console.log(rs);
                 if (rs === "true") {
                     Swal.fire({

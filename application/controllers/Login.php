@@ -2,7 +2,9 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Login extends CI_Controller
 {
-
+	// session_start();
+	// session_destroy();
+	// header("location:login.php");
 
 	private $theme;
 
@@ -31,6 +33,7 @@ class Login extends CI_Controller
 
 	public function Account()
 	{
+		// $this->session->sess_destroy();
 		// unset(session_id());
 		$this->load->library('session');
 		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
@@ -40,12 +43,22 @@ class Login extends CI_Controller
 		// $this->template->write_view('page_content', 'themes/'. $this->theme .'/view_login.php');
 		$this->template->render();
 	}
+	public function logout()
+	{
+		$sa_id = $_GET["id"];
+		$chesa_id = $this->backoffice_model->checkLog_login($sa_id);
+
+
+
+	// $this->template->set_master_template('themes/' . $this->theme . '/tpl_login.php');
+	// $this->template->render();
+	}
 	// public function logout()
 	// {
-	// 	$this->template->set_master_template('themes/' . $this->theme . '/tpl_logout.php');
-	// 	$this->template->render();
+	// 	$this->session->unset_userdata('sa_id');
+	// 	$this->session->sess_destroy();
+	// 	redirect('Account');
 	// }
-
 
 	public function checkUserLogin()
 	{
@@ -54,7 +67,9 @@ class Login extends CI_Controller
 		$rscheckLogin = $this->backoffice_model->checkLogin($code, $pass);
 		if ($rscheckLogin == "true") {
 			echo $rscheckLogin;
+
 			$data = $this->backoffice_model->getname($code);
+
 			if ($data == true) {
 				$session_data = array(
 					'id' => $data['sa_id'],
@@ -65,6 +80,9 @@ class Login extends CI_Controller
 					'login' => "OK"
 				);
 				$this->session->set_userdata($session_data);
+				$id = $data['sa_id'];
+
+				$loglogin = $this->backoffice_model->insertlog($id);
 			}
 		} else {
 			// http://192.168.161.102/api_system/getAccountEx?username=5101716
@@ -100,6 +118,10 @@ class Login extends CI_Controller
 							'login' => "OK"
 						);
 						$this->session->set_userdata($session_data);
+
+						$id = $data['sa_id'];
+
+						$loglogin = $this->backoffice_model->insertlog($id);
 					}
 
 					if ($pass == $passex) {
@@ -122,6 +144,9 @@ class Login extends CI_Controller
 							'login' => "OK"
 						);
 						$this->session->set_userdata($session_data);
+						$id = $data['sa_id'];
+
+						$loglogin = $this->backoffice_model->insertlog($id);
 					}
 				}
 			} else {

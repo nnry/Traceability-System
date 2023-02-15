@@ -27,16 +27,19 @@ class manage extends CI_Controller
 		$this->template->write('image_url', $this->image_url);
 		// ini_set('display_errors', 1);
 		// error_reporting(E_ALL);
+		// $this->backoffice_model->CheckSession();
+		
 	}
 
 	public function index()
 	{
 
-		$this->backoffice_model->checksession();
+		$this->backoffice_model->CheckSession();
 		redirect('manage');
 	}
 	public function Homepage()
 	{
+	
 		// $ch = curl_init("http://192.168.161.102/api_system/getAccountEx?username=$code");
 		// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		// $output = curl_exec($ch);
@@ -55,6 +58,7 @@ class manage extends CI_Controller
 		$data = $this->backoffice_model->getname($empcode);
 		$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
 		$data["user"] = $data["sa_code"];
+		$data["id"] = $data["sa_id"];
 		// $data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
 		$setTitle = "Traceability | Homepage";
 		
@@ -64,10 +68,7 @@ class manage extends CI_Controller
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/view_homepage.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/first_set/view_footer.php');
-
 		$this->template->render();
 	}
 
 }
-?>
-

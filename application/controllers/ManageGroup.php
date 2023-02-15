@@ -41,6 +41,7 @@ class manageGroup extends CI_Controller
 		$data = $this->backoffice_model->getname($empcode);
 		$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
 		$data["user"] = $data["sa_code"];
+		$data["id"] = $data["sa_id"];
 		$data["groupper"] = $this->backoffice_model->getTableGroup();
 		$data["tabledetail"] = $this->backoffice_model->TableDetailGroup();
 		$setTitle = "Traceability System | Management Group Permission";

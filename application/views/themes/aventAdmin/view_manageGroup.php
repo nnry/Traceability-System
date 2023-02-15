@@ -19,6 +19,10 @@
     <!-- Custom styles for this page -->
     <link href="<?php echo base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
+
+
+
+
 </head>
 
 
@@ -208,8 +212,8 @@
                             <form class="card-body" action="#">
 
                                 <div class="form-group">
-                                    <label for="lastname">ID :</label>
-                                    <input class="form-control" type="text" required="" id="idregis" checked>
+                                    <!-- <label for="lastname">ID :</label> -->
+                                    <input class="form-control" type="text" required="" id="idregis" hidden>
                                 </div>
 
                                 <div class="form-group">

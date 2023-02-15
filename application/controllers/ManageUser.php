@@ -23,6 +23,7 @@ class manageUser extends CI_Controller
 		$this->template->write('image_url', $this->image_url);
 		// ini_set('display_errors', 1);
 		// error_reporting(E_ALL);
+		// $this->session->sess_destroy();
 	}
 
 	public function index()
@@ -30,15 +31,17 @@ class manageUser extends CI_Controller
 
 		$this->backoffice_model->checksession();
 		redirect('manage');
+		// $this->session->sess_destroy();
 	}
 	public function ManagementUser()
 	{
-
+		// $this->session->sess_destroy();
+		// $this->session->sess_destroy();
 		$empcode = $this->session->userdata("empcode");
 		$data = $this->backoffice_model->getname($empcode);
 		$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
 		$data["user"] = $data["sa_code"];
-		
+		$data["id"] = $data["sa_id"];
 		$setTitle = "Traceability | Management User";
 		$data["resultUser"] = $this->backoffice_model->getTableData();
 		$data["groupper"] = $this->backoffice_model->getTableGroup();
@@ -52,7 +55,7 @@ class manageUser extends CI_Controller
 		$this->template->write('page_title', $setTitle . ' ');
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $menu);
-		
+
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/view_manageUser.php', $data);
 
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/first_set/view_footer.php');
@@ -68,7 +71,8 @@ class manageUser extends CI_Controller
 	public function editManageUser()
 	{
 		$sa_id = $_GET["sa_id"];
-		$res = $this->backoffice_model->editUser($sa_id);
+		$res["getdata"]= $this->backoffice_model->editUser($sa_id);
+		$res["datatableGroup"] = $this->backoffice_model->getTableGroup();
 		echo json_encode($res);
 	}
 	public function saveEdit()
@@ -77,8 +81,18 @@ class manageUser extends CI_Controller
 		$empcode = $_POST["empcode"];
 		$groupper = $_POST["groupper"];
 		$editemail = $_POST["editemail"];
-		$rs = $this->backoffice_model->saveEditmodel($empcode, $groupper, $editemail, $empcodeUser);
-		echo $rs;
+
+		$chemail = $this->backoffice_model->checkEmail($editemail);
+		// echo $chemail;
+		if ($chemail == "true") {
+			$rs = $this->backoffice_model->saveEditmodel($empcode, $groupper, $editemail, $empcodeUser);
+			echo $rs;
+		} else {
+			echo $chemail;
+		}
+
+
+
 		// echo $empcode.$groupper.$editemail;
 
 	}

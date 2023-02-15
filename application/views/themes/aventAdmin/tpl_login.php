@@ -13,6 +13,8 @@
 
     <title>Traceability System</title>
 
+ 
+
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -105,6 +107,13 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="<?php echo base_url() . $js_url; ?>js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
+    $(document).ready(function() {
+        window.history.pushState(null, "", window.location.href);
+        window.onpopstate = function() {
+            window.history.pushState(null, "", window.location.href);
+        };
+    });
+
     // window.close();
 
     $("#login").click(function() {
@@ -121,7 +130,7 @@
         var code = document.getElementById("empcode");
         var pass = document.getElementById("emppass");
 
-        if (code.value == "" || pass.value == "" ) {
+        if (code.value == "" || pass.value == "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Are you sure?',
@@ -130,35 +139,35 @@
             })
         } else {
             var path = $.ajax({
-            method: "post",
-            url: "<?php echo base_url(); ?>Login/checkUserLogin",
-            data: {
-                empcode: empcode,
-                emppass: emppass
-                // emppass: "namwan"
-            }
-        })
-        path.done(function(rs) {
-            // alert(rs)
-            console.log(rs);
+                method: "post",
+                url: "<?php echo base_url(); ?>Login/checkUserLogin",
+                data: {
+                    empcode: empcode,
+                    emppass: emppass
+                    // emppass: "namwan"
+                }
+            })
+            path.done(function(rs) {
+                // alert(rs)
+                console.log(rs);
 
-            if (rs === "true") {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Welcome to Traceability',
-                    text: 'You signed up successfully',
-                }).then(function() {
-                    window.location.href = "<?php echo base_url() ?>Manage/Homepage";
-                })
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Data not found',
-                    text: 'You failed to signed up',
-                })
-            }
-        })
+                if (rs === "true") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Welcome to Traceability',
+                        text: 'You signed up successfully',
+                    }).then(function() {
+                        window.location.href = "<?php echo base_url() ?>Manage/Homepage";
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Data not found',
+                        text: 'You failed to signed up',
+                    })
+                }
+            })
         }
-       
+
     }
 </script>
