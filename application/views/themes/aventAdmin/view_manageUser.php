@@ -239,27 +239,16 @@
                 <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
                 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
                 <script type="text/javascript">
-                    $(document).ready(function() {
-
-                        $("#editemailaddress").keyup(function() {
-
-                            var email = $("#editemailaddress").val();
-
-                            if (email != 0) {
-                                if (isValidEmailAddress(email)) {
-                                    $("#validEmail").html("<font color='green'>อีเมล์ถูกต้อง</font>");
-                                   
-                                    
-                                } else {
-                                    $("#validEmail").html("<font color='red'>อีเมล์ไม่ถูกต้อง</font>");
-                                }
-                            } else {
-                                $("#validEmail").html("");
-                            }
-
-                        });
-
+                    $("#btnSaveAdd").click(function() {
+                        // alert("btnSaveAdd")
+                        addUser()
                     });
+
+                    $("#btnSaveEdit").click(function() {
+                        // alert("1111");
+                        saveedit()
+                    });
+
 
                     function isValidEmailAddress(emailAddress) {
                         var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
@@ -267,11 +256,8 @@
                     }
                     // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-                    $("#btnSaveAdd").click(function() {
-                        // alert("btnSaveAdd")
-                        addUser()
-                    });
-                    
+
+
                     function status(sa_id) {
                         Swal.fire({
                             title: 'Are you sure?',
@@ -359,33 +345,54 @@
                                 confirmButtonColor: '#F7B267',
                             })
                         } else {
-                            var path = $.ajax({
-                                method: "post",
-                                url: "<?php echo base_url(); ?>manageUser/saveEdit",
-                                data: {
-                                    empcode: editempcode,
-                                    groupper: editgroup,
-                                    editemail: editemail,
-                                }
-                            })
-                            path.done(function(rs) {
-                                alert(rs);
-                                if (rs === "true") {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Successfully',
-                                        text: 'You have successfully edit employee',
-                                    }).then(function() {
-                                        window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
+                            if (editemail != 0) {
+                                if (isValidEmailAddress(editemail)) {
+                                    $("#validEmail").html("<font color='green'>อีเมล์ถูกต้อง</font>");
+                                    // alert("อีเมล์ถูกต้อง")
+                                    var path = $.ajax({
+                                        method: "post",
+                                        url: "<?php echo base_url(); ?>manageUser/saveEdit",
+                                        data: {
+                                            empcode: editempcode,
+                                            groupper: editgroup,
+                                            editemail: editemail,
+                                        }
                                     })
+                                    path.done(function(rs) {
+                                        alert(rs);
+                                        if (rs === "true") {
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'Successfully',
+                                                text: 'You have successfully edit employee',
+                                            }).then(function() {
+                                                window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
+                                            })
+                                        } else if (rs === "Duplicate email") {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Duplicate email!!',
+                                                text: 'You failed to edit employee',
+                                            })
+
+                                        } else {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Data not found',
+                                                text: 'You failed to edit employee',
+                                            })
+                                        }
+                                    })
+
+
                                 } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Data not found',
-                                        text: 'You failed to edit employee',
-                                    })
+                                    $("#validEmail").html("<font color='red'>อีเมล์ไม่ถูกต้อง</font>");
+                                    // alert("อีเมล์ไม่ถูกต้อง")
                                 }
-                            })
+                            } else {
+                                $("#validEmail").html("");
+                            }
+
                         }
 
                     };

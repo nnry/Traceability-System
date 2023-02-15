@@ -29,7 +29,7 @@ class manageUser extends CI_Controller
 	public function index()
 	{
 
-		$this->backoffice_model->checksession();
+		$this->backoffice_model->CheckSession();
 		redirect('manage');
 		// $this->session->sess_destroy();
 	}
@@ -64,14 +64,15 @@ class manageUser extends CI_Controller
 
 	public function swiftStatus()
 	{
+		$empcode = $this->session->userdata("empcode");
 		$sa_id = $_GET["sa_id"];
-		$res = $this->backoffice_model->editStatus($sa_id);
+		$res = $this->backoffice_model->editStatus($sa_id,$empcode);
 		echo json_encode($res);
 	}
 	public function editManageUser()
 	{
 		$sa_id = $_GET["sa_id"];
-		$res["getdata"]= $this->backoffice_model->editUser($sa_id);
+		$res["getdata"] = $this->backoffice_model->editUser($sa_id);
 		$res["datatableGroup"] = $this->backoffice_model->getTableGroup();
 		echo json_encode($res);
 	}
@@ -79,17 +80,26 @@ class manageUser extends CI_Controller
 	{
 		$empcodeUser = $this->session->userdata("empcode");
 		$empcode = $_POST["empcode"];
+		$emailUser = $this->backoffice_model->getemail($empcode);
 		$groupper = $_POST["groupper"];
 		$editemail = $_POST["editemail"];
+		// echo json_encode($emailUser);
 
-		$chemail = $this->backoffice_model->checkEmail($editemail);
-		// echo $chemail;
-		if ($chemail == "true") {
+		if ($emailUser == $editemail) {
 			$rs = $this->backoffice_model->saveEditmodel($empcode, $groupper, $editemail, $empcodeUser);
 			echo $rs;
 		} else {
-			echo $chemail;
+			$chemail = $this->backoffice_model->checkEmail($editemail);
+			// echo $chemail;
+			if ($chemail == "true") {
+				$rs = $this->backoffice_model->saveEditmodel($empcode, $groupper, $editemail, $empcodeUser);
+				echo $rs;
+			} else {
+				echo "Duplicate email";
+			}
 		}
+
+
 
 
 

@@ -4,21 +4,22 @@
 <link rel="shortcut icon" href="<?php echo base_url() . $css_url; ?>img/Logo2.png" />
 
 <head>
-<script type="text/javascript">
+    <script type="text/javascript">
         function preventBack() {
             window.history.forward();
         }
         setTimeout("preventBack()", 0);
         window.onunload = function() {
             null
+            // window.location.href = "<?php echo base_url() ?>Login/Account"
         };
-    </script>
 
+    </script>
 
     <meta charset="utf-8" />
     <title><?php echo $page_title; ?></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">

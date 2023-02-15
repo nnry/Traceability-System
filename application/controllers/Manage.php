@@ -70,5 +70,10 @@ class manage extends CI_Controller
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/first_set/view_footer.php');
 		$this->template->render();
 	}
+	public function tt(){
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/traceability/tt.php');
+		$this->template->render();
+		// C:\xampp\htdocs\tracea\application\views\themes\aventAdmin\
+	}
 
 }

@@ -13,7 +13,7 @@
 
     <title>Traceability System</title>
 
- 
+
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -107,14 +107,27 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="<?php echo base_url() . $js_url; ?>js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        window.history.pushState(null, "", window.location.href);
-        window.onpopstate = function() {
-            window.history.pushState(null, "", window.location.href);
-        };
-    });
 
-    // window.close();
+    // $(document).ready(function() {
+    //     window.history.pushState(null, "", window.location.href);
+    //     // window.history.forward(null, "", window.location.href);
+    //     window.onpopstate = function() {
+    //         window.history.pushState(null, "", window.location.href);
+    //     };
+
+    // });
+    // function preventBack() {
+    //         window.history.forward();
+    //     }
+    //     setTimeout("preventBack()", 0);
+    //     window.onunload = function() {
+    //         null
+    //         // window.location.href = "<?php echo base_url() ?>Login/Account"
+    //     };
+    
+
+
+
 
     $("#login").click(function() {
         login()
@@ -130,11 +143,18 @@
         var code = document.getElementById("empcode");
         var pass = document.getElementById("emppass");
 
-        if (code.value == "" || pass.value == "") {
+        if (code.value == "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Are you sure?',
-                text: 'You failed to edit user',
+                text: 'Please check the user again.',
+                confirmButtonColor: '#F7B267',
+            })
+        } else if (pass.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Are you sure?',
+                text: 'Please check the password again.',
                 confirmButtonColor: '#F7B267',
             })
         } else {
@@ -144,7 +164,7 @@
                 data: {
                     empcode: empcode,
                     emppass: emppass
-                    // emppass: "namwan"
+
                 }
             })
             path.done(function(rs) {
@@ -162,8 +182,8 @@
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Data not found',
-                        text: 'You failed to signed up',
+                        title: 'You failed to signed up',
+                        text: 'โปรดตรวจสอบชื่อ ผู้ใช้งาน และ รหัสผ่าน ของท่านอีกครั้ง',
                     })
                 }
             })

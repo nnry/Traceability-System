@@ -43,16 +43,12 @@ class Login extends CI_Controller
 		// $this->template->write_view('page_content', 'themes/'. $this->theme .'/view_login.php');
 		$this->template->render();
 	}
-	public function logout()
-	{
-		$sa_id = $_GET["id"];
-		$chesa_id = $this->backoffice_model->checkLog_login($sa_id);
 
 
 
 	// $this->template->set_master_template('themes/' . $this->theme . '/tpl_login.php');
 	// $this->template->render();
-	}
+
 	// public function logout()
 	// {
 	// 	$this->session->unset_userdata('sa_id');
@@ -62,6 +58,7 @@ class Login extends CI_Controller
 
 	public function checkUserLogin()
 	{
+		// session_start();
 		$code = $_POST["empcode"];
 		$pass = md5($_POST["emppass"]);
 		$rscheckLogin = $this->backoffice_model->checkLogin($code, $pass);
@@ -82,7 +79,21 @@ class Login extends CI_Controller
 				$this->session->set_userdata($session_data);
 				$id = $data['sa_id'];
 
-				$loglogin = $this->backoffice_model->insertlog($id);
+				$cheklog = $this->backoffice_model->checkLog_login($id);
+				
+				
+				$null_log = $cheklog["la_logout"];
+				
+				if($null_log == null){
+					$chmax = $this->backoffice_model->maxlogid($id);
+					$loglogin = $this->backoffice_model->insertlogaddupdate($id,$chmax);
+					// echo $loglogin;
+					
+				}else{
+					$loglogin = $this->backoffice_model->insertlog($id);
+					// echo $loglogin;
+				} 
+				
 			}
 		} else {
 			// http://192.168.161.102/api_system/getAccountEx?username=5101716
@@ -153,5 +164,24 @@ class Login extends CI_Controller
 				echo "false";
 			}
 		}
+	}
+	public function logout()
+	{
+		$id_log = $_GET["id"];
+		
+		$chesa_id = $this->backoffice_model->checkLog_login($id_log);
+		// echo json_encode($chesa_id);
+	
+
+		$data_status = $chesa_id["la_status"];
+		$data_id = $chesa_id["la_id"];
+		// echo json_encode($data_status);
+		// echo json_encode($data_id);
+		$chmax = $this->backoffice_model->maxlogid($id_log);
+		if ($data_status == "0") {
+			$res = $this->backoffice_model->logout($chmax);
+			echo $res;
+		}
+
 	}
 }

@@ -57,7 +57,7 @@
                   </a>
                   <!-- onclick="logLogout(<//?php echo $id;?>)"  -->
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal" id="logout" >
+                  <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal" id="logout">
                       <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                       Logout
                   </a>
@@ -75,9 +75,10 @@
                               session.</div>
                           <div class="modal-footer">
                               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                              <a class="btn btn-primary" id="btnlogout" onclick="logLogout(<?php echo $id;?>)" >Logout</a>
+                              <a class="btn btn-primary" id="btnlogout" onclick="logLogout(<?php echo $id; ?>)">Logout</a>
                               <!-- href="<//?php echo base_url(); ?>Login/Account" -->
-                            </div>
+                              <!-- onclick="logLogout(<?php echo $id; ?>)"y -->
+                          </div>
                       </div>
                   </div>
               </div>
@@ -88,20 +89,42 @@
   </nav>
   <!-- End of Topbar -->
 
-  
+
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
-                <script type="text/javascript">
-                    function logLogout($id){
-                        var path = $.ajax({
-                            method: "get",
-                            url: "<?php echo base_url(); ?>Login/logout?id=" +id,
-                        })
-                        path.done(function(rs) {
-                            alert("5555")
-                        })
-                     
-                    }
-                </script>
+  <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
+  <script type="text/javascript">
+      //   function preventBack() {
+      //       window.history.forward();
+      //   }
+      //   setTimeout("preventBack()", 0);
+      //   window.onunload = function() {
+      //       null
+      //       // window.location.href = "<?php echo base_url() ?>Login/Account"
+      //   };
 
+      //     $(document).ready(function() {
+      //     window.history.pushState(null, "", window.location.href);
+      //     // window.history.forward(null, "", window.location.href);
+      //     window.onpopstate = function() {
+      //         window.history.pushState(null, "", window.location.href);
+      //     };
 
+      // });
+
+      function logLogout($id) {
+        //   alert($id)
+          console.log($id)
+          var path = $.ajax({
+              method: "get",
+              dataType: "json",
+              url: "<?php echo base_url(); ?>Login/logout?id=" + $id,
+          })
+          path.done(function(rs) {
+              alert(rs)
+            //   console.log(rs)
+              window.location.href = "<?php echo base_url() ?>Login/Account";
+
+          })
+
+      }
+  </script>

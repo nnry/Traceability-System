@@ -17,16 +17,13 @@ class Backoffice_model extends CI_Model
             return "false";
         }
     }
-    public function CheckSession() 
+    public function CheckSession()
     {
-        if($this->session->userdata('sa_id')=="")
-        {
+        if ($this->session->userdata('sa_id') == "") {
             redirect('login/logout');
             return FALSE;
-        }
-        else
-        {  
-            return TRUE;  
+        } else {
+            return TRUE;
         }
     }
     public function checkForgot($forEmail)
@@ -96,7 +93,8 @@ class Backoffice_model extends CI_Model
             return "false"; //ซ้ำ
         }
     }
-    public function checkEmail($editemail){
+    public function checkEmail($editemail)
+    {
         $sql = "EXEC [dbo].[GET_CHECK_EMAIL] @EMP_EMAIL = '{$editemail}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
@@ -105,20 +103,20 @@ class Backoffice_model extends CI_Model
         } else {
             return "false"; //ซ้ำ
         }
-
     }
-    public function checkLog_login($id){
-        $sql = "EXEC [dbo].[GET_CHECK_LOG] @EMP_ID = '{$id}'";
+    public function checkLog_login($id_log)
+    {
+        $sql = "EXEC [dbo].[GET_CHECK_LOG] @EMP_ID = '{$id_log}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
-        if ($row) {
-            return "true"; // มี
-        } else {
-            return "false"; //ไม่มี
-        }
-
+        return $row[0];
+        // if ($row) {
+        //     return "true"; // มี
+        // } else {
+        //     return "false"; //ไม่มี
+        // }
     }
-    
+
     //***************************explanner***************************
 
     public function checkexplainer($usercode)
@@ -215,12 +213,12 @@ class Backoffice_model extends CI_Model
         $row = $res->result_array();
         return $row;
     }
-    public function selectplant($empid){
+    public function selectplant($empid)
+    {
         $sql = "EXEC [dbo].[GET_PLANT] @EMP_CODE ='{$empid}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         return $row;
-
     }
 
     public function detailGroup($id)
@@ -270,7 +268,8 @@ class Backoffice_model extends CI_Model
         $row = $res->result_array();
         return $row;
     }
-    public function Mainmenu($spg_id){
+    public function Mainmenu($spg_id)
+    {
         $sql = " SELECT
             * 
         FROM
@@ -278,20 +277,20 @@ class Backoffice_model extends CI_Model
         WHERE
             spg_id = '{$spg_id}' 
         ";
-    $res = $this->db->query($sql);
-    $id= "";
-    $i = 0;
-    foreach ($row = $res->result_array() as $value) {
-        $id.=$value["ss_id"];
-        if($i < count($row)-1){
-            $id .= ",";
+        $res = $this->db->query($sql);
+        $id = "";
+        $i = 0;
+        foreach ($row = $res->result_array() as $value) {
+            $id .= $value["ss_id"];
+            if ($i < count($row) - 1) {
+                $id .= ",";
+            }
+            $i++;
         }
-        $i++;
-    }
-    if($id == ""){
-        $id = 0;
-    }
-         $sql = "SELECT
+        if ($id == "") {
+            $id = 0;
+        }
+        $sql = "SELECT
             sys_menu.sm_id ,
             sys_menu.sm_name  
         FROM
@@ -301,42 +300,49 @@ class Backoffice_model extends CI_Model
     GROUP BY
     sys_menu.sm_id,
     sys_menu.sm_name";
-    $res = $this->db->query($sql);
-    $rowLoad = $res->result_array();
-    return $rowLoad;
+        $res = $this->db->query($sql);
+        $rowLoad = $res->result_array();
+        return $rowLoad;
     }
-public function loadDataAdd($id){
-       $sql = " SELECT
+    public function loadDataAdd($id)
+    {
+        $sql = " SELECT
             * 
         FROM
             sys_permission_detail 
         WHERE
             spg_id = '{$id}' 
         ";
-    $res = $this->db->query($sql);
-    $id= "";
-    $i = 0;
-    foreach ($row = $res->result_array() as $value) {
-        $id.=$value["ss_id"];
-        if($i < count($row)-1){
-            $id .= ",";
+        $res = $this->db->query($sql);
+        $id = "";
+        $i = 0;
+        foreach ($row = $res->result_array() as $value) {
+            $id .= $value["ss_id"];
+            if ($i < count($row) - 1) {
+                $id .= ",";
+            }
+            $i++;
         }
-        $i++;
-    }
-    if($id == ""){
-        $id = 0;
-    }
-    $sqlLoad = "SELECT
+        if ($id == "") {
+            $id = 0;
+        }
+        $sqlLoad = "SELECT
                 * 
             FROM
             sys_submenu INNER JOIN sys_menu on sys_submenu.sm_id = sys_menu.sm_id
             WHERE
-            ss_id NOT IN({$id})"; 
-     $resLoad = $this->db->query($sqlLoad);
-     $rowLoad = $resLoad->result_array();
-     return $rowLoad;
-}
-
+            ss_id NOT IN({$id})";
+        $resLoad = $this->db->query($sqlLoad);
+        $rowLoad = $resLoad->result_array();
+        return $rowLoad;
+    }
+    public function getemail($empcode)
+    {
+        $sql = "EXEC [dbo].[GET_SELECT_EMAIL] @EMP_CODE ='{$empcode}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        return $row[0]["sa_email"];
+    }
     //*********show**********innter join***************show***************innter join*****************show***************innter join*******************show*******
     public function showMenu2($empcode)
     {
@@ -407,14 +413,14 @@ public function loadDataAdd($id){
             return false;
         }
     }
-    public function editStatus($sa_id)
+    public function editStatus($sa_id,$empcode)
     {
         $sql = "EXEC [dbo].[GET_USER] @EMP_ID ='{$sa_id}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         $result = $row[0]["sa_status"];
         if ($result == 1) {
-            $sql = "EXEC [dbo].[GET_EDIT_STATUS_OFF] @EMP_ID ='{$sa_id}'";
+            $sql = "EXEC [dbo].[GET_EDIT_STATUS_OFF] @EMP_ID ='{$sa_id}',@EMP_CODE='{$empcode}'";
             $res = $this->db->query($sql);
             if ($res) {
                 return true;
@@ -422,7 +428,7 @@ public function loadDataAdd($id){
                 return false;
             }
         } elseif ($result == 0) {
-            $sql = "EXEC [dbo].[GET_EDIT_STATUS_ON] @EMP_ID ='{$sa_id}'";
+            $sql = "EXEC [dbo].[GET_EDIT_STATUS_ON] @EMP_ID ='{$sa_id}',@EMP_CODE='{$empcode}'";
             $res = $this->db->query($sql);
             if ($res) {
                 return true;
@@ -564,6 +570,15 @@ public function loadDataAdd($id){
             return  true;
         }
     }
+    public function logout($data_id){
+        $sql = "EXEC [dbo].[UP_DATE_LOG_OUT] @EMP_LOG = '{$data_id}'";
+        $res = $this->db->query($sql);
+        if ($res) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     // ***********insert***************************************insert***************************insert**************************insert********************** insert*******************************************
 
     public function insertUser($empcode, $firstname, $lastname, $groupCon, $email, $password, $plantCon, $empcodeUser)
@@ -586,7 +601,7 @@ public function loadDataAdd($id){
             return "false";
         }
     }
-    public function insertSubMenu($consm_id,$submenu,$path,$icons,$empcodeUser,$addorder)
+    public function insertSubMenu($consm_id, $submenu, $path, $icons, $empcodeUser, $addorder)
     {
         $sql = "EXEC [dbo].[INSERT_SUBMENU] @SSM_ID = '{$consm_id}',@MN_SUBMENU ='{$submenu}',@MN_PATH = '{$path}',@EMP_USER ='{$empcodeUser}',@MN_ICON='{$icons}',@MN_ORDER='$addorder'";
         $res = $this->db->query($sql);
@@ -596,7 +611,7 @@ public function loadDataAdd($id){
             return "false";
         }
     }
-    public function insertMenu($menu,$icons,$empcodeUser,$addorder)
+    public function insertMenu($menu, $icons, $empcodeUser, $addorder)
     {
         $sql = "EXEC [dbo].[INSERT_MENU_MM] @SM_NAME = '{$menu}',@EMP_USER ='{$empcodeUser}',@MN_ICON='{$icons}',@MN_ORDER='$addorder'";
         $res = $this->db->query($sql);
@@ -608,8 +623,9 @@ public function loadDataAdd($id){
         }
     }
 
-    public function regis($id,$menu,$sub,$empcode){
-        
+    public function regis($id, $menu, $sub, $empcode)
+    {
+
         $sql = "EXEC [dbo].[INSERT_PER_GROUP_MEMU] @GR_ID ='{$id}' , @MN_MENU ='{$menu}' , @MN_SUBMENU ='{$sub}' ,@EMP_USER='{$empcode}'";
         $res = $this->db->query($sql);
 
@@ -620,8 +636,20 @@ public function loadDataAdd($id){
         }
     }
 
-    public function insertlog($id){
+    public function insertlog($id)
+    {
         $sql = "EXEC [dbo].[INSERT_LOG] @EMP_ID ='{$id}'";
+        $res = $this->db->query($sql);
+
+        if ($res) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+    public function insertlogaddupdate($id,$chmax)
+    {
+        $sql = "EXEC [dbo].[INSERT_LOG_AND_UPDATE] @EMP_ID ='{$id}',@LOG_ID ='{$chmax}'";
         $res = $this->db->query($sql);
 
         if ($res) {
@@ -632,26 +660,31 @@ public function loadDataAdd($id){
     }
 
 
-    
+
 
     ////////////////////////////////////////////////  MAX //////////////////////////////////////////////////////////
-    public function maxOrder($consm_id){
+    public function maxOrder($consm_id)
+    {
         $sql = "EXEC [dbo].[MAX_ORDER_NO] @SM_ID = '{$consm_id}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         $ss = $row["0"]["re_max"];
         return $ss;
-      
-
-        
     }
-    public function maxOrderMenu(){
+    public function maxOrderMenu()
+    {
         $sql = "EXEC [dbo].[MAX_ORDER_NO_MENU]";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         $ss = $row["0"]["re_max"];
         return $ss;
-      
-
     }
+    public function maxlogid($id){
+        $sql = "EXEC [dbo].[MAX_LOG_ID] @SA_ID ='{$id}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        $ss = $row["0"]["re_max"];
+        return $ss;
+    }
+
 }
