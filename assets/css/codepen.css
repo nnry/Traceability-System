@@ -89,10 +89,9 @@ body {
 
 .main-timeline .content {
     color: #909090;
-    width: 50%;
+    width: 100%;
     padding: 20px;
     display: inline-block;
-    float: right;
 }
 
 .main-timeline .title {
@@ -105,7 +104,7 @@ body {
 
 .main-timeline .description {
     font-size: 16px;
-    margin: right;
+    margin: 0;
 }
 
 .main-timeline .timeline:nth-child(even)::before {

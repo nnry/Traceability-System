@@ -25,14 +25,20 @@
 </head>
 
 <body id="page-top">
+  <style>
+    .main-timeline .content {
+    color: #909090 !important;
+    width: 100% !important;
+    padding: 20px !important;
+    display: inline-block !important;
+    /* float: right; */
+}
+    </style>
   <!-- Begin Page Content -->
   <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h1 class="h3 mb-0 text-gray-800">Traceability Flow 1</h1>
-      <div class="seofy_module_text" style="font-size:18px;line-height:30px;">
-                                    <p style="text-align:left;">SYSTEM SERVICE</p>
 
-                                </div>
       <form class="d-none d-sm-inline-block form-inline col-md-4 ml-auto mr ml-md my-2 my-md-0 mw-100 navbar-search"
         style="width:30%; text-align:right">
         <div class="input-group">
@@ -57,38 +63,33 @@
             <div class="col">
               <div class="main-timeline">
                 <div class="timeline">
-                  <a href="#" class="timeline-content">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">COMING SOON</span>
                     <div class="timeline-icon">
                       <i class="far fa-clock" aria-hidden="true"></i>
                     </div>
                     <div class="content">
-                      <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card border-left-info shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
-                            <!-- <div class="col mr-2">
+                            <div class="col mr-2">
                               <h5 class="time_line-title"><label id="machine4_user_name">XXX</label></h5>
                               <div class="time_line-descr">USER ID : <label id="machine4_user_id">xxxxx</label></div>
                               <div class="time_line-descr">PART NO : <label id="machine4_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="machine4_scan_date">xxxxx</label></div>
-                              </div> -->
+                              </div>
                             <div class="col-auto">
-                              <i class="fas fa-clock fa-8x text-gray-300"></i>
+                              <!-- <i class="fas fa-calendar fa-2x text-gray-300"></i> -->
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <h3 class="title">Web Development</h3>
-                      <p class="description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever
-                        since the 1500s.
-                      </p>
+</div>
+                      
                     </div>
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">MACHINE ZONE 1</span>
                     <div class="timeline-icon">
                       <i class="fas fa-fw fa-cog" aria-hidden="true"></i>
@@ -109,17 +110,11 @@
                           </div>
                         </div>
                       </div>
-                      <h3 class="title">JavaScript</h3>
-                      <p class="description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever
-                        since the 1500s.
-                      </p>
                     </div>
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">MACHINE ZONE 2</span>
                     <div class="timeline-icon">
                       <i class="fas fa-fw fa-cogs" aria-hidden="true"></i>
@@ -140,17 +135,12 @@
                           </div>
                         </div>
                       </div>
-                      <h3 class="title">Mongo DB</h3>
-                      <p class="description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever
-                        since the 1500s.
-                      </p>
+                      
                     </div>
                   </a>
                 </div>
-                <div class="timeline">
-                  <a href="#" class="timeline-content">
+                <div class="timeline"> 
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">MACHINE ZONE 3</span>
                     <div class="timeline-icon">
                       <i class="fas fa-screwdriver" aria-hidden="true"></i>
@@ -171,17 +161,12 @@
                           </div>
                         </div>
                       </div>
-                      <h3 class="title">BlackPearl</h3>
-                      <p class="description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever
-                        since the 1500s.
-                      </p>
+          
                     </div>
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">MACHINE ZONE 4</span>
                     <div class="timeline-icon">
                       <i class="fas fa-wrench" aria-hidden="true"></i>
@@ -202,17 +187,12 @@
                           </div>
                         </div>
                       </div>
-                      <h3 class="title">Angular</h3>
-                      <p class="description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever
-                        since the 1500s.
-                      </p>
+                      
                     </div>
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">WASHING</span>
                     <div class="timeline-icon">
                       <i class="fas fa-clipboard-list" aria-hidden="true"></i>
@@ -233,17 +213,12 @@
                           </div>
                         </div>
                       </div>
-                      <h3 class="title">Laravel</h3>
-                      <p class="description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever
-                        since the 1500s.
-                      </p>
+                     
                     </div>
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">Q-GATE</span>
                     <div class="timeline-icon">
                       <i class="fas fa-clipboard-check" aria-hidden="true"></i>
@@ -264,17 +239,12 @@
                           </div>
                         </div>
                       </div>
-                      <h3 class="title">Creapure</h3>
-                      <p class="description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever
-                        since the 1500s.
-                      </p>
+                     
                     </div>
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content">
+                  <a href="#" class="timeline-content"  style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">TRANSFER</span>
                     <div class="timeline-icon">
                       <i class="fa fa-boxes" aria-hidden="true"></i>
@@ -295,17 +265,12 @@
                           </div>
                         </div>
                       </div>
-                      <h3 class="title">Creapure</h3>
-                      <p class="description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever
-                        since the 1500s.
-                      </p>
+                      
                     </div>
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">PICKING</span>
                     <div class="timeline-icon">
                       <i class="fas fa-dolly-flatbed" aria-hidden="true"></i>
@@ -326,17 +291,12 @@
                           </div>
                         </div>
                       </div>
-                      <h3 class="title">Creapure</h3>
-                      <p class="description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever
-                        since the 1500s.
-                      </p>
+                    
                     </div>
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">SHIPPING</span>
                     <div class="timeline-icon">
                       <i class="fas fa-shipping-fast" aria-hidden="true"></i>
@@ -357,12 +317,7 @@
                           </div>
                         </div>
                       </div>
-                      <h3 class="title">Creapure</h3>
-                      <p class="description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever
-                        since the 1500s.
-                      </p>
+                      
                     </div>
                   </a>
                 </div>
