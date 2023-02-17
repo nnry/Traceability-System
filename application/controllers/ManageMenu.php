@@ -48,96 +48,55 @@ class manageMenu extends CI_Controller
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/view_manageMenu.php');
-		$this->template->write_view('page_footer', 'themes/'. $this->theme .'/first_set/view_footer.php');
+		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/first_set/view_footer.php');
 
 		$this->template->render();
 	}
 
-	public function editMenu(){
-		$ss_id = $_GET["ss_id"];
-		$res = $this->backoffice_model->getEditMenu($ss_id);
+	public function editMenu()
+	{
+		$sm_id = $_GET["sm_id"];
+		$res = $this->backoffice_model->getEditMenu($sm_id);
 		echo json_encode($res);
-	
 	}
-	public function saveEditMenu(){
+	public function saveEditMenu()
+	{
 		$empcodeUser = $this->session->userdata("empcode");
-		$idsub = $_POST["idsub"];
+		$idmenu = $_POST["idmenu"];
 		$menu = $_POST["menu"];
-		$sub = $_POST["submenu"];
-		$path = $_POST["path"];
 
-		// echo $idsub;
-		// echo $menu;
-		// echo $sub;
-		// echo $path;
-	
-		$chkmenu=$this->backoffice_model->checkMenu($menu);
-		if($chkmenu == "true") {// มี
-			// echo "false";
-			$checksub = $this->backoffice_model->checkSubmenu($sub);
-			// echo $checksub;
-			if($checksub == "true"){
-				$res = $this->backoffice_model->saveEditTableMenu($menu,$sub,$path,$idsub,$empcodeUser);
-				echo $res;
-			}else{
-				echo "false";
-			}
-		}else{
-			$checksub = $this->backoffice_model->checkSubmenu($sub);
-			echo $checksub;
-			if($checksub == "true"){
-				$res = $this->backoffice_model->saveEditTableMenu($menu,$sub,$path,$idsub,$empcodeUser);
-				echo $res;
-			}else{
-				echo "false";
-			}
+
+		$chkmenu = $this->backoffice_model->checkMenu($menu);
+		if ($chkmenu == "true") { // มี แอดไม่ได้
+			echo "false";
+		} else {
+			$res = $this->backoffice_model->saveEditTableMenu($menu, $idmenu, $empcodeUser);
+			echo $res;
 		}
 	}
-	public function statusMenu(){
+	public function statusMenu()
+	{
+		$empcode = $this->session->userdata("empcode");
 		$ss_id = $_GET["ss_id"];
-		$res = $this->backoffice_model->swiftStatusMenu($ss_id);
+		$res = $this->backoffice_model->swiftStatusMenu($ss_id, $empcode);
 		echo json_encode($res);
 	}
-	public function insertMenu(){
+	public function insertMenu()
+	{
 		$empcodeUser = $this->session->userdata("empcode");
 		$menu = $_POST["addmmenu"];
-		$submenu = $_POST["addsubmenu"];
-		$path = $_POST["addpath"];
 		$icons = $_POST["addicons"];
 
 		$resCheckMenu = $this->backoffice_model->checkMenu($menu);
 
-		if($resCheckMenu ==  "true" ){ //มีอยู่แล้ว
-			$consm_id = $this->backoffice_model->convert("sm_id", "sys_menu", "sm_name ='{$menu}'");
-			$check = $this->backoffice_model->checkSubmenu($submenu);
-			if($check == "true"){
-				$order = $this->backoffice_model->maxOrder($consm_id);
-				$addorder = $order + 1;
-				$insertsubmenu = $this->backoffice_model->insertSubMenu($consm_id,$submenu,$path,$icons,$empcodeUser,$addorder);
-				echo $insertsubmenu; 
-			}else{
-				echo $check;
-			}
+		if ($resCheckMenu == "true") { // มี แอดไม่ได้
+			echo "false";
+		} else {
+			$order = $this->backoffice_model->maxOrderMenu();
+			$addorder = $order + 1;
+			$res = $this->backoffice_model->insertMenu($menu,$icons,$empcodeUser,$addorder);
 			
-		}else{ //ไม่มีแอดได้
-			$check = $this->backoffice_model->checkSubmenu($submenu);
-			if($check == "true"){
-				$order = $this->backoffice_model->maxOrderMenu();
-				$addorder = $order + 1;
-				$insertmenu = $this->backoffice_model->insertMenu($menu,$icons,$empcodeUser,$addorder);
-				if($insertmenu =="true"){
-					$consm_id = $this->backoffice_model->convert("sm_id", "sys_menu", "sm_name ='{$menu}'");
-					$insertsubmenu = $this->backoffice_model->insertSubMenu($consm_id,$submenu,$path,$icons,$empcodeUser,$addorder);
-					echo $insertsubmenu;
-				}else{
-					return $insertmenu;
-				}
-			}else{
-				echo $check;
-			}
-
+			echo $res;
 		}
-		
-
 	}
 }

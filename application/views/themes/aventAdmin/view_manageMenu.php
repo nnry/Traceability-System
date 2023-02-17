@@ -45,7 +45,7 @@
                                 <th>No.</th>
                                 <th>Menu</th>
                                 <th>Submenu</th>
-                                <th>Status</th>
+                                <th>Detail</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -57,28 +57,33 @@
                                 echo "<tr>";
                                 echo "<td>" . $i . "</td>";
                                 echo "<td>" . $value["sm_name"] . "</td>";
-                                echo "<td>" . $value["ss_name"] . "</td>";
-                                if ($value["ss_status"] == "1") {
+                                if ($value["sm_status"] == "1") {
                                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusmenu$i  name = statusmenu$i  checked onclick='statusmenu(" . $value["ss_id"] . ")'>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" id=statusmenu$i  name = statusmenu$i  checked onclick='statusmenu(" . $value["sm_id"] . ")'>
                                                 <label class=\"custom-control-label\" for=statusmenu$i ></label>
                                             </div>
                                     </td>";
                                 } else {
                                     echo "<td>
                                         <div class=\"custom-switch text-center\" >
-                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusmenu$i name = statusmenu$i onclick='statusmenu(" . $value["ss_id"] . ")'>
+                                            <input type=\"checkbox\" class=\"custom-control-input\" id=statusmenu$i name = statusmenu$i onclick='statusmenu(" . $value["sm_id"] . ")'>
                                             <label class=\"custom-control-label\" for=statusmenu$i></label>
                                         </div>
                                     </td>";
                                 }
                                 echo "<td>
                                     <div class=\"text-wrap text-center\" >
-                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editmenu\"   id=editmenu$i name=editmenu$i onclick='editmenu(" . $value["ss_id"] . ")'><i
-                                     class=\"fas fa-edit fa-sm\"></i> Edit</button>                              
+                                     <button  class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#showsubmenu\"   id=showsubmenu$i name=showsubmenu$i onclick='editsubmenu(" . $value["sm_id"] . ")'><i
+                                     class=\"fas fa-info-circle fa-sm\"></i>&nbsp;&nbsp;info</button>                              
                                     </div>
                                 </td>";
+                                echo "<td>
+                                <div class=\"text-wrap text-center\" >
+                                 <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editmenu\"   id=editmenu$i name=editmenu$i onclick='editmenu(" . $value["sm_id"] . ")'><i
+                                 class=\"fas fa-edit fa-sm\"></i> &nbsp;Edit</button>                              
+                                </div>
+                            </td>";
                                 echo "</tr>";
                             }
                             ?>
@@ -98,20 +103,13 @@
                             </div>
 
                             <form class="card-body" action="#">
+                            <div class="form-group" hidden>
+                                    <label for="empcode">ID :</label>
+                                    <input class="form-control" type="text" id="idmenu" required="" >
+                                </div>
                                 <div class="form-group">
                                     <label for="empcode">Menu :</label>
                                     <input class="form-control" type="text" id="editmenuname" required="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="fristname">Submenu:</label>
-                                    <input class="form-control" type="text" id="idsub" required="" hidden>
-                                    <input class="form-control" type="text" id="editsubmenu" required="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="lastname">Path :</label>
-                                    <input class="form-control" type="text" required="" id="editpath">
                                 </div>
 
                             </form>
@@ -141,34 +139,10 @@
                                     <label for="empcode">Menu :</label>
                                     <input class="form-control" type="text" id="addmmenu" required="" placeholder="Enter menu name">
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="fristname">Submenu :</label>
-                                    <input class="form-control" type="text" id="addsubmenu" required="" placeholder="Enter submenu name">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="lastname">Path :</label>
-                                    <input class="form-control" type="text" required="" id="addpath" placeholder="Enter path name">
-                                </div>
                                 <div class="form-group">
                                     <label for="lastname">Icon :</label>
                                     <input class="form-control" type="text" required="" id="addicons" placeholder="Enter path name">
                                 </div>
-
-                                <!-- <div class="form-group">
-                                    <label>Icons :</label>
-                                    <div>
-                                        <select class="form-select col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="addplant" aria-label="Default select example" placeholder="Enter your plant">
-                                            <option>Please select icons</option>
-                                            <//?php
-                                            //foreach ($icon as $value) {
-                                         ?>
-                                                <option value="<//?php echo $value["mi_id"]; ?>"><//?php echo $value["mi_icon"]["mi_name"]; ?></option>
-                                            <//?php } ?>
-                                        </select>
-                                    </div>
-                                </div> -->
 
                             </form>
 
@@ -191,23 +165,21 @@
                         saveeditmenu()
                     });
                     $("#btnSaveAddmenu").click(function() {
-                        alert("wowowowo")
+                        // alert("wowowowo")
                         addmenu()
                     });
 
-                    function editmenu(ss_id) {
+                    function editmenu(sm_id) {
                         var path = $.ajax({
                             method: "get",
                             dataType: "json",
-                            url: "<?php echo base_url(); ?>manageMenu/editMenu?ss_id=" + ss_id,
+                            url: "<?php echo base_url(); ?>manageMenu/editMenu?sm_id=" + sm_id,
                         })
                         path.done(function(rs) {
                             // alert(rs)
                             console.log(rs);
-                            $("#idsub").val(rs[0]["ss_id"]);
+                            $("#idmenu").val(rs[0]["sm_id"]);
                             $("#editmenuname").val(rs[0]["sm_name"]);
-                            $("#editsubmenu").val(rs[0]["ss_name"]);
-                            $("#editpath").val(rs[0]["ss_method"]);
 
 
 
@@ -258,17 +230,13 @@
                     }
 
                     function saveeditmenu() {
-                        var idsub = $("#idsub").val();
+                        var idmenu = $("#idmenu").val();
                         var menu = $("#editmenuname").val();
-                        var submenu = $("#editsubmenu").val();
-                        var path = $("#editpath").val();
 
                         var chmenu = document.getElementById("editmenuname");
-                        var chsubmenu = document.getElementById("editsubmenu");
-                        var chpath = document.getElementById("editpath");
 
 
-                        if (chmenu.value == "" || chsubmenu.value == "" || chpath.value == "" ) {
+                        if (chmenu.value == "") {
                             Swal.fire({
                                 icon: 'warning',
                                 title: 'Are you sure?',
@@ -280,10 +248,8 @@
                                 method: "post",
                                 url: "<?php echo base_url(); ?>manageMenu/saveEditMenu",
                                 data: {
-                                    idsub: idsub,
+                                    idmenu: idmenu,
                                     menu: menu,
-                                    submenu: submenu,
-                                    path: path,
 
                                 }
                             })
@@ -300,8 +266,8 @@
                                 } else {
                                     Swal.fire({
                                         icon: 'error',
-                                        title: 'Data not found',
-                                        text: 'You failed to edit menu',
+                                        title: 'You failed to edit menu',
+                                        text: 'ชื่อซ้ำ! โปรดตรวจสอบอีกครั้ง',
                                     })
                                 }
                             })
@@ -312,17 +278,13 @@
                     function addmenu() {
 
                         var addmmenu = $("#addmmenu").val();
-                        var addsubmenu = $("#addsubmenu").val();
-                        var addpath = $("#addpath").val();
                         var addicons = $("#addicons").val();
 
                         var chemenu = document.getElementById("addmenu");
-                        var chesubmenu = document.getElementById("addsubmenu");
-                        var chepath = document.getElementById("addpath");
                         var cheicons = document.getElementById("addicons");
 
 
-                        if (chemenu.value == "" || chesubmenu.value == "" || chepath.value == "" || cheicons.value == "") {
+                        if (chemenu.value == "" || cheicons.value == "") {
                             Swal.fire({
                                 icon: 'warning',
                                 title: 'Are you sure?',
@@ -335,13 +297,11 @@
                                 url: "<?php echo base_url(); ?>manageMenu/insertMenu",
                                 data: {
                                     addmmenu: addmmenu,
-                                    addsubmenu: addsubmenu,
-                                    addpath: addpath,
                                     addicons: addicons,
                                 }
                             })
                             path.done(function(rs) {
-                                alert(rs);
+                                // alert(rs);
                                 if (rs === "true") {
                                     Swal.fire({
                                         icon: 'success',

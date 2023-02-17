@@ -108,13 +108,12 @@ class Backoffice_model extends CI_Model
     {
         $sql = "EXEC [dbo].[GET_CHECK_LOG] @EMP_ID = '{$id_log}'";
         $res = $this->db->query($sql);
-        $row = $res->result_array();
-        return $row[0];
-        // if ($row) {
-        //     return "true"; // มี
-        // } else {
-        //     return "false"; //ไม่มี
-        // }
+        if ($res->num_rows() != 0) {
+            $result = $res->result_array();
+            return $result[0];
+        } else {
+            return false;
+        }
     }
 
     //***************************explanner***************************
@@ -178,9 +177,9 @@ class Backoffice_model extends CI_Model
         $row = $res->result_array();
         return $row;
     }
-    public function getEditMenu($ss_id)
+    public function getEditMenu($sm_id)
     {
-        $sql = "EXEC [dbo].[GET_EDIT_MANU] @EMP_ID ='{$ss_id}'";
+        $sql = "EXEC [dbo].[GET_EDIT_MANU] @EMP_ID ='{$sm_id}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         return $row;
@@ -450,14 +449,14 @@ class Backoffice_model extends CI_Model
         }
     }
 
-    public function swiftStatusGrop($spg_id)
+    public function swiftStatusGrop($spg_id,$empcode)
     {
         $sql = "EXEC [dbo].[GET_GROUP_STATUS] @EMP_ID ='{$spg_id}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         $result = $row[0]["spg_status"];
         if ($result == 1) {
-            $sql = "EXEC [dbo].[GET_GROUP_STATUS_OFF] @EMP_ID ='{$spg_id}'";
+            $sql = "EXEC [dbo].[GET_GROUP_STATUS_OFF] @EMP_ID ='{$spg_id}',@EMP_USER ='{$empcode}'";
             $res = $this->db->query($sql);
             if ($res) {
                 return true;
@@ -465,7 +464,7 @@ class Backoffice_model extends CI_Model
                 return false;
             }
         } elseif ($result == 0) {
-            $sql = "EXEC [dbo].[GET_GROUP_STATUS_ON] @EMP_ID ='{$spg_id}'";
+            $sql = "EXEC [dbo].[GET_GROUP_STATUS_ON] @EMP_ID ='{$spg_id}',@EMP_USER ='{$empcode}'";
             $res = $this->db->query($sql);
             if ($res) {
                 return true;
@@ -476,7 +475,7 @@ class Backoffice_model extends CI_Model
             return  true;
         }
     }
-    public function swiftStatusDetail($spd_id)
+    public function swiftStatusDetail($spd_id,$empcode)
     {
         $sql = "EXEC [dbo].[GET_DETAIL_GROUP_STATUS] @EMP_ID ='{$spd_id}'";
         $res = $this->db->query($sql);
@@ -484,7 +483,7 @@ class Backoffice_model extends CI_Model
         $result = $row[0]["spd_status"];
         // return $result;
         if ($result == 1) {
-            $sql = "EXEC [dbo].[GET_DETAIL_STATUS_OFF] @EMP_ID ='{$spd_id}'";
+            $sql = "EXEC [dbo].[GET_DETAIL_STATUS_OFF] @EMP_ID ='{$spd_id}',@EMP_USER ='{$empcode}'";
             $res = $this->db->query($sql);
             if ($res) {
                 return true; /// ปิด
@@ -492,7 +491,7 @@ class Backoffice_model extends CI_Model
                 return false;
             }
         } elseif ($result == 0) {
-            $sql = "EXEC [dbo].[GET_DETAIL_STATUS_ON] @EMP_ID ='{$spd_id}'";
+            $sql = "EXEC [dbo].[GET_DETAIL_STATUS_ON] @EMP_ID ='{$spd_id}',@EMP_USER ='{$empcode}'";
             $res = $this->db->query($sql);
             if ($res) {
                 return true; //เปิด
@@ -534,9 +533,9 @@ class Backoffice_model extends CI_Model
         }
     }
 
-    public function saveEditTableMenu($menu, $sub, $path, $idsub, $empcodeUser)
+    public function saveEditTableMenu($menu,$idmenu,$empcodeUser)
     {
-        $sql = "EXEC [dbo].[GET_SAVE_EDIT_MENU] @MN_ID  ='{$idsub}',@MN_MENU ='{$menu}',@MN_SUBMENU='{$sub}',@MN_PATH='{$path}',@EMP_USER='{$empcodeUser}'";
+        $sql = "EXEC [dbo].[GET_SAVE_EDIT_MENU] @MN_ID  ='{$idmenu}',@MN_MENU ='{$menu}',@EMP_USER='{$empcodeUser}'";
         $res = $this->db->query($sql);
         if ($res) {
             return "true";
@@ -611,7 +610,7 @@ class Backoffice_model extends CI_Model
             return "false";
         }
     }
-    public function insertMenu($menu, $icons, $empcodeUser, $addorder)
+    public function insertMenu($menu,$icons,$empcodeUser,$addorder)
     {
         $sql = "EXEC [dbo].[INSERT_MENU_MM] @SM_NAME = '{$menu}',@EMP_USER ='{$empcodeUser}',@MN_ICON='{$icons}',@MN_ORDER='$addorder'";
         $res = $this->db->query($sql);

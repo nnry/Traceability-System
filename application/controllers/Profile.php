@@ -68,6 +68,7 @@ class Profile extends CI_Controller
 		$data["fname"] = $data["sa_fname"];
 		$data["lname"] =  $data["sa_lname"];
 		$data["email"] =  $data["sa_email"];
+		$data["phase"] = $data['mpa_name'];
 		// $data["selectplant"] = $this->backoffice_model->selectplant($data["user"]);
 		// $data["youplant"] = $data["mpa_name"];
 		

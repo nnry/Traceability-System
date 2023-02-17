@@ -74,26 +74,29 @@ class Login extends CI_Controller
 					'fname' => $data['sa_fname'],
 					'lname' => $data['sa_lname'],
 					'email' => $data['sa_email'],
+					'phase' => $data['mpa_name'],
 					'login' => "OK"
 				);
 				$this->session->set_userdata($session_data);
 				$id = $data['sa_id'];
 
 				$cheklog = $this->backoffice_model->checkLog_login($id);
-				
-				
-				$null_log = $cheklog["la_logout"];
-				
-				if($null_log == null){
-					$chmax = $this->backoffice_model->maxlogid($id);
-					$loglogin = $this->backoffice_model->insertlogaddupdate($id,$chmax);
-					// echo $loglogin;
-					
-				}else{
+
+				if ($cheklog == false) {
 					$loglogin = $this->backoffice_model->insertlog($id);
-					// echo $loglogin;
-				} 
-				
+				} else {
+					$null_log = $cheklog["la_logout"];
+
+					if ($null_log == null) {
+						$chmax = $this->backoffice_model->maxlogid($id);
+						$loglogin = $this->backoffice_model->insertlogaddupdate($id, $chmax);
+						// echo $loglogin;
+
+					} else {
+						$loglogin = $this->backoffice_model->insertlog($id);
+						// echo $loglogin;
+					}
+				}
 			}
 		} else {
 			// http://192.168.161.102/api_system/getAccountEx?username=5101716
@@ -126,13 +129,30 @@ class Login extends CI_Controller
 							'fname' => $data['sa_fname'],
 							'lname' => $data['sa_lname'],
 							'email' => $data['sa_email'],
+							'phase' => $data['mpa_name'],
 							'login' => "OK"
 						);
 						$this->session->set_userdata($session_data);
 
 						$id = $data['sa_id'];
 
-						$loglogin = $this->backoffice_model->insertlog($id);
+						$cheklog = $this->backoffice_model->checkLog_login($id);
+
+						if ($cheklog == false) {
+							$loglogin = $this->backoffice_model->insertlog($id);
+						} else {
+							$null_log = $cheklog["la_logout"];
+
+							if ($null_log == null) {
+								$chmax = $this->backoffice_model->maxlogid($id);
+								$loglogin = $this->backoffice_model->insertlogaddupdate($id, $chmax);
+								// echo $loglogin;
+
+							} else {
+								$loglogin = $this->backoffice_model->insertlog($id);
+								// echo $loglogin;
+							}
+						}
 					}
 
 					if ($pass == $passex) {
@@ -152,12 +172,29 @@ class Login extends CI_Controller
 							'fname' => $data['sa_fname'],
 							'lname' => $data['sa_lname'],
 							'email' => $data['sa_email'],
+							'phase' => $data['mpa_name'],
 							'login' => "OK"
 						);
 						$this->session->set_userdata($session_data);
 						$id = $data['sa_id'];
 
-						$loglogin = $this->backoffice_model->insertlog($id);
+						$cheklog = $this->backoffice_model->checkLog_login($id);
+
+						if ($cheklog == false) {
+							$loglogin = $this->backoffice_model->insertlog($id);
+						} else {
+							$null_log = $cheklog["la_logout"];
+
+							if ($null_log == null) {
+								$chmax = $this->backoffice_model->maxlogid($id);
+								$loglogin = $this->backoffice_model->insertlogaddupdate($id, $chmax);
+								// echo $loglogin;
+
+							} else {
+								$loglogin = $this->backoffice_model->insertlog($id);
+								// echo $loglogin;
+							}
+						}
 					}
 				}
 			} else {
@@ -168,13 +205,13 @@ class Login extends CI_Controller
 	public function logout()
 	{
 		$id_log = $_GET["id"];
-		
+
 		$chesa_id = $this->backoffice_model->checkLog_login($id_log);
 		// echo json_encode($chesa_id);
-	
+
 
 		$data_status = $chesa_id["la_status"];
-		$data_id = $chesa_id["la_id"];
+		// $data_id = $chesa_id["la_id"];
 		// echo json_encode($data_status);
 		// echo json_encode($data_id);
 		$chmax = $this->backoffice_model->maxlogid($id_log);
@@ -182,6 +219,13 @@ class Login extends CI_Controller
 			$res = $this->backoffice_model->logout($chmax);
 			echo $res;
 		}
-
 	}
+	public function tt()
+	{
+		$code ='admin01';
+		$data = $this->backoffice_model->getname($code);
+		echo json_encode($data);
+	}
+	
+
 }

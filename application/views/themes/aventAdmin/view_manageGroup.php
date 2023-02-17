@@ -139,6 +139,7 @@
                                     <label for="pgn_name">Permission Group :</label>
                                     <input class="form-control" type="hidden" id="hideIDadd" name="hideIDadd" required="" value="">
                                     <input class="form-control" type="text" id="addname" name="addname" required="" placeholder="Enter your permission group name">
+                                    <!-- <div id="alertinput"></div> -->
                                 </div>
                             </form>
 
@@ -271,6 +272,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
+    function isValidInput(input) {
+        var pattern = new RegExp(/^([a-z0-9])+$/i);
+        return pattern.test(input);
+    }
     var datafullbody = {}
     $(document).ready(function() {
         $("select")
@@ -436,7 +441,7 @@
             $("#idregis").val(spg_id);
 
         } catch (err) {
-            alert("555")
+            // alert("555")
             $("#bodyshow").show("fast")
             $("#tbsubmenu").html("")
         }
@@ -518,8 +523,10 @@
                         })
                     }
                 })
+            } else {
+                window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
             }
-            window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
+
         })
 
     };
@@ -596,33 +603,59 @@
                 confirmButtonColor: '#F7B267',
             })
         } else {
-            var path = $.ajax({
-                method: "POST",
-                url: "<?php echo base_url(); ?>manageGroup/addPergroup",
-                data: {
-                    // id:id,
-                    name: name
-                }
-            })
-            path.done(function(rs) {
-                // console.log(rs);
-                // alert(rs);
-                if (rs === "true") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Successfully',
-                        text: 'You have successfully add  name group permission',
+            if (name != 0) {
+                if (isValidInput(name)) {
+                    // $("#alertinput").html("<font color='green'>ผ่าน</font>");
+                    // alert("อีเมล์ถูกต้อง")
+                    var path = $.ajax({
+                        method: "POST",
+                        url: "<?php echo base_url(); ?>manageGroup/addPergroup",
+                        data: {
+                            // id:id,
+                            name: name
+                        }
+                    })
+                    path.done(function(rs) {
+                        // console.log(rs);
+                        // alert(rs);
+                        if (rs === "true") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Successfully',
+                                text: 'You have successfully add  name group permission',
 
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
+                            }).then(function() {
+                                window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
+                            })
+                        } else if(rs === "repeat"){
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'You failed to register',
+                                text : 'ชื่อซ้ำ! โปรดตรวจสอบอีกครั้ง'
+                            })
+
+                        }else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'You failed to register',
+                            })
+                        }
                     })
+
                 } else {
+                    // $("#alertinput").html("<font color='red'>โปรดตรวจสอบชื่ออีกครั้ง</font>");
+                    // alert("อีเมล์ไม่ถูกต้อง")
                     Swal.fire({
-                        icon: 'error',
-                        title: 'You failed to register',
-                    })
+                                icon: 'error',
+                                title: 'You failed to register',
+                                text:'ไม่สามารถใช้ตัวอักษรพิเศษได้'
+                            })
                 }
-            })
+            } else {
+                // $("#alertinput").html("");
+            }
+
+
         }
 
 
