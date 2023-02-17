@@ -75,13 +75,13 @@
                                 echo "<td>
                                     <div class=\"text-wrap text-center\" >
                                      <button  class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#showsubmenu\"   id=showsubmenu$i name=showsubmenu$i onclick='editsubmenu(" . $value["sm_id"] . ")'><i
-                                     class=\"fas fa-info-circle fa-sm\"></i>&nbsp;&nbsp;info</button>                              
+                                     class=\"fas fa-info-circle fa-sm\"></i>&nbsp;&nbsp;info</button>
                                     </div>
                                 </td>";
                                 echo "<td>
                                 <div class=\"text-wrap text-center\" >
                                  <button  class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm  me-md-2 \"  data-toggle=\"modal\" data-target=\"#editmenu\"   id=editmenu$i name=editmenu$i onclick='editmenu(" . $value["sm_id"] . ")'><i
-                                 class=\"fas fa-edit fa-sm\"></i> &nbsp;Edit</button>                              
+                                 class=\"fas fa-edit fa-sm\"></i> &nbsp;Edit</button>
                                 </div>
                             </td>";
                                 echo "</tr>";
@@ -103,9 +103,9 @@
                             </div>
 
                             <form class="card-body" action="#">
-                            <div class="form-group" hidden>
+                                <div class="form-group" hidden>
                                     <label for="empcode">ID :</label>
-                                    <input class="form-control" type="text" id="idmenu" required="" >
+                                    <input class="form-control" type="text" id="idmenu" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="empcode">Menu :</label>
@@ -153,176 +153,329 @@
                         </div>
                     </div>
                 </div>
-
-
                 <!----------------------END Menu ADD Modal ----------------------------->
+            </div>
 
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
-                <script type="text/javascript">
-                    $("#btnSaveEditMenu").click(function() {
-                        // alert("wowowowo")
-                        saveeditmenu()
-                    });
-                    $("#btnSaveAddmenu").click(function() {
-                        // alert("wowowowo")
-                        addmenu()
-                    });
+            <!-- *************************************************************************************** -->
+            <!-- *************************************************************************************** -->
+            <!-- *************************************************************************************** -->
+            <div class="card-body" id="showsubmenu" style="display: none">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="Tablesubmenu" width="100%" cellspacing="0">
+                        <!-- style="display: none"-->
+                        <div class="card-header py" style="width:100%; text-align:right">
+                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle=modal data-target=#addsubmenu id="btnaddsubmenu" name="btnaddsubmenu"><i class="fas fa-user-plus fa-sm"></i> Register submenu</a>
+                        </div>
 
-                    function editmenu(sm_id) {
-                        var path = $.ajax({
-                            method: "get",
-                            dataType: "json",
-                            url: "<?php echo base_url(); ?>manageMenu/editMenu?sm_id=" + sm_id,
-                        })
-                        path.done(function(rs) {
-                            // alert(rs)
-                            console.log(rs);
-                            $("#idmenu").val(rs[0]["sm_id"]);
-                            $("#editmenuname").val(rs[0]["sm_name"]);
-
-
-
-                        })
-
-                    }
-
-                    function statusmenu(ss_id) {
-                        Swal.fire({
-                            title: 'Are you sure?',
-                            text: "คุณต้องการแก้ไขสถานะใช่หรือไม่? ( Do you want to edit your status? )",
-                            icon: 'question',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes' //ชื่อปุ่ม
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                var path = $.ajax({
-                                    method: "get",
-                                    url: "<?php echo base_url(); ?>manageMenu/statusMenu?ss_id=" + ss_id,
-                                })
-                                path.done(function(rs) {
-                                    // alert(rs);
-                                    if (rs === "true") {
-                                        Swal.fire(
-                                            'Success!',
-                                            'เปลี่ยนแปลงข้อมูลสำเร็จ',
-                                            'success'
-                                        ).then(function() {
-                                            window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";
-                                        })
-                                    } else {
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: 'Data not found',
-                                            text: 'You failed to edit status',
-                                        })
-                                    }
-                                })
-
-                            } else {
-                                window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";
-                            }
-
-                        })
-
-                    }
-
-                    function saveeditmenu() {
-                        var idmenu = $("#idmenu").val();
-                        var menu = $("#editmenuname").val();
-
-                        var chmenu = document.getElementById("editmenuname");
-
-
-                        if (chmenu.value == "") {
-                            Swal.fire({
-                                icon: 'warning',
-                                title: 'Are you sure?',
-                                text: 'You failed to edit menu',
-                                confirmButtonColor: '#F7B267',
-                            })
-                        } else {
-                            var path = $.ajax({
-                                method: "post",
-                                url: "<?php echo base_url(); ?>manageMenu/saveEditMenu",
-                                data: {
-                                    idmenu: idmenu,
-                                    menu: menu,
-
-                                }
-                            })
-                            path.done(function(rs) {
-                                alert(rs);
-                                if (rs === "true") {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Successfully',
-                                        text: 'You have successfully edit menu',
-                                    }).then(function() {
-                                        window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";
-                                    })
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Submenu</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbsubmenu">
+                            <?php
+                            $j = 0;
+                            foreach ($tablesubmenu as $submenu) {
+                                $j++;
+                                echo "<tr>";
+                                echo "<td>" .$j. "</td>";
+                                echo "<td>" . $submenu["ss_name"] . "</td>";
+                                echo "<td>" . $submenu["ss_name"] . "</td>";
+                                if ($submenu["ss_status"] == "1") {
+                                    echo "<td>
+                                            <div class=\"custom-switch text-center\" >
+                                                <input type=\"checkbox\" class=\"custom-control-input\" name=statusdetil$j  id=statusdetail$j checked onclick='statussubmenu(" . $submenu["ss_id"] . ")'>
+                                                <label class=\"custom-control-label\" for=statusdetail$j ></label>
+                                            </div>
+                                    </td>";
                                 } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'You failed to edit menu',
-                                        text: 'ชื่อซ้ำ! โปรดตรวจสอบอีกครั้ง',
-                                    })
+                                    echo "<td>
+                                        <div class=\"custom-switch text-center\" >
+                                            <input type=\"checkbox\" class=\"custom-control-input\" name=statusdetail$j  id=statusdetail$j onclick='statussubmenu(" . $submenu["ss_id"] . ")'>
+                                            <label class=\"custom-control-label\" for=statusdetail$j></label>
+                                        </div>
+                                    </td>";
                                 }
-                            })
-                        }
-                    }
+                                echo "</tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="modal fade" id="addpermenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-plus fa-sm"></i> Add Permission Group Menu</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+
+                            <form class="card-body" action="#">
+
+                                <div class="form-group">
+                                    <!-- <label for="lastname">ID :</label> -->
+                                    <input class="form-control" type="text" required="" id="idregis" hidden>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="username">Menu :</label>
+                                    <div>
+                                        <select class="form-control col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="regismenu" placeholder="Enter your Group Permission">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="username">Submenu :</label>
+                                    <div>
+                                        <select class="form-control col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="regissubmenu" placeholder="Enter your Group Permission">
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                <a class="btn btn-primary" type="submit" name="btnSaveAddRegis" id="btnSaveAddRegis">Save</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
+            <script type="text/javascript">
+                function isValidInput(input) {
+                    var pattern = new RegExp(/^([a-z0-9])+$/i);
+                    return pattern.test(input);
+                }
+
+                $("#btnSaveEditMenu").click(function() {
+                    // alert("wowowowo")
+                    saveeditmenu()
+                });
+                $("#btnSaveAddmenu").click(function() {
+                    // alert("wowowowo")
+                    addmenu()
+                });
+
+                function editmenu(sm_id) {
+                    var path = $.ajax({
+                        method: "get",
+                        dataType: "json",
+                        url: "<?php echo base_url(); ?>manageMenu/editMenu?sm_id=" + sm_id,
+                    })
+                    path.done(function(rs) {
+                        // alert(rs)
+                        console.log(rs);
+                        $("#idmenu").val(rs[0]["sm_id"]);
+                        $("#editmenuname").val(rs[0]["sm_name"]);
 
 
-                    function addmenu() {
 
-                        var addmmenu = $("#addmmenu").val();
-                        var addicons = $("#addicons").val();
+                    })
 
-                        var chemenu = document.getElementById("addmenu");
-                        var cheicons = document.getElementById("addicons");
+                }
 
-
-                        if (chemenu.value == "" || cheicons.value == "") {
-                            Swal.fire({
-                                icon: 'warning',
-                                title: 'Are you sure?',
-                                text: 'You failed to add menu',
-                                confirmButtonColor: '#F7B267',
-                            })
-                        } else {
+                function statusmenu(sm_id) {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "คุณต้องการแก้ไขสถานะใช่หรือไม่? ( Do you want to edit your status? )",
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes' //ชื่อปุ่ม
+                    }).then((result) => {
+                        if (result.isConfirmed) {
                             var path = $.ajax({
-                                method: "post",
-                                url: "<?php echo base_url(); ?>manageMenu/insertMenu",
-                                data: {
-                                    addmmenu: addmmenu,
-                                    addicons: addicons,
-                                }
+                                method: "get",
+                                url: "<?php echo base_url(); ?>manageMenu/statusMenu?sm_id=" + sm_id,
                             })
                             path.done(function(rs) {
                                 // alert(rs);
                                 if (rs === "true") {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Successfully',
-                                        text: 'You have successfully add menu',
-                                    }).then(function() {
+                                    Swal.fire(
+                                        'Success!',
+                                        'เปลี่ยนแปลงข้อมูลสำเร็จ',
+                                        'success'
+                                    ).then(function() {
                                         window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";
                                     })
                                 } else {
                                     Swal.fire({
                                         icon: 'error',
                                         title: 'Data not found',
-                                        text: 'You failed to add menu',
+                                        text: 'You failed to edit status',
                                     })
                                 }
                             })
+
+                        } else {
+                            window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";
                         }
 
+                    })
+
+                }
+
+                function saveeditmenu() {
+                    var idmenu = $("#idmenu").val();
+                    var menu = $("#editmenuname").val();
+
+                    var chmenu = document.getElementById("editmenuname");
+
+
+                    if (chmenu.value == "") {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Are you sure?',
+                            text: 'You failed to edit menu',
+                            confirmButtonColor: '#F7B267',
+                        })
+                    } else {
+                        if (addmmenu != 0) {
+                            if (isValidInput(addmmenu)) {
+                                // $("#alertinput").html("<font color='green'>ผ่าน</font>");
+                                // alert("อีเมล์ถูกต้อง")
+                                var path = $.ajax({
+                                    method: "post",
+                                    url: "<?php echo base_url(); ?>manageMenu/saveEditMenu",
+                                    data: {
+                                        idmenu: idmenu,
+                                        menu: menu,
+                                    }
+                                })
+                                path.done(function(rs) {
+                                    // console.log(rs);
+                                    // alert(rs);
+                                    if (rs === "true") {
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Successfully',
+                                            text: 'You have successfully edit menu',
+                                        }).then(function() {
+                                            window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";
+                                        })
+                                    } else if (rs === "repeat") {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'You failed to edit menu',
+                                            text: 'ชื่อซ้ำ! โปรดตรวจสอบอีกครั้ง'
+                                        })
+
+                                    } else {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'You failed to edit menu',
+                                        })
+                                    }
+                                })
+
+                            } else {
+                                // $("#alertinput").html("<font color='red'>โปรดตรวจสอบชื่ออีกครั้ง</font>");
+                                // alert("อีเมล์ไม่ถูกต้อง")
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'You failed to add menu',
+                                    text: 'ไม่สามารถใช้ตัวอักษรพิเศษได้'
+                                })
+
+                            }
+
+                        }
                     }
-                </script>
-            </div>
+                }
+
+
+                function addmenu() {
+
+                    var addmmenu = $("#addmmenu").val();
+                    var addicons = $("#addicons").val();
+
+                    var chemenu = document.getElementById("addmenu");
+                    var cheicons = document.getElementById("addicons");
+
+
+                    if (chemenu.value == "" || cheicons.value == "") {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Are you sure?',
+                            text: 'You failed to add menu',
+                            confirmButtonColor: '#F7B267',
+                        })
+                    } else {
+                        if (addmmenu != 0) {
+                            if (isValidInput(addmmenu)) {
+                                // $("#alertinput").html("<font color='green'>ผ่าน</font>");
+                                // alert("อีเมล์ถูกต้อง")
+                                var path = $.ajax({
+                                    method: "post",
+                                    url: "<?php echo base_url(); ?>manageMenu/insertMenu",
+                                    data: {
+                                        addmmenu: addmmenu,
+                                        addicons: addicons,
+                                    }
+                                })
+                                path.done(function(rs) {
+                                    // console.log(rs);
+                                    // alert(rs);
+                                    if (rs === "true") {
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Successfully',
+                                            text: 'You have successfully add menu',
+                                        }).then(function() {
+                                            window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";
+                                        })
+                                    } else if (rs === "repeat") {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'You failed to add menu',
+                                            text: 'ชื่อซ้ำ! โปรดตรวจสอบอีกครั้ง'
+                                        })
+
+                                    } else {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'You failed to add menu',
+                                        })
+                                    }
+                                })
+
+                            } else {
+                                // $("#alertinput").html("<font color='red'>โปรดตรวจสอบชื่ออีกครั้ง</font>");
+                                // alert("อีเมล์ไม่ถูกต้อง")
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'You failed to add menu',
+                                    text: 'ไม่สามารถใช้ตัวอักษรพิเศษได้'
+                                })
+
+                            }
+
+                        }
+                    }
+                }
+
+                function editsubmenu(sm_id) {
+                    $("#showsubmenu").show("fast")
+                    
+                    try {
+
+                    } catch (err) {
+
+                    }
+
+                };
+            </script>
         </div>
 
     </div>

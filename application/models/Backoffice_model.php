@@ -543,14 +543,14 @@ class Backoffice_model extends CI_Model
             return "false";
         }
     }
-    public function swiftStatusMenu($ss_id)
+    public function swiftStatusMenu($sm_id,$empcode)
     {
-        $sql = "EXEC [dbo].[GET_STATUS_MENU] @EMP_ID ='{$ss_id}'";
+        $sql = "EXEC [dbo].[GET_STATUS_MENU] @EMP_ID ='{$sm_id}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
-        $result = $row[0]["ss_status"];
+        $result = $row[0]["sm_status"];
         if ($result == 1) {
-            $sql = "EXEC [dbo].[GET_STATUS_MENU_OFF] @EMP_ID ='{$ss_id}'";
+            $sql = "EXEC [dbo].[GET_STATUS_MENU_OFF] @EMP_ID ='{$sm_id}',@EMP_USER='{$empcode}'";
             $res = $this->db->query($sql);
             if ($res) {
                 return true;
@@ -558,7 +558,7 @@ class Backoffice_model extends CI_Model
                 return false;
             }
         } elseif ($result == 0) {
-            $sql = "EXEC [dbo].[GET_STATUS_MENU_ON] @EMP_ID ='{$ss_id}'";
+            $sql = "EXEC [dbo].[GET_STATUS_MENU_ON] @EMP_ID ='{$sm_id}',@EMP_USER='{$empcode}'";
             $res = $this->db->query($sql);
             if ($res) {
                 return true;

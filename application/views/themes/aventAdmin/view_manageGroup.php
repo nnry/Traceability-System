@@ -79,7 +79,7 @@
                                 echo "<td>
                                     <div class=\"text-wrap text-center\" >
                                         <button  class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm  me-md-2 \"   id=showtable$j  name =showtable$j  onclick='detailgroup(" . $value1["spg_id"] . ")'><i
-                                        class=\"fas fa-info-circle fa-sm\"></i>&nbsp;info</button>                              
+                                        class=\"fas fa-info-circle fa-sm\"></i> &nbsp; info</button>                              
                                     </div>
                                 </td>";
                                 echo "<td>
@@ -651,12 +651,10 @@
                                 text:'ไม่สามารถใช้ตัวอักษรพิเศษได้'
                             })
                 }
-            } else {
-                // $("#alertinput").html("");
-            }
 
 
         }
+    }
 
 
 

@@ -43,11 +43,12 @@ class manageMenu extends CI_Controller
 		$data["user"] = $data["sa_code"];
 		$data["id"] = $data["sa_id"];
 		$data["tableMenu"] = $this->backoffice_model->tableMenu();
+		$data["tablesubmenu"] = $this->backoffice_model->tableMainSubMenu();
 		$setTitle = "Traceability System | Management Menu";
 		$this->template->write('page_title', $setTitle . ' ');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/view_manageMenu.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/view_manageMenu.php',$data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/first_set/view_footer.php');
 
 		$this->template->render();
@@ -68,7 +69,7 @@ class manageMenu extends CI_Controller
 
 		$chkmenu = $this->backoffice_model->checkMenu($menu);
 		if ($chkmenu == "true") { // มี แอดไม่ได้
-			echo "false";
+			echo "repeat";
 		} else {
 			$res = $this->backoffice_model->saveEditTableMenu($menu, $idmenu, $empcodeUser);
 			echo $res;
@@ -77,8 +78,8 @@ class manageMenu extends CI_Controller
 	public function statusMenu()
 	{
 		$empcode = $this->session->userdata("empcode");
-		$ss_id = $_GET["ss_id"];
-		$res = $this->backoffice_model->swiftStatusMenu($ss_id, $empcode);
+		$sm_id = $_GET["sm_id"];
+		$res = $this->backoffice_model->swiftStatusMenu($sm_id, $empcode);
 		echo json_encode($res);
 	}
 	public function insertMenu()
@@ -90,7 +91,7 @@ class manageMenu extends CI_Controller
 		$resCheckMenu = $this->backoffice_model->checkMenu($menu);
 
 		if ($resCheckMenu == "true") { // มี แอดไม่ได้
-			echo "false";
+			echo "repeat";
 		} else {
 			$order = $this->backoffice_model->maxOrderMenu();
 			$addorder = $order + 1;
