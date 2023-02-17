@@ -68,7 +68,7 @@ body {
 
 .main-timeline .timeline-year {
     color: #65c7d0;
-    font-size: 50px;
+    font-size: 23px;
     font-weight: 600;
     display: inline-block;
     transform: translatey(-50%);
@@ -105,7 +105,7 @@ body {
 
 .main-timeline .description {
     font-size: 16px;
-    margin: 0;
+    margin: right;
 }
 
 .main-timeline .timeline:nth-child(even)::before {
