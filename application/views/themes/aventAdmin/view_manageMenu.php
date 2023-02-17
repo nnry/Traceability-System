@@ -35,7 +35,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py" style="width:100%; text-align:right">
                 <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
-                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle=modal data-target=#addmenu><i class="fas fa-fw fa-cog"></i> Add Menu</a>
+                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle=modal data-target=#addmenu><i class="fas fa-plus-square"></i> Add Menu</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -128,7 +128,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-plus fa-sm"></i> Add Menu</h5>
+                                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-plus-square"></i> Add Menu</h5>
                                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>

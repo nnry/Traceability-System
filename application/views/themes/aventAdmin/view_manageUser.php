@@ -26,13 +26,13 @@
     <div class="container-fluid">
         <h1 class="h3 mb-2 text-gray-800">Management User</h1>
         <!-- DataTales Example -->
-        <div class="card shadow mb-4"><br>
-            <div class="card-header py" style="width:100%; text-align:right">
+        <div class="card shadow mb-4">
+            <!-- <div class="card-header py" style="width:100%; text-align:right"> -->
                 <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle=modal data-target=#adduser ><i class="fas fa-user-plus fa-sm" ></i> Add User</a> -->
                 <!-- <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
 
-            </div>
+            <!-- </div> -->
             <div class="card-body ">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -126,7 +126,7 @@
                                 <div class="form-group">
                                     <label for="groupper">Group Permission :</label>
                                     <div>
-                                        <select id="editgroup" name="editgroup" class="form-select col-md width-100px" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e; width:500px;" aria-label="Default select example">
+                                        <select id="editgroup" name="editgroup" class="form-control col-md width-100px" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e; width:500px;" aria-label="Default select example">
                                             <?php
                                             foreach ($groupper as $groupPer) {
                                             ?>
@@ -191,7 +191,7 @@
                                 <div class="form-group">
                                     <label for="groupper">Group Permission :</label>
                                     <div>
-                                        <select class="form-select col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addgroup" placeholder="Enter your Group Permission">
+                                        <select class="form-control col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="addgroup" placeholder="Enter your Group Permission">
                                             <option>Please select group permission</option>
                                             <//?php
                                             foreach ($groupper as $groupPer) {
@@ -214,7 +214,7 @@
                                 <div class="form-group">
                                     <label>Plant :</label>
                                     <div>
-                                        <select class="form-select col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="addplant" aria-label="Default select example" placeholder="Enter your plant">
+                                        <select class="form-control col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" id="addplant" aria-label="Default select example" placeholder="Enter your plant">
                                             <option>Please select plant</option>
                                             <//?php
                                             foreach ($plant as $plant) {

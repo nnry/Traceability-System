@@ -1,11 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$config['base_url'] = 'http://localhost/tracea';
+// $config['base_url'] = 'http://localhost/tracea';
 
-//$config['base_url'] = 'http://192.168.161.102/tracea/';
-
-// $config['base_url'] = 'http://192.168.161.214/tracea/';
+$config['base_url'] = 'http://192.168.161.214/Traceability-System/';
 
 $config['index_page'] = '';
 

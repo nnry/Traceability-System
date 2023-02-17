@@ -60,9 +60,8 @@ class Traceability extends CI_Controller
 		$data["user"] = $data["sa_code"];
 		$data["id"] = $data["sa_id"];
 		// $data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
-		$setTitle = "Traceability | Homepage";
 		
-	
+		$setTitle = "Traceability | Traceability Flow";
 		$this->template->write('page_title', $setTitle . ' ');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);

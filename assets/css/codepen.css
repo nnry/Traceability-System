@@ -68,7 +68,7 @@ body {
 
 .main-timeline .timeline-year {
     color: #65c7d0;
-    font-size: 50px;
+    font-size: 23px;
     font-weight: 600;
     display: inline-block;
     transform: translatey(-50%);
@@ -89,10 +89,9 @@ body {
 
 .main-timeline .content {
     color: #909090;
-    width: 50%;
+    width: 100%;
     padding: 20px;
     display: inline-block;
-    float: right;
 }
 
 .main-timeline .title {

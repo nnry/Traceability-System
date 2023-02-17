@@ -220,7 +220,7 @@
                                 <div class="form-group">
                                     <label for="username">Menu :</label>
                                     <div>
-                                        <select class="form-select col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="regismenu" placeholder="Enter your Group Permission">
+                                        <select class="form-control col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="regismenu" placeholder="Enter your Group Permission">
                                         </select>
                                     </div>
                                 </div>
@@ -228,7 +228,7 @@
                                 <div class="form-group">
                                     <label for="username">Submenu :</label>
                                     <div>
-                                        <select class="form-select col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="regissubmenu" placeholder="Enter your Group Permission">
+                                        <select class="form-control col-md" style="border: 1px solid #d1d3e2; border-radius: 0.35rem; color:#6e707e;" aria-label="Default select example" id="regissubmenu" placeholder="Enter your Group Permission">
 
                                         </select>
                                     </div>
