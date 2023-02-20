@@ -93,6 +93,30 @@ class Backoffice_model extends CI_Model
             return "false"; //ซ้ำ
         }
     }
+    public function checkpath($path){
+        $sql = "EXEC [dbo].[GET_CHECK_METHOD] @MN_METHOD= '{$path}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        if (empty($row)) {
+            return "true"; //ไม่มี แอดได้
+        } else {
+            return "false"; //ซ้ำ
+        }
+    }
+    public function normalpath($id){
+        $sql = "EXEC [dbo].[GET_CHECK_METHOD_NORMAL] @SSM_ID= '{$id}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        $met = $row[0]["ss_method"];
+        return $met;
+    }
+    public function normalsub($id){
+        $sql = "EXEC [dbo].[GET_CHECK_SUB_NORMAL] @SSM_ID= '{$id}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        $met = $row[0]["ss_name"];
+        return $met;
+    }
     public function checkEmail($editemail)
     {
         $sql = "EXEC [dbo].[GET_CHECK_EMAIL] @EMP_EMAIL = '{$editemail}'";
@@ -180,6 +204,13 @@ class Backoffice_model extends CI_Model
     public function getEditMenu($sm_id)
     {
         $sql = "EXEC [dbo].[GET_EDIT_MANU] @EMP_ID ='{$sm_id}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        return $row;
+    }
+    public function getEditSubMenu($id)
+    {
+        $sql = "EXEC [dbo].[GET_EDIT_SUBMANU] @EMP_ID ='{$id}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         return $row;
@@ -295,7 +326,7 @@ class Backoffice_model extends CI_Model
         FROM
             sys_submenu INNER JOIN sys_menu on sys_submenu.sm_id = sys_menu.sm_id
         WHERE
-        ss_id NOT IN({$id})
+        ss_id NOT IN({$id}) AND sm_status ='1'
     GROUP BY
     sys_menu.sm_id,
     sys_menu.sm_name";
@@ -330,7 +361,7 @@ class Backoffice_model extends CI_Model
             FROM
             sys_submenu INNER JOIN sys_menu on sys_submenu.sm_id = sys_menu.sm_id
             WHERE
-            ss_id NOT IN({$id})";
+            ss_id NOT IN({$id}) AND sm_status = '1'";
         $resLoad = $this->db->query($sqlLoad);
         $rowLoad = $resLoad->result_array();
         return $rowLoad;
@@ -389,7 +420,12 @@ class Backoffice_model extends CI_Model
         //    var_dump($para);
         // exit;
     }
-
+    public function getsunmenu_bymenu($sm_id){
+        $sql = "EXEC [dbo].[GET_SUBMENU] @SUB_MENU  = '{$sm_id}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        return $row;
+    }
     //***********************update************update***********************update*********************update***********update
     public function convert($attr, $table, $condition)
     {
@@ -502,6 +538,34 @@ class Backoffice_model extends CI_Model
             return  $res;
         }
     }
+    public function swiftstatusSubmenu($id,$empcodeUser){
+
+        $sql = "EXEC [dbo].[GET_STATUS_SUBMENU] @EMP_ID ='{$id}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        $result = $row[0]["ss_status"];
+        // return $result;
+        if ($result == 1) {
+            $sql = "EXEC [dbo].[GET_STATUS_SUBMENU_OFF] @EMP_ID ='{$id}',@EMP_USER ='{$empcodeUser}'";
+            $res = $this->db->query($sql);
+            if ($res) {
+                return true; /// ปิด
+            } else {
+                return false;
+            }
+        } elseif ($result == 0) {
+            $sql = "EXEC [dbo].[GET_STATUS_SUBMENU_ON] @EMP_ID ='{$id}',@EMP_USER ='{$empcodeUser}'";
+            $res = $this->db->query($sql);
+            if ($res) {
+                return true; //เปิด
+            } else {
+                return false;
+            }
+        } else {
+            return  $res;
+        }
+
+    }
     public function saveEditNameGroup($id, $name, $empcode)
     {
         $sql = "EXEC [dbo].[GET_SAVE_EDIT_GROUP] @EMP_ID  ='{$id}',@EMP_NAME='{$name}',@EMP_USER='{$empcode}'";
@@ -578,6 +642,15 @@ class Backoffice_model extends CI_Model
             return false;
         }
     }
+    public function saveEditSub($empcodeUser, $idmenu, $submenu, $path){
+        $sql = "EXEC [dbo].[UP_DATE_SUBMENU] @SSM_ID = '{$idmenu}' ,@SSM_NAME ='{$submenu}' ,@SSM_METHOD ='{$path}' ,@EMP_USER ='{$empcodeUser}'";
+        $res = $this->db->query($sql);
+        if ($res) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
     // ***********insert***************************************insert***************************insert**************************insert********************** insert*******************************************
 
     public function insertUser($empcode, $firstname, $lastname, $groupCon, $email, $password, $plantCon, $empcodeUser)
@@ -600,16 +673,16 @@ class Backoffice_model extends CI_Model
             return "false";
         }
     }
-    public function insertSubMenu($consm_id, $submenu, $path, $icons, $empcodeUser, $addorder)
-    {
-        $sql = "EXEC [dbo].[INSERT_SUBMENU] @SSM_ID = '{$consm_id}',@MN_SUBMENU ='{$submenu}',@MN_PATH = '{$path}',@EMP_USER ='{$empcodeUser}',@MN_ICON='{$icons}',@MN_ORDER='$addorder'";
-        $res = $this->db->query($sql);
-        if ($res) {
-            return "true";
-        } else {
-            return "false";
-        }
-    }
+    // public function insertSubMenu($consm_id, $submenu, $path, $icons, $empcodeUser, $addorder)
+    // {
+    //     $sql = "EXEC [dbo].[INSERT_SUBMENU] @SSM_ID = '{$consm_id}',@MN_SUBMENU ='{$submenu}',@MN_PATH = '{$path}',@EMP_USER ='{$empcodeUser}',@MN_ICON='{$icons}',@MN_ORDER='$addorder'";
+    //     $res = $this->db->query($sql);
+    //     if ($res) {
+    //         return "true";
+    //     } else {
+    //         return "false";
+    //     }
+    // }
     public function insertMenu($menu,$icons,$empcodeUser,$addorder)
     {
         $sql = "EXEC [dbo].[INSERT_MENU_MM] @SM_NAME = '{$menu}',@EMP_USER ='{$empcodeUser}',@MN_ICON='{$icons}',@MN_ORDER='$addorder'";
@@ -658,13 +731,25 @@ class Backoffice_model extends CI_Model
         }
     }
 
+    public function innsertSubAddPath($submenu,$path,$idmenu,$empcodeUser,$checkmax){
+        $sql = "EXEC [dbo].[INSERT_SUBMENU_PATH] @SM_ID ='{$idmenu}',@MN_SUBMENU='{$submenu}', @MN_PATH='{$path}',@EMP_USER ='{$empcodeUser}',@MN_ORDER='{$checkmax}'";
+        $res = $this->db->query($sql);
+
+        if ($res) {
+            return "true";
+        } else {
+            return "false";
+        }
+
+    }
+
 
 
 
     ////////////////////////////////////////////////  MAX //////////////////////////////////////////////////////////
-    public function maxOrder($consm_id)
+    public function maxOrderSubmenu($consm_id)
     {
-        $sql = "EXEC [dbo].[MAX_ORDER_NO] @SM_ID = '{$consm_id}'";
+        $sql = "EXEC [dbo].[MAX_ORDER_NO_SUBMENU] @SM_ID = '{$consm_id}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         $ss = $row["0"]["re_max"];

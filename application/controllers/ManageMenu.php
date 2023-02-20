@@ -48,7 +48,7 @@ class manageMenu extends CI_Controller
 		$this->template->write('page_title', $setTitle . ' ');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/view_manageMenu.php',$data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/view_manageMenu.php', $data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/first_set/view_footer.php');
 
 		$this->template->render();
@@ -70,9 +70,11 @@ class manageMenu extends CI_Controller
 		$chkmenu = $this->backoffice_model->checkMenu($menu);
 		if ($chkmenu == "true") { // มี แอดไม่ได้
 			echo "repeat";
-		} else {
+		} else if ($chkmenu == "false") {
 			$res = $this->backoffice_model->saveEditTableMenu($menu, $idmenu, $empcodeUser);
 			echo $res;
+		} else {
+			echo "false";
 		}
 	}
 	public function statusMenu()
@@ -95,9 +97,109 @@ class manageMenu extends CI_Controller
 		} else {
 			$order = $this->backoffice_model->maxOrderMenu();
 			$addorder = $order + 1;
-			$res = $this->backoffice_model->insertMenu($menu,$icons,$empcodeUser,$addorder);
-			
+			$res = $this->backoffice_model->insertMenu($menu, $icons, $empcodeUser, $addorder);
+
 			echo $res;
+		}
+	}
+	public function getsubbyid()
+	{
+		$sm_id = $_GET["sm_id"];
+		$res = $this->backoffice_model->getsunmenu_bymenu($sm_id);
+		echo json_encode($res);
+	}
+	public function statusSubMenu()
+	{
+		$empcodeUser = $this->session->userdata("empcode");
+		$id = $_GET["ss_id"];
+		$res = $this->backoffice_model->swiftstatusSubmenu($id, $empcodeUser);
+		echo json_encode($res);
+	}
+	public function geteditsub()
+	{
+		$id = $_GET["ss_id"];
+		$res = $this->backoffice_model->getEditSubMenu($id);
+		echo json_encode($res);
+	}
+
+	public function saveEditSubMenu()
+	{
+		$empcodeUser = $this->session->userdata("empcode");
+		$idmenu = $_POST["idmenu"];
+		$submenu = $_POST["submenu"];
+		$path = $_POST["path"];
+
+		// echo "==>",$idmenu;
+		// echo "  ==>",$submenu;
+		// echo "  ==>",$submenu;
+
+
+
+		$chksubmenu = $this->backoffice_model->checkSubmenu($submenu);
+		$chkknmsub = $this->backoffice_model->normalsub($idmenu);
+
+		if ($chkknmsub == $submenu) {
+			// echo "Submenufalse";
+			$chkpath = $this->backoffice_model->checkpath($path);
+			$chknmpath = $this->backoffice_model->normalpath($idmenu);
+			// echo $chknmpath;
+			if ($chknmpath == $path) {
+				$res = $this->backoffice_model->saveEditSub($empcodeUser, $idmenu, $submenu, $path);
+				echo "true";
+			} else {
+				if ($chkpath == "true") {
+					$res = $this->backoffice_model->saveEditSub($empcodeUser, $idmenu, $submenu, $path);
+					echo $res;
+				} else {
+					echo "pathfalse";
+				}
+			}
+		} else {
+			if ($chksubmenu == "true") { // มี แอดไม่ได้
+				$chkpath = $this->backoffice_model->checkpath($path);
+				$chknmpath = $this->backoffice_model->normalpath($idmenu);
+				// echo $chknmpath;
+				if ($chknmpath == $path) {
+					$res = $this->backoffice_model->saveEditSub($empcodeUser, $idmenu, $submenu, $path);
+					echo "true";
+				} else {
+					if ($chkpath == "true") {
+						$res = $this->backoffice_model->saveEditSub($empcodeUser, $idmenu, $submenu, $path);
+						echo $res;
+					} else {
+						echo "pathfalse";
+					}
+				}
+			} else if ($chksubmenu == "false") {
+				echo "Submenufalse";
+			} else {
+				echo "false";
+			}
+		}
+	}
+
+	public function insertSubmenu()
+	{
+		$empcodeUser = $this->session->userdata("empcode");
+		$idmenu = $_POST["idmenu"];
+		$submenu = $_POST["subname"];
+		$path = $_POST["pathname"];
+
+		// echo $idmenu;
+
+		$checkmax = $this->backoffice_model->maxOrderSubmenu($idmenu);
+		$cc = $checkmax+1;
+		$chksubmenu = $this->backoffice_model->checkSubmenu($submenu);
+		if ($chksubmenu == "true") {
+			$chkpath = $this->backoffice_model->checkpath($path);
+			if ($chkpath == "true") {
+				$res = $this->backoffice_model->innsertSubAddPath($submenu, $path, $idmenu, $empcodeUser,$cc);
+				echo $res;
+			} else {
+				echo "pathfalse";
+			}
+		} else {
+			echo "Submenufalse";
 		}
 	}
 }

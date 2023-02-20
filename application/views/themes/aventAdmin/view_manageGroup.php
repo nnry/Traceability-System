@@ -59,7 +59,7 @@
                             foreach ($groupper as $value1) {
                                 $j++;
                                 echo "<tr>";
-                                echo "<td>" . $value1["spg_id"] . "</td>";
+                                echo "<td>" . $j. "</td>";
                                 echo "<td>" . $value1["spg_name"] . "</td>";
                                 if ($value1["spg_status"] == "1") {
                                     echo "<td>
@@ -181,7 +181,7 @@
                                 if ($detail["spd_status"] == "1") {
                                     echo "<td>
                                             <div class=\"custom-switch text-center\" >
-                                                <input type=\"checkbox\" class=\"custom-control-input\" name=statusdetil$j  id=statusdetail$j checked onclick='statusdetail(" . $detail["spd_id"] . ")'>
+                                                <input type=\"checkbox\" class=\"custom-control-input\" name=statusdetail$j  id=statusdetail$j checked onclick='statusdetail(" . $detail["spd_id"] . ")'>
                                                 <label class=\"custom-control-label\" for=statusdetail$j ></label>
                                             </div>
                                     </td>";
@@ -246,25 +246,26 @@
         </div>
     </div>
     </div>
-</body>
-<!-- /.container-fluid -->
+
+    <!-- /.container-fluid -->
 
 
 
-<!-- Footer -->
-<!-- <footer class="sticky-footer bg-white">
+    <!-- Footer -->
+    <!-- <footer class="sticky-footer bg-white">
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
                 <span>Copyright &copy; Your Website 2020</span>
             </div>
         </div>
     </footer> -->
-<!-- End of Footer -->
+    <!-- End of Footer -->
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+</body>
 
 </html>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -627,14 +628,14 @@
                             }).then(function() {
                                 window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
                             })
-                        } else if(rs === "repeat"){
+                        } else if (rs === "repeat") {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'You failed to register',
-                                text : 'ชื่อซ้ำ! โปรดตรวจสอบอีกครั้ง'
+                                text: 'ชื่อซ้ำ! โปรดตรวจสอบอีกครั้ง'
                             })
 
-                        }else {
+                        } else {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'You failed to register',
@@ -646,15 +647,15 @@
                     // $("#alertinput").html("<font color='red'>โปรดตรวจสอบชื่ออีกครั้ง</font>");
                     // alert("อีเมล์ไม่ถูกต้อง")
                     Swal.fire({
-                                icon: 'error',
-                                title: 'You failed to register',
-                                text:'ไม่สามารถใช้ตัวอักษรพิเศษได้'
-                            })
+                        icon: 'error',
+                        title: 'You failed to register',
+                        text: 'ไม่สามารถใช้ตัวอักษรพิเศษได้'
+                    })
                 }
 
 
+            }
         }
-    }
 
 
 
