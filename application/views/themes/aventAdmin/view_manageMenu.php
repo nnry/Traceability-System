@@ -141,7 +141,7 @@
                                     <label for="empcode">Menu :</label>
                                     <input class="form-control" type="text" id="addmmenu" required="" placeholder="Enter menu name">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" hidden>
                                     <label for="lastname">Icon :</label>
                                     <input class="form-control" type="text" required="" id="addicons" placeholder="Enter path name">
                                 </div>
@@ -545,13 +545,13 @@
     function addmenu() {
 
         var addmmenu = $("#addmmenu").val();
-        var addicons = $("#addicons").val();
+        // var addicons = $("#addicons").val();
 
         var chemenu = document.getElementById("addmenu");
-        var cheicons = document.getElementById("addicons");
+        // var cheicons = document.getElementById("addicons");
 
 
-        if (chemenu.value == "" || cheicons.value == "") {
+        if (chemenu.value == "" ) {
             Swal.fire({
                 icon: 'warning',
                 title: 'Are you sure?',
@@ -568,7 +568,7 @@
                         url: "<?php echo base_url(); ?>manageMenu/insertMenu",
                         data: {
                             addmmenu: addmmenu,
-                            addicons: addicons,
+                            // addicons: addicons,
                         }
                     })
                     path.done(function(rs) {

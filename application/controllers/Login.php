@@ -61,7 +61,7 @@ class Login extends CI_Controller
 		// session_start();
 		$code = $_POST["empcode"];
 		$pass = md5($_POST["emppass"]);
-		$rscheckLogin = $this->backoffice_model->checkLogin($code,$pass);
+		$rscheckLogin = $this->backoffice_model->checkLogin($code, $pass);
 		if ($rscheckLogin == "true") {
 			echo $rscheckLogin;
 
@@ -119,86 +119,129 @@ class Login extends CI_Controller
 
 			if ($usercode) {
 				$excheck = $this->backoffice_model->checkexplainer($usercode);
-				if ($excheck == "true") {
+				if ($excheck == "false") {
+					$rss = $this->backoffice_model->checkpassword($pass);
+					echo $rss;
+					if ($pass == $rss) {
+						echo "true";
+						$data = $this->backoffice_model->getname($usercode);
+						if ($data == true) {
+							$session_data = array(
+								'id' => $data['sa_id'],
+								'empcode' => $data['sa_code'],
+								'fname' => $data['sa_fname'],
+								'lname' => $data['sa_lname'],
+								'email' => $data['sa_email'],
+								'phase' => $data['mpa_name'],
+								'login' => "OK"
+							);
+							$this->session->set_userdata($session_data);
 
-					$data = $this->backoffice_model->getname($usercode);
-					if ($data == true) {
-						$session_data = array(
-							'id' => $data['sa_id'],
-							'empcode' => $data['sa_code'],
-							'fname' => $data['sa_fname'],
-							'lname' => $data['sa_lname'],
-							'email' => $data['sa_email'],
-							'phase' => $data['mpa_name'],
-							'login' => "OK"
-						);
-						$this->session->set_userdata($session_data);
+							$id = $data['sa_id'];
 
-						$id = $data['sa_id'];
+							$cheklog = $this->backoffice_model->checkLog_login($id);
 
-						$cheklog = $this->backoffice_model->checkLog_login($id);
-
-						if ($cheklog == false) {
-							$loglogin = $this->backoffice_model->insertlog($id);
-						} else {
-							$null_log = $cheklog["la_logout"];
-
-							if ($null_log == null) {
-								$chmax = $this->backoffice_model->maxlogid($id);
-								$loglogin = $this->backoffice_model->insertlogaddupdate($id, $chmax);
-								// echo $loglogin;
-
-							} else {
+							if ($cheklog == false) {
 								$loglogin = $this->backoffice_model->insertlog($id);
-								// echo $loglogin;
+							} else {
+								$null_log = $cheklog["la_logout"];
+
+								if ($null_log == null) {
+									$chmax = $this->backoffice_model->maxlogid($id);
+									$loglogin = $this->backoffice_model->insertlogaddupdate($id, $chmax);
+									// echo $loglogin;
+
+								} else {
+									$loglogin = $this->backoffice_model->insertlog($id);
+									// echo $loglogin;
+								}
 							}
 						}
-					}
-
-					if ($pass == $passex) {
-						echo "true";
 					} else {
-						$rsUpdate = $this->backoffice_model->updatepass($passex, $usercode);
-						echo $rsUpdate;
+						if ($pass == $passex) {
+							$rsUpdate = $this->backoffice_model->updatepass($passex, $usercode);
+							echo $rsUpdate;
+							$data = $this->backoffice_model->getname($usercode);
+							if ($data == true) {
+								$session_data = array(
+									'id' => $data['sa_id'],
+									'empcode' => $data['sa_code'],
+									'fname' => $data['sa_fname'],
+									'lname' => $data['sa_lname'],
+									'email' => $data['sa_email'],
+									'phase' => $data['mpa_name'],
+									'login' => "OK"
+								);
+								$this->session->set_userdata($session_data);
+
+								$id = $data['sa_id'];
+
+								$cheklog = $this->backoffice_model->checkLog_login($id);
+
+								if ($cheklog == false) {
+									$loglogin = $this->backoffice_model->insertlog($id);
+								} else {
+									$null_log = $cheklog["la_logout"];
+
+									if ($null_log == null) {
+										$chmax = $this->backoffice_model->maxlogid($id);
+										$loglogin = $this->backoffice_model->insertlogaddupdate($id, $chmax);
+										// echo $loglogin;
+
+									} else {
+										$loglogin = $this->backoffice_model->insertlog($id);
+										// echo $loglogin;
+									}
+								}
+							}
+						} else {
+							// echo $pass ,"==", $passex;
+							echo "false";
+						}
 					}
 				} else {
-					$rs = $this->backoffice_model->addexplainer($usercode, $fname, $lname, $email, $passex, $conphase, $group, $user);
-					echo $rs;
-					$data = $this->backoffice_model->getname($usercode);
-					if ($data == true) {
-						$session_data = array(
-							'id' => $data['sa_id'],
-							'empcode' => $data['sa_code'],
-							'fname' => $data['sa_fname'],
-							'lname' => $data['sa_lname'],
-							'email' => $data['sa_email'],
-							'phase' => $data['mpa_name'],
-							'login' => "OK"
-						);
-						$this->session->set_userdata($session_data);
-						$id = $data['sa_id'];
+					$checkuser = $this->backoffice_model->checkUserAdd($usercode);
+					if ($checkuser == "true") {
+						$rs = $this->backoffice_model->addexplainer($usercode, $fname, $lname, $email, $passex, $conphase, $group, $user);
+						echo $rs;
+						$data = $this->backoffice_model->getname($usercode);
+						if ($data == true) {
+							$session_data = array(
+								'id' => $data['sa_id'],
+								'empcode' => $data['sa_code'],
+								'fname' => $data['sa_fname'],
+								'lname' => $data['sa_lname'],
+								'email' => $data['sa_email'],
+								'phase' => $data['mpa_name'],
+								'login' => "OK"
+							);
+							$this->session->set_userdata($session_data);
+							$id = $data['sa_id'];
 
-						$cheklog = $this->backoffice_model->checkLog_login($id);
+							$cheklog = $this->backoffice_model->checkLog_login($id);
 
-						if ($cheklog == false) {
-							$loglogin = $this->backoffice_model->insertlog($id);
-						} else {
-							$null_log = $cheklog["la_logout"];
-
-							if ($null_log == null) {
-								$chmax = $this->backoffice_model->maxlogid($id);
-								$loglogin = $this->backoffice_model->insertlogaddupdate($id, $chmax);
-								// echo $loglogin;
-
-							} else {
+							if ($cheklog == false) {
 								$loglogin = $this->backoffice_model->insertlog($id);
-								// echo $loglogin;
+							} else {
+								$null_log = $cheklog["la_logout"];
+
+								if ($null_log == null) {
+									$chmax = $this->backoffice_model->maxlogid($id);
+									$loglogin = $this->backoffice_model->insertlogaddupdate($id, $chmax);
+									// echo $loglogin;
+
+								} else {
+									$loglogin = $this->backoffice_model->insertlog($id);
+									// echo $loglogin;
+								}
 							}
 						}
+					} else {
+						echo "duplicate";
 					}
 				}
 			} else {
-				echo "false";
+				echo "2 == > false";
 			}
 		}
 	}
@@ -226,6 +269,6 @@ class Login extends CI_Controller
 	// 	$data = $this->backoffice_model->getname($code);
 	// 	echo json_encode($data);
 	// }
-	
+
 
 }

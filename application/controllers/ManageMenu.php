@@ -88,7 +88,7 @@ class manageMenu extends CI_Controller
 	{
 		$empcodeUser = $this->session->userdata("empcode");
 		$menu = $_POST["addmmenu"];
-		$icons = $_POST["addicons"];
+		$icons = "fas fa-globe";
 
 		$resCheckMenu = $this->backoffice_model->checkMenu($menu);
 

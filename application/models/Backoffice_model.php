@@ -60,6 +60,23 @@ class Backoffice_model extends CI_Model
             return "false";
         }
     }
+    public function checkpassword($pass)
+    {
+        $sql = "EXEC [dbo].[GET_CHCEK_PASSWORD] @EMP_PASS ='{$pass}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        // if($row) {
+        //     return "true";
+        // } else {
+        //     return "false";
+        // }
+        if ($res->num_rows() != 0) {
+            $result = $res->result_array();
+            return $result[0]["sa_password"];
+        } else {
+            return false;
+        }
+    }
     public function checkPerAdd($name)
     {
         $sql = "EXEC [dbo].[CHECK_ADD_PER] @PER_NAME= '{$name}'";
@@ -144,13 +161,13 @@ class Backoffice_model extends CI_Model
 
     public function checkexplainer($usercode)
     {
-        $sql = "EXEC [dbo].[GET_CHCEK_EXPLANER] @EMP_CODE  = '{$usercode}'";
+        $sql = "EXEC [dbo].[GET_CHCEK_EXPLANER] @EMP_CODE = '{$usercode}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
-        if ($row) {
-            return "true";
+        if (empty($row)) {
+            return "true"; //ไม่มี แอดได้
         } else {
-            return "false";
+            return "false"; //ซ้ำ
         }
     }
     public function addexplainer($code, $fname, $lname, $email, $pass, $conphase, $group, $user)

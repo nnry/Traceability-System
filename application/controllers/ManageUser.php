@@ -48,7 +48,7 @@ class manageUser extends CI_Controller
 		$data["plant"] = $this->backoffice_model->getTablePlant();
 
 
-		// $menu["menu"] = $this->backoffice_model->showMenu2($data["user"]);
+		$menu["menu"] = $this->backoffice_model->showMenu2($data["user"]);
 
 
 

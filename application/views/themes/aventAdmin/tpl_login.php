@@ -142,7 +142,7 @@
         var code = document.getElementById("empcode");
         var pass = document.getElementById("emppass");
 
-        if (code.value == "" || pass.value == "") {
+        if (code.value == "" && pass.value == "") {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
@@ -176,7 +176,7 @@
             })
             path.done(function(rs) {
                 // alert(rs)
-                console.log(rs);
+                // console.log(rs);
 
                 if (rs === "true") {
                     Swal.fire({
@@ -185,6 +185,12 @@
                         text: 'You signed up successfully',
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/Homepage";
+                    })
+                } else if(rs === "duplicate"){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You failed to signed up',
+                        text: 'โปรดตรวจสอบสถานะการใช้งาน !!',
                     })
                 } else {
                     Swal.fire({

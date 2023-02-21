@@ -581,7 +581,7 @@
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Data not found',
+                        title: 'ชื่อซ้ำ! โปรดตรวจสอบชื่ออีกครั้ง',
                         text: 'You failed to edit  name group permission',
                     })
                 }
