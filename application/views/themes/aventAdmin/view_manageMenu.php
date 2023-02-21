@@ -305,7 +305,7 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
     function isValidInput(input) {
-        var pattern = new RegExp(/^([a-z0-9])+$/i);
+        var pattern = new RegExp(/^([a-z0-9-" "])+$/i);
         return pattern.test(input);
     }
 
