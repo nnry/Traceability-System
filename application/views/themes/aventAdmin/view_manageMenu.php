@@ -225,8 +225,8 @@
                             </div>
 
                             <form class="card-body" action="#">
-                                <div class="form-group">
-                                    <label for="empcode">ID :</label>
+                                <div class="form-group" hidden>
+                                    <label for="empcode">ID : </label>
                                     <input class="form-control" type="text" id="idsubmenu" required="">
                                 </div>
                                 <div class="form-group">
@@ -261,7 +261,7 @@
                             </div>
 
                             <form class="card-body" action="#">
-                                <div class="form-group">
+                                <div class="form-group" hidden>
                                     <label for="empcode">ID :</label>
                                     <input class="form-control" type="text" id="idmenuaddsub" required="" placeholder="Enter menu name">
                                 </div>
@@ -651,6 +651,7 @@
             // console.log(rs);
             $("#idsubmenu").val(rs[0]["ss_id"]);
             $("#editpathmenuname").val(rs[0]["ss_method"]);
+            $("#editsubmenuname").val(rs[0]["ss_name"]);
         })
 
     }

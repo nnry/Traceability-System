@@ -107,7 +107,6 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="<?php echo base_url() . $js_url; ?>js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
-
     // $(document).ready(function() {
     //     window.history.pushState(null, "", window.location.href);
     //     // window.history.forward(null, "", window.location.href);
@@ -124,7 +123,7 @@
     //         null
     //         // window.location.href = "<?php echo base_url() ?>Login/Account"
     //     };
-    
+
 
 
 
@@ -143,18 +142,26 @@
         var code = document.getElementById("empcode");
         var pass = document.getElementById("emppass");
 
-        if (code.value == "") {
+        if (code.value == "" || pass.value == "") {
             Swal.fire({
-                icon: 'warning',
-                title: 'Are you sure?',
-                text: 'Please check the user again.',
+                icon: 'error',
+                title: 'Error',
+                text: 'Please check the uaername and password again.',
                 confirmButtonColor: '#F7B267',
+                
             })
         } else if (pass.value == "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Are you sure?',
                 text: 'Please check the password again.',
+                confirmButtonColor: '#F7B267',
+            })
+        } else if (code.value == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Are you sure?',
+                text: 'Please check the username again.',
                 confirmButtonColor: '#F7B267',
             })
         } else {

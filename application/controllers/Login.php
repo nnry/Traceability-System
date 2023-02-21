@@ -61,7 +61,7 @@ class Login extends CI_Controller
 		// session_start();
 		$code = $_POST["empcode"];
 		$pass = md5($_POST["emppass"]);
-		$rscheckLogin = $this->backoffice_model->checkLogin($code, $pass);
+		$rscheckLogin = $this->backoffice_model->checkLogin($code,$pass);
 		if ($rscheckLogin == "true") {
 			echo $rscheckLogin;
 
@@ -220,12 +220,12 @@ class Login extends CI_Controller
 			echo $res;
 		}
 	}
-	public function tt()
-	{
-		$code ='admin01';
-		$data = $this->backoffice_model->getname($code);
-		echo json_encode($data);
-	}
+	// public function tt()
+	// {
+	// 	$code ='admin01';
+	// 	$data = $this->backoffice_model->getname($code);
+	// 	echo json_encode($data);
+	// }
 	
 
 }

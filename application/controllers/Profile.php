@@ -83,16 +83,16 @@ class Profile extends CI_Controller
 		$this->template->render();
 	}
 
-	public function saveProfile()
-	{
+	// public function saveProfile()
+	// {
 
-		$empcodeUser = $this->session->userdata("empcode");
-		$fname = $_POST["fname"];
-		$lname = $_POST["lname"];
-		$email = $_POST["email"];
-		$plant = $_POST["plant"];
+	// 	$empcodeUser = $this->session->userdata("empcode");
+	// 	$fname = $_POST["fname"];
+	// 	$lname = $_POST["lname"];
+	// 	$email = $_POST["email"];
+	// 	$plant = $_POST["plant"];
 
-		$rs = $this->backoffice_model->saveEditProfile($fname, $lname, $email, $plant, $empcodeUser);
-		echo $rs;
-	}
+	// 	$rs = $this->backoffice_model->saveEditProfile($fname, $lname, $email, $plant, $empcodeUser);
+	// 	echo $rs;
+	// }
 }

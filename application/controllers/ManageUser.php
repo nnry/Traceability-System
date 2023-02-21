@@ -48,7 +48,7 @@ class manageUser extends CI_Controller
 		$data["plant"] = $this->backoffice_model->getTablePlant();
 
 
-		$menu["menu"] = $this->backoffice_model->showMenu2($data["user"]);
+		// $menu["menu"] = $this->backoffice_model->showMenu2($data["user"]);
 
 
 
@@ -66,7 +66,7 @@ class manageUser extends CI_Controller
 	{
 		$empcode = $this->session->userdata("empcode");
 		$sa_id = $_GET["sa_id"];
-		$res = $this->backoffice_model->editStatus($sa_id,$empcode);
+		$res = $this->backoffice_model->editStatus($sa_id, $empcode);
 		echo json_encode($res);
 	}
 	public function editManageUser()

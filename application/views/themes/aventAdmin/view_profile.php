@@ -91,10 +91,10 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-lg text-right">
+                <!-- <div class="col-lg text-right">
                     <button type="submit" id="saveEditPro" class="btn btn-primary">Save</button>
                     <button type="submit" id="cancelEditPro" class="btn btn-secondary">Cancel</button>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
