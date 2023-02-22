@@ -202,7 +202,7 @@ class Login extends CI_Controller
 				} else {
 					$checkuser = $this->backoffice_model->checkUserAdd($usercode);
 					if ($checkuser == "true") {
-						$rs = $this->backoffice_model->addexplainer($usercode, $fname, $lname, $email, $passex, $conphase, $group, $user);
+						$rs = $this->backoffice_model->addexplainer($usercode, $fname, $lname, $email, $passex, $conphase, $group, $usercode);
 						echo $rs;
 						$data = $this->backoffice_model->getname($usercode);
 						if ($data == true) {
