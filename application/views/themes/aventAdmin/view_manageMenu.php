@@ -310,7 +310,7 @@
     }
 
     function isValidpath(input) {
-        var pattern = new RegExp(/^([a-z0-9-/])+$/i);
+        var pattern = new RegExp(/^([a-z0-9-/-_-])+$/i);
         return pattern.test(input);
     }
     $("#btnSaveEditMenu").click(function() {

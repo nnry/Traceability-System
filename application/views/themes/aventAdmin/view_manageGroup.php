@@ -386,8 +386,8 @@
         if (chremenu.value == "" || chresubmenu.value == "") {
             Swal.fire({
                 icon: 'warning',
-                title: 'Are you sure?',
-                text: 'You failed to add user',
+                title: 'โปรดตรวจสอบข้อมูลอีกครั้ง',
+                text: 'Are you sure?',
                 confirmButtonColor: '#F7B267',
             })
         } else {
@@ -478,7 +478,7 @@
                     } else {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Data not found',
+                            title: 'ไม่สามารถ แก้ไข สถานะได้',
                             text: 'You failed to edit status',
                         })
                     }
@@ -519,8 +519,8 @@
                     } else {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Data not found',
-                            text: 'You failed to edit employee',
+                            title: 'ไม่สามารถ แก้ไข สถานะได้',
+                            text: 'You failed to edit status',
                         })
                     }
                 })
@@ -555,8 +555,8 @@
         if (editname.value == "") {
             Swal.fire({
                 icon: 'warning',
-                title: 'Are you sure?',
-                text: 'You failed to edit name group permission',
+                title: 'โปรดตรวจสอบข้อมูลอีกครั้ง',
+                text: 'Are you sure?',
                 confirmButtonColor: '#F7B267',
             })
         } else {
@@ -599,8 +599,8 @@
         if (addname.value == "") {
             Swal.fire({
                 icon: 'warning',
-                title: 'Are you sure?',
-                text: 'You failed to edit name group permission',
+                title: 'โปรดตรวจสอบข้อมูลอีกครั้ง',
+                text: 'Are you sure?',
                 confirmButtonColor: '#F7B267',
             })
         } else {
