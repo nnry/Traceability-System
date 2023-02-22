@@ -65,7 +65,7 @@ class Trace_Qgate extends CI_Controller
 		$this->template->write('page_title', $setTitle . ' ');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/set_traceability/view_flowOne.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/set_traceability/view_flowqgate.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/first_set/view_footer.php');
 		$this->template->render();
 	}
