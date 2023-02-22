@@ -68,7 +68,7 @@ class Login extends CI_Controller
 			$data = $this->backoffice_model->getname($code);
 
 			if ($data == true) {
-				$session_data = array(
+				$session_data1 = array(
 					'id' => $data['sa_id'],
 					'empcode' => $data['sa_code'],
 					'fname' => $data['sa_fname'],
@@ -77,7 +77,7 @@ class Login extends CI_Controller
 					'phase' => $data['mpa_name'],
 					'login' => "OK"
 				);
-				$this->session->set_userdata($session_data);
+				$this->session->set_userdata($session_data1);
 				$id = $data['sa_id'];
 
 				$cheklog = $this->backoffice_model->checkLog_login($id);
@@ -126,7 +126,7 @@ class Login extends CI_Controller
 						echo "true";
 						$data = $this->backoffice_model->getname($usercode);
 						if ($data == true) {
-							$session_data = array(
+							$session_data1 = array(
 								'id' => $data['sa_id'],
 								'empcode' => $data['sa_code'],
 								'fname' => $data['sa_fname'],
@@ -135,7 +135,7 @@ class Login extends CI_Controller
 								'phase' => $data['mpa_name'],
 								'login' => "OK"
 							);
-							$this->session->set_userdata($session_data);
+							$this->session->set_userdata($session_data1);
 
 							$id = $data['sa_id'];
 
@@ -163,7 +163,7 @@ class Login extends CI_Controller
 							echo $rsUpdate;
 							$data = $this->backoffice_model->getname($usercode);
 							if ($data == true) {
-								$session_data = array(
+								$session_data1 = array(
 									'id' => $data['sa_id'],
 									'empcode' => $data['sa_code'],
 									'fname' => $data['sa_fname'],
@@ -172,7 +172,7 @@ class Login extends CI_Controller
 									'phase' => $data['mpa_name'],
 									'login' => "OK"
 								);
-								$this->session->set_userdata($session_data);
+								$this->session->set_userdata($session_data1);
 
 								$id = $data['sa_id'];
 
@@ -206,7 +206,7 @@ class Login extends CI_Controller
 						echo $rs;
 						$data = $this->backoffice_model->getname($usercode);
 						if ($data == true) {
-							$session_data = array(
+							$session_data1 = array(
 								'id' => $data['sa_id'],
 								'empcode' => $data['sa_code'],
 								'fname' => $data['sa_fname'],
@@ -215,7 +215,7 @@ class Login extends CI_Controller
 								'phase' => $data['mpa_name'],
 								'login' => "OK"
 							);
-							$this->session->set_userdata($session_data);
+							$this->session->set_userdata($session_data1);
 							$id = $data['sa_id'];
 
 							$cheklog = $this->backoffice_model->checkLog_login($id);

@@ -11,9 +11,7 @@
 
   <!-- Custom fonts for this template -->
   <link href="<?php echo base_url() ?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link
-    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template -->
   <link href="<?php echo base_url() ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
@@ -113,9 +111,9 @@
   <!-- Begin Page Content -->
   <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">Traceability Flow 1</h1>
+      <h1 class="h3 mb-0 text-gray-800">Q - Gate</h1>
 
-      <form class="d-none d-sm-inline-block form-inline col-md-4 ml-auto mr ml-md my-2 my-md-0 mw-100 navbar-search"
+      <!-- <form class="d-none d-sm-inline-block form-inline col-md-4 ml-auto mr ml-md my-2 my-md-0 mw-100 navbar-search"
         style="width:30%; text-align:right">
         <div class="input-group">
           <input type="text" class="form-control bg-light border-2" placeholder="Search for..." aria-label="Search"
@@ -126,9 +124,102 @@
             </button>
           </div>
         </div>
-      </form>
-      <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-          class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+      </form> -->
+      <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50" onclick="createPDF()"></i> Generate Report</a>
+    </div>
+    <!-- Search Data -->
+    <div class="card shadow mb-4"><br>
+      <div class="card-body ">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="col-12 grid-margin stretch-card">
+                <div class="card corona-gradient-card">
+                  <div class="card-body py-0 px-0 px-sm-3">
+                    <div class="row align-items-center">
+                      <div class="col-4 col-sm-3 col-xl-2">
+                        <img src="<?php echo base_url() ?>assets/images/dashboard/Group126@2x.png" class="gradient-corona-img img-fluid" alt="">
+                      </div>
+
+                      <div class="row">
+                        <div class="card-body col-md-12 row mb-3">
+                          <label class="col-sm-6 col-form-label">Plant :</label>
+                          <div class="col-md-12">
+                            <div class="col-md-12">
+                              <select class="form-control" aria-label="Default select example" id ="selectplant" name = "selectplant">
+                                <option selected>Select...</option>
+                                <option value="1">...</option>
+                                <option value="2">...</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="card-body col-md-12 row mb-3">
+                          <label class="col-sm-6 col-form-label">Zone :</label>
+                          <div class="col-md-12">
+                            <div class="col-md-12">
+                              <select class="form-control" aria-label="Default select example" id ="selectzone" name ="selectzone">
+                                <option selected>Select...</option>
+                                <option value="1">...</option>
+                                <option value="2">...</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="card-body col-md-12 row mb-3">
+                          <label class="col-sm-6 col-form-label">Station :</label>
+                          <div class="col-md-12">
+                            <div class="col-md-12">
+                              <select class="form-control" aria-label="Default select example" id ="selectstation" name ="selectstation">
+                                <option selected>Select...</option>
+                                <option value="1">...</option>
+                                <option value="2">...</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="card-body col-md-12 row mb-3">
+                          <label class="col-sm-6 col-form-label">Part no. :</label>
+                          <div class="col-md-12">
+                            <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="oldpass">
+                          </div>
+                        </div>
+                        
+                        <div class="card-body col-md-12 row mb-3">
+                          <label class="col-sm-6 col-form-label">Delivery Date :</label>
+                          <div class="col-md-12">
+                            <input type="date" class="form-control ng-pristine ng-valid ng-empty ng-touched" ng-change="checkre()" id="compass">
+                          </div>
+                        </div>
+
+                        <div class="card-body col-md-12 row mb-3">
+                          <label class="col-sm-8 col-form-label">Scan Q-Gate TAG :</label>
+                          <div class="col-md-12">
+                            <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="newpass">
+                          </div>
+                        </div>
+
+
+                      </div>
+                      <div class="col-3 col-sm-2 col-xl-2 pl-0 text-center">
+                        <span>
+                          <button type="submit" id="strt" class="btn btn-outline-light btn-rounded get-started-btn col-md-5">Start</button>
+                          <button type="submit" id="end" class="btn btn-outline-light btn-rounded get-started-btn col-md-5">End</button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Flow -->
@@ -139,8 +230,7 @@
             <div class="col">
               <div class="main-timeline">
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">COMING SOON</span>
                     <div class="timeline-icon">
                       <i class="far fa-clock" aria-hidden="true"></i>
@@ -166,8 +256,7 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">MACHINE ZONE 1</span>
                     <div class="timeline-icon">
                       <i class="fas fa-fw fa-cog" aria-hidden="true"></i>
@@ -183,9 +272,7 @@
                               <div class="time_line-descr">SCAN DATE : <label id="machine1_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img
-                              src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -193,8 +280,7 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">MACHINE ZONE 2</span>
                     <div class="timeline-icon">
                       <i class="fas fa-fw fa-cogs" aria-hidden="true"></i>
@@ -210,9 +296,7 @@
                               <div class="time_line-descr">SCAN DATE : <label id="machine2_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img
-                              src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -220,8 +304,7 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">MACHINE ZONE 3</span>
                     <div class="timeline-icon">
                       <i class="fas fa-screwdriver" aria-hidden="true"></i>
@@ -237,9 +320,7 @@
                               <div class="time_line-descr">SCAN DATE : <label id="machine3_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img
-                              src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -247,8 +328,7 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">MACHINE ZONE 4</span>
                     <div class="timeline-icon">
                       <i class="fas fa-wrench" aria-hidden="true"></i>
@@ -264,9 +344,7 @@
                               <div class="time_line-descr">SCAN DATE : <label id="machine4_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img
-                              src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -274,8 +352,7 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">WASHING</span>
                     <div class="timeline-icon">
                       <i class="fas fa-clipboard-list" aria-hidden="true"></i>
@@ -290,9 +367,7 @@
                               <div class="time_line-descr">PART NO : <label id="washing_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="washing_scan_date">xxxxx</label></div>
                             </div>
-                            <img
-                              src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -300,8 +375,7 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">Q-GATE</span>
                     <div class="timeline-icon">
                       <i class="fas fa-clipboard-check" aria-hidden="true"></i>
@@ -316,9 +390,7 @@
                               <div class="time_line-descr">PART NO : <label id="qgate_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="qgate_scan_date">xxxxx</label></div>
                             </div>
-                            <img
-                              src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -326,8 +398,7 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">TRANSFER</span>
                     <div class="timeline-icon">
                       <i class="fa fa-boxes" aria-hidden="true"></i>
@@ -343,9 +414,7 @@
                               <div class="time_line-descr">SCAN DATE : <label id="transfer_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img
-                              src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -353,8 +422,7 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">PICKING</span>
                     <div class="timeline-icon">
                       <i class="fas fa-dolly-flatbed" aria-hidden="true"></i>
@@ -369,9 +437,7 @@
                               <div class="time_line-descr">PART NO : <label id="picking_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="picking_scan_date">xxxxx</label></div>
                             </div>
-                            <img
-                              src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -379,8 +445,7 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">SHIPPING</span>
                     <div class="timeline-icon">
                       <i class="fas fa-shipping-fast" aria-hidden="true"></i>
@@ -396,9 +461,7 @@
                               <div class="time_line-descr">SCAN DATE : <label id="shipping_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img
-                              src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -413,3 +476,22 @@
     </div>
   </div>
 </body>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+  // function createPDF($html, $filename='', $download=TRUE, $paper='A4', $orientation='portrait'){
+  //       $dompdf = new Dompdf\DOMPDF();
+  //       $dompdf->load_html($html);
+  //       $dompdf->set_paper($paper, $orientation);
+  //       $dompdf->render();
+  //       if($download)
+  //           $dompdf->stream($filename.'.pdf', array('Attachment' => 1));
+  //       else
+  //           $dompdf->stream($filename.'.pdf', array('Attachment' => 0));
+  //   }
+
+
+</script>

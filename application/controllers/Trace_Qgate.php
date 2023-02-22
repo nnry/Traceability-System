@@ -28,7 +28,7 @@ class Trace_Qgate extends CI_Controller
 		// ini_set('display_errors', 1);
 		// error_reporting(E_ALL);
 		// $this->backoffice_model->CheckSession();
-		
+
 	}
 
 	public function index()
@@ -39,7 +39,7 @@ class Trace_Qgate extends CI_Controller
 	}
 	public function qgate()
 	{
-	
+
 		// $ch = curl_init("http://192.168.161.102/api_system/getAccountEx?username=$code");
 		// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		// $output = curl_exec($ch);
@@ -59,16 +59,32 @@ class Trace_Qgate extends CI_Controller
 		$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
 		$data["user"] = $data["sa_code"];
 		$data["id"] = $data["sa_id"];
+
+		// $data["plantqgate"]=$this->b;
+
 		// $data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
-		
+
 		$setTitle = "Traceability | Traceability Flow";
 		$this->template->write('page_title', $setTitle . ' ');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/set_traceability/view_flowqgate.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/set_traceability/view_flowqgate.php',$data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/first_set/view_footer.php');
 		$this->template->render();
 	}
 
 
+	// function mypdf()
+	// {
+
+
+	// 	$this->load->library('pdf');
+
+
+	// 	$this->pdf->load_view('mypdf');
+	// 	$this->pdf->render();
+
+
+	// 	$this->pdf->stream("welcome.pdf");
+	// }
 }
