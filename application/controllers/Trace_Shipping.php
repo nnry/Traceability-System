@@ -1,7 +1,7 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Traceability extends CI_Controller
+class Trace_Shipping extends CI_Controller
 {
 
 	private $theme;
@@ -37,7 +37,7 @@ class Traceability extends CI_Controller
 		$this->backoffice_model->CheckSession();
 		redirect('manage');
 	}
-	public function traceability()
+	public function shipping()
 	{
 	
 		// $ch = curl_init("http://192.168.161.102/api_system/getAccountEx?username=$code");
@@ -65,7 +65,7 @@ class Traceability extends CI_Controller
 		$this->template->write('page_title', $setTitle . ' ');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/set_traceability/view_flowOne.php');
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/set_traceability/view_flowShipping.php');
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/first_set/view_footer.php');
 		$this->template->render();
 	}
