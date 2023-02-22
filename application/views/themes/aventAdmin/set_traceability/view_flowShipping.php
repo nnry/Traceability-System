@@ -136,90 +136,58 @@
     <!-- Search Data -->
     <div class="card shadow mb-4"><br>
       <div class="card-body ">
-        <div class="container">
-          <div class="row">
-            <div class="col">
-              <div class="col-12 grid-margin stretch-card">
-                <div class="card corona-gradient-card">
-                  <div class="card-body py-0 px-0 px-sm-3">
-                    <div class="row align-items-center">
-                      <div class="col-4 col-sm-3 col-xl-2">
-                        <img src="<?php echo base_url() ?>assets/images/dashboard/Group126@2x.png"
-                          class="gradient-corona-img img-fluid" alt="">
-                      </div>
+        <div class="col-12 grid-margin stretch-card">
+          <div class="card corona-gradient-card">
+            <div class="card-body py-0 px-0 px-sm-3">
+              <div class="row ">
+                <div class="card-body col-md-6 row mb-3">
+                  <label class="col-form-label">Customer :</label>
+                  <div class="col-md-8">
+                    <select class="form-control" aria-label="Default select example">
+                      <option selected>Select...</option>
+                      <option value="1">...</option>
+                      <option value="2">...</option>
+                    </select>
+                  </div>
+                </div>
 
-                      <div class="row">
-                        <div class="card-body col-md-12 row mb-3">
-                          <label class="col-sm-6 col-form-label">Customer :</label>
-                          <div class="col-md-12">
-                            <div class="col-md-12">
-                              <select class="form-control" aria-label="Default select example">
-                                <option selected>Select...</option>
-                                <option value="1">...</option>
-                                <option value="2">...</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
+                <div class="card-body col-md-6 row mb-3">
+                  <label class="col-form-label">Part No :</label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="newpass">
+                  </div>
+                </div>
 
-                        <div class="card-body col-md-12 row mb-3">
-                          <label class="col-sm-6 col-form-label">Part No :</label>
-                          <div class="col-md-12">
-                            <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched"
-                              id="newpass">
-                          </div>
-                        </div>
+                <div class="card-body col-md-6 row mb-3">
+                  <label class="col-form-label">Delivery Date :</label>
+                  <div class="col-md-8">
+                    <input type="date" class="form-control ng-pristine ng-valid ng-empty ng-touched"
+                      ng-change="checkre()" id="compass">
+                  </div>
+                </div>
+              </div>
 
+              <div class="row">
+                <div class="card-body col-md-6 row mb-3">
+                  <label class="col-form-label">Shipping Instruction :</label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="oldpass">
+                  </div>
+                </div>
 
-                        <div class="card-body col-md-12 row mb-3">
-                          <label class="col-sm-6 col-form-label">Delivery Date :</label>
-                          <div class="col-md-12">
-                            <input type="date"
-                              class="form-control ng-pristine ng-valid ng-empty ng-touched" ng-change="checkre()"
-                              id="compass">
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="card-body col-md-12 row mb-3">
-                          <label class="col-sm-6 col-form-label">Shipping Instruction :</label>
-                          <div class="col-md-12">
-                            <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched"
-                              id="oldpass">
-                          </div>
-                        </div>
-
-                        <div class="card-body col-md-12 row mb-3">
-                          <label class="col-sm-6 col-form-label">Customer Order No :</label>
-                          <div class="col-md-12">
-                            <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched"
-                              id="newpass">
-                          </div>
-                        </div>
-
-                      </div>
-
-
-
-
-
-
-                      <div class="col-3 col-sm-2 col-xl-2 pl-0 text-center">
-                        <span>
-                          <button type="submit" id="strt"
-                            class="btn btn-outline-light btn-rounded get-started-btn col-md-5">Start</button>
-                          <button type="submit" id="end"
-                            class="btn btn-outline-light btn-rounded get-started-btn col-md-5">End</button>
-                        </span>
-                      </div>
-                    </div>
+                <div class="card-body col-md-6 row mb-3">
+                  <label class="col-form-label">Customer Order No :</label>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="newpass">
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div class="col-lg mb-3 text-right">
+        <button type="submit" class="btn btn-warning" id="saveCheng">Submit</button>
       </div>
     </div>
 
