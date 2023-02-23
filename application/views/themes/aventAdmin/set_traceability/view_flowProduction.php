@@ -113,9 +113,9 @@
   <!-- Begin Page Content -->
   <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">Traceability Flow 1</h1>
+      <h1 class="h3 mb-0 text-gray-800">Production</h1>
 
-      <form class="d-none d-sm-inline-block form-inline col-md-4 ml-auto mr ml-md my-2 my-md-0 mw-100 navbar-search"
+      <!-- <form class="d-none d-sm-inline-block form-inline col-md-4 ml-auto mr ml-md my-2 my-md-0 mw-100 navbar-search"
         style="width:30%; text-align:right">
         <div class="input-group">
           <input type="text" class="form-control bg-light border-2" placeholder="Search for..." aria-label="Search"
@@ -126,9 +126,80 @@
             </button>
           </div>
         </div>
-      </form>
+      </form> -->
       <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
           class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    </div>
+
+    <!-- Search Data -->
+    <div class="card shadow mb-4"><br>
+      <div class="card-body ">
+        <div class="col-12 grid-margin stretch-card">
+          <div class="card corona-gradient-card">
+            <div class="card-body py-0 px-0 px-sm-3">
+              <div class="row ">
+                <div class="card-body col-md-6 row mb-3">
+                  <label class="col-form-label">PD :</label>
+                  <div class="col-md-8">
+                    <select class="form-control" aria-label="Default select example">
+                      <option selected>Select...</option>
+                      <option value="1">...</option>
+                      <option value="2">...</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="card-body col-md-6 row mb-3">
+                  <label class="col-form-label">Line :</label>
+                  <div class="col-md-8">
+                    <select class="form-control" aria-label="Default select example">
+                      <option selected>Select...</option>
+                      <option value="1">...</option>
+                      <option value="2">...</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="card-body col-md-6 row mb-3">
+                  <label class="col-form-label">Part No :</label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched"
+                      ng-change="checkre()" id="compass">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="card-body col-md-6 row mb-3">
+                  <label class="col-form-label">Production Date :</label>
+                  <div class="col-md-6">
+                    <input type="Date" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="oldpass">
+                  </div>
+                </div>
+
+                <div class="card-body col-md-6 row mb-3">
+                  <label class="col-form-label">Production Lot :</label>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="newpass">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="card-body col-md-8 row mb-3">
+                  <label class="col-form-label">Scan FA Tag :</label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="newpass">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg mb-3 text-right">
+        <button type="submit" class="btn btn-warning" id="saveCheng">Submit</button>
+      </div>
     </div>
 
     <!-- Flow -->
