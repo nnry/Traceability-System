@@ -133,18 +133,16 @@
 
     <!-- Search Data -->
     <div class="card shadow mb-4"><br>
-      <div class="card-body ">
-        <div class="col-12 grid-margin stretch-card">
-          <div class="card corona-gradient-card">
-            <div class="card-body py-0 px-0 px-sm-3">
-              <div class="row ">
-                <div class="card-body col-md-10 row mb-3">
-                  <label class="col-form-label">Scan FA Tag / Serial No :</label>
-                  <div class="col-md-6">
-                    <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="newpass">
-                  </div>
+      <div class="col-12 grid-margin stretch-card">
+        <div class="card corona-gradient-card">
+          <div class="card-body py-0 px-0 px-sm-3">
+            <div class="row ">
+              <div class="card-body col-md-10 row mb-3">
+                <label class="col-form-label">Scan FA Tag / Serial No :</label>
+                <div class="col-md-6">
+                  <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="newpass">
                 </div>
-              </div>   
+              </div>
             </div>
           </div>
         </div>
