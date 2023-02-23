@@ -333,7 +333,7 @@
                     function saveedit() {
                         var editempcode = $("#editempcode").val();
                         var editgroup = $("#editgroup").val();
-                        var editemail = $("#editemailaddress").val();
+editgroup                        var editemail = $("#editemailaddress").val();
 
                         var email = document.getElementById("editemailaddress");
 

@@ -146,10 +146,14 @@
                           <label class="col-sm-6 col-form-label">Plant :</label>
                           <div class="col-md-12">
                             <div class="col-md-12">
-                              <select class="form-control" aria-label="Default select example" id ="selectplant" name = "selectplant">
-                                <option selected>Select...</option>
-                                <option value="1">...</option>
-                                <option value="2">...</option>
+                              <select class="form-control" aria-label="Default select example" id="selectplant" name="selectplant" value="Select Plant" placeholder="Select Plant">
+                                <option></option>
+                                <?php
+                                foreach ($plantqgate as $key) {
+                                ?>
+                                  <option value="<?php echo $key["mpa_id"]; ?>"><?php echo $key["mpa_name"]; ?></option>
+                                <?php } ?>
+
                               </select>
                             </div>
                           </div>
@@ -159,7 +163,7 @@
                           <label class="col-sm-6 col-form-label">Zone :</label>
                           <div class="col-md-12">
                             <div class="col-md-12">
-                              <select class="form-control" aria-label="Default select example" id ="selectzone" name ="selectzone">
+                              <select class="form-control" aria-label="Default select example" id="selectzone" name="selectzone">
                                 <option selected>Select...</option>
                                 <option value="1">...</option>
                                 <option value="2">...</option>
@@ -172,7 +176,7 @@
                           <label class="col-sm-6 col-form-label">Station :</label>
                           <div class="col-md-12">
                             <div class="col-md-12">
-                              <select class="form-control" aria-label="Default select example" id ="selectstation" name ="selectstation">
+                              <select class="form-control" aria-label="Default select example" id="selectstation" name="selectzone" s>
                                 <option selected>Select...</option>
                                 <option value="1">...</option>
                                 <option value="2">...</option>
@@ -189,7 +193,7 @@
                             <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="oldpass">
                           </div>
                         </div>
-                        
+
                         <div class="card-body col-md-12 row mb-3">
                           <label class="col-sm-6 col-form-label">Delivery Date :</label>
                           <div class="col-md-12">
@@ -482,6 +486,55 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
+  var datafullbody = {}
+  $(document).ready(function() {
+    $("#selectplant")
+      .change(function() {
+        var str = "";
+        var tb = ""
+        var para = this.value
+        $("#selectplant option:selected").each(function() {
+          // alert(para)
+          // console.log(rs)
+          loadzone(para)
+
+        });
+
+      })
+  })
+
+
+  function loadzone(para) {
+    // console.log("para ==> " ,para)
+    $("#selectzone").html("")
+    var tb = " "
+    var i = 0
+    var path = $.ajax({ // ajax frist
+        method: "get",
+        dataType: "json",
+        url: "<?php echo base_url(); ?>Trace_Qgate/getzonebyid?para=" + para,
+      })
+      .done(function(rs) {
+        // var data = JSON.parse(rs)
+        // console.log("data",data)
+
+        var zoneall = rs.zoneall
+        var byid = rs.byid
+        // console.log("zoneall", zoneall)
+        // console.log("data", data)
+
+
+
+        $.each()
+      })
+
+
+
+  }
+
+
+
+
   // function createPDF($html, $filename='', $download=TRUE, $paper='A4', $orientation='portrait'){
   //       $dompdf = new Dompdf\DOMPDF();
   //       $dompdf->load_html($html);
@@ -492,6 +545,4 @@
   //       else
   //           $dompdf->stream($filename.'.pdf', array('Attachment' => 0));
   //   }
-
-
 </script>

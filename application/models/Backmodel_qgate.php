@@ -1,8 +1,30 @@
 <?php
 class Backmodel_qgate extends CI_Model
 {
-    function getplant(){
-        $this->EMP = $this->load->database('qgate',true);
+    public function getplant(){
+        $this->EXP = $this->load->database('qgate',true);
+        $sql = "EXEC [dbo].[API_PHASE]";
+        $res = $this->EXP->query($sql);
+        $row = $res->result_array();
+        return $row;
+
+    }
+
+    public function getzoneby_id($idplant){
+        $this->EXP = $this->load->database('qgate',true);
+        $sql = "EXEC [dbo].[API_ZONE_BY_ID] @PHASE_ID ='{$idplant}'";
+        $res = $this->EXP->query($sql);
+        $row = $res->result_array();
+        return $row;
+
+    }
+    public function getzoneall(){
+        $this->EXP = $this->load->database('qgate',true);
+        $sql = "EXEC [dbo].[API_ZONE_ALL]";
+        $res = $this->EXP->query($sql);
+        $row = $res->result_array();
+        return $row;
+
     }
     
 

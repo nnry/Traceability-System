@@ -8,6 +8,7 @@ class Trace_Qgate extends CI_Controller
 
 	public function __construct()
 	{
+		// $this->EXP = $this->load->database('qgate',true);
 		parent::__construct();
 
 		## asset config
@@ -60,7 +61,8 @@ class Trace_Qgate extends CI_Controller
 		$data["user"] = $data["sa_code"];
 		$data["id"] = $data["sa_id"];
 
-		// $data["plantqgate"]=$this->b;
+		$data["plantqgate"]=$this->backmodel_qgate->getplant();
+
 
 		// $data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
 
@@ -73,18 +75,10 @@ class Trace_Qgate extends CI_Controller
 		$this->template->render();
 	}
 
-
-	// function mypdf()
-	// {
-
-
-	// 	$this->load->library('pdf');
-
-
-	// 	$this->pdf->load_view('mypdf');
-	// 	$this->pdf->render();
-
-
-	// 	$this->pdf->stream("welcome.pdf");
-	// }
+	public function getzonebyid(){
+		$idplant = $_GET["para"];
+		$res["byid"] = $this->backmodel_qgate->getzoneby_id($idplant);
+		$res["zoneall"] = $this->backmodel_qgate->getzoneall();
+		echo json_encode($res);
+	}
 }
