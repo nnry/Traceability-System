@@ -67,7 +67,12 @@ class manageMenu extends CI_Controller
 		$menu = $_POST["menu"];
 
 
-		$chkmenu = $this->backoffice_model->checkMenu($menu);
+		$chkid = $this->backoffice_model->normalmenu($idmenu);
+		if($chkid ==$menu ){
+			echo "true";
+
+		}else{
+			$chkmenu = $this->backoffice_model->checkMenu($menu);
 		if ($chkmenu == "true") { // มี แอดไม่ได้
 			echo "repeat";
 		} else if ($chkmenu == "false") {
@@ -76,6 +81,10 @@ class manageMenu extends CI_Controller
 		} else {
 			echo "false";
 		}
+		}
+
+
+		
 	}
 	public function statusMenu()
 	{

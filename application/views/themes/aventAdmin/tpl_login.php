@@ -52,7 +52,7 @@
                             </div>
                             <form class="user">
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="empcode" aria-describedby="emailHelp" placeholder="Enter User Code">
+                                    <input type="text" class="form-control form-control-user" id="empcode" aria-describedby="emailHelp" placeholder="Enter User Code">
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control form-control-user" id="emppass" placeholder="Enter User Password">

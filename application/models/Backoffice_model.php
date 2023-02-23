@@ -134,6 +134,13 @@ class Backoffice_model extends CI_Model
         $met = $row[0]["ss_name"];
         return $met;
     }
+    public function normalmenu($id){
+        $sql = "EXEC [dbo].[GET_CHECK_MENU_NORMA] @SM_ID= '{$id}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        $met = $row[0]["sm_name"];
+        return $met;
+    }
     public function checkEmail($editemail)
     {
         $sql = "EXEC [dbo].[GET_CHECK_EMAIL] @EMP_EMAIL = '{$editemail}'";
