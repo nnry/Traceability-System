@@ -26,6 +26,23 @@ class Backmodel_qgate extends CI_Model
         return $row;
 
     }
+    public function getstationby_id($idstaion){
+        $this->EXP = $this->load->database('qgate',true);
+        $sql = "EXEC [dbo].[API_ZONE_BY_ID] @PHASE_ID ='{$idstaion}'";
+        $res = $this->EXP->query($sql);
+        $row = $res->result_array();
+        return $row;
+
+    }
+
+    public function getloadstation(){
+        $this->EXP = $this->load->database('qgate',true);
+        $sql = "EXEC [dbo].[API_STATION_LOAD]";
+        $res = $this->EXP->query($sql);
+        $row = $res->result_array();
+        return $row;
+
+    }
     
 
 

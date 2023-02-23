@@ -81,4 +81,11 @@ class Trace_Qgate extends CI_Controller
 		$res["zoneall"] = $this->backmodel_qgate->getzoneall();
 		echo json_encode($res);
 	}
+	public function getstationload(){
+		$idstaion = $_GET["zone"];
+		$res["byid"] = $this->backmodel_qgate->getstationby_id($idstaion);
+		$res["all"]= $this->backmodel_qgate->getloadstation();
+		echo json_encode($res);
+	}
+
 }

@@ -147,7 +147,7 @@
                           <div class="col-md-12">
                             <div class="col-md-12">
                               <select class="form-control" aria-label="Default select example" id="selectplant" name="selectplant" value="Select Plant" placeholder="Select Plant">
-                                <option></option>
+                                <option>Select...</option>
                                 <?php
                                 foreach ($plantqgate as $key) {
                                 ?>
@@ -164,9 +164,9 @@
                           <div class="col-md-12">
                             <div class="col-md-12">
                               <select class="form-control" aria-label="Default select example" id="selectzone" name="selectzone">
-                                <option selected>Select...</option>
-                                <option value="1">...</option>
-                                <option value="2">...</option>
+                                <option>Select...</option>
+                                <!-- <option value="1">...</option>
+                                <option value="2">...</option> -->
                               </select>
                             </div>
                           </div>
@@ -176,7 +176,7 @@
                           <label class="col-sm-6 col-form-label">Station :</label>
                           <div class="col-md-12">
                             <div class="col-md-12">
-                              <select class="form-control" aria-label="Default select example" id="selectstation" name="selectzone" s>
+                              <select class="form-control" aria-label="Default select example" id="selectstation" name="selectstation" s>
                                 <option selected>Select...</option>
                                 <option value="1">...</option>
                                 <option value="2">...</option>
@@ -519,17 +519,66 @@
         // console.log("data",data)
 
         var zoneall = rs.zoneall
-        var byid = rs.byid
+        // var byid = rs.byid
         // console.log("zoneall", zoneall)
         // console.log("data", data)
+        tb += "<option>" + "Select..." + "</option>"
+        $.each(zoneall, function(key, value) {
+          if (para == value["mpa_id"]) {
 
+            tb += "<option value='" + value["mza_id"] + "'>" + value["mza_name"] + "</option>"
 
+          }
+          i++
+        })
 
-        $.each()
+        $("#selectzone").html(tb)
       })
 
+    $(document).ready(function() {
+      $("#selectzone")
+        .change(function() {
+          var str = "";
+          var tb = ""
+          var zone = this.value
+          $("#selectzone option:selected").each(function() {
+            // alert(para)
+            // console.log(rs)
+            loadstation(para, zone)
+
+          });
+
+        })
+    })
+  }
 
 
+  function loadstation(para, zone) {
+    $("#selectstation").html("")
+    var tb = " "
+    var i = 0
+    var path = $.ajax({ // ajax frist
+        method: "get",
+        dataType: "json",
+        url: "<?php echo base_url(); ?>Trace_Qgate/getstationload?zone=",
+        zone,
+      })
+      .done(function(rs) {
+        // alert(rs);
+        // console.log("rs =>" , rs)
+        var station = rs.all
+        tb += "<option>" + "Select..." + "</option>"
+        $.each(station, function(key, value) {
+          if (para == value["mpa_id"]) {
+            if (zone == value["mza_id"]) {
+              tb += "<option value='" + value["msa_id"] + "'>" + value["msa_station"] + "</option>"
+            }
+          }
+          i++
+
+        })
+        $("#selectstation").html(tb)
+      })
   }
 
 
