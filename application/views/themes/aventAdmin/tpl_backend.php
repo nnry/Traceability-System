@@ -25,6 +25,7 @@
     <meta name="author" content="">
     <link href="<?php echo base_url() . $css_url; ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css:300,400,600" type="text/css" rel="stylesheet" />
     <link href="<?php echo base_url() . $css_url; ?>css/sb-admin-2.min.css" rel="stylesheet">
 
 

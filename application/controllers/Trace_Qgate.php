@@ -8,6 +8,7 @@ class Trace_Qgate extends CI_Controller
 
 	public function __construct()
 	{
+
 		// $this->EXP = $this->load->database('qgate',true);
 		parent::__construct();
 
@@ -87,5 +88,23 @@ class Trace_Qgate extends CI_Controller
 		$res["all"]= $this->backmodel_qgate->getloadstation();
 		echo json_encode($res);
 	}
+	public function getpdf(){
 
+	}
+	public function searchbypart(){
+		$delidate = $_POST["delidate"];
+		$selectplant = $_POST["selectplant"];
+		$selectzone = $_POST["selectzone"];
+		$selectstation = $_POST["selectstation"];
+		$inputpart = $_POST["inputpart"];
+		
+
+	}
+	public function searchbyscantag(){
+		$delidate = $_POST["delidate"];
+		$selectplant = $_POST["selectplant"];
+		$selectzone = $_POST["selectzone"];
+		$selectstation = $_POST["selectstation"];
+		$inputscantag = $_POST["inputscantag"];
+	}
 }

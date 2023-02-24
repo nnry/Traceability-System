@@ -11,9 +11,7 @@
 
   <!-- Custom fonts for this template -->
   <link href="<?php echo base_url() ?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link
-    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template -->
   <link href="<?php echo base_url() ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
@@ -21,6 +19,11 @@
   <!-- Custom styles for this page -->
   <link href="<?php echo base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link href="<?php echo base_url() ?>assets/css/codepen.css" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /> -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 
 </head>
 
@@ -127,8 +130,7 @@
           </div>
         </div>
       </form> -->
-      <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-          class="fas fa-download fa-sm text-white-50" onclick="createPDF()"></i> Generate Report</a>
+      <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50" onclick="createPDF()"></i> Generate Report</a>
     </div>
     <!-- Search Data -->
     <div class="card shadow mb-4"><br>
@@ -139,47 +141,42 @@
               <div class="card-body col-md-8 row mb-3">
                 <label class="col-form-label">Delivery Date :</label>
                 <div class="col-md-7">
-                  <input type="date" class="form-control ng-pristine ng-valid ng-empty ng-touched" ng-change="checkre()"
-                    id="compass">
+                  <input type="date" class="form-control ng-pristine ng-valid ng-empty ng-touched" ng-change="checkre()" id="delidate" name = "delidate" >
                 </div>
               </div>
 
               <div class="card-body col-md-6 row mb-3">
                 <label class="col-form-label">Plant :</label>
-                  <div class="col-md-8">
-                    <select class="form-control" aria-label="Default select example" id="selectplant" name="selectplant"
-                      value="Select Plant" placeholder="Select Plant">
-                      <option>Select...</option>
-                      <?php
-                      foreach ($plantqgate as $key) {
-                        ?>
-                        <option value="<?php echo $key["mpa_id"]; ?>"><?php echo $key["mpa_name"]; ?></option>
-                      <?php } ?>
-                    </select>
-                  </div>
+                <div class="col-md-8">
+                  <select class="form-control" aria-label="Default select example" id="selectplant" name="selectplant" value="Select Plant" placeholder="Select Plant">
+                    <option>Select...</option>
+                    <?php
+                    foreach ($plantqgate as $key) {
+                    ?>
+                      <option value="<?php echo $key["mpa_id"]; ?>"><?php echo $key["mpa_name"]; ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
               </div>
 
               <div class="card-body col-md-6 row mb-3">
                 <label class="col-form-label">Zone :</label>
-                  <div class="col-md-8">
-                    <select class="form-control" aria-label="Default select example" id="selectzone" name="selectzone">
-                      <option>Select...</option>
-                      <!-- <option value="1">...</option>
+                <div class="col-md-8">
+                  <select class="form-control" aria-label="Default select example" id="selectzone" name="selectzone">
+                    <option>Select...</option>
+                    <!-- <option value="1">...</option>
                                 <option value="2">...</option> -->
-                    </select>
-                  </div>
+                  </select>
+                </div>
               </div>
 
               <div class="card-body col-md-6 row mb-3">
                 <label class="col-form-label">Station :</label>
-                  <div class="col-md-8">
-                    <select class="form-control" aria-label="Default select example" id="selectstation"
-                      name="selectstation" s>
-                      <option selected>Select...</option>
-                      <option value="1">...</option>
-                      <option value="2">...</option>
-                    </select>
-                  </div> 
+                <div class="col-md-8">
+                  <select class="form-control" aria-label="Default select example" id="selectstation" name="selectstation">
+                    <option>Select...</option>
+                  </select>
+                </div>
               </div>
             </div>
 
@@ -187,14 +184,14 @@
               <div class="card-body col-md-6 row mb-3">
                 <label class="col-form-label">Part no. :</label>
                 <div class="col-md-8">
-                  <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="oldpass">
+                  <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="inputpart">
                 </div>
               </div>
 
               <div class="card-body col-md-8 row mb-3">
                 <label class="col-form-label">Scan Q-Gate TAG :</label>
                 <div class="col-md-8">
-                  <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="newpass">
+                  <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="inputscantag">
                 </div>
               </div>
             </div>
@@ -202,7 +199,7 @@
         </div>
       </div>
       <div class="col-lg mb-3 text-right">
-        <button type="submit" class="btn btn-warning" id="saveCheng">Submit</button>
+        <button type="submit" class="btn btn-warning" id="btnsearchqgate">Submit</button>
       </div>
     </div>
 
@@ -214,13 +211,12 @@
             <div class="col">
               <div class="main-timeline">
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">COMING SOON</span>
                     <div class="timeline-icon">
                       <i class="far fa-clock" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id ="detailcomingsoon">
                       <div class="card border-left-info shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -241,13 +237,12 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">MACHINE ZONE 1</span>
                     <div class="timeline-icon">
                       <i class="fas fa-fw fa-cog" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id="detailmachine1">
                       <div class="card border-left-danger shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -258,9 +253,7 @@
                               <div class="time_line-descr">SCAN DATE : <label id="machine1_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img
-                              src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -268,13 +261,12 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">MACHINE ZONE 2</span>
                     <div class="timeline-icon">
                       <i class="fas fa-fw fa-cogs" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id="detailmachine2">
                       <div class="card border-left-success shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -285,9 +277,7 @@
                               <div class="time_line-descr">SCAN DATE : <label id="machine2_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img
-                              src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -295,13 +285,12 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">MACHINE ZONE 3</span>
                     <div class="timeline-icon">
                       <i class="fas fa-screwdriver" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id="detailmachine3">
                       <div class="card border-left-warning shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -312,9 +301,7 @@
                               <div class="time_line-descr">SCAN DATE : <label id="machine3_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img
-                              src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -322,13 +309,12 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">MACHINE ZONE 4</span>
                     <div class="timeline-icon">
                       <i class="fas fa-wrench" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id="detailmachine4">
                       <div class="card border-left-primary shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -339,9 +325,7 @@
                               <div class="time_line-descr">SCAN DATE : <label id="machine4_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img
-                              src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -349,10 +333,9 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">WASHING</span>
-                    <div class="timeline-icon">
+                    <div class="timeline-icon" id="detailwashing">
                       <i class="fas fa-clipboard-list" aria-hidden="true"></i>
                     </div>
                     <div class="content">
@@ -365,9 +348,7 @@
                               <div class="time_line-descr">PART NO : <label id="washing_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="washing_scan_date">xxxxx</label></div>
                             </div>
-                            <img
-                              src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -375,13 +356,12 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">Q-GATE</span>
                     <div class="timeline-icon">
                       <i class="fas fa-clipboard-check" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id="detailqgate">
                       <div class="card border-left-danger shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -391,9 +371,7 @@
                               <div class="time_line-descr">PART NO : <label id="qgate_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="qgate_scan_date">xxxxx</label></div>
                             </div>
-                            <img
-                              src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -401,13 +379,12 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">TRANSFER</span>
                     <div class="timeline-icon">
                       <i class="fa fa-boxes" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id="detailtransfer">
                       <div class="card border-left-success shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -418,9 +395,7 @@
                               <div class="time_line-descr">SCAN DATE : <label id="transfer_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img
-                              src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -428,13 +403,12 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">PICKING</span>
                     <div class="timeline-icon">
                       <i class="fas fa-dolly-flatbed" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id="detailpicking">
                       <div class="card border-left-warning shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -444,9 +418,7 @@
                               <div class="time_line-descr">PART NO : <label id="picking_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="picking_scan_date">xxxxx</label></div>
                             </div>
-                            <img
-                              src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -454,13 +426,12 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content"
-                    style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
+                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">SHIPPING</span>
                     <div class="timeline-icon">
                       <i class="fas fa-shipping-fast" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id="detailshipping">
                       <div class="card border-left-primary shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -471,9 +442,7 @@
                               <div class="time_line-descr">SCAN DATE : <label id="shipping_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img
-                              src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png"
-                              class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -494,14 +463,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
+  function createPDF() {
+
+
+  }
+
   var datafullbody = {}
-  $(document).ready(function () {
+  $(document).ready(function() {
     $("#selectplant")
-      .change(function () {
+      .change(function() {
         var str = "";
         var tb = ""
         var para = this.value
-        $("#selectplant option:selected").each(function () {
+        $("#selectplant option:selected").each(function() {
           // alert(para)
           // console.log(rs)
           loadzone(para)
@@ -511,6 +485,9 @@
       })
   })
 
+  $('#btnsearchqgate').click(function() {
+    searchqgate()
+  })
 
   function loadzone(para) {
     // console.log("para ==> " ,para)
@@ -518,11 +495,11 @@
     var tb = " "
     var i = 0
     var path = $.ajax({ // ajax frist
-      method: "get",
-      dataType: "json",
-      url: "<?php echo base_url(); ?>Trace_Qgate/getzonebyid?para=" + para,
-    })
-      .done(function (rs) {
+        method: "get",
+        dataType: "json",
+        url: "<?php echo base_url(); ?>Trace_Qgate/getzonebyid?para=" + para,
+      })
+      .done(function(rs) {
         // var data = JSON.parse(rs)
         // console.log("data",data)
 
@@ -531,7 +508,7 @@
         // console.log("zoneall", zoneall)
         // console.log("data", data)
         tb += "<option>" + "Select..." + "</option>"
-        $.each(zoneall, function (key, value) {
+        $.each(zoneall, function(key, value) {
           if (para == value["mpa_id"]) {
 
             tb += "<option value='" + value["mza_id"] + "'>" + value["mza_name"] + "</option>"
@@ -543,13 +520,13 @@
         $("#selectzone").html(tb)
       })
 
-    $(document).ready(function () {
+    $(document).ready(function() {
       $("#selectzone")
-        .change(function () {
+        .change(function() {
           var str = "";
           var tb = ""
           var zone = this.value
-          $("#selectzone option:selected").each(function () {
+          $("#selectzone option:selected").each(function() {
             // alert(para)
             // console.log(rs)
             loadstation(para, zone)
@@ -566,17 +543,17 @@
     var tb = " "
     var i = 0
     var path = $.ajax({ // ajax frist
-      method: "get",
-      dataType: "json",
-      url: "<?php echo base_url(); ?>Trace_Qgate/getstationload?zone=",
-      zone,
-    })
-      .done(function (rs) {
+        method: "get",
+        dataType: "json",
+        url: "<?php echo base_url(); ?>Trace_Qgate/getstationload?zone=",
+        zone,
+      })
+      .done(function(rs) {
         // alert(rs);
         // console.log("rs =>" , rs)
         var station = rs.all
         tb += "<option>" + "Select..." + "</option>"
-        $.each(station, function (key, value) {
+        $.each(station, function(key, value) {
           if (para == value["mpa_id"]) {
             if (zone == value["mza_id"]) {
               tb += "<option value='" + value["msa_id"] + "'>" + value["msa_station"] + "</option>"
@@ -589,6 +566,69 @@
       })
   }
 
+
+  function searchqgate() {
+    var delidate = $('#delidate').val();
+    var selectplant = $('#selectplant').val();
+    var selectzone = $('#selectzone').val();
+    var selectstation = $('#selectstation').val();
+    var inputpart = $('#inputpart').val();
+    var inputscantag = $('#inputscantag').val();
+
+    var chdelidate = document.getElementById('delidate');
+    var chselectplant = document.getElementById('selectplant');
+    var chselectzone = document.getElementById('selectzone');
+    var chselectstation = document.getElementById('selectstation');
+    // var chinputpart = document.getElementById('inputpart');
+    // var chinputscantag = document.getElementById('inputscantag');
+
+    if (chdelidate.value == "") {
+      Swal.fire({
+        icon: 'warning',
+        title: 'โปรดตรวจสอบข้อมูลอีกครั้ง',
+        text: 'Are you sure?',
+        confirmButtonColor: '#F7B267',
+      })
+    } else if (chselectplant.value == "Select..." || chselectzone.value == "Select..." || chselectstation.value == "Select...") {
+      Swal.fire({
+        icon: 'warning',
+        title: 'โปรดตรวจสอบข้อมูลอีกครั้ง',
+        text: 'Are you sure?',
+        confirmButtonColor: '#F7B267',
+      })
+    } else if (inputpart != 0) {
+      var path = $.ajax({
+        method: "post",
+        url: "<?php echo base_url(); ?>Trace_Qgate/searchbypart",
+        data: {
+          delidate: delidate,
+          selectplant: selectplant,
+          selectzone: selectzone,
+          selectstation: selectstation,
+          inputpart: inputpart,
+        }
+      })
+    } else if (inputscantag != 0) {
+      var path = $.ajax({
+        method: "post",
+        url: "<?php echo base_url(); ?>Trace_Qgate/searchbyscantag",
+        data: {
+          delidate: delidate,
+          selectplant: selectplant,
+          selectzone: selectzone,
+          selectstation: selectstation,
+          inputscantag: inputscantag,
+        }
+      })
+    }
+
+
+
+
+
+
+
+  }
 
 
 
