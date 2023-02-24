@@ -132,6 +132,7 @@
       </form> -->
       <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50" onclick="createPDF()"></i> Generate Report</a>
     </div>
+
     <!-- Search Data -->
     <div class="card shadow mb-4"><br>
       <div class="col-12 grid-margin stretch-card">
@@ -141,22 +142,24 @@
               <div class="card-body col-md-8 row mb-3">
                 <label class="col-form-label">Delivery Date :</label>
                 <div class="col-md-7">
-                  <input type="date" class="form-control ng-pristine ng-valid ng-empty ng-touched" ng-change="checkre()" id="delidate" name = "delidate" >
+                  <input type="date" class="form-control ng-pristine ng-valid ng-empty ng-touched" ng-change="checkre()"
+                    id="compass">
                 </div>
               </div>
 
               <div class="card-body col-md-6 row mb-3">
                 <label class="col-form-label">Plant :</label>
-                <div class="col-md-8">
-                  <select class="form-control" aria-label="Default select example" id="selectplant" name="selectplant" value="Select Plant" placeholder="Select Plant">
-                    <option>Select...</option>
-                    <?php
-                    foreach ($plantqgate as $key) {
-                    ?>
-                      <option value="<?php echo $key["mpa_id"]; ?>"><?php echo $key["mpa_name"]; ?></option>
-                    <?php } ?>
-                  </select>
-                </div>
+                  <div class="col-md-8">
+                    <select class="form-control" aria-label="Default select example" id="selectplant" name="selectplant"
+                      value="Select Plant" placeholder="Select Plant">
+                      <option>Select...</option>
+                      <?php
+                      foreach ($plantqgate as $key) {
+                        ?>
+                        <option value="<?php echo $key["mpa_id"]; ?>"><?php echo $key["mpa_name"]; ?></option>
+                      <?php } ?>
+                    </select>
+                  </div>
               </div>
 
               <div class="card-body col-md-6 row mb-3">
