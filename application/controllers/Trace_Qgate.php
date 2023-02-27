@@ -122,6 +122,8 @@ class Trace_Qgate extends CI_Controller
 		$data["line"] = $res[0]["ifts_line_cd"];
 		$data["lot"] = $res[0]["ifts_lot_current"];
 		$data["snp"] = $res[0]["ifts_snp"];
+		$data["part_no"] = $res[0]["ifts_part_no"];
+		$data["date"] = $res[0]["date"];
 		echo json_encode($data);
 	}
 }

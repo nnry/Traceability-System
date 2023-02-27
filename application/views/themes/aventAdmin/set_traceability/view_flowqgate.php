@@ -243,7 +243,7 @@
                     <div class="timeline-icon">
                       <i class="fas fa-fw fa-cog" aria-hidden="true"></i>
                     </div>
-                    <div class="content" >
+                    <div class="content">
                       <div class="card border-left-danger shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -251,10 +251,12 @@
                               <h5 class="time_line-title"><label id="machine1_user_name">XXX</label></h5>
                               <div class="time_line-descr">USER ID : <label id="machine1_user_id">xxxxx</label></div>
                               <div class="time_line-descr">PART NO : <label id="machine1_part_no">xxxxx</label></div>
-                              <div class="time_line-descr">SCAN DATE : <label id="machine1_scan_date">xxxxx</label>
-                              </div>
+                              <div class="time_line-descr">SCAN DATE : <label id="machine1_scan_date">xxxxx</label></div>
                             </div>
-                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id ="imgdetailmachine1"/>
+                            <!-- <span id="imgdetailmachine1">
+                              <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            </span> -->
+                            <img id="imgdetailmachine1" src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -267,7 +269,7 @@
                     <div class="timeline-icon">
                       <i class="fas fa-fw fa-cogs" aria-hidden="true"></i>
                     </div>
-                    <div class="content" >
+                    <div class="content">
                       <div class="card border-left-success shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -278,7 +280,7 @@
                               <div class="time_line-descr">SCAN DATE : <label id="machine2_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id = "imgdetailmachine2"/>
+                            <img id="imgdetailmachine2" src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -295,14 +297,14 @@
                       <div class="card border-left-warning shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
-                            <div class="col mr-2"  id="detailmachine3">
+                            <div class="col mr-2" id="detailmachine3">
                               <h5 class="time_line-title"><label id="machine3_user_name">XXX</label></h5>
                               <div class="time_line-descr">USER ID : <label id="machine3_user_id">xxxxx</label></div>
                               <div class="time_line-descr">PART NO : <label id="machine3_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="machine3_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id = "imgdetailmachine3"/>
+                            <img id="imgdetailmachine3" src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -315,7 +317,7 @@
                     <div class="timeline-icon">
                       <i class="fas fa-wrench" aria-hidden="true"></i>
                     </div>
-                    <div class="content" >
+                    <div class="content">
                       <div class="card border-left-primary shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -326,7 +328,7 @@
                               <div class="time_line-descr">SCAN DATE : <label id="machine4_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id = "imgdetailmachine4"/>
+                            <img id="imgdetailmachine4" src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -336,7 +338,7 @@
                 <div class="timeline">
                   <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">WASHING</span>
-                    <div class="timeline-icon" >
+                    <div class="timeline-icon">
                       <i class="fas fa-clipboard-list" aria-hidden="true"></i>
                     </div>
                     <div class="content">
@@ -349,7 +351,7 @@
                               <div class="time_line-descr">PART NO : <label id="washing_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="washing_scan_date">xxxxx</label></div>
                             </div>
-                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id="imgdetailwashing"/>
+                            <img id="imgdetailwashing" src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -372,7 +374,7 @@
                               <div class="time_line-descr">PART NO : <label id="qgate_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="qgate_scan_date">xxxxx</label></div>
                             </div>
-                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id ="imgdetailqgate"/>
+                            <img id="imgdetailqgate" src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -385,7 +387,7 @@
                     <div class="timeline-icon">
                       <i class="fa fa-boxes" aria-hidden="true"></i>
                     </div>
-                    <div class="content" >
+                    <div class="content">
                       <div class="card border-left-success shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -396,7 +398,7 @@
                               <div class="time_line-descr">SCAN DATE : <label id="transfer_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id ="imgdetailtransfer"/>
+                            <img id="imgdetailtransfer" src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -409,7 +411,7 @@
                     <div class="timeline-icon">
                       <i class="fas fa-dolly-flatbed" aria-hidden="true"></i>
                     </div>
-                    <div class="content" >
+                    <div class="content">
                       <div class="card border-left-warning shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -419,7 +421,7 @@
                               <div class="time_line-descr">PART NO : <label id="picking_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="picking_scan_date">xxxxx</label></div>
                             </div>
-                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id ="imgdetailpicking"/>
+                            <img id="imgdetailpicking" src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -432,7 +434,7 @@
                     <div class="timeline-icon">
                       <i class="fas fa-shipping-fast" aria-hidden="true"></i>
                     </div>
-                    <div class="content" >
+                    <div class="content">
                       <div class="card border-left-primary shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -443,7 +445,7 @@
                               <div class="time_line-descr">SCAN DATE : <label id="shipping_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id="imgdetailshipping"/>
+                            <img id="imgdetailshipping" src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
                           </div>
                         </div>
                       </div>
@@ -598,7 +600,7 @@
       })
       path.done(function(rs) {
         var data = JSON.parse(rs)
-        
+
         Getmachine(data)
         //  alert(zone)
         //  alert(rs[0]["msa_id"])
@@ -653,34 +655,58 @@
     // console.log("data ==> ",data)
     // console.log("data.zone ==> ",data.zone)
     var zone = data.zone
-    var mt =" "
-    alert(zone)
+    var mt = " "
+    // alert(zone)
     if (zone === '1') {
-      alert("1")
-
+      // alert("1")
+      $("#machine1_user_name").html(data.line);
+      $("#machine1_user_id").html(data.byUser);
+      $("#machine1_part_no").html(data.part_no);
+      $("#machine1_scan_date").html(data.date);
     } else {
       // alert("1  else")
       // detailmachine1
-      $('#detailmachine1').hide()  
+
+      $("#detailmachine1").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+      $("#imgdetailmachine1").hide();
     }
     if (zone === '2') {
-
-      alert("2")
+      $("#machine2_user_name").html(data.line);
+      $("#machine2_user_id").html(data.byUser);
+      $("#machine2_part_no").html(data.part_no);
+      $("#machine2_scan_date").html(data.date);
+      // alert("2")
 
     } else {
-      alert("2  else")
+      // alert("2  else")
+      $("#detailmachine2").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+      $("#imgdetailmachine2").hide();
     }
 
     if (zone === '3') {
-      alert("3")
+      // alert("3")
+      $("#machine3_user_name").html(data.line);
+      $("#machine3_user_id").html(data.byUser);
+      $("#machine3_part_no").html(data.part_no);
+      $("#machine3_scan_date").html(data.date);
+
     } else {
-      alert("3  else")
+      // alert("3  else")
+      $("#detailmachine3").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+      $("#imgdetailmachine3").hide();
     }
 
     if (zone == '4') {
-      alert("4")
+      // alert("4")
+      $("#machine4_user_name").html(data.line);
+      $("#machine4_user_id").html(data.byUser);
+      $("#machine4_part_no").html(data.part_no);
+      $("#machine4_scan_date").html(data.date);
+
     } else {
-      alert("else")
+      // alert("else")
+      $("#detailmachine4").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+      $("#imgdetailmachine4").hide();
 
     }
   }
