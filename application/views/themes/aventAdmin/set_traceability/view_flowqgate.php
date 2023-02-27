@@ -20,9 +20,9 @@
   <link href="<?php echo base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link href="<?php echo base_url() ?>assets/css/codepen.css" rel="stylesheet">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /> -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
 
 
 </head>
@@ -142,24 +142,22 @@
               <div class="card-body col-md-8 row mb-3">
                 <label class="col-form-label">Delivery Date :</label>
                 <div class="col-md-7">
-                  <input type="date" class="form-control ng-pristine ng-valid ng-empty ng-touched" ng-change="checkre()"
-                    id="compass">
+                  <input type="date" class="form-control ng-pristine ng-valid ng-empty ng-touched" ng-change="checkre()" id="delidate">
                 </div>
               </div>
 
               <div class="card-body col-md-6 row mb-3">
                 <label class="col-form-label">Plant :</label>
-                  <div class="col-md-8">
-                    <select class="form-control" aria-label="Default select example" id="selectplant" name="selectplant"
-                      value="Select Plant" placeholder="Select Plant">
-                      <option>Select...</option>
-                      <?php
-                      foreach ($plantqgate as $key) {
-                        ?>
-                        <option value="<?php echo $key["mpa_id"]; ?>"><?php echo $key["mpa_name"]; ?></option>
-                      <?php } ?>
-                    </select>
-                  </div>
+                <div class="col-md-8">
+                  <select class="form-control" aria-label="Default select example" id="selectplant" name="selectplant" value="Select Plant" placeholder="Select Plant">
+                    <option>Select...</option>
+                    <?php
+                    foreach ($plantqgate as $key) {
+                    ?>
+                      <option value="<?php echo $key["mpa_id"]; ?>"><?php echo $key["mpa_name"]; ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
               </div>
 
               <div class="card-body col-md-6 row mb-3">
@@ -219,7 +217,7 @@
                     <div class="timeline-icon">
                       <i class="far fa-clock" aria-hidden="true"></i>
                     </div>
-                    <div class="content" id ="detailcomingsoon">
+                    <div class="content" id="detailcomingsoon">
                       <div class="card border-left-info shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -245,18 +243,18 @@
                     <div class="timeline-icon">
                       <i class="fas fa-fw fa-cog" aria-hidden="true"></i>
                     </div>
-                    <div class="content" id="detailmachine1">
+                    <div class="content" >
                       <div class="card border-left-danger shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
+                            <div class="col mr-2" id="detailmachine1">
                               <h5 class="time_line-title"><label id="machine1_user_name">XXX</label></h5>
                               <div class="time_line-descr">USER ID : <label id="machine1_user_id">xxxxx</label></div>
                               <div class="time_line-descr">PART NO : <label id="machine1_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="machine1_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id ="imgdetailmachine1"/>
                           </div>
                         </div>
                       </div>
@@ -269,18 +267,18 @@
                     <div class="timeline-icon">
                       <i class="fas fa-fw fa-cogs" aria-hidden="true"></i>
                     </div>
-                    <div class="content" id="detailmachine2">
+                    <div class="content" >
                       <div class="card border-left-success shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
+                            <div class="col mr-2" id="detailmachine2">
                               <h5 class="time_line-title"><label id="machine2_user_name">XXX</label></h5>
                               <div class="time_line-descr">USER ID : <label id="machine2_user_id">xxxxx</label></div>
                               <div class="time_line-descr">PART NO : <label id="machine2_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="machine2_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id = "imgdetailmachine2"/>
                           </div>
                         </div>
                       </div>
@@ -293,18 +291,18 @@
                     <div class="timeline-icon">
                       <i class="fas fa-screwdriver" aria-hidden="true"></i>
                     </div>
-                    <div class="content" id="detailmachine3">
+                    <div class="content">
                       <div class="card border-left-warning shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
+                            <div class="col mr-2"  id="detailmachine3">
                               <h5 class="time_line-title"><label id="machine3_user_name">XXX</label></h5>
                               <div class="time_line-descr">USER ID : <label id="machine3_user_id">xxxxx</label></div>
                               <div class="time_line-descr">PART NO : <label id="machine3_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="machine3_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id = "imgdetailmachine3"/>
                           </div>
                         </div>
                       </div>
@@ -317,18 +315,18 @@
                     <div class="timeline-icon">
                       <i class="fas fa-wrench" aria-hidden="true"></i>
                     </div>
-                    <div class="content" id="detailmachine4">
+                    <div class="content" >
                       <div class="card border-left-primary shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
+                            <div class="col mr-2" id="detailmachine4">
                               <h5 class="time_line-title"><label id="machine4_user_name">XXX</label></h5>
                               <div class="time_line-descr">USER ID : <label id="machine4_user_id">xxxxx</label></div>
                               <div class="time_line-descr">PART NO : <label id="machine4_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="machine4_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id = "imgdetailmachine4"/>
                           </div>
                         </div>
                       </div>
@@ -338,20 +336,20 @@
                 <div class="timeline">
                   <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">WASHING</span>
-                    <div class="timeline-icon" id="detailwashing">
+                    <div class="timeline-icon" >
                       <i class="fas fa-clipboard-list" aria-hidden="true"></i>
                     </div>
                     <div class="content">
                       <div class="card border-left-info shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
+                            <div class="col mr-2" id="detailwashing">
                               <h5 class="time_line-title"><label id="washing_user_name">XXX</label></h5>
                               <div class="time_line-descr">USER ID : <label id="washing_user_id">xxxxx</label></div>
                               <div class="time_line-descr">PART NO : <label id="washing_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="washing_scan_date">xxxxx</label></div>
                             </div>
-                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id="imgdetailwashing"/>
                           </div>
                         </div>
                       </div>
@@ -364,17 +362,17 @@
                     <div class="timeline-icon">
                       <i class="fas fa-clipboard-check" aria-hidden="true"></i>
                     </div>
-                    <div class="content" id="detailqgate">
+                    <div class="content">
                       <div class="card border-left-danger shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
+                            <div class="col mr-2" id="detailqgate">
                               <h5 class="time_line-title"><label id="qgate_user_name">XXX</label></h5>
                               <div class="time_line-descr">USER ID : <label id="qgate_user_id">xxxxx</label></div>
                               <div class="time_line-descr">PART NO : <label id="qgate_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="qgate_scan_date">xxxxx</label></div>
                             </div>
-                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id ="imgdetailqgate"/>
                           </div>
                         </div>
                       </div>
@@ -387,18 +385,18 @@
                     <div class="timeline-icon">
                       <i class="fa fa-boxes" aria-hidden="true"></i>
                     </div>
-                    <div class="content" id="detailtransfer">
+                    <div class="content" >
                       <div class="card border-left-success shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
+                            <div class="col mr-2" id="detailtransfer">
                               <h5 class="time_line-title"><label id="transfer_user_name">XXX</label></h5>
                               <div class="time_line-descr">USER ID : <label id="transfer_user_id">xxxxx</label></div>
                               <div class="time_line-descr">PART NO : <label id="transfer_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="transfer_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id ="imgdetailtransfer"/>
                           </div>
                         </div>
                       </div>
@@ -411,17 +409,17 @@
                     <div class="timeline-icon">
                       <i class="fas fa-dolly-flatbed" aria-hidden="true"></i>
                     </div>
-                    <div class="content" id="detailpicking">
+                    <div class="content" >
                       <div class="card border-left-warning shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
+                            <div class="col mr-2" id="detailpicking">
                               <h5 class="time_line-title"><label id="picking_user_name">XXX</label></h5>
                               <div class="time_line-descr">USER ID : <label id="picking_user_id">xxxxx</label></div>
                               <div class="time_line-descr">PART NO : <label id="picking_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="picking_scan_date">xxxxx</label></div>
                             </div>
-                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id ="imgdetailpicking"/>
                           </div>
                         </div>
                       </div>
@@ -434,18 +432,18 @@
                     <div class="timeline-icon">
                       <i class="fas fa-shipping-fast" aria-hidden="true"></i>
                     </div>
-                    <div class="content" id="detailshipping">
+                    <div class="content" >
                       <div class="card border-left-primary shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
+                            <div class="col mr-2" id="detailshipping">
                               <h5 class="time_line-title"><label id="shipping_user_name">XXX</label></h5>
                               <div class="time_line-descr">USER ID : <label id="shipping_user_id">xxxxx</label></div>
                               <div class="time_line-descr">PART NO : <label id="shipping_part_no">xxxxx</label></div>
                               <div class="time_line-descr">SCAN DATE : <label id="shipping_scan_date">xxxxx</label>
                               </div>
                             </div>
-                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" />
+                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="img-circle" style="width: 30%;" alt="Cinque Terre" id="imgdetailshipping"/>
                           </div>
                         </div>
                       </div>
@@ -585,52 +583,105 @@
     // var chinputpart = document.getElementById('inputpart');
     // var chinputscantag = document.getElementById('inputscantag');
 
-    if (chdelidate.value == "") {
-      Swal.fire({
-        icon: 'warning',
-        title: 'โปรดตรวจสอบข้อมูลอีกครั้ง',
-        text: 'Are you sure?',
-        confirmButtonColor: '#F7B267',
-      })
-    } else if (chselectplant.value == "Select..." || chselectzone.value == "Select..." || chselectstation.value == "Select...") {
-      Swal.fire({
-        icon: 'warning',
-        title: 'โปรดตรวจสอบข้อมูลอีกครั้ง',
-        text: 'Are you sure?',
-        confirmButtonColor: '#F7B267',
-      })
-    } else if (inputpart != 0) {
+    if (inputscantag != 0) {
       var path = $.ajax({
         method: "post",
-        url: "<?php echo base_url(); ?>Trace_Qgate/searchbypart",
+        url: "<?php echo base_url(); ?>Trace_Qgate/searchByScanTag",
         data: {
-          delidate: delidate,
-          selectplant: selectplant,
-          selectzone: selectzone,
-          selectstation: selectstation,
-          inputpart: inputpart,
+          // delidate: delidate,
+          // selectplant: selectplant,
+          // selectzone: selectzone,
+          // selectstation: selectstation,
+          inputscantag: inputscantag
         }
       })
-    } else if (inputscantag != 0) {
-      var path = $.ajax({
-        method: "post",
-        url: "<?php echo base_url(); ?>Trace_Qgate/searchbyscantag",
-        data: {
-          delidate: delidate,
-          selectplant: selectplant,
-          selectzone: selectzone,
-          selectstation: selectstation,
-          inputscantag: inputscantag,
-        }
+      path.done(function(rs) {
+        var data = JSON.parse(rs)
+        
+        Getmachine(data)
+        //  alert(zone)
+        //  alert(rs[0]["msa_id"])
+
       })
+    } else {
+      if (chdelidate.value == "") {
+        Swal.fire({
+          icon: 'warning',
+          title: 'โปรดตรวจสอบข้อมูลของวันที่อีกครั้ง',
+          text: 'Are you sure?',
+          confirmButtonColor: '#F7B267',
+        })
+      } else if (chselectplant.value == "Select..." || chselectzone.value == "Select..." || chselectstation.value == "Select...") {
+        Swal.fire({
+          icon: 'warning',
+          title: 'โปรดตรวจสอบข้อมูลอีกครั้ง',
+          text: 'Are you sure?',
+          confirmButtonColor: '#F7B267',
+        })
+      } else if (inputpart != 0) {
+        var path = $.ajax({
+          method: "post",
+          url: "<?php echo base_url(); ?>Trace_Qgate/searchbypart",
+          data: {
+            delidate: delidate,
+            selectplant: selectplant,
+            selectzone: selectzone,
+            selectstation: selectstation,
+            inputpart: inputpart,
+          }
+        })
+        path.done(function(rs) {
+
+        })
+      } else {
+        Swal.fire({
+          icon: 'warning',
+          title: 'โปรดตรวจสอบข้อมูล Part no. อีกครั้ง',
+          text: 'Are you sure?',
+          confirmButtonColor: '#F7B267',
+        })
+      }
+
     }
 
 
 
+  }
 
+  function Getmachine(data) {
+    // console.log("data ==> ",data)
+    // console.log("data.zone ==> ",data.zone)
+    var zone = data.zone
+    var mt =" "
+    alert(zone)
+    if (zone === '1') {
+      alert("1")
 
+    } else {
+      // alert("1  else")
+      // detailmachine1
+      $('#detailmachine1').hide()  
+    }
+    if (zone === '2') {
 
+      alert("2")
 
+    } else {
+      alert("2  else")
+    }
+
+    if (zone === '3') {
+      alert("3")
+    } else {
+      alert("3  else")
+    }
+
+    if (zone == '4') {
+      alert("4")
+    } else {
+      alert("else")
+
+    }
   }
 
 

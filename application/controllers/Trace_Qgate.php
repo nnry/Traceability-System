@@ -100,11 +100,28 @@ class Trace_Qgate extends CI_Controller
 		
 
 	}
-	public function searchbyscantag(){
-		$delidate = $_POST["delidate"];
-		$selectplant = $_POST["selectplant"];
-		$selectzone = $_POST["selectzone"];
-		$selectstation = $_POST["selectstation"];
+	public function searchByScanTag(){
+		// $delidate = $_POST["delidate"];
+		// $selectplant = $_POST["selectplant"];
+		// $selectzone = $_POST["selectzone"];
+		// $selectstation = $_POST["selectstation"];
 		$inputscantag = $_POST["inputscantag"];
+
+		// echo "delidate => ",$delidate;
+		// echo "selectplant => ",$selectplant;
+		// echo "selectzone => ",$selectzone;
+		// echo "selectstation => ",$selectstation;
+		// echo "inputscantag => ",$inputscantag;
+
+		$res = $this->backmodel_qgate->ScanTagQgate($inputscantag);
+		$data["tag_id"] = $res[0]["iotc_id"];
+		$data["plant"] = $res[0]["mpa_id"];
+		$data["zone"] = $res[0]["mza_id"];
+		$data["station"] = $res[0]["msa_id"];
+		$data["byUser"] = $res[0]["iotc_create_by"];
+		$data["line"] = $res[0]["ifts_line_cd"];
+		$data["lot"] = $res[0]["ifts_lot_current"];
+		$data["snp"] = $res[0]["ifts_snp"];
+		echo json_encode($data);
 	}
 }

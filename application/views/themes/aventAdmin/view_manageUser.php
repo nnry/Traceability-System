@@ -28,8 +28,8 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <!-- <div class="card-header py" style="width:100%; text-align:right"> -->
-                <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle=modal data-target=#adduser ><i class="fas fa-user-plus fa-sm" ></i> Add User</a> -->
-                <!-- <div class="card-header py-3">
+            <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle=modal data-target=#adduser ><i class="fas fa-user-plus fa-sm" ></i> Add User</a> -->
+            <!-- <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
 
             <!-- </div> -->
@@ -333,7 +333,7 @@
                     function saveedit() {
                         var editempcode = $("#editempcode").val();
                         var editgroup = $("#editgroup").val();
-editgroup                        var editemail = $("#editemailaddress").val();
+                        var editemail = $("#editemailaddress").val();
 
                         var email = document.getElementById("editemailaddress");
 
