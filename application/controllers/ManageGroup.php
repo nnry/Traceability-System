@@ -57,7 +57,7 @@ class manageGroup extends CI_Controller
 	{
 		$empcode = $this->session->userdata("empcode");
 		$spg_id = $_GET["spg_id"];
-		$res = $this->backoffice_model->swiftStatusGrop($spg_id,$empcode);
+		$res = $this->backoffice_model->swiftStatusGrop($spg_id, $empcode);
 		// echo date('h:i:s')."<br>";
 		echo json_encode($res);
 	}
@@ -65,7 +65,7 @@ class manageGroup extends CI_Controller
 	{
 		$empcode = $this->session->userdata("empcode");
 		$spd_id = $_GET["spd_id"];
-		$res = $this->backoffice_model->swiftStatusDetail($spd_id,$empcode);
+		$res = $this->backoffice_model->swiftStatusDetail($spd_id, $empcode);
 		// // echo date('h:i:s')."<br>";
 		echo json_encode($res);
 		// echo $res;
@@ -82,12 +82,18 @@ class manageGroup extends CI_Controller
 		$empcode = $this->session->userdata("empcode");
 		$id = $_POST["id"];
 		$name = $_POST["name"];
-		$check = $this->backoffice_model->checkPerAdd($name);
-		if ($check == "true") {
-			$res = $this->backoffice_model->saveEditNameGroup($id, $name, $empcode);
-			echo $res;
+
+		$chnormol = $this->backoffice_model->normalPer($id);
+		if ($chnormol == $name) {
+			echo "true";
 		} else {
-			echo "false";
+			$check = $this->backoffice_model->checkPerAdd($name);
+			if ($check == "true") {
+				$res = $this->backoffice_model->saveEditNameGroup($id, $name, $empcode);
+				echo $res;
+			} else {
+				echo "false";
+			}
 		}
 	}
 	public function addPergroup()
@@ -99,9 +105,9 @@ class manageGroup extends CI_Controller
 		if ($check == "true") {
 			$res = $this->backoffice_model->insertPermissionGroup($name, $empcode);
 			echo $res;
-		} else if ($check == "false"){
+		} else if ($check == "false") {
 			echo "repeat";
-		}else{
+		} else {
 			echo "false";
 		}
 	}

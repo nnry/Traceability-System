@@ -11,7 +11,7 @@
         setTimeout("preventBack()", 0);
         window.onunload = function() {
             null
-            // window.location.href = "<?php echo base_url() ?>Login/Account"
+            
         };
 
     </script>

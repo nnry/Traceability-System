@@ -4,6 +4,17 @@
 <link rel="shortcut icon" href="<?php echo base_url() . $css_url; ?>img/Logo2.png" />
 
 <head>
+<script type="text/javascript">
+        function preventBack() {
+            window.history.forward();
+        }
+        setTimeout("preventBack()", 0);
+        window.onunload = function() {
+            null
+            
+        };
+
+    </script>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -110,22 +121,12 @@
 <script type="text/javascript">
     // $(document).ready(function() {
     //     window.history.pushState(null, "", window.location.href);
-    //     // window.history.forward(null, "", window.location.href);
+    // //    window.history.forward(null, "", window.location.href);
     //     window.onpopstate = function() {
     //         window.history.pushState(null, "", window.location.href);
     //     };
 
     // });
-    // function preventBack() {
-    //         window.history.forward();
-    //     }
-    //     setTimeout("preventBack()", 0);
-    //     window.onunload = function() {
-    //         null
-    //         // window.location.href = "<?php echo base_url() ?>Login/Account"
-    //     };
-
-
 
 
 
@@ -149,7 +150,7 @@
                 title: 'Error',
                 text: 'Please check the uaername and password again.',
                 confirmButtonColor: '#F7B267',
-                
+
             })
         } else if (pass.value == "") {
             Swal.fire({
@@ -187,11 +188,17 @@
                     }).then(function() {
                         window.location.href = "<?php echo base_url() ?>Manage/Homepage";
                     })
-                } else if(rs === "duplicate"){
+                } else if (rs === "duplicate") {
                     Swal.fire({
                         icon: 'error',
                         title: 'You failed to signed up',
                         text: 'โปรดตรวจสอบสถานะการใช้งาน !!',
+                    })
+                } else if (rs === "passfail") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'You failed to signed up',
+                        text: 'โปรดตรวจสอบรหัสผ่านของท่าน!!',
                     })
                 } else {
                     Swal.fire({

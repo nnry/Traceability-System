@@ -587,6 +587,7 @@
     // var chinputscantag = document.getElementById('inputscantag');
 
     if (inputscantag != 0) {
+      Getwashing(inputscantag);
       var path = $.ajax({
         method: "post",
         url: "<?php echo base_url(); ?>Trace_Qgate/searchByScanTag",
@@ -599,11 +600,14 @@
         }
       })
       path.done(function(rs) {
-        var data = JSON.parse(rs)
-
-        Getmachine(data)
-        //  alert(zone)
-        //  alert(rs[0]["msa_id"])
+        // alert(rs)
+        if (rs == "undefined") {
+          // alert("wow");
+          getNotFoundmachine()
+        } else {
+          var data = JSON.parse(rs)
+          Getmachine(data)
+        }
 
       })
     } else {
@@ -635,6 +639,7 @@
         })
         path.done(function(rs) {
 
+
         })
       } else {
         Swal.fire({
@@ -652,6 +657,7 @@
   }
 
   function Getmachine(data) {
+    // alert(data)
     // console.log("data ==> ",data)
     // console.log("data.zone ==> ",data.zone)
     var zone = data.zone
@@ -709,6 +715,50 @@
       $("#imgdetailmachine4").hide();
 
     }
+  }
+
+  function Getwashing(inputscantag) {
+
+    var path = $.ajax({
+      method: "get",
+      url: "<?php echo base_url(); ?>Trace_Qgate/searchwashing?inputscantag=" + inputscantag,
+
+    })
+    path.done(function(rs) {
+      // alert(rs)
+
+      if (rs == "undefined") {
+        $("#detailwashing").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+        $("#imgdetailwashing").hide();
+
+      } else {
+        var data = JSON.parse(rs)
+        $("#washing_user_name").html(data.line);
+        $("#washing_user_id").html(data.byUser);
+        $("#washing_part_no").html(data.partNo);
+        $("#washing_scan_date").html(data.date);
+
+      }
+
+
+    })
+
+
+  }
+
+  function getNotFoundmachine() {
+    $("#detailmachine1").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+    $("#imgdetailmachine1").hide();
+
+    $("#detailmachine2").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+    $("#imgdetailmachine2").hide();
+
+    $("#detailmachine3").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+    $("#imgdetailmachine3").hide();
+
+    $("#detailmachine4").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+    $("#imgdetailmachine4").hide();
+
   }
 
 

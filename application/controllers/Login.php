@@ -13,8 +13,11 @@ class Login extends CI_Controller
 		parent::__construct();
 
 		## asset config
+
 		$theme = $this->config->item('theme');
 		$this->theme = $theme;
+		$this->load->library('session');
+
 
 		$this->asset_url = $this->config->item('asset_url');
 		$this->js_url = $this->config->item('js_url');
@@ -31,18 +34,7 @@ class Login extends CI_Controller
 
 	}
 
-	public function Account()
-	{
-		// $this->session->sess_destroy();
-		// unset(session_id());
-		$this->load->library('session');
-		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 
-		$this->template->set_master_template('themes/' . $this->theme . '/tpl_login.php');
-		$this->template->write('page_title', '' . $setTitle . 'TBKK | ');
-		// $this->template->write_view('page_content', 'themes/'. $this->theme .'/view_login.php');
-		$this->template->render();
-	}
 
 
 
@@ -68,6 +60,7 @@ class Login extends CI_Controller
 			$data = $this->backoffice_model->getname($code);
 
 			if ($data == true) {
+
 				$session_data1 = array(
 					'id' => $data['sa_id'],
 					'empcode' => $data['sa_code'],
@@ -196,57 +189,63 @@ class Login extends CI_Controller
 							}
 						} else {
 							// echo $pass ,"==", $passex;
-							echo "false";
+							echo "passfail";
 						}
 					}
 				} else {
 					$checkuser = $this->backoffice_model->checkUserAdd($usercode);
 					if ($checkuser == "true") {
-						$rs = $this->backoffice_model->addexplainer($usercode, $fname, $lname, $email, $passex, $conphase, $group, $usercode);
-						echo $rs;
-						$data = $this->backoffice_model->getname($usercode);
-						if ($data == true) {
-							$session_data1 = array(
-								'id' => $data['sa_id'],
-								'empcode' => $data['sa_code'],
-								'fname' => $data['sa_fname'],
-								'lname' => $data['sa_lname'],
-								'email' => $data['sa_email'],
-								'phase' => $data['mpa_name'],
-								'login' => "OK"
-							);
-							$this->session->set_userdata($session_data1);
-							$id = $data['sa_id'];
+						if ($passex == $pass) {
+							$rs = $this->backoffice_model->addexplainer($usercode, $fname, $lname, $email, $passex, $conphase, $group, $usercode);
+							echo $rs;
+							$data = $this->backoffice_model->getname($usercode);
+							if ($data == true) {
+								$session_data1 = array(
+									'id' => $data['sa_id'],
+									'empcode' => $data['sa_code'],
+									'fname' => $data['sa_fname'],
+									'lname' => $data['sa_lname'],
+									'email' => $data['sa_email'],
+									'phase' => $data['mpa_name'],
+									'login' => "OK"
+								);
+								$this->session->set_userdata($session_data1);
+								$id = $data['sa_id'];
 
-							$cheklog = $this->backoffice_model->checkLog_login($id);
+								$cheklog = $this->backoffice_model->checkLog_login($id);
 
-							if ($cheklog == false) {
-								$loglogin = $this->backoffice_model->insertlog($id);
-							} else {
-								$null_log = $cheklog["la_logout"];
-
-								if ($null_log == null) {
-									$chmax = $this->backoffice_model->maxlogid($id);
-									$loglogin = $this->backoffice_model->insertlogaddupdate($id, $chmax);
-									// echo $loglogin;
-
-								} else {
+								if ($cheklog == false) {
 									$loglogin = $this->backoffice_model->insertlog($id);
-									// echo $loglogin;
+								} else {
+									$null_log = $cheklog["la_logout"];
+
+									if ($null_log == null) {
+										$chmax = $this->backoffice_model->maxlogid($id);
+										$loglogin = $this->backoffice_model->insertlogaddupdate($id, $chmax);
+										// echo $loglogin;
+
+									} else {
+										$loglogin = $this->backoffice_model->insertlog($id);
+										// echo $loglogin;
+									}
 								}
 							}
+						} else {
+							echo "passfail";
 						}
 					} else {
 						echo "duplicate";
 					}
 				}
 			} else {
-				echo "2 == > false";
+				echo "false";
 			}
 		}
 	}
 	public function logout()
+
 	{
+
 		$id_log = $_GET["id"];
 
 		$chesa_id = $this->backoffice_model->checkLog_login($id_log);
@@ -261,6 +260,7 @@ class Login extends CI_Controller
 		if ($data_status == "0") {
 			$res = $this->backoffice_model->logout($chmax);
 			echo $res;
+			session_destroy();
 		}
 	}
 	// public function tt()
@@ -269,6 +269,46 @@ class Login extends CI_Controller
 	// 	$data = $this->backoffice_model->getname($code);
 	// 	echo json_encode($data);
 	// }
+	public function Account()
+	{
+		// session_start();
+		// $session_data1 = "vv";
+		// if (isset($session_data1)) {
+		// 	echo "มีจ้าาาาาาาาาา";
+		// } else {
+		// 	echo "ไม่มีจ้าาาาาาาาาา ไอ่หน้าโง่";
+		// };
+		// session_destroy();
+
+		// $this->session->sess_destroy();
+		// unset(session_id());
 
 
+		// if (isset($session_data1 )) {
+		// 	$setTitle = "Traceability | Homepage";
+
+		// 	$empcode = $this->session->userdata("empcode");
+		// 	$data = $this->backoffice_model->getname($empcode);
+		// 	$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
+		// 	$data["user"] = $data["sa_code"];
+		// 	$data["id"] = $data["sa_id"];
+		// 	// $data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
+		// 	$setTitle = "Traceability | Homepage";
+
+
+		// 	$this->template->write('page_title', $setTitle . ' ');
+		// 	$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
+		// 	$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
+		// 	$this->template->write_view('page_content', 'themes/' . $this->theme . '/view_homepage.php');
+		// 	$this->template->write_view('page_footer', 'themes/' . $this->theme . '/first_set/view_footer.php');
+		// 	$this->template->render();
+		// } else {
+		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+
+		$this->template->set_master_template('themes/' . $this->theme . '/tpl_login.php');
+		$this->template->write('page_title', '' . $setTitle . 'TBKK | ');
+		// $this->template->write_view('page_content', 'themes/'. $this->theme .'/view_login.php');
+		$this->template->render();
+		// }
+	}
 }

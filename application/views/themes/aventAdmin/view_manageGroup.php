@@ -59,7 +59,7 @@
                             foreach ($groupper as $value1) {
                                 $j++;
                                 echo "<tr>";
-                                echo "<td>" . $j. "</td>";
+                                echo "<td>" . $j . "</td>";
                                 echo "<td>" . $value1["spg_name"] . "</td>";
                                 if ($value1["spg_status"] == "1") {
                                     echo "<td>
@@ -252,7 +252,7 @@
 
 
     <!-- Footer -->
-  
+
     <!-- <footer class="sticky-footer bg-white">
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
@@ -336,7 +336,7 @@
             tb += "</tr>"
             j++
             i++
-        })
+        }) 
         // alert(tb)
         $("#tbsubmenu").html(tb)
     }
@@ -561,32 +561,50 @@
                 confirmButtonColor: '#F7B267',
             })
         } else {
-            var path = $.ajax({
-                method: "post",
-                url: "<?php echo base_url(); ?>manageGroup/saveEditPer",
-                data: {
-                    id: id,
-                    name: name
-                }
-            })
-            path.done(function(rs) {
-                //alert(rs);
-                if (rs === "true") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Successfully',
-                        text: 'You have successfully edit  name group permission',
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
+            if (name != 0) {
+                if (isValidInput(name)) {
+                    // $("#alertinput").html("<font color='green'>ผ่าน</font>");
+                    // alert("อีเมล์ถูกต้อง")
+                    var path = $.ajax({
+                        method: "post",
+                        url: "<?php echo base_url(); ?>manageGroup/saveEditPer",
+                        data: {
+                            id: id,
+                            name: name
+                        }
                     })
+                    path.done(function(rs) {
+                        //alert(rs);
+                        if (rs === "true") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Successfully',
+                                text: 'You have successfully edit  name group permission',
+                            }).then(function() {
+                                window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'ชื่อซ้ำ! โปรดตรวจสอบชื่ออีกครั้ง',
+                                text: 'You failed to edit  name group permission',
+                            })
+                        }
+                    })
+
                 } else {
+                    // $("#alertinput").html("<font color='red'>โปรดตรวจสอบชื่ออีกครั้ง</font>");
+                    // alert("อีเมล์ไม่ถูกต้อง")
                     Swal.fire({
                         icon: 'error',
-                        title: 'ชื่อซ้ำ! โปรดตรวจสอบชื่ออีกครั้ง',
-                        text: 'You failed to edit  name group permission',
+                        title: 'You failed to add menu',
+                        text: 'ไม่สามารถใช้ตัวอักษรพิเศษได้'
                     })
+
                 }
-            })
+
+            }
+
         }
 
 

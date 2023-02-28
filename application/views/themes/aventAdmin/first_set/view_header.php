@@ -120,6 +120,7 @@
               url: "<?php echo base_url(); ?>Login/logout?id=" + $id,
           })
           path.done(function(rs) {
+            
             //   alert(rs)
             //   console.log(rs)
               window.location.href = "<?php echo base_url() ?>Login/Account";

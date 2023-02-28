@@ -7,7 +7,7 @@ class Backoffice_model extends CI_Model
     {
         //"EXEC [dbo].[GET_CHCEKUSERLOGIN] @sa_code = '{$code} AND @sa_password ='{$pass}'";
 
-        $sql = "EXEC [dbo].[GET_CHCEK_USER_LOGIN] @EMP_CODE = '{$code}' , @EMP_PASS ='{$pass}'";
+        $sql = "EXEC [dbo].[GET_CHCEK_USER_LOGIN] @EMP_CODE = '{$code}', @EMP_PASS ='{$pass}'";
         $res = $this->db->query($sql);
         $row = $res->result_array();
         // return $row;
@@ -64,7 +64,7 @@ class Backoffice_model extends CI_Model
     {
         $sql = "EXEC [dbo].[GET_CHCEK_PASSWORD] @EMP_PASS ='{$pass}'";
         $res = $this->db->query($sql);
-        $row = $res->result_array();
+        // $row = $res->result_array();
         // if($row) {
         //     return "true";
         // } else {
@@ -99,6 +99,7 @@ class Backoffice_model extends CI_Model
             return "false"; //ไม่มี
         }
     }
+    
     public function checkSubmenu($menu)
     {
         $sql = "EXEC [dbo].[GET_CHECK_SUBMENU] @MN_NAME= '{$menu}'";
@@ -139,6 +140,14 @@ class Backoffice_model extends CI_Model
         $res = $this->db->query($sql);
         $row = $res->result_array();
         $met = $row[0]["sm_name"];
+        return $met;
+    }
+    public function normalPer($id)
+    {
+        $sql = "EXEC [dbo].[GET_CHECK_NAME_GROUP] @GROUP_ID= '{$id}'";
+        $res = $this->db->query($sql);
+        $row = $res->result_array();
+        $met = $row[0]["spg_name"];
         return $met;
     }
     public function checkEmail($editemail)

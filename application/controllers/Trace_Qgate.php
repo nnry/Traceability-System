@@ -114,16 +114,43 @@ class Trace_Qgate extends CI_Controller
 		// echo "inputscantag => ",$inputscantag;
 
 		$res = $this->backmodel_qgate->ScanTagQgate($inputscantag);
-		$data["tag_id"] = $res[0]["iotc_id"];
-		$data["plant"] = $res[0]["mpa_id"];
-		$data["zone"] = $res[0]["mza_id"];
-		$data["station"] = $res[0]["msa_id"];
-		$data["byUser"] = $res[0]["iotc_create_by"];
-		$data["line"] = $res[0]["ifts_line_cd"];
-		$data["lot"] = $res[0]["ifts_lot_current"];
-		$data["snp"] = $res[0]["ifts_snp"];
-		$data["part_no"] = $res[0]["ifts_part_no"];
-		$data["date"] = $res[0]["date"];
-		echo json_encode($data);
+		if($res == false){
+			echo "undefined";
+		}else{
+			$data["tag_id"] = $res[0]["iotc_id"];
+			$data["plant"] = $res[0]["mpa_id"];
+			$data["zone"] = $res[0]["mza_id"];
+			$data["station"] = $res[0]["msa_id"];
+			$data["byUser"] = $res[0]["iotc_create_by"];
+			$data["line"] = $res[0]["ifts_line_cd"];
+			$data["lot"] = $res[0]["ifts_lot_current"];
+			$data["snp"] = $res[0]["ifts_snp"];
+			$data["part_no"] = $res[0]["ifts_part_no"];
+			$data["date"] = $res[0]["date"];
+	
+			echo json_encode($data);
+		}
+	
+	}
+
+	public function searchwashing(){
+
+		$inputscantag =$_GET["inputscantag"];
+		// echo $inputscantag;
+		$res = $this->backmodel_qgate->searchWashing($inputscantag);
+		
+		if($res == false){
+			echo "undefined";
+		}else{
+			$data["tagScan"] = $res[0]["iotc_tag_qgate"];
+			$data["tagId"] = $res[0]["ifts_id"];
+			$data["line"] = $res[0]["ifts_line_cd"];
+			$data["partNo"] = $res[0]["ifts_part_no"];
+			$data["date"] = $res[0]["datewash"];
+			$data["byUser"] = $res[0]["iodc_created_by"];
+
+			echo json_encode($data);
+		}
+
 	}
 }

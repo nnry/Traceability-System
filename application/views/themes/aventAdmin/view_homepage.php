@@ -1,3 +1,4 @@
+
 <!-- Main Content -->
 <div id="content">
 
@@ -313,17 +314,16 @@
 
 </div>
 <!-- End of Main Content -->
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
-  <script type="text/javascript">
-    //     $(document).ready(function() {
-    //     window.history.pushState(null, "", window.location.href);
-    //     // window.history.forward(null, "", window.location.href);
-    //     window.onpopstate = function() {
-    //         window.history.pushState(null, "", window.location.href);
-    //     };
+<!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        window.history.pushState(null, "", window.location.href);
+        // window.history.forward(null, "", window.location.href);
+        window.onpopstate = function() {
+            window.history.pushState(null, "", window.location.href);
+        };
 
-    // });
-    
+    });
 
-  </script>
+</script> -->
