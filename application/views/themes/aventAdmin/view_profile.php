@@ -71,7 +71,7 @@
                                 </div>
 
                                 <div class="card-body col-md-10 row mb-3">
-                                <label class="col-sm-4 col-form-label">Plant :</label>
+                                    <label class="col-sm-4 col-form-label">Plant :</label>
                                     <div class="col-sm-8">
                                         <input ng-model="rePassword" type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" ng-change="checkre()" id="phase" value="<?php echo $phase; ?>" disabled />
                                     </div>
@@ -101,9 +101,19 @@
     <?php
     session_reset();
     ?>
+
 </body>
 
 </html>
+<!-- Footer -->
+<!-- <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Your Website 2020</span>
+            </div>
+        </div>
+    </footer> -->
+<!-- End of Footer -->
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>

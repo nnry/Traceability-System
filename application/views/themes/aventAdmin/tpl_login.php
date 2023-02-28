@@ -46,8 +46,8 @@
                     <div>
                         <div class="card-body">
 
-                            <div class="text-center">
-                                <img src="<?php echo base_url() . $image_url; ?>/img/Logo2.png" width="130" height="130"><br><br>
+                            <div class="text-center"><br>
+                                <img src="<?php echo base_url() . $image_url; ?>/img/Logo2.png" width="110" height="110"><br><br>
                                 <h1 class="h10S text-gray-900 mb-5">Traceability</h1>
                             </div>
                             <form class="user">
@@ -57,17 +57,18 @@
                                 <div class="form-group">
                                     <input type="password" class="form-control form-control-user" id="emppass" placeholder="Enter User Password">
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <div class="custom-control custom-checkbox small">
                                         <input type="checkbox" class="custom-control-input" id="customCheck">
                                         <label class="custom-control-label" for="customCheck">Remember Me</label>
                                     </div>
 
-                                </div>
+                                </div> -->
+                                <hr>
                                 <a class="btn btn-primary btn-user btn-block" id="login">
                                     Login
-                                </a>
-                                <hr>
+                                </a><br>
+                                <!-- <hr> -->
                                 <!-- <div class="text-center">
                                     <a href="<?php echo base_url() ?>Forgot_Password/forgotPassword" class="small" href="forgot-password.html">Forgot Password?</a>
                                 </div> -->

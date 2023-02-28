@@ -48,7 +48,7 @@ class ResetPassword extends CI_Controller
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
 		$this->template->write_view('page_content', 'themes/' . $this->theme . '/view_resetPassword.php');
-		// $this->template->write_view('page_footer', 'themes/'. $this->theme .'/first_set/view_footer.php');
+		$this->template->write_view('page_footer', 'themes/'. $this->theme .'/first_set/view_footer.php');
 
 		$this->template->render();
 	}
