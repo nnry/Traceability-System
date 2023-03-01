@@ -272,7 +272,35 @@ class Login extends CI_Controller
 	public function Account()
 	{
 		// session_start();
-		// $session_data1 = "vv";
+		$session = $this->session->userdata('id');
+		if ($session == "") {
+			// echo "ไม่มีจ้าาาาาาาาาา ไอ่หน้าโง่";
+			$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+
+			$this->template->set_master_template('themes/' . $this->theme . '/tpl_login.php');
+			$this->template->write('page_title', '' . $setTitle . 'TBKK | ');
+			// $this->template->write_view('page_content', 'themes/'. $this->theme .'/view_login.php');
+			$this->template->render();
+		} else {
+			// echo "มีจ้าาาาาาาาาา";
+			// echo $session;
+			$empcode = $this->session->userdata("empcode");
+			$data = $this->backoffice_model->getname($empcode);
+			$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
+			$data["user"] = $data["sa_code"];
+			$data["id"] = $data["sa_id"];
+			// $data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
+			$setTitle = "Traceability | Homepage";
+
+
+			$this->template->write('page_title', $setTitle . ' ');
+			$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
+			$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
+			$this->template->write_view('page_content', 'themes/' . $this->theme . '/view_homepage.php');
+			$this->template->write_view('page_footer', 'themes/' . $this->theme . '/first_set/view_footer.php');
+			$this->template->render();
+		}
+
 		// if (isset($session_data1)) {
 		// 	echo "มีจ้าาาาาาาาาา";
 		// } else {
@@ -303,12 +331,7 @@ class Login extends CI_Controller
 		// 	$this->template->write_view('page_footer', 'themes/' . $this->theme . '/first_set/view_footer.php');
 		// 	$this->template->render();
 		// } else {
-		$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
 
-		$this->template->set_master_template('themes/' . $this->theme . '/tpl_login.php');
-		$this->template->write('page_title', '' . $setTitle . 'TBKK | ');
-		// $this->template->write_view('page_content', 'themes/'. $this->theme .'/view_login.php');
-		$this->template->render();
 		// }
 	}
 }
