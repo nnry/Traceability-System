@@ -62,7 +62,7 @@ class Trace_Qgate extends CI_Controller
 		$data["user"] = $data["sa_code"];
 		$data["id"] = $data["sa_id"];
 
-		$data["plantqgate"]=$this->backmodel_qgate->getplant();
+		$data["plantqgate"] = $this->backmodel_qgate->getplant();
 
 
 		// $data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
@@ -71,36 +71,38 @@ class Trace_Qgate extends CI_Controller
 		$this->template->write('page_title', $setTitle . ' ');
 		$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
 		$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
-		$this->template->write_view('page_content', 'themes/' . $this->theme . '/set_traceability/view_flowqgate.php',$data);
+		$this->template->write_view('page_content', 'themes/' . $this->theme . '/set_traceability/view_flowqgate.php', $data);
 		$this->template->write_view('page_footer', 'themes/' . $this->theme . '/first_set/view_footer.php');
 		$this->template->render();
 	}
 
-	public function getzonebyid(){
+	public function getzonebyid()
+	{
 		$idplant = $_GET["para"];
 		$res["byid"] = $this->backmodel_qgate->getzoneby_id($idplant);
 		$res["zoneall"] = $this->backmodel_qgate->getzoneall();
 		echo json_encode($res);
 	}
-	public function getstationload(){
+	public function getstationload()
+	{
 		$idstaion = $_GET["zone"];
 		$res["byid"] = $this->backmodel_qgate->getstationby_id($idstaion);
-		$res["all"]= $this->backmodel_qgate->getloadstation();
+		$res["all"] = $this->backmodel_qgate->getloadstation();
 		echo json_encode($res);
 	}
-	public function getpdf(){
-
+	public function getpdf()
+	{
 	}
-	public function searchbypart(){
+	public function searchbypart()
+	{
 		$delidate = $_POST["delidate"];
 		$selectplant = $_POST["selectplant"];
 		$selectzone = $_POST["selectzone"];
 		$selectstation = $_POST["selectstation"];
 		$inputpart = $_POST["inputpart"];
-		
-
 	}
-	public function searchByScanTag(){
+	public function searchByScanTag()
+	{
 		// $delidate = $_POST["delidate"];
 		// $selectplant = $_POST["selectplant"];
 		// $selectzone = $_POST["selectzone"];
@@ -114,9 +116,9 @@ class Trace_Qgate extends CI_Controller
 		// echo "inputscantag => ",$inputscantag;
 
 		$res = $this->backmodel_qgate->ScanTagQgate($inputscantag);
-		if($res == false){
+		if ($res == false) {
 			echo "undefined";
-		}else{
+		} else {
 			$data["tag_id"] = $res[0]["iotc_id"];
 			$data["plant"] = $res[0]["mpa_id"];
 			$data["zone"] = $res[0]["mza_id"];
@@ -127,21 +129,21 @@ class Trace_Qgate extends CI_Controller
 			$data["snp"] = $res[0]["ifts_snp"];
 			$data["part_no"] = $res[0]["ifts_part_no"];
 			$data["date"] = $res[0]["date"];
-	
+
 			echo json_encode($data);
 		}
-	
 	}
 
-	public function searchwashing(){
+	public function searchwashing()
+	{
 
-		$inputscantag =$_GET["inputscantag"];
+		$inputscantag = $_GET["inputscantag"];
 		// echo $inputscantag;
 		$res = $this->backmodel_qgate->searchWashing($inputscantag);
-		
-		if($res == false){
+
+		if ($res == false) {
 			echo "undefined";
-		}else{
+		} else {
 			$data["tagScan"] = $res[0]["iotc_tag_qgate"];
 			$data["tagId"] = $res[0]["ifts_id"];
 			$data["line"] = $res[0]["ifts_line_cd"];
@@ -151,6 +153,26 @@ class Trace_Qgate extends CI_Controller
 
 			echo json_encode($data);
 		}
+	}
+	public function searchQgateByScan()
+	{
 
+		$inputscantag = $_GET["inputscantag"];
+		// echo $inputscantag;
+		$res = $this->backmodel_qgate->searchQgate($inputscantag);
+
+		if ($res == false) {
+			echo "undefined";
+		} else {
+			$data["tagScan"] = $res[0]["iotc_tag_qgate"];
+			$data["tagId"] = $res[0]["iotc_id"];
+			$data["line"] = $res[0]["ifts_line_cd"];
+			$data["partNo"] = $res[0]["ifts_part_no"];
+			$data["date"] = $res[0]["date"];
+			$data["byUserName"] = $res[0]["ss_emp_name"];
+			$data["byUserId"] = $res[0]["ss_id"];
+
+			echo json_encode($data);
+		}
 	}
 }

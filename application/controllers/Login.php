@@ -301,37 +301,5 @@ class Login extends CI_Controller
 			$this->template->render();
 		}
 
-		// if (isset($session_data1)) {
-		// 	echo "มีจ้าาาาาาาาาา";
-		// } else {
-		// 	echo "ไม่มีจ้าาาาาาาาาา ไอ่หน้าโง่";
-		// };
-		// session_destroy();
-
-		// $this->session->sess_destroy();
-		// unset(session_id());
-
-
-		// if (isset($session_data1 )) {
-		// 	$setTitle = "Traceability | Homepage";
-
-		// 	$empcode = $this->session->userdata("empcode");
-		// 	$data = $this->backoffice_model->getname($empcode);
-		// 	$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
-		// 	$data["user"] = $data["sa_code"];
-		// 	$data["id"] = $data["sa_id"];
-		// 	// $data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
-		// 	$setTitle = "Traceability | Homepage";
-
-
-		// 	$this->template->write('page_title', $setTitle . ' ');
-		// 	$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
-		// 	$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
-		// 	$this->template->write_view('page_content', 'themes/' . $this->theme . '/view_homepage.php');
-		// 	$this->template->write_view('page_footer', 'themes/' . $this->theme . '/first_set/view_footer.php');
-		// 	$this->template->render();
-		// } else {
-
-		// }
 	}
 }

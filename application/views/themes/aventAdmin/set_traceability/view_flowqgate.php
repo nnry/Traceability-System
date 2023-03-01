@@ -587,7 +587,11 @@
     // var chinputscantag = document.getElementById('inputscantag');
 
     if (inputscantag != 0) {
-      Getwashing(inputscantag);
+      getwashing(inputscantag);
+      getQgate(inputscantag);
+      getTransfer(inputscantag);
+      getPicking(inputscantag);
+      getShipping(inputscantag);
       var path = $.ajax({
         method: "post",
         url: "<?php echo base_url(); ?>Trace_Qgate/searchByScanTag",
@@ -717,7 +721,7 @@
     }
   }
 
-  function Getwashing(inputscantag) {
+  function getwashing(inputscantag) {
 
     var path = $.ajax({
       method: "get",
@@ -761,7 +765,106 @@
 
   }
 
+  function getQgate(inputscantag) {
+    var path = $.ajax({
+      method: "get",
+      url: "<?php echo base_url(); ?>Trace_Qgate/searchQgateByScan?inputscantag=" + inputscantag,
 
+    })
+    path.done(function(rs) {
+      // alert(rs)
+
+      if (rs == "undefined") {
+        $("#detailqgate").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+        $("#imgdetailqgate").hide();
+
+      } else {
+        var data = JSON.parse(rs)
+        $("#qgate_user_name").html(data.byUserName);
+        $("#qgate_user_id").html(data.byUserId);
+        $("#qgate_part_no").html(data.partNo);
+        $("#qgate_scan_date").html(data.date);
+
+      }
+
+
+    })
+  }
+  function getTransfer(inputscantag) {
+    var path = $.ajax({
+      method: "get",
+      url: "<?php echo base_url(); ?>Trace_Qgate/searchQgateByScan?inputscantag=" + inputscantag,
+
+    })
+    path.done(function(rs) {
+      // alert(rs)
+
+      if (rs == "undefined") {
+        $("#detailtransfer").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+        $("#imgdetailtransfer").hide();
+
+      } else {
+        var data = JSON.parse(rs)
+        $("#transfer_user_name").html(data.byUserName);
+        $("#transfer_user_id").html(data.byUserId);
+        $("#transfer_part_no").html(data.partNo);
+        $("#transfer_scan_date").html(data.date);
+
+      }
+
+
+    })
+  }
+  function getPicking(inputscantag) {
+    var path = $.ajax({
+      method: "get",
+      url: "<?php echo base_url(); ?>Trace_Qgate/searchQgateByScan?inputscantag=" + inputscantag,
+
+    })
+    path.done(function(rs) {
+      // alert(rs)
+
+      if (rs == "undefined") {
+        $("#detailpicking").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+        $("#imgdetailpicking").hide();
+
+      } else {
+        var data = JSON.parse(rs)
+        $("#picking_user_name").html(data.byUserName);
+        $("#picking_user_id").html(data.byUserId);
+        $("#picking_part_no").html(data.partNo);
+        $("#picking_scan_date").html(data.date);
+
+      }
+
+
+    })
+  }
+  function getShipping(inputscantag) {
+    var path = $.ajax({
+      method: "get",
+      url: "<?php echo base_url(); ?>Trace_Qgate/searchQgateByScan?inputscantag=" + inputscantag,
+
+    })
+    path.done(function(rs) {
+      // alert(rs)
+
+      if (rs == "undefined") {
+        $("#detailshipping").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+        $("#imgdetailshipping").hide();
+
+      } else {
+        var data = JSON.parse(rs)
+        $("#shipping_user_name").html(data.byUserName);
+        $("#shipping_user_id").html(data.byUserId);
+        $("#shipping_part_no").html(data.partNo);
+        $("#shipping_scan_date").html(data.date);
+
+      }
+
+
+    })
+  }
 
   // function createPDF($html, $filename='', $download=TRUE, $paper='A4', $orientation='portrait'){
   //       $dompdf = new Dompdf\DOMPDF();

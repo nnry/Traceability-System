@@ -69,6 +69,18 @@ class Backmodel_qgate extends CI_Model
             return false;
         }
     }
+    public function searchQgate($inputscantag){
+        $this->EXP = $this->load->database('qgate',true);
+        $sql = "EXEC [dbo].[API_SEARCH_QGATE] @TAG_QGATE = '{$inputscantag}'";
+        $res = $this->EXP->query($sql);
+        // $row = $res->result_array();
+        if ($res->num_rows() != 0) {
+            $result = $res->result_array();
+            return $result;;
+        } else {
+            return false;
+        }
+    }
     
 
 
