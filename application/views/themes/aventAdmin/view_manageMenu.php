@@ -423,9 +423,10 @@
                     }
                 })
 
-            } else {
-                window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";
             }
+            //  else {
+            //     window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";
+            // }
 
         })
 
@@ -465,9 +466,10 @@
                     }
                 })
 
-            } else {
-                window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";
             }
+            //  else {
+            //     window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";
+            // }
 
         })
 

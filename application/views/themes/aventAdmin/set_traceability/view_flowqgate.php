@@ -111,6 +111,29 @@
       -webkit-animation: ptAiguille 120s linear infinite;
       animation: ptAiguille 120s linear infinite;
     }
+
+    /* .swal2-close {
+      z-index: 2;
+      align-items: center;
+      justify-content: center;
+      width: 1.2em;
+      height: 1.2em;
+      margin-top: 0;
+      margin-right: 0;
+      margin-bottom: -1.2em;
+      padding: 0;
+      overflow: hidden;
+      transition: color .1s, box-shadow .1s;
+      border: none;
+      border-radius: 5px;
+      background: rgba(0, 0, 0, 0);
+      color: #ccc;
+      font-family: serif;
+      font-family: monospace;
+      font-size: 2.5em;
+      cursor: pointer;
+      justify-self: end;
+    } */
   </style>
 
   <!-- Begin Page Content -->
@@ -200,24 +223,24 @@
         </div>
       </div>
       <div class="col-lg mb-3 text-right">
-        <button type="submit" class="btn btn-warning" id="btnsearchqgate">Submit</button>
+        <button type="submit" class="btn btn-warning" id="btnsearchqgate" onclick='searchqgate()'>Submit</button>
       </div>
     </div>
 
     <!-- Flow -->
-    <div class="card shadow mb-4"><br>
+    <div class="card shadow mb-4" id="flowTrace"><br>
       <div class="card-body ">
         <div class="container">
           <div class="row">
             <div class="col">
               <div class="main-timeline">
                 <div class="timeline">
-                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
+                  <a class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">COMING SOON</span>
                     <div class="timeline-icon">
                       <i class="far fa-clock" aria-hidden="true"></i>
                     </div>
-                    <div class="content" id="detailcomingsoon">
+                    <div class="content" id="detailcomingsoon" onclick="clickcoming()">
                       <div class="card border-left-info shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -238,12 +261,12 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
+                  <a class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">MACHINE ZONE 1</span>
                     <div class="timeline-icon">
                       <i class="fas fa-fw fa-cog" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id=clickma1>
                       <div class="card border-left-danger shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -262,14 +285,17 @@
                       </div>
                     </div>
                   </a>
+
                 </div>
+
+
                 <div class="timeline">
-                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
+                  <a class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">MACHINE ZONE 2</span>
                     <div class="timeline-icon">
                       <i class="fas fa-fw fa-cogs" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id=clickma2>
                       <div class="card border-left-success shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -288,12 +314,12 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
+                  <a class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">MACHINE ZONE 3</span>
                     <div class="timeline-icon">
                       <i class="fas fa-screwdriver" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id="clickma3">
                       <div class="card border-left-warning shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -312,12 +338,12 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
+                  <a class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">MACHINE ZONE 4</span>
                     <div class="timeline-icon">
                       <i class="fas fa-wrench" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id="clickma4">
                       <div class="card border-left-primary shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -336,12 +362,12 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
+                  <a class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">WASHING</span>
                     <div class="timeline-icon">
                       <i class="fas fa-clipboard-list" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id="clickwashing">
                       <div class="card border-left-info shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -359,12 +385,12 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
+                  <a class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">Q-GATE</span>
                     <div class="timeline-icon">
                       <i class="fas fa-clipboard-check" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id="clickQgate">
                       <div class="card border-left-danger shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -382,12 +408,12 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
+                  <a class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">TRANSFER</span>
                     <div class="timeline-icon">
                       <i class="fa fa-boxes" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id="clicktransfer">
                       <div class="card border-left-success shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -406,12 +432,12 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
+                  <a class="timeline-content" style="width: 50%;position: static;margin-left: 50%;padding: 20px;">
                     <span class="timeline-year">PICKING</span>
                     <div class="timeline-icon">
                       <i class="fas fa-dolly-flatbed" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id="clickpick">
                       <div class="card border-left-warning shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -429,12 +455,12 @@
                   </a>
                 </div>
                 <div class="timeline">
-                  <a href="#" class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
+                  <a class="timeline-content" style="width: 50%;position: static;margin-right: 50%;padding: 20px;">
                     <span class="timeline-year">SHIPPING</span>
                     <div class="timeline-icon">
                       <i class="fas fa-shipping-fast" aria-hidden="true"></i>
                     </div>
-                    <div class="content">
+                    <div class="content" id="clickship">
                       <div class="card border-left-primary shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
@@ -457,6 +483,7 @@
           </div>
         </div>
       </div>
+
     </div>
     <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
   </div>
@@ -489,9 +516,9 @@
       })
   })
 
-  $('#btnsearchqgate').click(function() {
-    searchqgate()
-  })
+  // $('#btnsearchqgate').click(function() {
+  //   searchqgate()
+  // })
 
   function loadzone(para) {
     // console.log("para ==> " ,para)
@@ -572,6 +599,7 @@
 
 
   function searchqgate() {
+
     var delidate = $('#delidate').val();
     var selectplant = $('#selectplant').val();
     var selectzone = $('#selectzone').val();
@@ -587,11 +615,13 @@
     // var chinputscantag = document.getElementById('inputscantag');
 
     if (inputscantag != 0) {
+
       getwashing(inputscantag);
       getQgate(inputscantag);
       getTransfer(inputscantag);
       getPicking(inputscantag);
       getShipping(inputscantag);
+
       var path = $.ajax({
         method: "post",
         url: "<?php echo base_url(); ?>Trace_Qgate/searchByScanTag",
@@ -603,17 +633,23 @@
           inputscantag: inputscantag
         }
       })
+
       path.done(function(rs) {
+
         // alert(rs)
         if (rs == "undefined") {
           // alert("wow");
           getNotFoundmachine()
+
+
         } else {
           var data = JSON.parse(rs)
           Getmachine(data)
         }
 
+
       })
+
     } else {
       if (chdelidate.value == "") {
         Swal.fire({
@@ -668,60 +704,216 @@
     var mt = " "
     // alert(zone)
     if (zone === '1') {
+      $("#detailmachine1").html("");
+      $("#imgdetailmachine1").show();
       // alert("1")
-      $("#machine1_user_name").html(data.line);
-      $("#machine1_user_id").html(data.byUser);
-      $("#machine1_part_no").html(data.part_no);
-      $("#machine1_scan_date").html(data.date);
+      // $("#machine1_user_name").html(data.line);
+      // $("#machine1_user_id").html(data.byUser);
+      // $("#machine1_part_no").html(data.part_no);
+      // $("#machine1_scan_date").html(data.date);
+
+      mt += "<h5 class='time_line-title'><label id='machine1_user_name'>" + data.line + "</label></h5>"
+      mt += "<div class='time_line-descr'>USER ID : <label id='machine1_user_name'>" + data.byUser + "</label></div>"
+      mt += "<div class='time_line-descr'>PART NO : <label id='machine1_user_name'>" + data.part_no + "</label></div>"
+      mt += "<div class='time_line-descr'>SCAN DATE : <label id='machine1_user_name'>" + data.date + "</label>"
+      $("#detailmachine1").html(mt)
+
+
+
+      var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+        "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+
+
+      $("#clickma1").click(function() {
+        Swal.fire({
+          // '<pre>' + str + '</pre>'
+          html: '<pre>' + str + '</pre>',
+          showCloseButton: true,
+          showConfirmButton: false,
+
+        })
+
+      });
+
     } else {
       // alert("1  else")
       // detailmachine1
+      $("#clickma1").click(function() {
+        // alert("wowowowo")
+        Swal.fire(
+          'ไม่มีข้อมูล',
+          'No Data Found!',
+          'error'
+        )
 
+      });
       $("#detailmachine1").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
       $("#imgdetailmachine1").hide();
+
     }
     if (zone === '2') {
-      $("#machine2_user_name").html(data.line);
-      $("#machine2_user_id").html(data.byUser);
-      $("#machine2_part_no").html(data.part_no);
-      $("#machine2_scan_date").html(data.date);
-      // alert("2")
+      $("#detailmachine2").html("");
+      $("#imgdetailmachine2").show();
+
+      // $("#machine2_user_name").html(data.line);
+      // $("#machine2_user_id").html(data.byUser);
+      // $("#machine2_part_no").html(data.part_no);
+      // $("#machine2_scan_date").html(data.date);
+
+      // alert("2") 
+      mt += "<h5 class='time_line-title'><label id='machine2_user_name'>" + data.line + "</label></h5>"
+      mt += "<div class='time_line-descr'>USER ID : <label id='machine2_user_id'>" + data.byUser + "</label></div>"
+      mt += "<div class='time_line-descr'>PART NO : <label id='machine2_part_no'>" + data.part_no + "</label></div>"
+      mt += "<div class='time_line-descr'>SCAN DATE : <label id='machine2_scan_date'>" + data.date + "</label>"
+      $("#detailmachine2").html(mt)
+
+      var str = "<br><img src='https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+        "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+
+
+      $("#clickma2").click(function() {
+        Swal.fire({
+          // '<pre>' + str + '</pre>'
+          html: '<pre>' + str + '</pre>',
+          showCloseButton: true,
+          showConfirmButton: false,
+
+        })
+
+      });
+
 
     } else {
       // alert("2  else")
       $("#detailmachine2").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
       $("#imgdetailmachine2").hide();
+
+      $("#clickma2").click(function() {
+        // alert("wowowowo")
+
+        Swal.fire(
+          'ไม่มีข้อมูล',
+          'No Data Found!',
+          'error'
+        )
+
+      });
     }
 
     if (zone === '3') {
+      $("#detailmachine3").html("");
+      $("#imgdetailmachine3").show();
       // alert("3")
-      $("#machine3_user_name").html(data.line);
-      $("#machine3_user_id").html(data.byUser);
-      $("#machine3_part_no").html(data.part_no);
-      $("#machine3_scan_date").html(data.date);
+      // $("#machine3_user_name").html(data.line);
+      // $("#machine3_user_id").html(data.byUser);
+      // $("#machine3_part_no").html(data.part_no);
+      // $("#machine3_scan_date").html(data.date);
+
+      mt += "<h5 class='time_line-title'><label id='machine3_user_name'>" + data.line + "</label></h5>"
+      mt += "<div class='time_line-descr'>USER ID : <label id='machine3_user_name'>" + data.byUser + "</label></div>"
+      mt += "<div class='time_line-descr'>PART NO : <label id='machine3_user_name'>" + data.part_no + "</label></div>"
+      mt += "<div class='time_line-descr'>SCAN DATE : <label id='machine3_user_name'>" + data.date + "</label>"
+      $("#detailmachine3").html(mt)
+
+      var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+        "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+
+
+      $("#clickma3").click(function() {
+        Swal.fire({
+          // '<pre>' + str + '</pre>'
+          html: '<pre>' + str + '</pre>',
+          showCloseButton: true,
+          showConfirmButton: false,
+
+        })
+
+      });
 
     } else {
       // alert("3  else")
       $("#detailmachine3").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
       $("#imgdetailmachine3").hide();
+      $("#clickma3").click(function() {
+        // alert("wowowowo")
+
+        Swal.fire(
+          'ไม่มีข้อมูล',
+          'No Data Found!',
+          'error'
+        )
+      });
     }
 
     if (zone == '4') {
+      $("#detailmachine4").html("");
+      $("#imgdetailmachine4").show();
       // alert("4")
-      $("#machine4_user_name").html(data.line);
-      $("#machine4_user_id").html(data.byUser);
-      $("#machine4_part_no").html(data.part_no);
-      $("#machine4_scan_date").html(data.date);
+      // $("#machine4_user_name").html(data.line);
+      // $("#machine4_user_id").html(data.byUser);
+      // $("#machine4_part_no").html(data.part_no);
+      // $("#machine4_scan_date").html(data.date);
+
+      mt += "<h5 class='time_line-title'><label id='machine4_user_name'>" + data.line + "</label></h5>"
+      mt += "<div class='time_line-descr'>USER ID : <label id='machine4_user_name'>" + data.byUser + "</label></div>"
+      mt += "<div class='time_line-descr'>PART NO : <label id='machine4_user_name'>" + data.part_no + "</label></div>"
+      mt += "<div class='time_line-descr'>SCAN DATE : <label id='machine4_user_name'>" + data.date + "</label>"
+      $("#detailmachine4").html(mt)
+
+      var str = "<br><img src='https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+        "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+        "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+
+
+      $("#clickma4").click(function() {
+        Swal.fire({
+          // '<pre>' + str + '</pre>'
+          html: '<pre>' + str + '</pre>',
+          showCloseButton: true,
+          showConfirmButton: false,
+
+        })
+
+      });
+
 
     } else {
       // alert("else")
       $("#detailmachine4").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
       $("#imgdetailmachine4").hide();
+      $("#clickma4").click(function() {
+        // alert("wowowowo")
+        Swal.fire(
+          'ไม่มีข้อมูล',
+          'No Data Found!',
+          'error'
+        )
 
+      });
     }
   }
 
   function getwashing(inputscantag) {
+    var mt = " "
 
     var path = $.ajax({
       method: "get",
@@ -734,13 +926,50 @@
       if (rs == "undefined") {
         $("#detailwashing").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
         $("#imgdetailwashing").hide();
+        $("#clickwashing").click(function() {
+          // alert("wowowowo")
+          Swal.fire(
+            'ไม่มีข้อมูล',
+            'No Data Found!',
+            'error'
+          )
+
+        });
 
       } else {
+        $("#detailwashing").html("");
+        $("#imgdetailwashing").show();
         var data = JSON.parse(rs)
-        $("#washing_user_name").html(data.line);
-        $("#washing_user_id").html(data.byUser);
-        $("#washing_part_no").html(data.partNo);
-        $("#washing_scan_date").html(data.date);
+        // $("#washing_user_name").html(data.line);
+        // $("#washing_user_id").html(data.byUser);
+        // $("#washing_part_no").html(data.partNo);
+        // $("#washing_scan_date").html(data.date);
+        mt += "<h5 class='time_line-title'><label id='washing_user_name'>" + data.line + "</label></h5>"
+        mt += "<div class='time_line-descr'>USER ID : <label id='washing_user_id'>" + data.byUser + "</label></div>"
+        mt += "<div class='time_line-descr'>PART NO : <label id='washing_part_no'>" + data.partNo + "</label></div>"
+        mt += "<div class='time_line-descr'>SCAN DATE : <label id='washing_scan_date'>" + data.date + "</label>"
+        $("#detailwashing").html(mt)
+
+
+        var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+
+
+        $("#clickwashing").click(function() {
+          Swal.fire({
+            // '<pre>' + str + '</pre>'
+            html: '<pre>' + str + '</pre>',
+            showCloseButton: true,
+            showConfirmButton: false,
+
+          })
+
+        });
 
       }
 
@@ -754,6 +983,7 @@
     $("#detailmachine1").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
     $("#imgdetailmachine1").hide();
 
+
     $("#detailmachine2").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
     $("#imgdetailmachine2").hide();
 
@@ -763,9 +993,50 @@
     $("#detailmachine4").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
     $("#imgdetailmachine4").hide();
 
+    $("#clickma2").click(function() {
+      // alert("wowowowo")
+
+      Swal.fire(
+        'ไม่มีข้อมูล',
+        'No Data Found!',
+        'error'
+      )
+
+    });
+    $("#clickma3").click(function() {
+      // alert("wowowowo")
+
+      Swal.fire(
+        'ไม่มีข้อมูล',
+        'No Data Found!',
+        'error'
+      )
+    });
+    $("#clickma4").click(function() {
+      // alert("wowowowo")
+      Swal.fire(
+        'ไม่มีข้อมูล',
+        'No Data Found!',
+        'error'
+      )
+
+    });
+
+    $("#clickma1").click(function() {
+      // alert("wowowowo")
+      Swal.fire(
+        'ไม่มีข้อมูล',
+        'No Data Found!',
+        'error'
+      )
+
+    });
+
   }
 
+
   function getQgate(inputscantag) {
+    var mt = " "
     var path = $.ajax({
       method: "get",
       url: "<?php echo base_url(); ?>Trace_Qgate/searchQgateByScan?inputscantag=" + inputscantag,
@@ -777,20 +1048,63 @@
       if (rs == "undefined") {
         $("#detailqgate").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
         $("#imgdetailqgate").hide();
+        $("#clickQgate").click(function() {
+          // alert("wowowowo")
+          Swal.fire(
+            'ไม่มีข้อมูล',
+            'No Data Found!',
+            'error'
+          )
+
+        });
 
       } else {
         var data = JSON.parse(rs)
-        $("#qgate_user_name").html(data.byUserName);
-        $("#qgate_user_id").html(data.byUserId);
-        $("#qgate_part_no").html(data.partNo);
-        $("#qgate_scan_date").html(data.date);
+        $("#detailqgate").html("");
+        $("#imgdetailqgate").show();
+
+        // $("#qgate_user_name").html(data.byUserName);
+        // $("#qgate_user_id").html(data.byUserId);
+        // $("#qgate_part_no").html(data.partNo);
+        // $("#qgate_scan_date").html(data.date);
+
+        mt += "<h5 class='time_line-title'><label id='qgate_user_name'>" + data.byUserName + "</label></h5>"
+        mt += "<div class='time_line-descr'>USER ID : <label id='qgate_user_id'>" + data.byUserId + "</label></div>"
+        mt += "<div class='time_line-descr'>PART NO : <label id='qgate_part_no'>" + data.partNo + "</label></div>"
+        mt += "<div class='time_line-descr'>SCAN DATE : <label id='qgate_scan_date'>" + data.date + "</label>"
+        $("#detailqgate").html(mt)
+
+        var str = "<br><img src='https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+
+
+        $("#clickQgate").click(function() {
+          Swal.fire({
+            // '<pre>' + str + '</pre>'
+            html: '<pre>' + str + '</pre>',
+            showCloseButton: true,
+            showConfirmButton: false,
+
+          })
+
+        });
+
 
       }
 
 
+
+
     })
   }
+
   function getTransfer(inputscantag) {
+    var mt = " "
     var path = $.ajax({
       method: "get",
       url: "<?php echo base_url(); ?>Trace_Qgate/searchQgateByScan?inputscantag=" + inputscantag,
@@ -802,20 +1116,61 @@
       if (rs == "undefined") {
         $("#detailtransfer").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
         $("#imgdetailtransfer").hide();
+        $("#clicktransfer").click(function() {
+          // alert("wowowowo")
+          Swal.fire(
+            'ไม่มีข้อมูล',
+            'No Data Found!',
+            'error'
+          )
+
+        });
 
       } else {
         var data = JSON.parse(rs)
-        $("#transfer_user_name").html(data.byUserName);
-        $("#transfer_user_id").html(data.byUserId);
-        $("#transfer_part_no").html(data.partNo);
-        $("#transfer_scan_date").html(data.date);
+        // $("#transfer_user_name").html(data.byUserName);
+        // $("#transfer_user_id").html(data.byUserId);
+        // $("#transfer_part_no").html(data.partNo);
+        // $("#transfer_scan_date").html(data.date);
+
+        $("#detailtransfer").html("");
+        $("#imgdetailtransfer").show();
+
+
+        mt += "<h5 class='time_line-title'><label id='transfer_user_name'>" + data.byUserName + "</label></h5>"
+        mt += "<div class='time_line-descr'>USER ID : <label id='transfer_user_id'>" + data.byUserId + "</label></div>"
+        mt += "<div class='time_line-descr'>PART NO : <label id='transfer_part_no'>" + data.partNo + "</label></div>"
+        mt += "<div class='time_line-descr'>SCAN DATE : <label id='transfer_scan_date'>" + data.date + "</label>"
+        $("#detailtransfer").html(mt)
+
+        var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+
+
+        $("#clicktransfer").click(function() {
+          Swal.fire({
+            // '<pre>' + str + '</pre>'
+            html: '<pre>' + str + '</pre>',
+            showCloseButton: true,
+            showConfirmButton: false,
+
+          })
+
+        });
 
       }
 
 
     })
   }
+
   function getPicking(inputscantag) {
+    var mt = " "
     var path = $.ajax({
       method: "get",
       url: "<?php echo base_url(); ?>Trace_Qgate/searchQgateByScan?inputscantag=" + inputscantag,
@@ -827,20 +1182,60 @@
       if (rs == "undefined") {
         $("#detailpicking").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
         $("#imgdetailpicking").hide();
+        $("#clickpick").click(function() {
+          // alert("wowowowo")
+          Swal.fire(
+            'ไม่มีข้อมูล',
+            'No Data Found!',
+            'error'
+          )
+
+        });
 
       } else {
         var data = JSON.parse(rs)
-        $("#picking_user_name").html(data.byUserName);
-        $("#picking_user_id").html(data.byUserId);
-        $("#picking_part_no").html(data.partNo);
-        $("#picking_scan_date").html(data.date);
+        // $("#picking_user_name").html(data.byUserName);
+        // $("#picking_user_id").html(data.byUserId);
+        // $("#picking_part_no").html(data.partNo);
+        // $("#picking_scan_date").html(data.date);
+        $("#detailpicking").html("");
+        $("#imgdetailpicking").show();
+
+
+        mt += "<h5 class='time_line-title'><label id='picking_user_name'>" + data.byUserName + "</label></h5>"
+        mt += "<div class='time_line-descr'>USER ID : <label id='picking_user_id'>" + data.byUserId + "</label></div>"
+        mt += "<div class='time_line-descr'>PART NO : <label id='picking_part_no'>" + data.partNo + "</label></div>"
+        mt += "<div class='time_line-descr'>SCAN DATE : <label id='picking_scan_date'>" + data.date + "</label>"
+        $("#detailpicking").html(mt)
+
+        var str = "<br><img src='https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+
+
+        $("#clickpick").click(function() {
+          Swal.fire({
+            // '<pre>' + str + '</pre>'
+            html: '<pre>' + str + '</pre>',
+            showCloseButton: true,
+            showConfirmButton: false,
+
+          })
+
+        });
 
       }
 
 
     })
   }
+
   function getShipping(inputscantag) {
+    var mt = " "
     var path = $.ajax({
       method: "get",
       url: "<?php echo base_url(); ?>Trace_Qgate/searchQgateByScan?inputscantag=" + inputscantag,
@@ -852,28 +1247,55 @@
       if (rs == "undefined") {
         $("#detailshipping").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
         $("#imgdetailshipping").hide();
+        $("#clickship").click(function() {
+          // alert("wowowowo")
+          Swal.fire(
+            'ไม่มีข้อมูล',
+            'No Data Found!',
+            'error'
+          )
 
+        });
       } else {
         var data = JSON.parse(rs)
-        $("#shipping_user_name").html(data.byUserName);
-        $("#shipping_user_id").html(data.byUserId);
-        $("#shipping_part_no").html(data.partNo);
-        $("#shipping_scan_date").html(data.date);
+        // $("#shipping_user_name").html(data.byUserName);
+        // $("#shipping_user_id").html(data.byUserId);
+        // $("#shipping_part_no").html(data.partNo);
+        // $("#shipping_scan_date").html(data.date);
 
+        $("#detailshipping").html("");
+        $("#imgdetailshipping").show();
+
+
+        mt += "<h5 class='time_line-title'><label id='shipping_user_name'>" + data.byUserName + "</label></h5>"
+        mt += "<div class='time_line-descr'>USER ID : <label id='shipping_user_id'>" + data.byUserId + "</label></div>"
+        mt += "<div class='time_line-descr'>PART NO : <label id='shipping_part_no'>" + data.partNo + "</label></div>"
+        mt += "<div class='time_line-descr'>SCAN DATE : <label id='shipping_scan_date'>" + data.date + "</label>"
+        $("#detailshipping").html(mt)
+
+
+        var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
+          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+
+
+        $("#clickship").click(function() {
+          Swal.fire({
+            // '<pre>' + str + '</pre>'
+            html: '<pre>' + str + '</pre>',
+            showCloseButton: true,
+            showConfirmButton: false,
+
+          })
+
+        });
       }
 
 
     })
   }
-
-  // function createPDF($html, $filename='', $download=TRUE, $paper='A4', $orientation='portrait'){
-  //       $dompdf = new Dompdf\DOMPDF();
-  //       $dompdf->load_html($html);
-  //       $dompdf->set_paper($paper, $orientation);
-  //       $dompdf->render();
-  //       if($download)
-  //           $dompdf->stream($filename.'.pdf', array('Attachment' => 1));
-  //       else
-  //           $dompdf->stream($filename.'.pdf', array('Attachment' => 0));
-  //   }
 </script>

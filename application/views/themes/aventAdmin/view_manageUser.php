@@ -292,9 +292,10 @@
                                     }
                                 })
 
-                            } else {
-                                window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
-                            }
+                            } 
+                            // else {
+                            //     window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
+                            // }
                         })
 
                     };

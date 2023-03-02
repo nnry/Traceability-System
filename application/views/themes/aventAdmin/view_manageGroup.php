@@ -484,10 +484,11 @@
                         })
                     }
                 })
-            } else {
-                window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
-
             }
+            //  else {
+            //     window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
+
+            // }
         })
 
     };
@@ -525,9 +526,10 @@
                         })
                     }
                 })
-            } else {
-                window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
-            }
+            } 
+            // else {
+            //     window.location.href = "<?php echo base_url() ?>manageGroup/ManagementGroupPer";
+            // }
 
         })
 
