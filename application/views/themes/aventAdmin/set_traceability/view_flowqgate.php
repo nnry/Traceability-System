@@ -1247,7 +1247,7 @@
           }
 
         })
-        pathwashing.done(function(tranf) {
+        pathtran.done(function(tranf) {
           // alert(was)
           // console.log(was);
           var resulttranf = JSON.parse(tranf)
@@ -1287,7 +1287,7 @@
     var mt = " "
     var path = $.ajax({
       method: "get",
-      url: "<?php echo base_url(); ?>Trace_Qgate/?inputscantag=" + inputscantag,
+      url: "<?php echo base_url(); ?>Trace_Qgate/searchQgateByScan?inputscantag=" + inputscantag,
 
     })
     path.done(function(rs) {
@@ -1406,6 +1406,7 @@
         mt += "<div class='time_line-descr'>PART NO : <label id='shipping_part_no'>" + data.partNo + "</label></div>"
         mt += "<div class='time_line-descr'>SCAN DATE : <label id='shipping_scan_date'>" + data.date + "</label>"
         $("#detailshipping").html(mt)
+
         var idTagFa = data.idFa
 
 
