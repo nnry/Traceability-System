@@ -81,6 +81,33 @@ class Backmodel_qgate extends CI_Model
             return false;
         }
     }
+
+    public function searchwashingQgate($idTagFa){
+        $this->EXP = $this->load->database('qgate',true);
+        $sql = "EXEC [dbo].[API_WASHING_BY_TAG] @ID_FA = '{$idTagFa}'";
+        $res = $this->EXP->query($sql);
+        // $row = $res->result_array();
+        if ($res->num_rows() != 0) {
+            $result = $res->result_array();
+            return $result;;
+        } else {
+            return false;
+        }
+    }
+    public function searchQgatebyFaId($idfa){
+        $this->EXP = $this->load->database('qgate',true);
+        $sql = "EXEC [dbo].[API_WASHING_BY_TAG] @ID_FA = '{$idfa}'";
+        $res = $this->EXP->query($sql);
+        // $row = $res->result_array();
+        if ($res->num_rows() != 0) {
+            $result = $res->result_array();
+            return $result;;
+        } else {
+            return false;
+        }
+    }
+
+
     
 
 

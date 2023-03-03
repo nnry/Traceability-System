@@ -718,25 +718,35 @@
       mt += "<div class='time_line-descr'>SCAN DATE : <label id='machine1_user_name'>" + data.date + "</label>"
       $("#detailmachine1").html(mt)
 
+      var idfa = data.idFa
+      var pathmc1 = $.ajax({
+        method: "get",
+        url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
+        data: {
+          "idfa": idfa
+        }
 
+      })
+      pathmc1.done(function(mc1) {
+        var remc1 = JSON.parse(mc1)
+        var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+          "<div class='time_line-descr'>USER NAME : <label>" + remc1.empName + "</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>" + remc1.partNoFA + "</label></div>\n" +
+          "<div class='time_line-descr'>LINE NO : <label>" + remc1.lineFA + "</label></div>\n" +
+          "<div class='time_line-descr'>LOT  NO : <label>" + remc1.lotNoProd + "</label></div>\n" +
+          "<div class='time_line-descr'>BOX  NO : <label>" + remc1.boxNoFA + "</label></div>\n" +
+          "<div class='time_line-descr'>QTY     : <label>" + remc1.spnFA + "</label></div>\n" +
+          "<div class='time_line-descr'>DATE : <label>" + remc1.datecom + "</label></div>";
 
-      var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
-        "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+        $("#clickma1").click(function() {
+          Swal.fire({
+            // '<pre>' + str + '</pre>'
+            html: '<pre>' + str + '</pre>',
+            showCloseButton: true,
+            showConfirmButton: false,
+          })
 
-
-      $("#clickma1").click(function() {
-        Swal.fire({
-          // '<pre>' + str + '</pre>'
-          html: '<pre>' + str + '</pre>',
-          showCloseButton: true,
-          showConfirmButton: false,
-
-        })
+        });
 
       });
 
@@ -772,26 +782,39 @@
       mt += "<div class='time_line-descr'>SCAN DATE : <label id='machine2_scan_date'>" + data.date + "</label>"
       $("#detailmachine2").html(mt)
 
-      var str = "<br><img src='https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
-        "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+
+      var idfa = data.idFa
+      var pathmc2 = $.ajax({
+        method: "get",
+        url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
+        data: {
+          "idfa": idfa
+        }
+
+      })
+      pathmc2.done(function(mc2) {
+        var remc2 = JSON.parse(mc2)
+        var str = "<br><img src='https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+          "<div class='time_line-descr'>USER NAME : <label>" + remc2.empName + "</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>" + remc2.partNoFA + "</label></div>\n" +
+          "<div class='time_line-descr'>LINE NO : <label>" + remc2.lineFA + "</label></div>\n" +
+          "<div class='time_line-descr'>LOT  NO : <label>" + remc2.lotNoProd + "</label></div>\n" +
+          "<div class='time_line-descr'>BOX  NO : <label>" + remc2.boxNoFA + "</label></div>\n" +
+          "<div class='time_line-descr'>QTY     : <label>" + remc2.spnFA + "</label></div>\n" +
+          "<div class='time_line-descr'>DATE : <label>" + remc2.datecom + "</label></div>";
 
 
-      $("#clickma2").click(function() {
-        Swal.fire({
-          // '<pre>' + str + '</pre>'
-          html: '<pre>' + str + '</pre>',
-          showCloseButton: true,
-          showConfirmButton: false,
 
-        })
+        $("#clickma2").click(function() {
+          Swal.fire({
+            // '<pre>' + str + '</pre>'
+            html: '<pre>' + str + '</pre>',
+            showCloseButton: true,
+            showConfirmButton: false,
+          })
+        });
 
-      });
-
+      })
 
     } else {
       // alert("2  else")
@@ -824,26 +847,38 @@
       mt += "<div class='time_line-descr'>PART NO : <label id='machine3_user_name'>" + data.part_no + "</label></div>"
       mt += "<div class='time_line-descr'>SCAN DATE : <label id='machine3_user_name'>" + data.date + "</label>"
       $("#detailmachine3").html(mt)
+      var idfa = data.idFa
+      var pathmc2 = $.ajax({
+        method: "get",
+        url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
+        data: {
+          "idfa": idfa
+        }
 
-      var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
-        "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+      })
+      pathmc3.done(function(mc3) {
+        var remc3 = JSON.parse(mc3)
+        var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+          "<div class='time_line-descr'>USER NAME : <label>" + remc3.empName + "</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>" + remc3.partNoFA + "</label></div>\n" +
+          "<div class='time_line-descr'>LINE NO : <label>" + remc3.lineFA + "</label></div>\n" +
+          "<div class='time_line-descr'>LOT  NO : <label>" + remc3.lotNoProd + "</label></div>\n" +
+          "<div class='time_line-descr'>BOX  NO : <label>" + remc3.boxNoFA + "</label></div>\n" +
+          "<div class='time_line-descr'>QTY     : <label>" + remc3.spnFA + "</label></div>\n" +
+          "<div class='time_line-descr'>DATE : <label>" + remc3.datecom + "</label></div>";
 
 
-      $("#clickma3").click(function() {
-        Swal.fire({
-          // '<pre>' + str + '</pre>'
-          html: '<pre>' + str + '</pre>',
-          showCloseButton: true,
-          showConfirmButton: false,
+        $("#clickma3").click(function() {
+          Swal.fire({
+            // '<pre>' + str + '</pre>'
+            html: '<pre>' + str + '</pre>',
+            showCloseButton: true,
+            showConfirmButton: false,
+          })
+        });
 
-        })
+      })
 
-      });
 
     } else {
       // alert("3  else")
@@ -875,25 +910,43 @@
       mt += "<div class='time_line-descr'>SCAN DATE : <label id='machine4_user_name'>" + data.date + "</label>"
       $("#detailmachine4").html(mt)
 
-      var str = "<br><img src='https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
-        "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-        "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+
+      var idfa = data.idFa
+      var pathmc4 = $.ajax({
+        method: "get",
+        url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
+        data: {
+          "idfa": idfa
+        }
+
+      })
+      pathmc4.done(function(mc4) {
+        var remc4 = JSON.parse(mc4)
+        var str = "<br><img src='https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+          "<div class='time_line-descr'>USER NAME : <label>" + remc4.empName + "</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>" + remc4.partNoFA + "</label></div>\n" +
+          "<div class='time_line-descr'>LINE NO : <label>" + remc4.lineFA + "</label></div>\n" +
+          "<div class='time_line-descr'>LOT  NO : <label>" + remc4.lotNoProd + "</label></div>\n" +
+          "<div class='time_line-descr'>BOX  NO : <label>" + remc4.boxNoFA + "</label></div>\n" +
+          "<div class='time_line-descr'>QTY     : <label>" + remc4.spnFA + "</label></div>\n" +
+          "<div class='time_line-descr'>DATE : <label>" + remc4.datecom + "</label></div>";
 
 
-      $("#clickma4").click(function() {
-        Swal.fire({
-          // '<pre>' + str + '</pre>'
-          html: '<pre>' + str + '</pre>',
-          showCloseButton: true,
-          showConfirmButton: false,
+        $("#clickma4").click(function() {
+          Swal.fire({
+            // '<pre>' + str + '</pre>'
+            html: '<pre>' + str + '</pre>',
+            showCloseButton: true,
+            showConfirmButton: false,
 
-        })
+          })
 
-      });
+        });
+
+      })
+
+
+
 
 
     } else {
@@ -950,26 +1003,46 @@
         mt += "<div class='time_line-descr'>SCAN DATE : <label id='washing_scan_date'>" + data.date + "</label>"
         $("#detailwashing").html(mt)
 
+        var idTagFa = data.tagId
+        // alert(idTagFa);
+        // console.log("===>",idTagFa);
+        var pathwashing = $.ajax({
+          method: "get",
+          url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
+          data: {
+            "idTagFa": idTagFa
+          }
 
-        var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
-          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+        })
+        pathwashing.done(function(was) {
+          // alert(was)
+          // console.log(was);
+          var resultwashing = JSON.parse(was)
+
+          var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+            "<div class='time_line-descr'>USER NAME : <label>" + resultwashing.empName + "</label></div>\n" +
+            "<div class='time_line-descr'>PART NO : <label>" + resultwashing.partNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LINE NO : <label>" + resultwashing.lineFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LOT  NO : <label>" + resultwashing.lotNoProd + "</label></div>\n" +
+            "<div class='time_line-descr'>BOX  NO : <label>" + resultwashing.boxNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>QTY     : <label>" + resultwashing.spnFA + "</label></div>\n" +
+            "<div class='time_line-descr'>DATE : <label>" + resultwashing.datecom + "</label></div>";
+
+          $("#clickwashing").click(function() {
+            Swal.fire({
+              // '<pre>' + str + '</pre>'
+              html: '<pre>' + str + '</pre>',
+              showCloseButton: true,
+              showConfirmButton: false,
+
+            })
+
+          });
+
+        })
 
 
-        $("#clickwashing").click(function() {
-          Swal.fire({
-            // '<pre>' + str + '</pre>'
-            html: '<pre>' + str + '</pre>',
-            showCloseButton: true,
-            showConfirmButton: false,
 
-          })
-
-        });
 
       }
 
@@ -1074,25 +1147,46 @@
         mt += "<div class='time_line-descr'>SCAN DATE : <label id='qgate_scan_date'>" + data.date + "</label>"
         $("#detailqgate").html(mt)
 
-        var str = "<br><img src='https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
-          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+        var idfa = data.idFa
 
 
-        $("#clickQgate").click(function() {
-          Swal.fire({
-            // '<pre>' + str + '</pre>'
-            html: '<pre>' + str + '</pre>',
-            showCloseButton: true,
-            showConfirmButton: false,
+        var pathqgate = $.ajax({
+          method: "get",
+          url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
+          data: {
+            "idfa": idfa
+          }
 
-          })
+        })
+        pathqgate.done(function(qgate) {
+          // alert(reqgate)
+          var reqgate = JSON.parse(qgate)
+          var str = "<br><img src='https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+            "<div class='time_line-descr'>USER NAME : <label>" + reqgate.empName + "</label></div>\n" +
+            "<div class='time_line-descr'>PART NO : <label>" + reqgate.partNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LINE NO : <label>" + reqgate.lineFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LOT  NO : <label>" + reqgate.lotNoProd + "</label></div>\n" +
+            "<div class='time_line-descr'>BOX  NO : <label>" + reqgate.boxNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>QTY     : <label>" + reqgate.spnFA + "</label></div>\n" +
+            "<div class='time_line-descr'>DATE : <label>" + reqgate.datecom + "</label></div>";
 
-        });
+
+
+          $("#clickQgate").click(function() {
+            Swal.fire({
+              // '<pre>' + str + '</pre>'
+              html: '<pre>' + str + '</pre>',
+              showCloseButton: true,
+              showConfirmButton: false,
+
+            })
+
+          });
+
+
+        })
+
+
 
 
       }
@@ -1143,25 +1237,45 @@
         mt += "<div class='time_line-descr'>SCAN DATE : <label id='transfer_scan_date'>" + data.date + "</label>"
         $("#detailtransfer").html(mt)
 
-        var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
-          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+        var idfa = data.idFa
+
+        var pathtran = $.ajax({
+          method: "get",
+          url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
+          data: {
+            "idTagFa": idTagFa
+          }
+
+        })
+        pathwashing.done(function(tranf) {
+          // alert(was)
+          // console.log(was);
+          var resulttranf = JSON.parse(tranf)
+
+          var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+            "<div class='time_line-descr'>USER NAME : <label>" + resulttranf.empName + "</label></div>\n" +
+            "<div class='time_line-descr'>PART NO : <label>" + resulttranf.partNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LINE NO : <label>" + resulttranf.lineFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LOT  NO : <label>" + resulttranf.lotNoProd + "</label></div>\n" +
+            "<div class='time_line-descr'>BOX  NO : <label>" + resulttranf.boxNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>QTY     : <label>" + resulttranf.spnFA + "</label></div>\n" +
+            "<div class='time_line-descr'>DATE : <label>" + resulttranf.datecom + "</label></div>";
 
 
-        $("#clicktransfer").click(function() {
-          Swal.fire({
-            // '<pre>' + str + '</pre>'
-            html: '<pre>' + str + '</pre>',
-            showCloseButton: true,
-            showConfirmButton: false,
+          $("#clicktransfer").click(function() {
+            Swal.fire({
+              // '<pre>' + str + '</pre>'
+              html: '<pre>' + str + '</pre>',
+              showCloseButton: true,
+              showConfirmButton: false,
 
-          })
+            })
 
-        });
+          });
+
+        })
+
+
 
       }
 
@@ -1173,7 +1287,7 @@
     var mt = " "
     var path = $.ajax({
       method: "get",
-      url: "<?php echo base_url(); ?>Trace_Qgate/searchQgateByScan?inputscantag=" + inputscantag,
+      url: "<?php echo base_url(); ?>Trace_Qgate/?inputscantag=" + inputscantag,
 
     })
     path.done(function(rs) {
@@ -1208,25 +1322,45 @@
         mt += "<div class='time_line-descr'>SCAN DATE : <label id='picking_scan_date'>" + data.date + "</label>"
         $("#detailpicking").html(mt)
 
-        var str = "<br><img src='https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
-          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+        var idfa = data.idFa
+
+        var pathpick = $.ajax({
+          method: "get",
+          url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
+          data: {
+            "idTagFa": idTagFa
+          }
+
+        })
+        pathpick.done(function(pic) {
+
+          var resultpick = JSON.parse(pic)
+
+          var str = "<br><img src='https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+            "<div class='time_line-descr'>USER NAME : <label>" + resultpick.empName + "</label></div>\n" +
+            "<div class='time_line-descr'>PART NO : <label>" + resultpick.partNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LINE NO : <label>" + resultpick.lineFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LOT  NO : <label>" + resultpick.lotNoProd + "</label></div>\n" +
+            "<div class='time_line-descr'>BOX  NO : <label>" + resultpick.boxNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>QTY     : <label>" + resultpick.spnFA + "</label></div>\n" +
+            "<div class='time_line-descr'>DATE : <label>" + resultpick.datecom + "</label></div>";
+
+          $("#clickpick").click(function() {
+            Swal.fire({
+              // '<pre>' + str + '</pre>'
+              html: '<pre>' + str + '</pre>',
+              showCloseButton: true,
+              showConfirmButton: false,
+
+            })
+
+          });
 
 
-        $("#clickpick").click(function() {
-          Swal.fire({
-            // '<pre>' + str + '</pre>'
-            html: '<pre>' + str + '</pre>',
-            showCloseButton: true,
-            showConfirmButton: false,
+        })
 
-          })
 
-        });
+
 
       }
 
@@ -1272,27 +1406,46 @@
         mt += "<div class='time_line-descr'>PART NO : <label id='shipping_part_no'>" + data.partNo + "</label></div>"
         mt += "<div class='time_line-descr'>SCAN DATE : <label id='shipping_scan_date'>" + data.date + "</label>"
         $("#detailshipping").html(mt)
+        var idfa = data.idFa
 
 
-        var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
-          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>USER NAME : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>PART NO : <label>xxxxx</label></div>\n" +
-          "<div class='time_line-descr'>LOT NO : <label>xxxxx</label></div>";
+        var pathship = $.ajax({
+          method: "get",
+          url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
+          data: {
+            "idTagFa": idTagFa
+          }
+
+        })
+        pathship.done(function(ship) {
+          // alert(was)
+          // console.log(was);
+          var resultshipp = JSON.parse(ship)
+
+          var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+            "<div class='time_line-descr'>USER NAME : <label>" + resultshipp.empName + "</label></div>\n" +
+            "<div class='time_line-descr'>PART NO : <label>" + resultshipp.partNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LINE NO : <label>" + resultshipp.lineFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LOT  NO : <label>" + resultshipp.lotNoProd + "</label></div>\n" +
+            "<div class='time_line-descr'>BOX  NO : <label>" + resultshipp.boxNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>QTY     : <label>" + resultshipp.spnFA + "</label></div>\n" +
+            "<div class='time_line-descr'>DATE : <label>" + resultshipp.datecom + "</label></div>";
 
 
-        $("#clickship").click(function() {
-          Swal.fire({
-            // '<pre>' + str + '</pre>'
-            html: '<pre>' + str + '</pre>',
-            showCloseButton: true,
-            showConfirmButton: false,
+          $("#clickship").click(function() {
+            Swal.fire({
+              // '<pre>' + str + '</pre>'
+              html: '<pre>' + str + '</pre>',
+              showCloseButton: true,
+              showConfirmButton: false,
 
-          })
+            })
 
-        });
+          });
+
+
+        })
+
       }
 
 

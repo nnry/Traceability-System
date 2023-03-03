@@ -120,6 +120,7 @@ class Trace_Qgate extends CI_Controller
 			echo "undefined";
 		} else {
 			$data["tag_id"] = $res[0]["iotc_id"];
+			$data["idFa"] = $res[0]["ifts_id"];
 			$data["plant"] = $res[0]["mpa_id"];
 			$data["zone"] = $res[0]["mza_id"];
 			$data["station"] = $res[0]["msa_id"];
@@ -166,6 +167,7 @@ class Trace_Qgate extends CI_Controller
 		} else {
 			$data["tagScan"] = $res[0]["iotc_tag_qgate"];
 			$data["tagId"] = $res[0]["iotc_id"];
+			$data["idFa"] = $res[0]["ifts_id"];
 			$data["line"] = $res[0]["ifts_line_cd"];
 			$data["partNo"] = $res[0]["ifts_part_no"];
 			$data["date"] = $res[0]["date"];
@@ -173,6 +175,64 @@ class Trace_Qgate extends CI_Controller
 			$data["byUserId"] = $res[0]["ss_id"];
 
 			echo json_encode($data);
+		}
+	}
+	public function getWashing()
+	{
+
+		$idTagFa = $_GET["idTagFa"];
+		$res = $this->backmodel_qgate->searchwashingQgate($idTagFa);
+
+		if ($res == false) {
+			echo "undefined";
+		} else {
+			$data["plantFA"] = $res[0]["ifts_plant"];
+			$data["lineFA"] = $res[0]["ifts_line_cd"];
+			$data["boxNoFA"] = $res[0]["ifts_box"];
+			$data["dateplanFA"] = $res[0]["ifts_plan_date"];
+			$data["seqpalnFA"] = $res[0]["ifts_seq_paln"];
+			$data["seqActFA"] = $res[0]["ifts_seq_actual"];
+			$data["partNoFA"] = $res[0]["ifts_part_no"];
+			$data["dateActFA"] = $res[0]["ifts_actual_date"];
+			$data["spnFA"] = $res[0]["ifts_snp"];
+			$data["lotNoProd"] = $res[0]["ifts_lot_no_prod"];
+			$data["empCode"] = $res[0]["ss_emp_code"];
+			$data["empName"] = $res[0]["ss_emp_name"];
+			$data["codeFAmaster"] = $res[0]["mfcm_line_code"];
+			$data["nameFAmaster"] = $res[0]["mfcm_name_code"];
+			$data["datecom"] = $res[0]["date"];
+
+			echo json_encode($data);
+		}
+	}
+
+	public function getQgate()
+	{
+
+		$idfa = $_GET["idfa"];
+		$res = $this->backmodel_qgate->searchQgatebyFaId($idfa);
+
+		if ($res == false) {
+			echo "undefined";
+		} else {
+			// $data["plantFA"] = $res[0]["ifts_plant"];
+			// $data["lineFA"] = $res[0]["ifts_line_cd"];
+			// $data["boxNoFA"] = $res[0]["ifts_box"];
+			// $data["dateplanFA"] = $res[0]["ifts_plan_date"];
+			// $data["seqpalnFA"] = $res[0]["ifts_seq_paln"];
+			// $data["seqActFA"] = $res[0]["ifts_seq_actual"];
+			// $data["partNoFA"] = $res[0]["ifts_part_no"];
+			// $data["dateActFA"] = $res[0]["ifts_actual_date"];
+			// $data["spnFA"] = $res[0]["ifts_snp"];
+			// $data["lotNoProd"] = $res[0]["ifts_lot_no_prod"];
+			// $data["empCode"] = $res[0]["ss_emp_code"];
+			// $data["empName"] = $res[0]["ss_emp_name"];
+			// $data["codeFAmaster"] = $res[0]["mfcm_line_code"];
+			// $data["nameFAmaster"] = $res[0]["mfcm_name_code"];
+			// $data["datecom"] = $res[0]["date"];
+
+
+			echo json_encode($res);
 		}
 	}
 }
