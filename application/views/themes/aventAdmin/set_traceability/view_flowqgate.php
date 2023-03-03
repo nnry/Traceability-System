@@ -718,12 +718,12 @@
       mt += "<div class='time_line-descr'>SCAN DATE : <label id='machine1_user_name'>" + data.date + "</label>"
       $("#detailmachine1").html(mt)
 
-      var idfa = data.idFa
+      var idTagFa = data.idFa
       var pathmc1 = $.ajax({
         method: "get",
         url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
         data: {
-          "idfa": idfa
+          "idTagFa": idTagFa
         }
 
       })
@@ -783,12 +783,12 @@
       $("#detailmachine2").html(mt)
 
 
-      var idfa = data.idFa
+      var idTagFa = data.idFa
       var pathmc2 = $.ajax({
         method: "get",
         url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
         data: {
-          "idfa": idfa
+          "idTagFa": idTagFa
         }
 
       })
@@ -847,12 +847,12 @@
       mt += "<div class='time_line-descr'>PART NO : <label id='machine3_user_name'>" + data.part_no + "</label></div>"
       mt += "<div class='time_line-descr'>SCAN DATE : <label id='machine3_user_name'>" + data.date + "</label>"
       $("#detailmachine3").html(mt)
-      var idfa = data.idFa
+      var idTagFa = data.idFa
       var pathmc2 = $.ajax({
         method: "get",
         url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
         data: {
-          "idfa": idfa
+          "idTagFa": idTagFa
         }
 
       })
@@ -911,12 +911,12 @@
       $("#detailmachine4").html(mt)
 
 
-      var idfa = data.idFa
+      var idTagFa = data.idFa
       var pathmc4 = $.ajax({
         method: "get",
         url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
         data: {
-          "idfa": idfa
+          "idTagFa": idTagFa
         }
 
       })
@@ -1147,14 +1147,14 @@
         mt += "<div class='time_line-descr'>SCAN DATE : <label id='qgate_scan_date'>" + data.date + "</label>"
         $("#detailqgate").html(mt)
 
-        var idfa = data.idFa
+        var idTagFa = data.idFa
 
 
         var pathqgate = $.ajax({
           method: "get",
           url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
           data: {
-            "idfa": idfa
+            "idTagFa": idTagFa
           }
 
         })
@@ -1237,7 +1237,7 @@
         mt += "<div class='time_line-descr'>SCAN DATE : <label id='transfer_scan_date'>" + data.date + "</label>"
         $("#detailtransfer").html(mt)
 
-        var idfa = data.idFa
+        var idTagFa = data.idFa
 
         var pathtran = $.ajax({
           method: "get",
@@ -1322,7 +1322,7 @@
         mt += "<div class='time_line-descr'>SCAN DATE : <label id='picking_scan_date'>" + data.date + "</label>"
         $("#detailpicking").html(mt)
 
-        var idfa = data.idFa
+        var idTagFa = data.idFa
 
         var pathpick = $.ajax({
           method: "get",
@@ -1406,7 +1406,7 @@
         mt += "<div class='time_line-descr'>PART NO : <label id='shipping_part_no'>" + data.partNo + "</label></div>"
         mt += "<div class='time_line-descr'>SCAN DATE : <label id='shipping_scan_date'>" + data.date + "</label>"
         $("#detailshipping").html(mt)
-        var idfa = data.idFa
+        var idTagFa = data.idFa
 
 
         var pathship = $.ajax({
