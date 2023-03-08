@@ -14,6 +14,7 @@ class Trace_Qgate extends CI_Controller
 
 		## asset config
 		$theme = $this->config->item('theme');
+		$this->load->config('config', TRUE);
 		$this->theme = $theme;
 
 		$this->asset_url = $this->config->item('asset_url');
@@ -86,7 +87,8 @@ class Trace_Qgate extends CI_Controller
 	public function getstationload()
 	{
 		$idstaion = $_GET["zone"];
-		$res["byid"] = $this->backmodel_qgate->getstationby_id($idstaion);
+		$idphase = $_GET["para"];
+		$res["byid"] = $this->backmodel_qgate->getstationby_id($idstaion,$idphase);
 		$res["all"] = $this->backmodel_qgate->getloadstation();
 		echo json_encode($res);
 	}
@@ -100,6 +102,16 @@ class Trace_Qgate extends CI_Controller
 		$selectzone = $_POST["selectzone"];
 		$selectstation = $_POST["selectstation"];
 		$inputpart = $_POST["inputpart"];
+
+		// echo "delidate==>", $delidate;
+		// echo "selectplant==>",$selectplant;
+		// echo "selectzone==>",$selectzone;
+		// echo "selectstation==>",$selectstation;
+		// echo "inputpart==>",$inputpart;
+		$res = $this->backmodel_qgate->searchByPathNo($delidate,$selectplant,$selectzone,$selectstation,$inputpart);
+		echo $res;
+
+
 	}
 	public function searchByScanTag()
 	{

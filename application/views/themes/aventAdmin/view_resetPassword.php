@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,11 +10,8 @@
     <meta name="author" content="">
 
     <!-- Custom fonts for this template-->
-    <link href="<?php echo base_url() ?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
-        type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url() ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
@@ -49,18 +45,18 @@
                         <div class="card-body col-md-12 row mb-3">
                             <label class="col-sm-4 col-form-label">Current Password :</label>
                             <div class="col-sm-6">
-                                <input type="password" class="form-control ng-pristine ng-valid ng-empty ng-touched"  id="oldpass">
+                                <input type="password" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="oldpass">
                             </div>
                         </div>
 
                         <div class="card-body col-md-12 row mb-3">
                             <label class="col-sm-4 col-form-label">New Password :</label>
                             <div class="col-sm-6">
-                                <input type="password" class="form-control ng-pristine ng-valid ng-empty ng-touched"  id="newpass">
+                                <input type="password" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="newpass">
                             </div>
                         </div>
 
-                      
+
                         <div class="card-body col-md-12 row mb-3">
                             <label class="col-sm-4 col-form-label">Confirm Password :</label>
                             <div class="col-sm-6">
@@ -75,7 +71,8 @@
                 <button type="submit" class="btn btn-secondary" id="canCheng">Cancel</button>
             </div>
         </div>
-    </div> 
+    </div>
+    </div>
     <!-- Footer -->
     <!-- <footer class="sticky-footer bg-white">
         <div class="container my-auto">
@@ -87,7 +84,7 @@
     <!-- End of Footer -->
 </body>
 
-</html> 
+</html>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
 <script type="text/javascript">
@@ -134,42 +131,42 @@
         //         confirmButtonColor: '#F7B267',
         //     })
         // }else{
-            var path = $.ajax({
-                method: "post",
-                url: "<?php echo base_url(); ?>ResetPassword/checkRePass",
-                data: {
-                    oldpass: oldpass,
-                    newpass: newpass,
-                    compass: compass,
-                }
-            }) 
-            path.done(function(rs) {
-               // alert(rs);
-                console.log(rs);
-                if (rs === "true") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Successfully',
-                        text: 'You have successfully edit profile',
-                    }).then(function() {
-                        window.location.href = "<?php echo base_url() ?>manage/Homepage";
-                    })
-                } else if(rs == "old pass fail") {
+        var path = $.ajax({
+            method: "post",
+            url: "<?php echo base_url(); ?>ResetPassword/checkRePass",
+            data: {
+                oldpass: oldpass,
+                newpass: newpass,
+                compass: compass,
+            }
+        })
+        path.done(function(rs) {
+            // alert(rs);
+            console.log(rs);
+            if (rs === "true") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully',
+                    text: 'You have successfully edit profile',
+                }).then(function() {
+                    window.location.href = "<?php echo base_url() ?>manage/Homepage";
+                })
+            } else if (rs == "old pass fail") {
 
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Data not found',
-                        text: 'You failed to current password',
-                    })
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Data not found',
+                    text: 'You failed to current password',
+                })
 
-                }else if(rs == "confirm pass fail" ){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Data not found',
-                        text: 'You failed to Change Password',
-                    })
-                }
-            })
+            } else if (rs == "confirm pass fail") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Data not found',
+                    text: 'You failed to Change Password',
+                })
+            }
+        })
         // }
 
     }

@@ -24,7 +24,7 @@
 <body id="page-top">
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800">Management User</h1>
+        <h1 class="h3 mb-2 text-gray-800">Manage User</h1>
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <!-- <div class="card-header py" style="width:100%; text-align:right"> -->
@@ -160,9 +160,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- addUser Modal-->
-                <!-- <div class="modal fade" id="adduser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- addUser Modal-->
+            <!-- <div class="modal fade" id="adduser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -235,238 +236,238 @@
                 </div> -->
 
 
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
-                <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-                <script type="text/javascript">
-                    $("#btnSaveAdd").click(function() {
-                        // alert("btnSaveAdd")
-                        addUser()
-                    });
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.js"></script>
+            <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+            <script type="text/javascript">
+                $("#btnSaveAdd").click(function() {
+                    // alert("btnSaveAdd")
+                    addUser()
+                });
 
-                    $("#btnSaveEdit").click(function() {
-                        // alert("1111");
-                        saveedit()
-                    });
-
-
-                    function isValidEmailAddress(emailAddress) {
-                        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-                        return pattern.test(emailAddress);
-                    }
-                    // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                $("#btnSaveEdit").click(function() {
+                    // alert("1111");
+                    saveedit()
+                });
 
 
-
-                    function status(sa_id) {
-                        Swal.fire({
-                            title: 'Are you sure?',
-                            text: "คุณต้องการแก้ไขสถานะใช่หรือไม่? ( Do you want to edit your status? )",
-                            icon: 'question',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes' //ชื่อปุ่ม
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                var path = $.ajax({
-                                    method: "get",
-                                    url: "<?php echo base_url(); ?>manageUser/swiftStatus?sa_id=" + sa_id,
-                                })
-                                path.done(function(rs) {
-                                    // alert(rs);
-                                    if (rs === "true") {
-                                        Swal.fire(
-                                            'Success!',
-                                            'เปลี่ยนแปลงข้อมูลสำเร็จ',
-                                            'success'
-                                        ).then(function() {
-                                            window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
-                                        })
-                                    } else {
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: 'Data not found',
-                                            text: 'You failed to edit status',
-                                        })
-                                    }
-                                })
-
-                            } 
-                            // else {
-                            //     window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
-                            // }
-                        })
-
-                    };
-
-                    function edit(sa_id) {
-                        var path = $.ajax({
-                            method: "get",
-                            // dataType: "json",
-                            url: "<?php echo base_url(); ?>manageUser/editManageUser?sa_id=" + sa_id,
-                        })
-                        path.done(function(rs) {
-                            //  alert(rs)
-                            // console.log(rs);
-                            var data = JSON.parse(rs)
-                            // alert(data)
-                            var tb = ""
-                            var checked = ""
-                            $("#editempcode").val(data.getdata[0]["sa_code"]);
-                            $("#editfirstname").val(data.getdata[0]["sa_fname"]);
-                            $("#editlastname").val(data.getdata[0]["sa_lname"]);
-                            $("#editemailaddress").val(data.getdata[0]["sa_email"]);
-                            $("#editplant").val(data.getdata[0]["mpa_name"]);
-                            $("#editgroup").val(rs[0]["spg_name"]);
-                            $.each(data.datatableGroup, function(key, value) {
-                                if (value["spg_name"] == data.getdata[0]["spg_name"]) {
-                                    checked = "selected"
-                                } else {
-                                    checked = ""
-                                }
-                                tb += "<option value='" + value["spg_id"] + "' " + checked + ">" + value["spg_name"] + "</option>"
-                            })
-                            $("#editgroup").html(tb);
-                        })
-                    };
-
-                    function saveedit() {
-                        var editempcode = $("#editempcode").val();
-                        var editgroup = $("#editgroup").val();
-                        var editemail = $("#editemailaddress").val();
-
-                        var email = document.getElementById("editemailaddress");
-
-                        if (email.value == "") {
-                            Swal.fire({
-                                icon: 'warning',
-                                title: 'Are you sure?',
-                                text: 'You failed to edit employee',
-                                confirmButtonColor: '#F7B267',
-                            })
-                        } else {
-                            if (editemail != 0) {
-                                if (isValidEmailAddress(editemail)) {
-                                    $("#validEmail").html("<font color='green'>อีเมล์ถูกต้อง</font>");
-                                    // alert("อีเมล์ถูกต้อง")
-                                    var path = $.ajax({
-                                        method: "post",
-                                        url: "<?php echo base_url(); ?>manageUser/saveEdit",
-                                        data: {
-                                            empcode: editempcode,
-                                            groupper: editgroup,
-                                            editemail: editemail,
-                                        }
-                                    })
-                                    path.done(function(rs) {
-                                        alert(rs);
-                                        if (rs === "true") {
-                                            Swal.fire({
-                                                icon: 'success',
-                                                title: 'Successfully',
-                                                text: 'You have successfully edit employee',
-                                            }).then(function() {
-                                                window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
-                                            })
-                                        } else if (rs === "Duplicate email") {
-                                            Swal.fire({
-                                                icon: 'error',
-                                                title: 'Duplicate email!!',
-                                                text: 'You failed to edit employee',
-                                            })
-
-                                        } else {
-                                            Swal.fire({
-                                                icon: 'error',
-                                                title: 'Data not found',
-                                                text: 'You failed to edit employee',
-                                            })
-                                        }
-                                    })
-
-
-                                } else {
-                                    $("#validEmail").html("<font color='red'>อีเมล์ไม่ถูกต้อง</font>");
-                                    // alert("อีเมล์ไม่ถูกต้อง")
-                                }
-                            } else {
-                                $("#validEmail").html("");
-                            }
-
-                        }
-
-                    };
-
-                    function addUser() {
-                        var empcode = $('#addempcode').val();
-                        var firstname = $('#addfirstname').val();
-                        var lastname = $('#addlastname').val();
-                        var groupper = $('#addgroup').val();
-                        var email = $('#addemailaddress').val();
-                        var password = $('#addpassword').val();
-                        var plant = $('#addplant').val();
-
-                        var addempcode = document.getElementById("addempcode");
-                        var addfirstname = document.getElementById("addfirstname");
-                        var addlastname = document.getElementById("addlastname");
-                        var addgroup = document.getElementById("addgroup");
-                        var addemailaddress = document.getElementById("addemailaddress");
-                        var addpassword = document.getElementById("addpassword");
-                        var addplant = document.getElementById("addplant");
+                function isValidEmailAddress(emailAddress) {
+                    var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+                    return pattern.test(emailAddress);
+                }
+                // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
-                        if (addempcode.value == "" || addfirstname.value == "" || addlastname.value == "" || addgroup.value == "" || addemailaddress.value == "" || addpassword.value == "" || addplant.value == "") {
-                            Swal.fire({
-                                icon: 'warning',
-                                title: 'Are you sure?',
-                                text: 'You failed to add user',
-                                confirmButtonColor: '#F7B267',
-                            })
-                        } else {
+                function status(sa_id) {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "คุณต้องการแก้ไขสถานะใช่หรือไม่? ( Do you want to edit your status? )",
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes' //ชื่อปุ่ม
+                    }).then((result) => {
+                        if (result.isConfirmed) {
                             var path = $.ajax({
-                                method: "POST",
-                                url: "<?php echo base_url(); ?>manageUser/addManageUser",
-                                data: {
-                                    empcode: empcode,
-                                    firstname: firstname,
-                                    lastname: lastname,
-                                    groupper: groupper,
-                                    email: email,
-                                    password: password,
-                                    plant: plant,
-                                }
+                                method: "get",
+                                url: "<?php echo base_url(); ?>manageUser/swiftStatus?sa_id=" + sa_id,
                             })
                             path.done(function(rs) {
-                                console.log(rs);
-                                alert(rs);
+                                // alert(rs);
                                 if (rs === "true") {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Successfully',
-                                        text: 'You have successfully add user.',
-
-                                    }).then(function() {
+                                    Swal.fire(
+                                        'Success!',
+                                        'เปลี่ยนแปลงข้อมูลสำเร็จ',
+                                        'success'
+                                    ).then(function() {
                                         window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
                                     })
                                 } else {
                                     Swal.fire({
                                         icon: 'error',
-                                        title: 'You failed to register',
+                                        title: 'Data not found',
+                                        text: 'You failed to edit status',
                                     })
                                 }
                             })
+
+                        }
+                        // else {
+                        //     window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
+                        // }
+                    })
+
+                };
+
+                function edit(sa_id) {
+                    var path = $.ajax({
+                        method: "get",
+                        // dataType: "json",
+                        url: "<?php echo base_url(); ?>manageUser/editManageUser?sa_id=" + sa_id,
+                    })
+                    path.done(function(rs) {
+                        //  alert(rs)
+                        // console.log(rs);
+                        var data = JSON.parse(rs)
+                        // alert(data)
+                        var tb = ""
+                        var checked = ""
+                        $("#editempcode").val(data.getdata[0]["sa_code"]);
+                        $("#editfirstname").val(data.getdata[0]["sa_fname"]);
+                        $("#editlastname").val(data.getdata[0]["sa_lname"]);
+                        $("#editemailaddress").val(data.getdata[0]["sa_email"]);
+                        $("#editplant").val(data.getdata[0]["mpa_name"]);
+                        $("#editgroup").val(rs[0]["spg_name"]);
+                        $.each(data.datatableGroup, function(key, value) {
+                            if (value["spg_name"] == data.getdata[0]["spg_name"]) {
+                                checked = "selected"
+                            } else {
+                                checked = ""
+                            }
+                            tb += "<option value='" + value["spg_id"] + "' " + checked + ">" + value["spg_name"] + "</option>"
+                        })
+                        $("#editgroup").html(tb);
+                    })
+                };
+
+                function saveedit() {
+                    var editempcode = $("#editempcode").val();
+                    var editgroup = $("#editgroup").val();
+                    var editemail = $("#editemailaddress").val();
+
+                    var email = document.getElementById("editemailaddress");
+
+                    if (email.value == "") {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Are you sure?',
+                            text: 'You failed to edit employee',
+                            confirmButtonColor: '#F7B267',
+                        })
+                    } else {
+                        if (editemail != 0) {
+                            if (isValidEmailAddress(editemail)) {
+                                // $("#validEmail").html("<font color='green'>อีเมล์ถูกต้อง</font>");
+                                // alert("อีเมล์ถูกต้อง")
+                                var path = $.ajax({
+                                    method: "post",
+                                    url: "<?php echo base_url(); ?>manageUser/saveEdit",
+                                    data: {
+                                        empcode: editempcode,
+                                        groupper: editgroup,
+                                        editemail: editemail,
+                                    }
+                                })
+                                path.done(function(rs) {
+                                    //     alert(rs);
+                                    if (rs === "true") {
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Successfully',
+                                            text: 'You have successfully edit employee',
+                                        }).then(function() {
+                                            window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
+                                        })
+                                    } else if (rs === "Duplicate email") {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Duplicate email!!',
+                                            text: 'You failed to edit employee',
+                                        })
+
+                                    } else {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Data not found',
+                                            text: 'You failed to edit employee',
+                                        })
+                                    }
+                                })
+
+
+                            } else {
+                                // $("#validEmail").html("<font color='red'>อีเมล์ไม่ถูกต้อง</font>");
+                                // alert("อีเมล์ไม่ถูกต้อง")
+                            }
+                        } else {
+                            $("#validEmail").html("");
                         }
 
+                    }
 
-                    };
-                </script>
-            </div>
+                };
+
+                function addUser() {
+                    var empcode = $('#addempcode').val();
+                    var firstname = $('#addfirstname').val();
+                    var lastname = $('#addlastname').val();
+                    var groupper = $('#addgroup').val();
+                    var email = $('#addemailaddress').val();
+                    var password = $('#addpassword').val();
+                    var plant = $('#addplant').val();
+
+                    var addempcode = document.getElementById("addempcode");
+                    var addfirstname = document.getElementById("addfirstname");
+                    var addlastname = document.getElementById("addlastname");
+                    var addgroup = document.getElementById("addgroup");
+                    var addemailaddress = document.getElementById("addemailaddress");
+                    var addpassword = document.getElementById("addpassword");
+                    var addplant = document.getElementById("addplant");
+
+
+
+                    if (addempcode.value == "" || addfirstname.value == "" || addlastname.value == "" || addgroup.value == "" || addemailaddress.value == "" || addpassword.value == "" || addplant.value == "") {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Are you sure?',
+                            text: 'You failed to add user',
+                            confirmButtonColor: '#F7B267',
+                        })
+                    } else {
+                        var path = $.ajax({
+                            method: "POST",
+                            url: "<?php echo base_url(); ?>manageUser/addManageUser",
+                            data: {
+                                empcode: empcode,
+                                firstname: firstname,
+                                lastname: lastname,
+                                groupper: groupper,
+                                email: email,
+                                password: password,
+                                plant: plant,
+                            }
+                        })
+                        path.done(function(rs) {
+                            console.log(rs);
+                            // alert(rs);
+                            if (rs === "true") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Successfully',
+                                    text: 'You have successfully add user.',
+
+                                }).then(function() {
+                                    window.location.href = "<?php echo base_url() ?>manageUser/ManagementUser";
+                                })
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'You failed to register',
+                                })
+                            }
+                        })
+                    }
+
+
+                };
+            </script>
         </div>
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+    </div>
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
     </div>
 
 </body>

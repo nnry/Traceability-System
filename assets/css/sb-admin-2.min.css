@@ -76,7 +76,6 @@ body {
     color: #858796;
     text-align: left;
     background-color: #fff
-    /* padding-top: 70px;  */
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {

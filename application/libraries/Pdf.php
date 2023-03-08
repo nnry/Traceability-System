@@ -16,4 +16,5 @@ class Pdf
             $dompdf->stream($filename.'.pdf', array('Attachment' => 0));
     }
 }
-?>
+ ?>
+

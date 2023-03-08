@@ -31,7 +31,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Management Group Permission</h1>
+        <h1 class="h3 mb-2 text-gray-800">Manage Group Permission</h1>
 
 
 
@@ -252,8 +252,8 @@
 
 
     <!-- Footer -->
-
-    <!-- <footer class="sticky-footer bg-white">
+    <!-- 
+    <footer class="sticky-footer bg-white">
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
                 <span>Copyright &copy; Your Website 2020</span>

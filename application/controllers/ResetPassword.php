@@ -12,6 +12,7 @@ class ResetPassword extends CI_Controller
 
 		## asset config
 		$theme = $this->config->item('theme');
+		$this->load->config('config', TRUE);
 		$this->theme = $theme;
 
 		$this->asset_url = $this->config->item('asset_url');

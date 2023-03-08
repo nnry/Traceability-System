@@ -11,10 +11,15 @@
         setTimeout("preventBack()", 0);
         window.onunload = function() {
             null
-            
+
         };
 
+        <?php
+        $session = $this->session->userdata('id');
+        ?>
+       
     </script>
+
 
     <meta charset="utf-8" />
     <title><?php echo $page_title; ?></title>
@@ -27,8 +32,6 @@
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
     <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css:300,400,600" type="text/css" rel="stylesheet" /> -->
     <link href="<?php echo base_url() . $css_url; ?>css/sb-admin-2.min.css" rel="stylesheet">
-
-
 
 </head>
 

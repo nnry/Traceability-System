@@ -576,13 +576,13 @@
     var path = $.ajax({ // ajax frist
         method: "get",
         dataType: "json",
-        url: "<?php echo base_url(); ?>Trace_Qgate/getstationload?zone=",
-        zone,
+        url: "<?php echo base_url(); ?>Trace_Qgate/getstationload?zone="+zone+"&para="+para,
       })
       .done(function(rs) {
         // alert(rs);
         // console.log("rs =>" , rs)
         var station = rs.all
+        var all = rs.all
         tb += "<option>" + "Select..." + "</option>"
         $.each(station, function(key, value) {
           if (para == value["mpa_id"]) {
@@ -666,6 +666,7 @@
           confirmButtonColor: '#F7B267',
         })
       } else if (inputpart != 0) {
+        console.log("delidate==>> ",delidate)
         var path = $.ajax({
           method: "post",
           url: "<?php echo base_url(); ?>Trace_Qgate/searchbypart",
@@ -678,6 +679,9 @@
           }
         })
         path.done(function(rs) {
+          alert(rs)
+          console.log(" rs==>> ",rs)
+          
 
 
         })

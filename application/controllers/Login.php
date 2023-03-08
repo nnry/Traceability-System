@@ -11,12 +11,14 @@ class Login extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-
+		// session_start();
 		## asset config
 
 		$theme = $this->config->item('theme');
 		$this->theme = $theme;
 		$this->load->library('session');
+		$this->load->config('config', TRUE);
+
 
 
 		$this->asset_url = $this->config->item('asset_url');
@@ -48,6 +50,39 @@ class Login extends CI_Controller
 	// 	redirect('Account');
 	// }
 
+	public function Account()
+	{
+		// session_start();
+		$session = $this->session->userdata('id');
+		if ($session == "") {
+			// echo "ไม่มีจ้าาาาาาาาาา ไอ่หน้าโง่";
+			// $setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
+
+			$this->template->set_master_template('themes/' . $this->theme . '/tpl_login.php');
+			// $this->template->write('page_title', '' . $setTitle . 'TBKK | ');
+			// $this->template->write_view('page_content', 'themes/'. $this->theme .'/view_login.php');
+			$this->template->render();
+		} else {
+			// echo "มีจ้าาาาาาาาาา";
+			// echo $session;
+			$empcode = $this->session->userdata("empcode");
+			$data = $this->backoffice_model->getname($empcode);
+			$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
+			$data["user"] = $data["sa_code"];
+			$data["id"] = $data["sa_id"];
+			// $data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
+			$setTitle = "Traceability | Homepage";
+
+
+			$this->template->write('page_title', $setTitle . ' ');
+			$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
+			$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
+			$this->template->write_view('page_content', 'themes/' . $this->theme . '/view_homepage.php');
+			$this->template->write_view('page_footer', 'themes/' . $this->theme . '/first_set/view_footer.php');
+			$this->template->render();
+		}
+
+	}
 	public function checkUserLogin()
 	{
 		// session_start();
@@ -68,6 +103,7 @@ class Login extends CI_Controller
 					'lname' => $data['sa_lname'],
 					'email' => $data['sa_email'],
 					'phase' => $data['mpa_name'],
+
 					'login' => "OK"
 				);
 				$this->session->set_userdata($session_data1);
@@ -269,37 +305,5 @@ class Login extends CI_Controller
 	// 	$data = $this->backoffice_model->getname($code);
 	// 	echo json_encode($data);
 	// }
-	public function Account()
-	{
-		// session_start();
-		$session = $this->session->userdata('id');
-		if ($session == "") {
-			// echo "ไม่มีจ้าาาาาาาาาา ไอ่หน้าโง่";
-			$setTitle = strtoupper($this->router->fetch_method() . ' ' . $this->router->fetch_class());
-
-			$this->template->set_master_template('themes/' . $this->theme . '/tpl_login.php');
-			$this->template->write('page_title', '' . $setTitle . 'TBKK | ');
-			// $this->template->write_view('page_content', 'themes/'. $this->theme .'/view_login.php');
-			$this->template->render();
-		} else {
-			// echo "มีจ้าาาาาาาาาา";
-			// echo $session;
-			$empcode = $this->session->userdata("empcode");
-			$data = $this->backoffice_model->getname($empcode);
-			$data["fullname"] = $data["sa_fname"] . " " . $data["sa_lname"];
-			$data["user"] = $data["sa_code"];
-			$data["id"] = $data["sa_id"];
-			// $data["menu"] = $this->backoffice_model->showMenu2($data["user"]);
-			$setTitle = "Traceability | Homepage";
-
-
-			$this->template->write('page_title', $setTitle . ' ');
-			$this->template->write_view('page_menu', 'themes/' . $this->theme . '/first_set/view_menu.php', $data);
-			$this->template->write_view('page_header', 'themes/' . $this->theme . '/first_set/view_header.php', $data);
-			$this->template->write_view('page_content', 'themes/' . $this->theme . '/view_homepage.php');
-			$this->template->write_view('page_footer', 'themes/' . $this->theme . '/first_set/view_footer.php');
-			$this->template->render();
-		}
-
-	}
+	
 }

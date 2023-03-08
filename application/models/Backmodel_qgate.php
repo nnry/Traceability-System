@@ -26,9 +26,9 @@ class Backmodel_qgate extends CI_Model
         return $row;
 
     }
-    public function getstationby_id($idstaion){
+    public function getstationby_id($idstaion,$idphase){
         $this->EXP = $this->load->database('qgate',true);
-        $sql = "EXEC [dbo].[API_ZONE_BY_ID] @PHASE_ID ='{$idstaion}'";
+        $sql = "EXEC [dbo].[API_STATION_BY_ID] @PHASE_ID ='{$idphase}', @ZONE_ID='{$idstaion}'";
         $res = $this->EXP->query($sql);
         $row = $res->result_array();
         return $row;
@@ -105,6 +105,12 @@ class Backmodel_qgate extends CI_Model
         } else {
             return false;
         }
+    }
+
+    public function searchByPathNo($delidate,$selectplant,$selectzone,$selectstation,$inputpart){
+        $this->EXP = $this->load->database('qgate',true);
+        
+        
     }
 
 

@@ -27,7 +27,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Management Menu</h1>
+        <h1 class="h3 mb-2 text-gray-800">Manage Menu</h1>
 
 
 
@@ -283,16 +283,16 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
-
         </div>
-        <!-- /.container-fluid -->
 
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+
+    </div>
+    <!-- /.container-fluid -->
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
     </div>
 </body>
@@ -549,11 +549,11 @@
         var addmmenu = $("#addmmenu").val();
         // var addicons = $("#addicons").val();
 
-        var chemenu = document.getElementById("addmenu");
+        var chemenu = document.getElementById("addmmenu");
         // var cheicons = document.getElementById("addicons");
 
 
-        if (chemenu.value == "" ) {
+        if (chemenu.value == "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Are you sure?',
@@ -633,7 +633,7 @@
             })
 
             $("#idmenuaddsub").val(sm_id);
-            
+
 
         } catch (err) {
             $("#showtablesubmenu").show("fast")
@@ -696,7 +696,7 @@
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'Successfully',
-                                        text: 'You have successfully edit menu',
+                                        text: 'You have successfully edit submenu',
                                     }).then(function() {
                                         window.location.href = "<?php echo base_url() ?>manageMenu/ManagementMenu";
                                     })
