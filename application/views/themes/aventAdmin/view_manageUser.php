@@ -114,7 +114,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="fristname">Frist Name :</label>
+                                    <label for="fristname">First Name :</label>
                                     <input class="form-control" type="fristname" id="editfirstname" required="" disabled>
                                 </div>
 
