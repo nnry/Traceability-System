@@ -212,6 +212,15 @@
                 </div>
               </div>
 
+              <div class="card-body col-md-6 row mb-3">
+                <label class="col-form-label">SLIP CD :</label>
+                <div class="col-md-8">
+                  <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="inputslip">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
               <div class="card-body col-md-8 row mb-3">
                 <label class="col-form-label">Scan Q-Gate TAG :</label>
                 <div class="col-md-8">
@@ -576,7 +585,7 @@
     var path = $.ajax({ // ajax frist
         method: "get",
         dataType: "json",
-        url: "<?php echo base_url(); ?>Trace_Qgate/getstationload?zone="+zone+"&para="+para,
+        url: "<?php echo base_url(); ?>Trace_Qgate/getstationload?zone=" + zone + "&para=" + para,
       })
       .done(function(rs) {
         // alert(rs);
@@ -606,6 +615,7 @@
     var selectstation = $('#selectstation').val();
     var inputpart = $('#inputpart').val();
     var inputscantag = $('#inputscantag').val();
+    var inputslip = $('#inputslip').val();
 
     var chdelidate = document.getElementById('delidate');
     var chselectplant = document.getElementById('selectplant');
@@ -620,7 +630,7 @@
       getQgate(inputscantag);
       getTransfer(inputscantag);
       getPicking(inputscantag);
-      getShipping(inputscantag);
+      getShippingScanTag(inputscantag);
 
       var path = $.ajax({
         method: "post",
@@ -650,6 +660,10 @@
 
       })
 
+    } else if (inputslip != 0) {
+      getShippingSLIP(inputslip)
+
+
     } else {
       if (chdelidate.value == "") {
         Swal.fire({
@@ -666,7 +680,7 @@
           confirmButtonColor: '#F7B267',
         })
       } else if (inputpart != 0) {
-        console.log("delidate==>> ",delidate)
+        console.log("delidate==>> ", delidate)
         var path = $.ajax({
           method: "post",
           url: "<?php echo base_url(); ?>Trace_Qgate/searchbypart",
@@ -680,9 +694,7 @@
         })
         path.done(function(rs) {
           alert(rs)
-          console.log(" rs==>> ",rs)
-          
-
+          console.log(" rs==>> ", rs)
 
         })
       } else {
@@ -1372,11 +1384,15 @@
     })
   }
 
-  function getShipping(inputscantag) {
+
+  function getShippingScanTag(inputscantag) {
     var mt = " "
     var path = $.ajax({
       method: "get",
-      url: "<?php echo base_url(); ?>Trace_Qgate/searchQgateByScan?inputscantag=" + inputscantag,
+      url: "<?php echo base_url(); ?>Trace_Qgate/checkShippingByScanTag",
+      data: {
+        "inputscantag": inputscantag
+      }
 
     })
     path.done(function(rs) {
@@ -1453,6 +1469,83 @@
 
       }
 
+
+    })
+  }
+
+  function getShippingSLIP(inputslip) {
+    var tb = ""
+    var path = $.ajax({
+      method: "get",
+      url: "<?php echo base_url(); ?>Trace_Qgate/inputSlip_CD",
+      data: {
+        inputslip: inputslip,
+      }
+    })
+    path.done(function(rs) {
+      // alert(rs)
+      // console.log(" rs==>> ", rs)
+
+      if (rs == "NO DATA") {
+        $("#detailshipping").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+        $("#imgdetailshipping").hide();
+        $("#clickship").click(function() {
+          // alert("wowowowo")
+          Swal.fire(
+            'ไม่มีข้อมูล',
+            'No Data Found!',
+            'error'
+          )
+        });
+      } else {
+        $("#detailshipping").html("");
+        $("#imgdetailshipping").show();
+        var data = JSON.parse(rs)
+        // console.log(" data==>> ", data);
+
+        tb += "<h5 class='time_line-title'><label id='shipping_user_name'>" + data[0].LINE_CD + "</label></h5>"
+        tb += "<div class='time_line-descr'>LOT NO : <label>" + data[0].LOT_NUMBER + "</label></div>"
+        tb += "<div class='time_line-descr'>INVOICE NO : <label id='shipping_user_id'>" + data[0].INVOICE_NO + "</label></div>"
+        tb += "<div class='time_line-descr'>TRACE NO : <label id='shipping_part_no'>" + data[0].TRACE_KEY + "</label></div>"
+        tb += "<div class='time_line-descr'>SCAN DATE : <label id='shipping_scan_date'>" + data[0].CREATED_DATE + "</label>"
+
+
+
+        $("#detailshipping").html(tb)
+
+        $("#clickship").click(function() {
+          getDetailShippingBySLIP(rs);
+        });
+
+
+
+      }
+    })
+
+
+  }
+
+  function getDetailShippingBySLIP(rs) {
+    var tb = ""
+    console.log(rs)
+    var value = JSON.parse(rs)
+    // console.log("value=====>>>>>>>>> ",value)
+    // console.log("INVOICE_NO=====>>>>>>>>> ",value[0].SEQ_NO)
+
+    var i =0
+  
+    $.each(value, function(key, detail) {
+      tb += "<div class='time_line-descr'>SLIP CD : <label>" + detail["SLIP_CD"]+ "</label></div>"
+      tb += "<div class='time_line-descr'>LOT NO : <label>" + detail["LOT_NUMBER"]+ "</label></div>"
+      tb += "<div class='time_line-descr'>TERM ID : <label>" + detail["CREATED_TERM_ID"]+ "</label></div>"
+      i++
+    })
+
+    Swal.fire({
+      // '<pre>' + str + '</pre>'
+      html: '<pre>' + tb + '</pre>',
+      showCloseButton: true,
+      showConfirmButton: false,
 
     })
   }
