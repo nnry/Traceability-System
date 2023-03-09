@@ -143,10 +143,9 @@
       width: 50%;
       height: 100px;
     }
-
     .line {
-      border-right: 2px solid cornflowerblue;
-      padding-right: 0.3rem;
+        border-right: 2px solid cornflowerblue;
+        padding-right: 0.3rem;        
     }
   </style>
 
@@ -236,7 +235,7 @@
 
             <div class="row">
               <div class="card-body col-md-8 row mb-3">
-                <label class="col-form-label">Scan Q-Gate Tag :</label>
+                <label class="col-form-label">Scan Q-Gate TAG :</label>
                 <div class="col-md-8">
                   <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="inputscantag">
                 </div>
@@ -635,17 +634,48 @@
     var chselectplant = document.getElementById('selectplant');
     var chselectzone = document.getElementById('selectzone');
     var chselectstation = document.getElementById('selectstation');
+    // var chinputpart = document.getElementById('inputpart');
+    // var chinputscantag = document.getElementById('inputscantag');
 
     if (inputscantag != 0) {
+
+      // getwashing(inputscantag);
+      // getQgate(inputscantag);
+      // getTransfer(inputscantag);
+      // getPicking(inputscantag);
       getShippingScanTag(inputscantag);
 
+      var path = $.ajax({
+        method: "post",
+        url: "<//?php echo base_url(); ?>Trace_Qgate/searchByScanTag",
+        data: {
+          // delidate: delidate,
+          // selectplant: selectplant,
+          // selectzone: selectzone,
+          // selectstation: selectstation,
+          inputscantag: inputscantag
+        }
+      })
+
+      path.done(function(rs) {
+
+        // alert(rs)
+        if (rs == "undefined") {
+          // alert("wow");
+          getNotFoundmachine()
+
+
+        } else {
+          var data = JSON.parse(rs)
+          Getmachine(data)
+        }
+
+
+      })
 
     } else if (inputslip != 0) {
       getShippingSLIP(inputslip)
 
-
-    } else if (delidate != 0) {
-      getShippingDeliDate(delidate)
 
     } else {
       if (chdelidate.value == "") {
@@ -662,6 +692,9 @@
           text: 'Are you sure?',
           confirmButtonColor: '#F7B267',
         })
+      } else if (inputpart != 0) {
+        getShippingDeliDate(delidate)
+       
       } else {
         Swal.fire({
           icon: 'warning',
@@ -671,24 +704,675 @@
         })
       }
 
-
-
     }
+
 
 
   }
 
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////getShippingScanTag/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  function Getmachine(data) {
+    var zone = data.zone
+    var mt = " "
+    // alert(zone)
+    if (zone === '1') {
+      $("#detailmachine1").html("");
+      $("#imgdetailmachine1").show();
+      mt += "<h5 class='time_line-title'><label id='machine1_user_name'>" + data.line + "</label></h5>"
+      mt += "<div class='time_line-descr'>USER ID : <label id='machine1_user_name'>" + data.byUser + "</label></div>"
+      mt += "<div class='time_line-descr'>PART NO : <label id='machine1_user_name'>" + data.part_no + "</label></div>"
+      mt += "<div class='time_line-descr'>SCAN DATE : <label id='machine1_user_name'>" + data.date + "</label>"
+      $("#detailmachine1").html(mt)
+
+      var idTagFa = data.idFa
+      var pathmc1 = $.ajax({
+        method: "get",
+        url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
+        data: {
+          "idTagFa": idTagFa
+        }
+
+      })
+      pathmc1.done(function(mc1) {
+        var remc1 = JSON.parse(mc1)
+        var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+          "<div class='time_line-descr'>USER NAME : <label>" + remc1.empName + "</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>" + remc1.partNoFA + "</label></div>\n" +
+          "<div class='time_line-descr'>LINE NO : <label>" + remc1.lineFA + "</label></div>\n" +
+          "<div class='time_line-descr'>LOT  NO : <label>" + remc1.lotNoProd + "</label></div>\n" +
+          "<div class='time_line-descr'>BOX  NO : <label>" + remc1.boxNoFA + "</label></div>\n" +
+          "<div class='time_line-descr'>QTY     : <label>" + remc1.spnFA + "</label></div>\n" +
+          "<div class='time_line-descr'>DATE : <label>" + remc1.datecom + "</label></div>";
+
+        $("#clickma1").click(function() {
+          Swal.fire({
+            // '<pre>' + str + '</pre>'
+            html: '<pre>' + str + '</pre>',
+            showCloseButton: true,
+            showConfirmButton: false,
+          })
+
+        });
+
+      });
+
+    } else {
+      // alert("1  else")
+      // detailmachine1
+      $("#clickma1").click(function() {
+        // alert("wowowowo")
+        Swal.fire(
+          'ไม่มีข้อมูล',
+          'No Data Found!',
+          'error'
+        )
+
+      });
+      $("#detailmachine1").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+      $("#imgdetailmachine1").hide();
+
+    }
+    if (zone === '2') {
+      $("#detailmachine2").html("");
+      $("#imgdetailmachine2").show();
+
+      // $("#machine2_user_name").html(data.line);
+      // $("#machine2_user_id").html(data.byUser);
+      // $("#machine2_part_no").html(data.part_no);
+      // $("#machine2_scan_date").html(data.date);
+
+      // alert("2") 
+      mt += "<h5 class='time_line-title'><label id='machine2_user_name'>" + data.line + "</label></h5>"
+      mt += "<div class='time_line-descr'>USER ID : <label id='machine2_user_id'>" + data.byUser + "</label></div>"
+      mt += "<div class='time_line-descr'>PART NO : <label id='machine2_part_no'>" + data.part_no + "</label></div>"
+      mt += "<div class='time_line-descr'>SCAN DATE : <label id='machine2_scan_date'>" + data.date + "</label>"
+      $("#detailmachine2").html(mt)
+
+
+      var idTagFa = data.idFa
+      var pathmc2 = $.ajax({
+        method: "get",
+        url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
+        data: {
+          "idTagFa": idTagFa
+        }
+
+      })
+      pathmc2.done(function(mc2) {
+        var remc2 = JSON.parse(mc2)
+        var str = "<br><img src='https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+          "<div class='time_line-descr'>USER NAME : <label>" + remc2.empName + "</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>" + remc2.partNoFA + "</label></div>\n" +
+          "<div class='time_line-descr'>LINE NO : <label>" + remc2.lineFA + "</label></div>\n" +
+          "<div class='time_line-descr'>LOT  NO : <label>" + remc2.lotNoProd + "</label></div>\n" +
+          "<div class='time_line-descr'>BOX  NO : <label>" + remc2.boxNoFA + "</label></div>\n" +
+          "<div class='time_line-descr'>QTY     : <label>" + remc2.spnFA + "</label></div>\n" +
+          "<div class='time_line-descr'>DATE : <label>" + remc2.datecom + "</label></div>";
+
+
+
+        $("#clickma2").click(function() {
+          Swal.fire({
+            // '<pre>' + str + '</pre>'
+            html: '<pre>' + str + '</pre>',
+            showCloseButton: true,
+            showConfirmButton: false,
+          })
+        });
+
+      })
+
+    } else {
+      // alert("2  else")
+      $("#detailmachine2").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+      $("#imgdetailmachine2").hide();
+
+      $("#clickma2").click(function() {
+        // alert("wowowowo")
+
+        Swal.fire(
+          'ไม่มีข้อมูล',
+          'No Data Found!',
+          'error'
+        )
+
+      });
+    }
+
+    if (zone === '3') {
+      $("#detailmachine3").html("");
+      $("#imgdetailmachine3").show();
+      // alert("3")
+      // $("#machine3_user_name").html(data.line);
+      // $("#machine3_user_id").html(data.byUser);
+      // $("#machine3_part_no").html(data.part_no);
+      // $("#machine3_scan_date").html(data.date);
+
+      mt += "<h5 class='time_line-title'><label id='machine3_user_name'>" + data.line + "</label></h5>"
+      mt += "<div class='time_line-descr'>USER ID : <label id='machine3_user_name'>" + data.byUser + "</label></div>"
+      mt += "<div class='time_line-descr'>PART NO : <label id='machine3_user_name'>" + data.part_no + "</label></div>"
+      mt += "<div class='time_line-descr'>SCAN DATE : <label id='machine3_user_name'>" + data.date + "</label>"
+      $("#detailmachine3").html(mt)
+      var idTagFa = data.idFa
+      var pathmc2 = $.ajax({
+        method: "get",
+        url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
+        data: {
+          "idTagFa": idTagFa
+        }
+
+      })
+      pathmc3.done(function(mc3) {
+        var remc3 = JSON.parse(mc3)
+        var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+          "<div class='time_line-descr'>USER NAME : <label>" + remc3.empName + "</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>" + remc3.partNoFA + "</label></div>\n" +
+          "<div class='time_line-descr'>LINE NO : <label>" + remc3.lineFA + "</label></div>\n" +
+          "<div class='time_line-descr'>LOT  NO : <label>" + remc3.lotNoProd + "</label></div>\n" +
+          "<div class='time_line-descr'>BOX  NO : <label>" + remc3.boxNoFA + "</label></div>\n" +
+          "<div class='time_line-descr'>QTY     : <label>" + remc3.spnFA + "</label></div>\n" +
+          "<div class='time_line-descr'>DATE : <label>" + remc3.datecom + "</label></div>";
+
+
+        $("#clickma3").click(function() {
+          Swal.fire({
+            // '<pre>' + str + '</pre>'
+            html: '<pre>' + str + '</pre>',
+            showCloseButton: true,
+            showConfirmButton: false,
+          })
+        });
+
+      })
+
+
+    } else {
+      // alert("3  else")
+      $("#detailmachine3").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+      $("#imgdetailmachine3").hide();
+      $("#clickma3").click(function() {
+        // alert("wowowowo")
+
+        Swal.fire(
+          'ไม่มีข้อมูล',
+          'No Data Found!',
+          'error'
+        )
+      });
+    }
+
+    if (zone == '4') {
+      $("#detailmachine4").html("");
+      $("#imgdetailmachine4").show();
+      mt += "<h5 class='time_line-title'><label id='machine4_user_name'>" + data.line + "</label></h5>"
+      mt += "<div class='time_line-descr'>USER ID : <label id='machine4_user_name'>" + data.byUser + "</label></div>"
+      mt += "<div class='time_line-descr'>PART NO : <label id='machine4_user_name'>" + data.part_no + "</label></div>"
+      mt += "<div class='time_line-descr'>SCAN DATE : <label id='machine4_user_name'>" + data.date + "</label>"
+      $("#detailmachine4").html(mt)
+
+
+      var idTagFa = data.idFa
+      var pathmc4 = $.ajax({
+        method: "get",
+        url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
+        data: {
+          "idTagFa": idTagFa
+        }
+
+      })
+      pathmc4.done(function(mc4) {
+        var remc4 = JSON.parse(mc4)
+        var str = "<br><img src='https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+          "<div class='time_line-descr'>USER NAME : <label>" + remc4.empName + "</label></div>\n" +
+          "<div class='time_line-descr'>PART NO : <label>" + remc4.partNoFA + "</label></div>\n" +
+          "<div class='time_line-descr'>LINE NO : <label>" + remc4.lineFA + "</label></div>\n" +
+          "<div class='time_line-descr'>LOT  NO : <label>" + remc4.lotNoProd + "</label></div>\n" +
+          "<div class='time_line-descr'>BOX  NO : <label>" + remc4.boxNoFA + "</label></div>\n" +
+          "<div class='time_line-descr'>QTY     : <label>" + remc4.spnFA + "</label></div>\n" +
+          "<div class='time_line-descr'>DATE : <label>" + remc4.datecom + "</label></div>";
+
+
+        $("#clickma4").click(function() {
+          Swal.fire({
+            // '<pre>' + str + '</pre>'
+            html: '<pre>' + str + '</pre>',
+            showCloseButton: true,
+            showConfirmButton: false,
+
+          })
+
+        });
+
+      })
+
+
+
+
+
+    } else {
+      // alert("else")
+      $("#detailmachine4").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+      $("#imgdetailmachine4").hide();
+      $("#clickma4").click(function() {
+        // alert("wowowowo")
+        Swal.fire(
+          'ไม่มีข้อมูล',
+          'No Data Found!',
+          'error'
+        )
+
+      });
+    }
+  }
+
+  function getwashing(inputscantag) {
+    var mt = " "
+
+    var path = $.ajax({
+      method: "get",
+      url: "<?php echo base_url(); ?>Trace_Qgate/searchwashing?inputscantag=" + inputscantag,
+
+    })
+    path.done(function(rs) {
+      // alert(rs)
+
+      if (rs == "undefined") {
+        $("#detailwashing").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+        $("#imgdetailwashing").hide();
+        $("#clickwashing").click(function() {
+          // alert("wowowowo")
+          Swal.fire(
+            'ไม่มีข้อมูล',
+            'No Data Found!',
+            'error'
+          )
+
+        });
+
+      } else {
+        $("#detailwashing").html("");
+        $("#imgdetailwashing").show();
+        var data = JSON.parse(rs)
+        // $("#washing_user_name").html(data.line);
+        // $("#washing_user_id").html(data.byUser);
+        // $("#washing_part_no").html(data.partNo);
+        // $("#washing_scan_date").html(data.date);
+        mt += "<h5 class='time_line-title'><label id='washing_user_name'>" + data.line + "</label></h5>"
+        mt += "<div class='time_line-descr'>USER ID : <label id='washing_user_id'>" + data.byUser + "</label></div>"
+        mt += "<div class='time_line-descr'>PART NO : <label id='washing_part_no'>" + data.partNo + "</label></div>"
+        mt += "<div class='time_line-descr'>SCAN DATE : <label id='washing_scan_date'>" + data.date + "</label>"
+        $("#detailwashing").html(mt)
+
+        var idTagFa = data.tagId
+        // alert(idTagFa);
+        // console.log("===>",idTagFa);
+        var pathwashing = $.ajax({
+          method: "get",
+          url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
+          data: {
+            "idTagFa": idTagFa
+          }
+
+        })
+        pathwashing.done(function(was) {
+          // alert(was)
+          // console.log(was);
+          var resultwashing = JSON.parse(was)
+
+          var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+            "<div class='time_line-descr'>USER NAME : <label>" + resultwashing.empName + "</label></div>\n" +
+            "<div class='time_line-descr'>PART NO : <label>" + resultwashing.partNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LINE NO : <label>" + resultwashing.lineFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LOT  NO : <label>" + resultwashing.lotNoProd + "</label></div>\n" +
+            "<div class='time_line-descr'>BOX  NO : <label>" + resultwashing.boxNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>QTY     : <label>" + resultwashing.spnFA + "</label></div>\n" +
+            "<div class='time_line-descr'>DATE : <label>" + resultwashing.datecom + "</label></div>";
+
+          $("#clickwashing").click(function() {
+            Swal.fire({
+              // '<pre>' + str + '</pre>'
+              html: '<pre>' + str + '</pre>',
+              showCloseButton: true,
+              showConfirmButton: false,
+
+            })
+
+          });
+
+        })
+
+
+
+
+      }
+
+
+    })
+
+
+  }
+
+  function getNotFoundmachine() {
+    $("#detailmachine1").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+    $("#imgdetailmachine1").hide();
+
+
+    $("#detailmachine2").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+    $("#imgdetailmachine2").hide();
+
+    $("#detailmachine3").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+    $("#imgdetailmachine3").hide();
+
+    $("#detailmachine4").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+    $("#imgdetailmachine4").hide();
+
+    $("#clickma2").click(function() {
+      // alert("wowowowo")
+
+      Swal.fire(
+        'ไม่มีข้อมูล',
+        'No Data Found!',
+        'error'
+      )
+
+    });
+    $("#clickma3").click(function() {
+      // alert("wowowowo")
+
+      Swal.fire(
+        'ไม่มีข้อมูล',
+        'No Data Found!',
+        'error'
+      )
+    });
+    $("#clickma4").click(function() {
+      // alert("wowowowo")
+      Swal.fire(
+        'ไม่มีข้อมูล',
+        'No Data Found!',
+        'error'
+      )
+
+    });
+
+    $("#clickma1").click(function() {
+      // alert("wowowowo")
+      Swal.fire(
+        'ไม่มีข้อมูล',
+        'No Data Found!',
+        'error'
+      )
+
+    });
+
+  }
+
+
+  function getQgate(inputscantag) {
+    var mt = " "
+    var path = $.ajax({
+      method: "get",
+      url: "<?php echo base_url(); ?>Trace_Qgate/searchQgateByScan?inputscantag=" + inputscantag,
+
+    })
+    path.done(function(rs) {
+      // alert(rs)
+
+      if (rs == "undefined") {
+        $("#detailqgate").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+        $("#imgdetailqgate").hide();
+        $("#clickQgate").click(function() {
+          // alert("wowowowo")
+          Swal.fire(
+            'ไม่มีข้อมูล',
+            'No Data Found!',
+            'error'
+          )
+
+        });
+
+      } else {
+        var data = JSON.parse(rs)
+        $("#detailqgate").html("");
+        $("#imgdetailqgate").show();
+
+        // $("#qgate_user_name").html(data.byUserName);
+        // $("#qgate_user_id").html(data.byUserId);
+        // $("#qgate_part_no").html(data.partNo);
+        // $("#qgate_scan_date").html(data.date);
+
+        mt += "<h5 class='time_line-title'><label id='qgate_user_name'>" + data.byUserName + "</label></h5>"
+        mt += "<div class='time_line-descr'>USER ID : <label id='qgate_user_id'>" + data.byUserId + "</label></div>"
+        mt += "<div class='time_line-descr'>PART NO : <label id='qgate_part_no'>" + data.partNo + "</label></div>"
+        mt += "<div class='time_line-descr'>SCAN DATE : <label id='qgate_scan_date'>" + data.date + "</label>"
+        $("#detailqgate").html(mt)
+
+        var idTagFa = data.idFa
+
+
+        var pathqgate = $.ajax({
+          method: "get",
+          url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
+          data: {
+            "idTagFa": idTagFa
+          }
+
+        })
+        pathqgate.done(function(qgate) {
+          // alert(reqgate)
+          var reqgate = JSON.parse(qgate)
+          var str = "<br><img src='https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+            "<div class='time_line-descr'>USER NAME : <label>" + reqgate.empName + "</label></div>\n" +
+            "<div class='time_line-descr'>PART NO : <label>" + reqgate.partNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LINE NO : <label>" + reqgate.lineFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LOT  NO : <label>" + reqgate.lotNoProd + "</label></div>\n" +
+            "<div class='time_line-descr'>BOX  NO : <label>" + reqgate.boxNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>QTY     : <label>" + reqgate.spnFA + "</label></div>\n" +
+            "<div class='time_line-descr'>DATE : <label>" + reqgate.datecom + "</label></div>";
+
+
+
+          $("#clickQgate").click(function() {
+            Swal.fire({
+              // '<pre>' + str + '</pre>'
+              html: '<pre>' + str + '</pre>',
+              showCloseButton: true,
+              showConfirmButton: false,
+
+            })
+
+          });
+
+
+        })
+
+
+
+
+      }
+
+
+
+
+    })
+  }
+
+  function getTransfer(inputscantag) {
+    var mt = " "
+    var path = $.ajax({
+      method: "get",
+      url: "<?php echo base_url(); ?>Trace_Qgate/searchQgateByScan?inputscantag=" + inputscantag,
+
+    })
+    path.done(function(rs) {
+      // alert(rs)
+
+      if (rs == "undefined") {
+        $("#detailtransfer").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+        $("#imgdetailtransfer").hide();
+        $("#clicktransfer").click(function() {
+          // alert("wowowowo")
+          Swal.fire(
+            'ไม่มีข้อมูล',
+            'No Data Found!',
+            'error'
+          )
+
+        });
+
+      } else {
+        var data = JSON.parse(rs)
+        // $("#transfer_user_name").html(data.byUserName);
+        // $("#transfer_user_id").html(data.byUserId);
+        // $("#transfer_part_no").html(data.partNo);
+        // $("#transfer_scan_date").html(data.date);
+
+        $("#detailtransfer").html("");
+        $("#imgdetailtransfer").show();
+
+
+        mt += "<h5 class='time_line-title'><label id='transfer_user_name'>" + data.byUserName + "</label></h5>"
+        mt += "<div class='time_line-descr'>USER ID : <label id='transfer_user_id'>" + data.byUserId + "</label></div>"
+        mt += "<div class='time_line-descr'>PART NO : <label id='transfer_part_no'>" + data.partNo + "</label></div>"
+        mt += "<div class='time_line-descr'>SCAN DATE : <label id='transfer_scan_date'>" + data.date + "</label>"
+        $("#detailtransfer").html(mt)
+
+        var idTagFa = data.idFa
+
+        var pathtran = $.ajax({
+          method: "get",
+          url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
+          data: {
+            "idTagFa": idTagFa
+          }
+
+        })
+        pathtran.done(function(tranf) {
+          // alert(was)
+          // console.log(was);
+          var resulttranf = JSON.parse(tranf)
+
+          var str = "<br><img src='https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+            "<div class='time_line-descr'>USER NAME : <label>" + resulttranf.empName + "</label></div>\n" +
+            "<div class='time_line-descr'>PART NO : <label>" + resulttranf.partNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LINE NO : <label>" + resulttranf.lineFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LOT  NO : <label>" + resulttranf.lotNoProd + "</label></div>\n" +
+            "<div class='time_line-descr'>BOX  NO : <label>" + resulttranf.boxNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>QTY     : <label>" + resulttranf.spnFA + "</label></div>\n" +
+            "<div class='time_line-descr'>DATE : <label>" + resulttranf.datecom + "</label></div>";
+
+
+          $("#clicktransfer").click(function() {
+            Swal.fire({
+              // '<pre>' + str + '</pre>'
+              html: '<pre>' + str + '</pre>',
+              showCloseButton: true,
+              showConfirmButton: false,
+
+            })
+
+          });
+
+        })
+
+
+
+      }
+
+
+    })
+  }
+
+  function getPicking(inputscantag) {
+    var mt = " "
+    var path = $.ajax({
+      method: "get",
+      url: "<?php echo base_url(); ?>Trace_Qgate/searchQgateByScan?inputscantag=" + inputscantag,
+
+    })
+    path.done(function(rs) {
+      // alert(rs)
+
+      if (rs == "undefined") {
+        $("#detailpicking").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
+        $("#imgdetailpicking").hide();
+        $("#clickpick").click(function() {
+          // alert("wowowowo")
+          Swal.fire(
+            'ไม่มีข้อมูล',
+            'No Data Found!',
+            'error'
+          )
+
+        });
+
+      } else {
+        var data = JSON.parse(rs)
+        $("#detailpicking").html("");
+        $("#imgdetailpicking").show();
+
+
+        mt += "<h5 class='time_line-title'><label id='picking_user_name'>" + data.byUserName + "</label></h5>"
+        mt += "<div class='time_line-descr'>USER ID : <label id='picking_user_id'>" + data.byUserId + "</label></div>"
+        mt += "<div class='time_line-descr'>PART NO : <label id='picking_part_no'>" + data.partNo + "</label></div>"
+        mt += "<div class='time_line-descr'>SCAN DATE : <label id='picking_scan_date'>" + data.date + "</label>"
+        $("#detailpicking").html(mt)
+
+        var idTagFa = data.idFa
+
+        var pathpick = $.ajax({
+          method: "get",
+          url: "<?php echo base_url(); ?>Trace_Qgate/getWashing",
+          data: {
+            "idTagFa": idTagFa
+          }
+
+        })
+        pathpick.done(function(pic) {
+
+          var resultpick = JSON.parse(pic)
+
+          var str = "<br><img src='https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png' class='img-circle' style='width: 20%;' alt='Cinque Terre'/>\n\n<br>" +
+            "<div class='time_line-descr'>USER NAME : <label>" + resultpick.empName + "</label></div>\n" +
+            "<div class='time_line-descr'>PART NO : <label>" + resultpick.partNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LINE NO : <label>" + resultpick.lineFA + "</label></div>\n" +
+            "<div class='time_line-descr'>LOT  NO : <label>" + resultpick.lotNoProd + "</label></div>\n" +
+            "<div class='time_line-descr'>BOX  NO : <label>" + resultpick.boxNoFA + "</label></div>\n" +
+            "<div class='time_line-descr'>QTY     : <label>" + resultpick.spnFA + "</label></div>\n" +
+            "<div class='time_line-descr'>DATE : <label>" + resultpick.datecom + "</label></div>";
+
+          $("#clickpick").click(function() {
+            Swal.fire({
+              // '<pre>' + str + '</pre>'
+              html: '<pre>' + str + '</pre>',
+              showCloseButton: true,
+              showConfirmButton: false,
+
+            })
+
+          });
+
+
+        })
+
+
+
+
+      }
+
+
+    })
+  }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////getShippingScanTag/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   function getShippingScanTag(inputscantag) {
-    console.log("inputscantag ==>>", inputscantag)
+    console.log("inputscantag ==>>" ,inputscantag)
     var mt = " "
     var path = $.ajax({
       method: "get",
@@ -700,7 +1384,7 @@
     })
     path.done(function(rs) {
       alert(rs)
-      console.log("rs ==>>", rs)
+      console.log("rs ==>>" ,rs)
 
       if (rs == "undefined") {
         $("#detailshipping").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
@@ -767,16 +1451,16 @@
 
     })
   }
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////getShippingSLIP/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////getShippingSLIP/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  function getShippingSLIP(inputslip) {
+function getShippingSLIP(inputslip) {
     var tb = ""
     var path = $.ajax({
       method: "get",
@@ -823,7 +1507,7 @@
 
   function getDetailShippingBySLIP(rs) {
     var tb = ""
-    // console.log(rs)
+    console.log(rs)
     var value = JSON.parse(rs)
     // console.log("value=====>>>>>>>>> ",value)
     // console.log("INVOICE_NO=====>>>>>>>>> ",value[0].SEQ_NO)
@@ -837,7 +1521,7 @@
       tb += "<div class='time_line-descr'> TERM ID: <label>" + detail["CREATED_TERM_ID"] + " </label></div>"
       tb += "<div class='time_line-descr'> SHIP QTY: <label>" + detail["SHIP_QTY"] + " </label></div>"
       tb += "</div>"
-      tb += "<div class='col_50' id='showdetail" + i + "'>"
+      tb += "<div class='col_50' id='showdetail"+i+"'>"
       tb += "<div class='time_line-descr'> SEQ NO : <label>" + detail["SEQ_NO"] + "</label></div>"
       tb += "<div class='time_line-descr'> CREATED DATE: <label>" + detail["CREATED_DATE"] + "</label></div>"
       tb += "<hr>"
@@ -855,73 +1539,15 @@
     })
   }
 
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////getShippingDeliDate/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  function getShippingDeliDate(delidate) {
-    var tb = ""
-    var path = $.ajax({
-      method: "get",
-      url: "<?php echo base_url(); ?>Trace_Qgate/inputDeliDateShipping",
-      data: {
-        delidate: delidate,
-      }
-    })
-
-    path.done(function(rs) {
-      // console.log("rs==>>", rs)
-      if (rs == "NO DATA") {
-        $("#detailshipping").html("<img src='https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png' class='img-circle' style='width: 100%; text-center;' alt='Cinque Terre'>");
-        $("#imgdetailshipping").hide();
-        $("#clickship").click(function() {
-          Swal.fire(
-            'ไม่มีข้อมูล',
-            'No Data Found!',
-            'error'
-          )
-        });
-      } else {
-        $("#detailshipping").html("");
-        $("#imgdetailshipping").show();
-        var data = JSON.parse(rs)
-        var datalength = data.length
-
-        tb += "<h5 class='time_line-title'>Delivery Date : <label>" + delidate + "</label></h5>"
-        tb += "<div class='time_line-descr'>ALL INFORMATION : <label>" + datalength + " DATA </label></div>"
-        $("#detailshipping").html(tb)
-
-        $("#clickship").click(function() {
-          getDetailShippingByDeliDate(rs);
-        });
-      }
-
-    })
-  }
-
-  function getDetailShippingByDeliDate(rs) {
-    var tb = ""
-    var data = JSON.parse(rs)
-    console.log("data == >>",data )
-    var count = " "
-    var i = 0
-    var j = 1
-    $.each(data, function(key, value) {
-     tb += "<h5 class='time_line-title'>INVOICE NO: <label>" + value["INVOICE_NO"] + "</label></h5>"
-    })
-
-    Swal.fire({
-      // '<pre>' + str + '</pre>'
-      html: '<pre>' + tb + '</pre>',
-      showCloseButton: true,
-      showConfirmButton: false,
-
-    })
-
-
-  }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////getShippingDeliDate/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function getShippingDeliDate(delidate){
+  
+}
 </script>

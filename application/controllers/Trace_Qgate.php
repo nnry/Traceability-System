@@ -92,162 +92,14 @@ class Trace_Qgate extends CI_Controller
 		$res["all"] = $this->backmodel_qgate->getloadstation();
 		echo json_encode($res);
 	}
-	public function getpdf()
-	{
-	}
-	public function searchbypart()
-	{
-		$delidate = $_POST["delidate"];
-		$selectplant = $_POST["selectplant"];
-		$selectzone = $_POST["selectzone"];
-		$selectstation = $_POST["selectstation"];
-		$inputpart = $_POST["inputpart"];
-		$datadate = date_create($delidate);
-		$date = date_format($datadate,"Y/m/d");
-
-		echo "delidate==> ", $date;
-		echo "  selectplant==> ",$selectplant;
-		echo "  selectzone==> ",$selectzone;
-		echo "  selectstation==> ",$selectstation;
-		echo "  inputpart==> ",$inputpart;
-		// $res = $this->backmodel_qgate->searchByPathNo($delidate,$selectplant,$selectzone,$selectstation,$inputpart);
-		// echo $res;
-
-
-	}
-	public function searchByScanTag()
-	{
-		$inputscantag = $_POST["inputscantag"];
-
-
-		$res = $this->backmodel_qgate->ScanTagQgate($inputscantag);
-		if ($res == false) {
-			echo "undefined";
-		} else {
-			$data["tag_id"] = $res[0]["iotc_id"];
-			$data["idFa"] = $res[0]["ifts_id"];
-			$data["plant"] = $res[0]["mpa_id"];
-			$data["zone"] = $res[0]["mza_id"];
-			$data["station"] = $res[0]["msa_id"];
-			$data["byUser"] = $res[0]["iotc_create_by"];
-			$data["line"] = $res[0]["ifts_line_cd"];
-			$data["lot"] = $res[0]["ifts_lot_current"];
-			$data["snp"] = $res[0]["ifts_snp"];
-			$data["part_no"] = $res[0]["ifts_part_no"];
-			$data["date"] = $res[0]["date"];
-
-			echo json_encode($data);
-		}
-	}
-
-	public function searchwashing()
-	{
-
-		$inputscantag = $_GET["inputscantag"];
-		// echo $inputscantag;
-		$res = $this->backmodel_qgate->searchWashing($inputscantag);
-
-		if ($res == false) {
-			echo "undefined";
-		} else {
-			$data["tagScan"] = $res[0]["iotc_tag_qgate"];
-			$data["tagId"] = $res[0]["ifts_id"];
-			$data["line"] = $res[0]["ifts_line_cd"];
-			$data["partNo"] = $res[0]["ifts_part_no"];
-			$data["date"] = $res[0]["datewash"];
-			$data["byUser"] = $res[0]["iodc_created_by"];
-
-			echo json_encode($data);
-		}
-	}
-	public function searchQgateByScan()
-	{
-
-		$inputscantag = $_GET["inputscantag"];
-		// echo $inputscantag;
-		$res = $this->backmodel_qgate->searchQgate($inputscantag);
-
-		if ($res == false) {
-			echo "undefined";
-		} else {
-			$data["tagScan"] = $res[0]["iotc_tag_qgate"];
-			$data["tagId"] = $res[0]["iotc_id"];
-			$data["idFa"] = $res[0]["ifts_id"];
-			$data["line"] = $res[0]["ifts_line_cd"];
-			$data["partNo"] = $res[0]["ifts_part_no"];
-			$data["date"] = $res[0]["date"];
-			$data["byUserName"] = $res[0]["ss_emp_name"];
-			$data["byUserId"] = $res[0]["ss_id"];
-
-			echo json_encode($data);
-		}
-	}
-	public function getWashing()
-	{
-
-		$idTagFa = $_GET["idTagFa"];
-		$res = $this->backmodel_qgate->searchwashingQgate($idTagFa);
-
-		if ($res == false) {
-			echo "undefined";
-		} else {
-			$data["plantFA"] = $res[0]["ifts_plant"];
-			$data["lineFA"] = $res[0]["ifts_line_cd"];
-			$data["boxNoFA"] = $res[0]["ifts_box"];
-			$data["dateplanFA"] = $res[0]["ifts_plan_date"];
-			$data["seqpalnFA"] = $res[0]["ifts_seq_paln"];
-			$data["seqActFA"] = $res[0]["ifts_seq_actual"];
-			$data["partNoFA"] = $res[0]["ifts_part_no"];
-			$data["dateActFA"] = $res[0]["ifts_actual_date"];
-			$data["spnFA"] = $res[0]["ifts_snp"];
-			$data["lotNoProd"] = $res[0]["ifts_lot_no_prod"];
-			$data["empCode"] = $res[0]["ss_emp_code"];
-			$data["empName"] = $res[0]["ss_emp_name"];
-			$data["codeFAmaster"] = $res[0]["mfcm_line_code"];
-			$data["nameFAmaster"] = $res[0]["mfcm_name_code"];
-			$data["datecom"] = $res[0]["date"];
-
-			echo json_encode($data);
-		}
-	}
-
-	public function getQgate()
-	{
-
-		$idfa = $_GET["idfa"];
-		$res = $this->backmodel_qgate->searchQgatebyFaId($idfa);
-
-		if ($res == false) {
-			echo "undefined";
-		} else {
-			$data["plantFA"] = $res[0]["ifts_plant"];
-			$data["lineFA"] = $res[0]["ifts_line_cd"];
-			$data["boxNoFA"] = $res[0]["ifts_box"];
-			$data["dateplanFA"] = $res[0]["ifts_plan_date"];
-			$data["seqpalnFA"] = $res[0]["ifts_seq_paln"];
-			$data["seqActFA"] = $res[0]["ifts_seq_actual"];
-			$data["partNoFA"] = $res[0]["ifts_part_no"];
-			$data["dateActFA"] = $res[0]["ifts_actual_date"];
-			$data["spnFA"] = $res[0]["ifts_snp"];
-			$data["lotNoProd"] = $res[0]["ifts_lot_no_prod"];
-			$data["empCode"] = $res[0]["ss_emp_code"];
-			$data["empName"] = $res[0]["ss_emp_name"];
-			$data["codeFAmaster"] = $res[0]["mfcm_line_code"];
-			$data["nameFAmaster"] = $res[0]["mfcm_name_code"];
-			$data["datecom"] = $res[0]["date"];
-
-
-			echo json_encode($res);
-		}
-	}
 
 	public function checkShippingByScanTag(){
 
-		// $inputscantag = $_GET["inputscantag"];
-		$inputscantag="GBK1M11820221116002898351-8020              20221115    15BK15                         2022111500251002";
-		echo "id   ",$inputscantag;
+		$inputscantag = $_GET["inputscantag"];
+		// $inputscantag="GBK1M11820221116002898351-8020              20221115    15BK15                         2022111500251002";
+		// echo "id   ",$inputscantag;
 		$checkTag = curl_init("http://192.168.161.77/Api_Traceability/Api_Get_Data/get_shift_by_qrCode?READ_QR=$inputscantag");
-		echo "   ===>>>text    ",$checkTag;
+		// echo "   ===>>>text    ",$checkTag;
 		curl_setopt($checkTag, CURLOPT_RETURNTRANSFER, true);
 		$output = curl_exec($checkTag);
 		$data = json_decode($output, true);
@@ -258,17 +110,13 @@ class Trace_Qgate extends CI_Controller
 		// 	echo "undefined";
 		// }else{
 
-
-
-
 		// }
-	
+
 		
 	}
 
 
-
-	public function inputSlip_CD(){
+	public function inputSlip_CDShipping(){
 		$slip = $_GET["inputslip"];
 		// $slip="50SLD0000531113";
 		// echo $slip;
@@ -288,10 +136,27 @@ class Trace_Qgate extends CI_Controller
 
 		}
 
+	}
+	public function inputDeliDateShipping(){
+		$deliDate = $_GET["delidate"];
+		$dataDate = date_create($deliDate);
+		$date = date_format($dataDate,"Y/m/d");
 
-		
+		$ch =curl_init("http://192.168.161.77/Api_Traceability/Api_Get_Data/get_shift_by_dev_date?dlv_date=$date");
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$output = curl_exec($ch);
+		$data = json_decode($output, true);
 
+		if($data == null){
 
+			echo "NO DATA";
+
+		}else{
+
+			echo json_encode($data);
+
+		}
 
 	}
+
 }
