@@ -134,6 +134,19 @@
       cursor: pointer;
       justify-self: end;
     } */
+    .row {
+      width: 100%;
+      padding: 10px;
+    }
+
+    .col_50 {
+      width: 50%;
+      height: 100px;
+    }
+    .line {
+        border-right: 2px solid cornflowerblue;
+        padding-right: 0.3rem;        
+    }
   </style>
 
   <!-- Begin Page Content -->
@@ -1532,12 +1545,22 @@
     // console.log("value=====>>>>>>>>> ",value)
     // console.log("INVOICE_NO=====>>>>>>>>> ",value[0].SEQ_NO)
 
-    var i =0
-  
+    var i = 0
+
     $.each(value, function(key, detail) {
-      tb += "<div class='time_line-descr'>SLIP CD : <label>" + detail["SLIP_CD"]+ "</label></div>"
-      tb += "<div class='time_line-descr'>LOT NO : <label>" + detail["LOT_NUMBER"]+ "</label></div>"
-      tb += "<div class='time_line-descr'>TERM ID : <label>" + detail["CREATED_TERM_ID"]+ "</label></div>"
+      tb += "<div class='row'>"
+      tb += "<div class='col_50 line'>"
+      tb += "<div class='time_line-descr'>SLIP CD: <label>" + detail["SLIP_CD"] + " </label></div>"
+      tb += "<div class='time_line-descr'>LOT NO: <label>" + detail["LOT_NUMBER"] + " </label></div>"
+      tb += "<div class='time_line-descr'>TERM ID: <label>" + detail["CREATED_TERM_ID"] + " </label></div>"
+      tb += "</div>"
+      tb += "<div class='col_50' hidden>"
+      tb += "<div class='time_line-descr'> SLIP CD : <label>" + detail["SLIP_CD"] + "</label></div>"
+      tb += "<div class='time_line-descr'> LOT NO : <label>" + detail["LOT_NUMBER"] + "</label></div>"
+      tb += "<div class='time_line-descr'> TERM ID : <label>" + detail["CREATED_TERM_ID"] + "</label></div>"
+      tb += "<hr>"
+      tb += "</div>"
+      tb += "</div>"
       i++
     })
 
